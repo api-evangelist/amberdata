@@ -1,0 +1,86 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Amberdata
+providerId: amberdata
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Crypto
+- Blockchain
+- Market Data
+- Digital Assets
+- Derivatives
+- DeFi
+- On-Chain
+- Plans
+description: >-
+  Amberdata sells institutional-grade digital asset and blockchain data through
+  primarily sales-led, enterprise licensing. Self-service purchasing is offered
+  for some market data: customers select the spot, futures, or options exchanges
+  they want and check out by credit card. Comprehensive coverage, real-time and
+  historical data sets, and delivery options (REST API, WebSockets, AWS S3,
+  Snowflake) are arranged via enterprise agreement. Public list prices are not
+  published; specific tier prices are not reconciled in this artifact.
+notes: >-
+  Pricing is sales-led / quote-based for most coverage. Verify current
+  self-service market-data options and enterprise terms with Amberdata sales
+  during reconciliation.
+sources:
+- https://www.amberdata.io/pricing
+- https://docs.amberdata.io/reference/ws-subscriptions-plans
+- https://www.amberdata.io/contact
+plans:
+- id: amberdata-market-data-self-service
+  name: Market Data (Self-Service)
+  type: subscription
+  description: >-
+    Self-service market data subscription. Select the spot, futures, or options
+    exchanges desired and check out by credit card. Exact prices are not
+    publicly listed.
+  entries:
+  - label: Selected Exchanges Market Data
+    name: market_data
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: see Amberdata pricing page (self-service, exchange-based)
+    userMultiplied: false
+  elements:
+  - name: Spot Market Data
+  - name: Futures Market Data
+  - name: Options Market Data
+- id: amberdata-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Enterprise license for financial institutions and crypto-native firms.
+    Institutional-grade, low-latency real-time and historical data across spot,
+    derivatives, DeFi, and on-chain, with delivery via REST API, WebSockets,
+    AWS S3, and Snowflake. Negotiated terms - contact Amberdata sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Spot Market Data
+  - name: Derivatives (Futures and Options)
+  - name: DeFi Data
+  - name: On-Chain Blockchain Data
+  - name: WebSocket Streaming
+  - name: Historical Data Sets
+  - name: AWS S3 and Snowflake Delivery
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,606 @@
+openapi: 3.0.1
+info:
+  title: Amberdata API
+  description: >-
+    Amberdata's institutional-grade digital asset and blockchain data API.
+    Provides spot market data (prices, OHLCV, tickers, trades, order books),
+    derivatives across futures and options (funding rates, open interest,
+    liquidations, implied volatility, Greeks), DeFi (DEX and lending), and
+    on-chain blockchain data (blocks, transactions, addresses, tokens). Every
+    request requires the x-api-key header. An optional api-version header
+    selects a dated API version.
+  termsOfService: https://www.amberdata.io/terms-of-service
+  contact:
+    name: Amberdata Support
+    url: https://www.amberdata.io/contact
+  version: '1.0'
+servers:
+  - url: https://api.amberdata.com
+    description: Amberdata REST API
+security:
+  - apiKeyAuth: []
+tags:
+  - name: Spot
+    description: Spot market data across supported exchanges.
+  - name: Futures
+    description: Futures market data and analytics.
+  - name: Options
+    description: Options market data and analytics.
+  - name: DeFi
+    description: Decentralized finance (DEX and lending) data.
+  - name: On-Chain
+    description: On-chain blockchain data (blocks, transactions, addresses, tokens).
+paths:
+  /markets/spot/exchanges/reference:
+    get:
+      operationId: getSpotExchangesReference
+      tags:
+        - Spot
+      summary: Spot exchanges reference
+      description: >-
+        Returns reference information for all supported spot exchanges and the
+        instruments (pairs) available on each.
+      parameters:
+        - $ref: '#/components/parameters/Exchange'
+        - $ref: '#/components/parameters/Pair'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/spot/prices/{pair}/latest:
+    get:
+      operationId: getSpotPriceLatest
+      tags:
+        - Spot
+      summary: Latest spot price for a pair
+      description: Returns the latest price for the specified spot pair (e.g. eth_usd).
+      parameters:
+        - $ref: '#/components/parameters/PairPath'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/spot/ohlcv/{pair}/historical:
+    get:
+      operationId: getSpotOhlcvHistorical
+      tags:
+        - Spot
+      summary: Historical spot OHLCV
+      description: >-
+        Returns historical OHLCV (open/high/low/close/volume) time series for
+        the specified spot pair.
+      parameters:
+        - $ref: '#/components/parameters/PairPath'
+        - $ref: '#/components/parameters/Exchange'
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+        - $ref: '#/components/parameters/TimeInterval'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/spot/tickers/{pair}:
+    get:
+      operationId: getSpotTickers
+      tags:
+        - Spot
+      summary: Spot tickers
+      description: >-
+        Returns historical and live best bid and best ask (top of book) for the
+        specified spot instrument.
+      parameters:
+        - $ref: '#/components/parameters/PairPath'
+        - $ref: '#/components/parameters/Exchange'
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/spot/trades/{pair}:
+    get:
+      operationId: getSpotTrades
+      tags:
+        - Spot
+      summary: Historical spot trades
+      description: >-
+        Returns historical (time series) trade data for the specified spot pair
+        or instrument.
+      parameters:
+        - $ref: '#/components/parameters/PairPath'
+        - $ref: '#/components/parameters/Exchange'
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/spot/order-book-snapshots/{pair}:
+    get:
+      operationId: getSpotOrderBookSnapshots
+      tags:
+        - Spot
+      summary: Spot order book snapshots
+      description: >-
+        Returns order book snapshots for the specified spot pair with
+        granularity from 1 minute to 1 day.
+      parameters:
+        - $ref: '#/components/parameters/PairPath'
+        - $ref: '#/components/parameters/Exchange'
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/futures/exchanges/reference:
+    get:
+      operationId: getFuturesExchangesReference
+      tags:
+        - Futures
+      summary: Futures exchanges reference
+      description: >-
+        Returns reference data for futures instruments across exchanges,
+        including base and quote symbols, price and volume limits, precision,
+        contract terms, and trading availability.
+      parameters:
+        - $ref: '#/components/parameters/Exchange'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/futures/tickers/{instrument}:
+    get:
+      operationId: getFuturesTickers
+      tags:
+        - Futures
+      summary: Futures tickers
+      description: Returns ticker data for the specified futures instrument.
+      parameters:
+        - $ref: '#/components/parameters/InstrumentPath'
+        - $ref: '#/components/parameters/Exchange'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/futures/funding-rates/{instrument}:
+    get:
+      operationId: getFuturesFundingRates
+      tags:
+        - Futures
+      summary: Futures funding rates
+      description: Returns funding rate data for the specified futures instrument.
+      parameters:
+        - $ref: '#/components/parameters/InstrumentPath'
+        - $ref: '#/components/parameters/Exchange'
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/futures/open-interest/{instrument}:
+    get:
+      operationId: getFuturesOpenInterest
+      tags:
+        - Futures
+      summary: Futures open interest
+      description: Returns open interest data for the specified futures instrument.
+      parameters:
+        - $ref: '#/components/parameters/InstrumentPath'
+        - $ref: '#/components/parameters/Exchange'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/futures/liquidations/{instrument}:
+    get:
+      operationId: getFuturesLiquidations
+      tags:
+        - Futures
+      summary: Futures liquidations
+      description: Returns liquidation events for the specified futures instrument.
+      parameters:
+        - $ref: '#/components/parameters/InstrumentPath'
+        - $ref: '#/components/parameters/Exchange'
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/options/exchanges/reference:
+    get:
+      operationId: getOptionsExchangesReference
+      tags:
+        - Options
+      summary: Options instruments and reference
+      description: >-
+        Returns all available exchanges, currencies, and option instruments,
+        filterable by a timestamp for historical reference.
+      parameters:
+        - $ref: '#/components/parameters/Exchange'
+        - $ref: '#/components/parameters/Currency'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/options/trades/{instrument}:
+    get:
+      operationId: getOptionsTrades
+      tags:
+        - Options
+      summary: Options trades
+      description: Returns trade data for the specified options instrument.
+      parameters:
+        - $ref: '#/components/parameters/InstrumentPath'
+        - $ref: '#/components/parameters/Exchange'
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/options/order-book-snapshots/{instrument}:
+    get:
+      operationId: getOptionsOrderBookSnapshots
+      tags:
+        - Options
+      summary: Options order book snapshots
+      description: Returns order book snapshots for the specified options instrument.
+      parameters:
+        - $ref: '#/components/parameters/InstrumentPath'
+        - $ref: '#/components/parameters/Exchange'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /defi/dex/trades/{pair}:
+    get:
+      operationId: getDefiDexTrades
+      tags:
+        - DeFi
+      summary: DEX trades
+      description: >-
+        Returns decentralized exchange (DEX) trade history for the specified
+        pair (e.g. Uniswap V3 pools).
+      parameters:
+        - $ref: '#/components/parameters/PairPath'
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /defi/lending/protocols:
+    get:
+      operationId: getDefiLendingProtocols
+      tags:
+        - DeFi
+      summary: DeFi lending protocols
+      description: Returns lending protocol metrics across supported DeFi lending markets.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/blocks:
+    get:
+      operationId: getBlocks
+      tags:
+        - On-Chain
+      summary: Blocks
+      description: >-
+        Returns block information for the specified blockchain, including block
+        number, hash, timestamp, and aggregate metrics.
+      parameters:
+        - $ref: '#/components/parameters/BlockchainId'
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/transactions:
+    get:
+      operationId: getTransactions
+      tags:
+        - On-Chain
+      summary: Transactions
+      description: >-
+        Returns transaction data including sending and receiving addresses
+        (with token transfers), fees (gas), amounts, op codes, block number and
+        hash, and timestamps.
+      parameters:
+        - $ref: '#/components/parameters/BlockchainId'
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/transactions/{hash}:
+    get:
+      operationId: getTransaction
+      tags:
+        - On-Chain
+      summary: Transaction by hash
+      description: Returns a single transaction by its hash on the specified blockchain.
+      parameters:
+        - $ref: '#/components/parameters/BlockchainId'
+        - name: hash
+          in: path
+          required: true
+          description: The transaction hash.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/addresses/{address}/balances:
+    get:
+      operationId: getAddressBalances
+      tags:
+        - On-Chain
+      summary: Address balances
+      description: >-
+        Returns account balance and token balances for the specified address on
+        the given blockchain.
+      parameters:
+        - $ref: '#/components/parameters/BlockchainId'
+        - $ref: '#/components/parameters/AddressPath'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/addresses/{address}/transactions:
+    get:
+      operationId: getAddressTransactions
+      tags:
+        - On-Chain
+      summary: Address transactions
+      description: Returns transactions for the specified address on the given blockchain.
+      parameters:
+        - $ref: '#/components/parameters/BlockchainId'
+        - $ref: '#/components/parameters/AddressPath'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/tokens/{address}/information:
+    get:
+      operationId: getTokenInformation
+      tags:
+        - On-Chain
+      summary: Token information
+      description: >-
+        Returns token information including name, symbol, contract address,
+        decimals, total supply, and circulating supply.
+      parameters:
+        - $ref: '#/components/parameters/BlockchainId'
+        - $ref: '#/components/parameters/AddressPath'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/tokens/{address}/transfers:
+    get:
+      operationId: getTokenTransfers
+      tags:
+        - On-Chain
+      summary: Token transfers
+      description: >-
+        Returns token transfers including sender, receiver, amount, transaction
+        hash, and timestamp.
+      parameters:
+        - $ref: '#/components/parameters/BlockchainId'
+        - $ref: '#/components/parameters/AddressPath'
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/tokens/{address}/holders:
+    get:
+      operationId: getTokenHolders
+      tags:
+        - On-Chain
+      summary: Token holders
+      description: >-
+        Returns token holder information including the number of holders, their
+        addresses, and tokens held by each.
+      parameters:
+        - $ref: '#/components/parameters/BlockchainId'
+        - $ref: '#/components/parameters/AddressPath'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: >-
+        Unique, user-specific API key. Required on every REST request via the
+        x-api-key header.
+  parameters:
+    Exchange:
+      name: exchange
+      in: query
+      required: false
+      description: Filter by exchange (e.g. binance, coinbase, deribit).
+      schema:
+        type: string
+    Pair:
+      name: pair
+      in: query
+      required: false
+      description: Filter by trading pair (e.g. eth_usd, btc_usd).
+      schema:
+        type: string
+    PairPath:
+      name: pair
+      in: path
+      required: true
+      description: The trading pair (e.g. eth_usd, btc_usd).
+      schema:
+        type: string
+    InstrumentPath:
+      name: instrument
+      in: path
+      required: true
+      description: The instrument identifier for the futures or options contract.
+      schema:
+        type: string
+    Currency:
+      name: currency
+      in: query
+      required: false
+      description: Filter by underlying currency (e.g. BTC, ETH).
+      schema:
+        type: string
+    BlockchainId:
+      name: blockchainId
+      in: path
+      required: true
+      description: >-
+        The blockchain network identifier (e.g. ethereum-mainnet,
+        bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id
+        header on some namespaces.
+      schema:
+        type: string
+    AddressPath:
+      name: address
+      in: path
+      required: true
+      description: The on-chain address or token contract address.
+      schema:
+        type: string
+    StartDate:
+      name: startDate
+      in: query
+      required: false
+      description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    EndDate:
+      name: endDate
+      in: query
+      required: false
+      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    TimeInterval:
+      name: timeInterval
+      in: query
+      required: false
+      description: Time resolution of the returned series (e.g. minutes, hours, days).
+      schema:
+        type: string
+  schemas:
+    ApiResponse:
+      type: object
+      description: >-
+        Standard Amberdata API envelope. The requested data is returned under
+        the payload property, alongside the HTTP status and a status message.
+      properties:
+        status:
+          type: integer
+          description: HTTP-style status code echoed in the response body.
+          example: 200
+        title:
+          type: string
+          description: Human-readable status message.
+          example: OK
+        description:
+          type: string
+          description: Additional context about the response.
+        payload:
+          type: object
+          description: >-
+            The response payload. Shape varies by endpoint; time series
+            endpoints typically return metadata plus a data array.
+          properties:
+            metadata:
+              type: object
+              description: Metadata describing the payload (columns, request params, etc.).
+            data:
+              type: array
+              description: The array of records for the requested resource.
+              items:
+                type: object

@@ -1,0 +1,284 @@
+asyncapi: '2.6.0'
+id: 'urn:io:amberdata:ws:web3api:streaming'
+info:
+  title: Amberdata WebSocket Streaming API
+  version: '1.0.0'
+  description: |
+    AsyncAPI 2.6 description of Amberdata's **real-time WebSocket streaming**
+    surface.
+
+    Unlike the Groq reference (which exposes no WebSocket), Amberdata DOES
+    publish a documented public WebSocket API. Clients open a secure WebSocket
+    connection to `wss://ws.web3api.io` and authenticate with the same
+    `x-api-key` header used for REST. Subscriptions are managed with
+    **JSON-RPC 2.0** request messages (`method: "subscribe"` /
+    `method: "unsubscribe"`); the server then pushes a stream of update
+    messages for each subscribed topic.
+
+    Example connection (from Amberdata docs):
+    `wscat -c "wss://ws.web3api.io" -H "x-api-key: <api-key>"`
+
+    Topics are colon-delimited channel names such as `market:spot:trades`,
+    `market:spot:prices`, and on-chain event channels. A subscription's params
+    array carries the channel name plus a filter object (e.g. exchange + pair).
+
+    This document models the JSON-RPC subscribe/unsubscribe control messages
+    and the streamed update messages. REST request/response shapes are modeled
+    in the companion OpenAPI document at `openapi/amberdata-openapi.yml`.
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+  license:
+    name: API documentation - Amberdata Terms of Service
+    url: https://www.amberdata.io/terms-of-service
+  x-transport-notes:
+    transport: WebSocket (secure)
+    protocol: wss
+    direction: bidirectional
+    controlProtocol: JSON-RPC 2.0
+    auth: 'x-api-key header sent on the WebSocket upgrade request'
+    source: https://docs.amberdata.io/real-time/websocket-getting-started
+defaultContentType: application/json
+servers:
+  web3api:
+    url: ws.web3api.io
+    protocol: wss
+    description: |
+      Amberdata real-time WebSocket endpoint for blockchain and market data.
+      Authenticate by sending the `x-api-key` header on the connection upgrade
+      request. After connecting, send JSON-RPC 2.0 `subscribe` messages to
+      begin receiving topic updates.
+    security:
+      - apiKeyAuth: []
+channels:
+  market:spot:trades:
+    description: |
+      Real-time spot trade stream. Subscribe with a JSON-RPC 2.0 message whose
+      params are `["market:spot:trades", { "exchange": "binance", "pair":
+      "btc_usdt" }]`. The server then pushes a trade update message for each
+      executed trade matching the filter.
+    publish:
+      operationId: subscribeSpotTrades
+      summary: Send a JSON-RPC subscribe/unsubscribe request for spot trades.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/SubscribeRequest'
+          - $ref: '#/components/messages/UnsubscribeRequest'
+    subscribe:
+      operationId: receiveSpotTrades
+      summary: Receive streamed spot trade updates.
+      message:
+        $ref: '#/components/messages/SpotTradeUpdate'
+  market:spot:prices:
+    description: |
+      Real-time spot price stream. Subscribe with params
+      `["market:spot:prices", { "pair": "eth_usd" }]` to receive latest price
+      updates as they occur.
+    publish:
+      operationId: subscribeSpotPrices
+      summary: Send a JSON-RPC subscribe/unsubscribe request for spot prices.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/SubscribeRequest'
+          - $ref: '#/components/messages/UnsubscribeRequest'
+    subscribe:
+      operationId: receiveSpotPrices
+      summary: Receive streamed spot price updates.
+      message:
+        $ref: '#/components/messages/SpotPriceUpdate'
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: httpApiKey
+      in: header
+      name: x-api-key
+      description: |
+        Amberdata API key sent as the `x-api-key` header on the WebSocket
+        upgrade (connection) request. The same key used for the REST API.
+  messages:
+    SubscribeRequest:
+      name: SubscribeRequest
+      title: JSON-RPC subscribe request
+      summary: Client message that subscribes to a topic.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/JsonRpcSubscribe'
+      examples:
+        - name: subscribeTrades
+          summary: Subscribe to Binance BTC/USDT spot trades
+          payload:
+            jsonrpc: '2.0'
+            id: 1
+            method: subscribe
+            params:
+              - market:spot:trades
+              - exchange: binance
+                pair: btc_usdt
+    UnsubscribeRequest:
+      name: UnsubscribeRequest
+      title: JSON-RPC unsubscribe request
+      summary: Client message that unsubscribes from a topic by subscription id.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/JsonRpcUnsubscribe'
+      examples:
+        - name: unsubscribe
+          summary: Unsubscribe from a previously returned subscription id
+          payload:
+            jsonrpc: '2.0'
+            id: 2
+            method: unsubscribe
+            params:
+              - 0xb
+    SpotTradeUpdate:
+      name: SpotTradeUpdate
+      title: Spot trade update
+      summary: A single real-time spot trade event pushed by the server.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SpotTrade'
+      examples:
+        - name: trade
+          summary: Trade update message
+          payload:
+            jsonrpc: '2.0'
+            method: subscription
+            params:
+              subscription: '0xb'
+              result:
+                exchange: binance
+                pair: btc_usdt
+                price: '64850.10'
+                volume: '0.0125'
+                timestamp: 1750464000000
+                isBuySide: true
+    SpotPriceUpdate:
+      name: SpotPriceUpdate
+      title: Spot price update
+      summary: A real-time latest-price event pushed by the server.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SpotPrice'
+      examples:
+        - name: price
+          summary: Price update message
+          payload:
+            jsonrpc: '2.0'
+            method: subscription
+            params:
+              subscription: '0xc'
+              result:
+                pair: eth_usd
+                price: '3420.55'
+                timestamp: 1750464000000
+  schemas:
+    JsonRpcSubscribe:
+      type: object
+      required:
+        - jsonrpc
+        - id
+        - method
+        - params
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+            - '2.0'
+        id:
+          type: integer
+          description: Client-generated request identifier.
+        method:
+          type: string
+          enum:
+            - subscribe
+        params:
+          type: array
+          description: >-
+            First element is the channel/topic name (e.g. market:spot:trades);
+            the second element is an optional filter object.
+          items: {}
+    JsonRpcUnsubscribe:
+      type: object
+      required:
+        - jsonrpc
+        - id
+        - method
+        - params
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+            - '2.0'
+        id:
+          type: integer
+        method:
+          type: string
+          enum:
+            - unsubscribe
+        params:
+          type: array
+          description: The subscription id returned when the subscription was created.
+          items:
+            type: string
+    SpotTrade:
+      type: object
+      description: Envelope of a streamed spot trade update.
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+            - '2.0'
+        method:
+          type: string
+          enum:
+            - subscription
+        params:
+          type: object
+          properties:
+            subscription:
+              type: string
+              description: The subscription id this update belongs to.
+            result:
+              type: object
+              properties:
+                exchange:
+                  type: string
+                pair:
+                  type: string
+                price:
+                  type: string
+                volume:
+                  type: string
+                timestamp:
+                  type: integer
+                  description: Event time in milliseconds since epoch.
+                isBuySide:
+                  type: boolean
+    SpotPrice:
+      type: object
+      description: Envelope of a streamed spot price update.
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+            - '2.0'
+        method:
+          type: string
+          enum:
+            - subscription
+        params:
+          type: object
+          properties:
+            subscription:
+              type: string
+            result:
+              type: object
+              properties:
+                pair:
+                  type: string
+                price:
+                  type: string
+                timestamp:
+                  type: integer
+                  description: Event time in milliseconds since epoch.

@@ -1,0 +1,411 @@
+{
+  "item": [
+    {
+      "name": "Spot",
+      "description": {
+        "content": "Spot market data across supported exchanges.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Spot exchanges reference",
+          "request": {
+            "name": "Spot exchanges reference",
+            "url": {
+              "path": ["markets", "spot", "exchanges", "reference"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "Latest spot price for a pair",
+          "request": {
+            "name": "Latest spot price for a pair",
+            "url": {
+              "path": ["markets", "spot", "prices", ":pair", "latest"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "pair", "value": "eth_usd" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "Historical spot OHLCV",
+          "request": {
+            "name": "Historical spot OHLCV",
+            "url": {
+              "path": ["markets", "spot", "ohlcv", ":pair", "historical"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "pair", "value": "eth_usd" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "Spot tickers",
+          "request": {
+            "name": "Spot tickers",
+            "url": {
+              "path": ["markets", "spot", "tickers", ":pair"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "pair", "value": "btc_usd" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "Historical spot trades",
+          "request": {
+            "name": "Historical spot trades",
+            "url": {
+              "path": ["markets", "spot", "trades", ":pair"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "pair", "value": "eth_usd" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "Spot order book snapshots",
+          "request": {
+            "name": "Spot order book snapshots",
+            "url": {
+              "path": ["markets", "spot", "order-book-snapshots", ":pair"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "pair", "value": "btc_usd" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "name": "Futures",
+      "description": {
+        "content": "Futures market data and analytics.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Futures exchanges reference",
+          "request": {
+            "name": "Futures exchanges reference",
+            "url": {
+              "path": ["markets", "futures", "exchanges", "reference"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "Futures funding rates",
+          "request": {
+            "name": "Futures funding rates",
+            "url": {
+              "path": ["markets", "futures", "funding-rates", ":instrument"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "instrument", "value": "BTCUSD_PERP" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "Futures open interest",
+          "request": {
+            "name": "Futures open interest",
+            "url": {
+              "path": ["markets", "futures", "open-interest", ":instrument"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "instrument", "value": "BTCUSD_PERP" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "Futures liquidations",
+          "request": {
+            "name": "Futures liquidations",
+            "url": {
+              "path": ["markets", "futures", "liquidations", ":instrument"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "instrument", "value": "BTCUSD_PERP" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "name": "Options",
+      "description": {
+        "content": "Options market data and analytics.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Options instruments and reference",
+          "request": {
+            "name": "Options instruments and reference",
+            "url": {
+              "path": ["markets", "options", "exchanges", "reference"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "Options trades",
+          "request": {
+            "name": "Options trades",
+            "url": {
+              "path": ["markets", "options", "trades", ":instrument"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "instrument", "value": "BTC-28JUN24-60000-C" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "name": "DeFi",
+      "description": {
+        "content": "Decentralized finance (DEX and lending) data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "DEX trades",
+          "request": {
+            "name": "DEX trades",
+            "url": {
+              "path": ["defi", "dex", "trades", ":pair"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "pair", "value": "weth_usdc" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "DeFi lending protocols",
+          "request": {
+            "name": "DeFi lending protocols",
+            "url": {
+              "path": ["defi", "lending", "protocols"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "name": "On-Chain",
+      "description": {
+        "content": "On-chain blockchain data (blocks, transactions, addresses, tokens).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Blocks",
+          "request": {
+            "name": "Blocks",
+            "url": {
+              "path": ["blockchains", ":blockchainId", "blocks"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "blockchainId", "value": "ethereum-mainnet" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "Transactions",
+          "request": {
+            "name": "Transactions",
+            "url": {
+              "path": ["blockchains", ":blockchainId", "transactions"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "blockchainId", "value": "ethereum-mainnet" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "Address balances",
+          "request": {
+            "name": "Address balances",
+            "url": {
+              "path": ["blockchains", ":blockchainId", "addresses", ":address", "balances"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "blockchainId", "value": "ethereum-mainnet" },
+                { "key": "address", "value": "0x0000000000000000000000000000000000000000" }
+              ]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "Token information",
+          "request": {
+            "name": "Token information",
+            "url": {
+              "path": ["blockchains", ":blockchainId", "tokens", ":address", "information"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "blockchainId", "value": "ethereum-mainnet" },
+                { "key": "address", "value": "0xdac17f958d2ee523a2206206994597c13d831ec7" }
+              ]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "Token transfers",
+          "request": {
+            "name": "Token transfers",
+            "url": {
+              "path": ["blockchains", ":blockchainId", "tokens", ":address", "transfers"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "blockchainId", "value": "ethereum-mainnet" },
+                { "key": "address", "value": "0xdac17f958d2ee523a2206206994597c13d831ec7" }
+              ]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        },
+        {
+          "name": "Token holders",
+          "request": {
+            "name": "Token holders",
+            "url": {
+              "path": ["blockchains", ":blockchainId", "tokens", ":address", "holders"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "blockchainId", "value": "ethereum-mainnet" },
+                { "key": "address", "value": "0xdac17f958d2ee523a2206206994597c13d831ec7" }
+              ]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.amberdata.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "x-api-key" },
+      { "key": "value", "value": "{{apiKey}}" },
+      { "key": "in", "value": "header" }
+    ]
+  },
+  "info": {
+    "_postman_id": "a1b2c3d4-amb0-4e5f-9a8b-amberdata00001",
+    "name": "Amberdata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amberdata digital asset and blockchain data API. All requests require the x-api-key header.\n\nContact Support:\n Name: Amberdata Support\n URL: https://www.amberdata.io/contact",
+      "type": "text/plain"
+    }
+  }
+}

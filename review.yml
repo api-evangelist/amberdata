@@ -1,0 +1,86 @@
+aid: amberdata
+name: Amberdata
+review:
+  question: Does Amberdata expose a documented public WebSocket API?
+  answer: true
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: true
+  asyncapiScopeNote: |
+    Amberdata publishes a documented public WebSocket streaming API. An
+    AsyncAPI 2.6 document was created at asyncapi/amberdata-asyncapi.yml
+    modeling the WebSocket surface: a secure wss:// connection authenticated
+    with the x-api-key header, JSON-RPC 2.0 subscribe/unsubscribe control
+    messages, and server-pushed topic update messages (e.g.
+    market:spot:trades, market:spot:prices).
+findings:
+  summary: |
+    Amberdata exposes BOTH a documented REST API and a documented public
+    WebSocket API. The REST API is at https://api.amberdata.com and requires
+    the x-api-key header on every request (an optional api-version header
+    selects a dated API version). REST coverage spans spot market data,
+    derivatives (futures and options), DeFi, and on-chain blockchain data.
+
+    Separately, Amberdata documents a real-time WebSocket streaming service.
+    Clients connect to wss://ws.web3api.io, authenticate with the x-api-key
+    header on the upgrade request, and manage subscriptions using JSON-RPC
+    2.0 messages (method "subscribe" / "unsubscribe") whose params carry a
+    colon-delimited topic name (e.g. market:spot:trades) plus a filter
+    object. The server then pushes update messages per subscription. This is
+    a true bidirectional WebSocket transport, not Server-Sent Events.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.amberdata.com
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      baseURL: wss://ws.web3api.io
+      documented: true
+      note: Real-time streaming with JSON-RPC 2.0 subscribe/unsubscribe; x-api-key auth on the upgrade request.
+  endpointsConfirmedRest:
+    - GET https://api.amberdata.com/markets/spot/trades/{pair}
+    - GET https://api.amberdata.com/markets/spot/tickers/{pair}
+    - GET https://api.amberdata.com/markets/spot/ohlcv/{pair}/historical
+    - GET https://api.amberdata.com/markets/spot/order-book-snapshots/{pair}
+    - GET https://api.amberdata.com/markets/futures/exchanges/reference
+    - GET https://api.amberdata.com/markets/futures/funding-rates/{instrument}
+    - GET https://api.amberdata.com/markets/futures/open-interest/{instrument}
+    - GET https://api.amberdata.com/markets/futures/liquidations/{instrument}
+    - GET https://api.amberdata.com/markets/options/exchanges/reference
+    - GET https://api.amberdata.com/markets/options/trades/{instrument}
+    - GET https://api.amberdata.com/defi/dex/trades/{pair}
+    - GET https://api.amberdata.com/defi/lending/protocols
+    - GET https://api.amberdata.com/blockchains/{blockchainId}/blocks
+    - GET https://api.amberdata.com/blockchains/{blockchainId}/transactions
+    - GET https://api.amberdata.com/blockchains/{blockchainId}/addresses/{address}/balances
+    - GET https://api.amberdata.com/blockchains/{blockchainId}/tokens/{address}/information
+    - GET https://api.amberdata.com/blockchains/{blockchainId}/tokens/{address}/transfers
+    - GET https://api.amberdata.com/blockchains/{blockchainId}/tokens/{address}/holders
+  endpointsConfirmedWebSocket:
+    - wss://ws.web3api.io (subscribe market:spot:trades)
+    - wss://ws.web3api.io (subscribe market:spot:prices)
+sources:
+  - url: https://docs.amberdata.io/http/http-api-fundamentals
+    type: Documentation
+    note: REST base URL https://api.amberdata.com; x-api-key required on every request; api-version header for dated versions.
+  - url: https://docs.amberdata.io/real-time/websocket-getting-started
+    type: Documentation
+    note: Documents the real-time WebSocket streaming service.
+  - url: https://docs.amberdata.io/reference/ws-connection
+    type: APIReference
+    note: WebSocket connection (wss://ws.web3api.io), x-api-key auth, JSON-RPC 2.0 subscribe format.
+  - url: https://docs.amberdata.io/reference/futures-exchanges-reference
+    type: APIReference
+    note: Confirms futures exchanges reference endpoint under /markets/futures/.
+actions:
+  asyncapiPath: asyncapi/amberdata-asyncapi.yml
+  apisYmlUpdated: true
+  reason: |
+    A documented public WebSocket surface exists, so an AsyncAPI 2.6 document
+    was authored modeling the wss://ws.web3api.io streaming API (JSON-RPC 2.0
+    subscribe/unsubscribe + pushed update messages), and the WebSocket
+    Streaming API was added as a distinct api entry in apis.yml.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

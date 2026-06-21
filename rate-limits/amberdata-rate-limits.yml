@@ -1,0 +1,56 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Amberdata
+providerId: amberdata
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Crypto
+- Blockchain
+- Market Data
+- Digital Assets
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Amberdata enforces per-account rate limits on REST API requests, scoped to the
+  user-specific x-api-key. Limits and historical-depth entitlements vary by
+  subscription plan and contract. Specific per-plan request-rate values are not
+  publicly published and are not reconciled in this artifact. WebSocket
+  streaming connections are subscription-based rather than per-request metered.
+notes: >-
+  Verify per-plan request limits, concurrent connection limits, and historical
+  data depth with Amberdata during reconciliation; values vary by plan and
+  enterprise agreement.
+sources:
+- https://docs.amberdata.io/http/http-api-fundamentals
+- https://docs.amberdata.io/reference/ws-subscriptions-plans
+- https://www.amberdata.io/pricing
+responseCodes:
+  throttled: 429
+limits:
+- name: REST Requests
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Per-account REST request rate, scoped to the x-api-key; varies by plan.
+- name: Historical Data Depth
+  scope: account
+  metric: history
+  limit: see provider documentation
+  notes: Available historical lookback varies by subscription entitlement.
+- name: WebSocket Subscriptions
+  scope: account
+  metric: connections
+  limit: see provider documentation
+  notes: Real-time streaming is subscription-based; concurrent connection and topic limits vary by plan.
+policies:
+- name: API Key Scoping
+  description: All REST requests require the unique user-specific x-api-key header; limits are enforced per account.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on HTTP 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/amberdata-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  description: Unique, user-specific API key. Required on every REST request via the x-api-key
+    header.
+  sources:
+  - openapi/amberdata-openapi.yml

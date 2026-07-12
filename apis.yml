@@ -127,6 +127,12 @@ apis:
     interface for spot trades and prices, DEX data, and on-chain events, authenticated
     with the x-api-key header.
 common:
+- type: DomainSecurity
+  url: security/amberdata-domain-security.yml
+- type: Authentication
+  url: authentication/amberdata-authentication.yml
+- type: Blog
+  url: https://blog.amberdata.io/rss.xml
 - type: GitHubOrganization
   url: https://github.com/amberdata
 - type: LinkedIn

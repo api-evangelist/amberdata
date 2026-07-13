@@ -1,0 +1,13 @@
+{
+  "repo": "amberdata",
+  "feeds": [
+    {
+      "source": "https://blog.amberdata.io/rss.xml",
+      "feed_url": "https://blog.amberdata.io/rss.xml",
+      "title": "Amberdata Blog",
+      "saved": 0
+    }
+  ],
+  "fetched": "2026-07-11T11:43:46Z",
+  "post_count": 10
+}

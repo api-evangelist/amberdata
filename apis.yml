@@ -127,6 +127,8 @@ apis:
     interface for spot trades and prices, DEX data, and on-chain events, authenticated
     with the x-api-key header.
 common:
+- type: AgenticAccess
+  url: agentic-access/amberdata-agentic-access.yml
 - type: DomainSecurity
   url: security/amberdata-domain-security.yml
 - type: Authentication

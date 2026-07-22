@@ -1,20 +1,24 @@
-generated: '2026-07-15'
+generated: '2026-07-22'
 method: generated
-source: openapi/amberdata-openapi.yml
+source: openapi/amberdata-arc-openapi.yaml, openapi/amberdata-blockchain-openapi.yaml, openapi/amberdata-defi-api-openapi.yml,
+  openapi/amberdata-defi-market-openapi.yaml, openapi/amberdata-defi-openapi.yaml, openapi/amberdata-derivatives-openapi.yaml,
+  openapi/amberdata-futures-api-openapi.yml, openapi/amberdata-market-openapi.yaml, openapi/amberdata-metrics-openapi.yaml,
+  openapi/amberdata-on-chain-api-openapi.yml, openapi/amberdata-options-api-openapi.yml, openapi/amberdata-price-openapi.yaml,
+  openapi/amberdata-spot-api-openapi.yml, openapi/amberdata-spot-openapi.yaml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 24
+  operations: 240
   by_action_class:
-    connected: 24
+    connected: 240
   by_consequence:
-    read: 24
+    read: 240
   human_in_the_loop_required: 0
 operations:
-- path: /markets/spot/exchanges/reference
+- path: /updates
   method: get
-  operationId: getSpotExchangesReference
+  operationId: asset-reference-classifications-list-updates
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -22,9 +26,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /markets/spot/prices/{pair}/latest
+- path: /classifications
   method: get
-  operationId: getSpotPriceLatest
+  operationId: asset-reference-classification-list-classifications
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -32,9 +36,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /markets/spot/ohlcv/{pair}/historical
+- path: /exchanges/statistics
   method: get
-  operationId: getSpotOhlcvHistorical
+  operationId: asset-reference-classification-exchange-statistics
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -42,9 +46,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /markets/spot/tickers/{pair}
+- path: /search
   method: get
-  operationId: getSpotTickers
+  operationId: asset-reference-classification-search-assets
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -52,9 +56,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /markets/spot/trades/{pair}
+- path: /addresses/{hash}/token-balances/historical
   method: get
-  operationId: getSpotTrades
+  operationId: get-token-balances
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -62,9 +66,1209 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /markets/spot/order-book-snapshots/{pair}
+- path: /addresses/{hash}/token-balances/latest
   method: get
-  operationId: getSpotOrderBookSnapshots
+  operationId: get-address-tokens
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /addresses/balances
+  method: get
+  operationId: address-balances-batch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /addresses/{hash}/balances
+  method: get
+  operationId: address-balances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /addresses/{hash}/account-balances/historical
+  method: get
+  operationId: get-historical-account-balances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /addresses/{hash}/account-balances/latest
+  method: get
+  operationId: get-current-account-balance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /addresses/{address}/portfolio
+  method: get
+  operationId: portfolio
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /addresses/{hash}/transactions
+  method: get
+  operationId: get-address-transactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /addresses/{hash}/token-transfers
+  method: get
+  operationId: token-transfers-by-address-pro
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /addresses/{hash}/logs
+  method: get
+  operationId: get-address-logs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/stablecoins/information
+  method: get
+  operationId: stablecoins-information-gold
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/stablecoins/transfers
+  method: get
+  operationId: stablecoin-transfers-hourly-gold
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/assets/information
+  method: get
+  operationId: analytics-assets-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/assets/{arcId}/marketcap
+  method: get
+  operationId: analytics-asset-marketcap
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /blocks/metrics/historical
+  method: get
+  operationId: blocks-metrics-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /contracts/{hash}
+  method: get
+  operationId: get-contract-details
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /marketcap
+  method: get
+  operationId: marketcap
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /metrics/latest
+  method: get
+  operationId: blockchains-metrics-latest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /transactions/metrics/historical
+  method: get
+  operationId: transactions-metrics-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tokens/{hash}/supplies/historical
+  method: get
+  operationId: get-historical-token-supply
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tokens/metrics/{symbol}/historical
+  method: get
+  operationId: token-metrics-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tokens/{hash}/transfers
+  method: get
+  operationId: get-token-transfers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tokens/{hash}/holders/latest
+  method: get
+  operationId: get-token-holders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tokens/metrics/{symbol}/latest
+  method: get
+  operationId: token-metrics-latest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /tokens/{hash}/supplies/latest
+  method: get
+  operationId: get-token-supply-latest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /defi/dex/trades/{pair}
+  method: get
+  operationId: getDefiDexTrades
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /defi/lending/protocols
+  method: get
+  operationId: getDefiLendingProtocols
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /metrics/exchanges/{exchange}/latest
+  method: get
+  operationId: defi-metrics-exchanges-latest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /metrics/exchanges/{exchange}/historical
+  method: get
+  operationId: defi-metrics-exchanges-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ohlcv/{pool}/latest/
+  method: get
+  operationId: defi-ohlcv-latest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ohlcv/{pool}/historical/
+  method: get
+  operationId: defi-ohlcv-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /metrics/exchanges/{exchange}/assets/{asset}/latest
+  method: get
+  operationId: defi-metrics-assets-latest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /metrics/exchanges/{exchange}/assets/{asset}/historical
+  method: get
+  operationId: defi-metrics-assets-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /metrics/exchanges/{exchange}/pairs/{pair}/latest
+  method: get
+  operationId: defi-metrics-pairs-latest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /metrics/exchanges/{exchange}/pairs/{pair}/historical
+  method: get
+  operationId: defi-metrics-pairs-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /liquidity/information/
+  method: get
+  operationId: defi-liquidity-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /dex/exchanges
+  method: get
+  operationId: defi-information-dex-exchanges
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /dex/pairs
+  method: get
+  operationId: defi-information-dex-pairs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /lending/{protocolId}/protocol
+  method: get
+  operationId: defi-lending-protocol-lens
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /lending/{protocolId}/wallets/{walletAddress}
+  method: get
+  operationId: defi-lending-wallet-lens
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /lending/{protocolId}/assets/{asset}
+  method: get
+  operationId: defi-lending-asset-lens
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /lending/{protocolId}/governance
+  method: get
+  operationId: defi-lending-governance-lens
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /lending/protocols/information
+  method: get
+  operationId: defi-lending-information-protocols
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /lending/assets/information
+  method: get
+  operationId: defi-lending-information-assets
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /lending/{protocolId}/metrics/summary
+  method: get
+  operationId: lending-protocol-metrics-summary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /lending/{protocolId}/assets/{assetId}/metrics/summary
+  method: get
+  operationId: lending-asset-summary-metrics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /lending/{protocolId}/wallets/{address}/portfolio
+  method: get
+  operationId: track-positions-lending-wallet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /dex/uniswapv3/pools/{poolAddress}/liquidity-distribution
+  method: get
+  operationId: uniswap-v3-liquidity-distribution
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /stablecoins/{assetSymbol}/lending/metrics/summary
+  method: get
+  operationId: stablecoins-in-defi-lending-aggregate-insights
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /lending/wallets/{walletAddress}/returns
+  method: get
+  operationId: profit-and-loss-analytics-in-defi-lending
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /dex/ohlcv/information/
+  method: get
+  operationId: defi-ohlcv-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /dex/trades
+  method: get
+  operationId: dex-trades-all-blockchains
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /dex/information
+  method: get
+  operationId: dex-all-blockchains-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/instruments/information
+  method: get
+  operationId: derivatives-information-instruments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/trade-aggregation-information
+  method: get
+  operationId: derivatives-futures-perpetuals-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/depth/information
+  method: get
+  operationId: derivatives-information-instruments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/trade-aggregation
+  method: get
+  operationId: derivatives-futures-perpetuals-trade-aggregation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/trade-aggregation-instrument
+  method: get
+  operationId: derivatives-futures-perpetuals-trade-aggregation-instruments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/apr-basis/live-term-structures-decorated
+  method: get
+  operationId: derivatives-futures-perpetuals-apr-basis-live
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/apr-basis/constant-days-to-expiration
+  method: get
+  operationId: derivatives-futures-perpetuals-apr-basis-constant-maturity-decorated
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/apr-basis/floating
+  method: get
+  operationId: derivatives-futures-perpetuals-apr-basis-floating
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/apr-basis/constant-maturities
+  method: get
+  operationId: derivatives-futures-perpetuals-apr-basis-constant-maturities
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/apr-basis/live-term-structures
+  method: get
+  operationId: derivatives-futures-perpetuals-apr-basis-live-term-structures
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/realized-funding-rates-cumulated
+  method: get
+  operationId: derivatives-futures-perpetuals-funding-realized-accumulated
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/funding-rates
+  method: get
+  operationId: derivatives-futures-perpetuals-funding-rates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/liquidations-total
+  method: get
+  operationId: derivatives-futures-perpetuals-liquidations-aggregates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/open-interest-total
+  method: get
+  operationId: derivatives-futures-perpetuals-open-interest-total
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/volumes
+  method: get
+  operationId: derivatives-futures-perpetuals-volumes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/realized-volatility/cones/information
+  method: get
+  operationId: derivatives-realized-volatility-pairs-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/realized-volatility/correlation-beta
+  method: get
+  operationId: derivatives-realized-volatility-correlation-beta
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/realized-volatility/monthly-vs-daily-ratio
+  method: get
+  operationId: derivatives-realized-volatility-monthly-daily-ratio
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/realized-volatility/seasonality/day-of-week
+  method: get
+  operationId: derivatives-realized-volatility-seasonality-day-of-the-week
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/realized-volatility/seasonality/month-of-year
+  method: get
+  operationId: derivatives-realized-volatility-seasonality-month-of-the-year
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/realized-volatility/cones
+  method: get
+  operationId: derivatives-realized-volatility-cones
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/level-1-quotes
+  method: get
+  operationId: derivatives-volatility-level-1-quotes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/delta-surfaces/constant
+  method: get
+  operationId: derivatives-volatility-delta-surfaces-constant
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/delta-surfaces/floating
+  method: get
+  operationId: derivatives-volatility-delta-surfaces-floating
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/moneyness-surfaces/floating
+  method: get
+  operationId: derivatives-volatility-moneyness-surfaces-floating
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/moneyness-surfaces/constant
+  method: get
+  operationId: derivatives-volatility-moneyness-surfaces-constant
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/realized-volatility/implied-vs-realized
+  method: get
+  operationId: derivatives-volatility-implied-vs-realized
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/term-structures/forward-volatility/constant
+  method: get
+  operationId: derivatives-volatility-term-structures-constant
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/term-structures/forward-volatility/floating
+  method: get
+  operationId: derivatives-volatility-term-structures-floating
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/term-structures/richness
+  method: get
+  operationId: derivatives-volatility-term-structures-richness
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/index
+  method: get
+  operationId: derivatives-volatility-index
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/index-decorated
+  method: get
+  operationId: derivatives-volatility-index-decorated
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/index-delivery-price
+  method: get
+  operationId: derivatives-volatility-index-delivery-price
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/variance-premium
+  method: get
+  operationId: derivatives-volatility-index-variance-risk-premium
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/volatility-of-volatility
+  method: get
+  operationId: derivatives-volatility-index-volatility-of-volatility
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/metrics
+  method: get
+  operationId: derivatives-volatility-metrics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/svi-hourly
+  method: get
+  operationId: derivatives-svi-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/svi-minutely
+  method: get
+  operationId: derivatives-svi-minutely
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/trades-flow/block-volumes
+  method: get
+  operationId: derivatives-trades-flow-block-volumes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/trades-flow/decorated-trades
+  method: get
+  operationId: derivatives-trades-flow-decorated-trades
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/instruments/most-traded
+  method: get
+  operationId: derivatives-trades-flow-instruments-most-traded
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/trades-flow/gamma-exposures/normalized-usd
+  method: get
+  operationId: derivatives-trades-flow-gamma-normalized-usd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/trades-flow/gamma-exposures-snapshots
+  method: get
+  operationId: derivatives-trades-flow-gamma-gex-snapshots
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/trades-flow/options-yields
+  method: get
+  operationId: derivatives-trades-flow-options-yields
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/trades-flow/put-call-distribution
+  method: get
+  operationId: derivatives-trades-flow-put-call-trades-distribution
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/trades-flow/put-call-ratio
+  method: get
+  operationId: derivatives-trades-flow-put-call-ratio
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/options-scanner/top-trades
+  method: get
+  operationId: derivatives-trades-flow-top-trades
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/trades-flow/volume-aggregates
+  method: get
+  operationId: derivatives-trades-flow-volume-aggregates
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/instruments/information/tradfi
+  method: get
+  operationId: tradfi-information-instruments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/realized-volatility/tradfi
+  method: get
+  operationId: tradfi-realized-volatility-close-to-close
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/realized-volatility/cones/tradfi
+  method: get
+  operationId: tradfi-realized-volatility-cones
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/level-1-quotes/tradfi
+  method: get
+  operationId: tradfi-volatility-level-1-quotes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/delta-surfaces/constant/tradfi
+  method: get
+  operationId: tradfi-volatility-delta-surfaces-constant
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/delta-surfaces/floating/tradfi
+  method: get
+  operationId: tradfi-volatility-delta-surfaces-floating
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/realized-volatility/implied-vs-realized/tradfi
+  method: get
+  operationId: tradfi-volatility-implied-vs-realized
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/term-structures/forward-volatility/constant/tradfi
+  method: get
+  operationId: tradfi-volatility-term-structures-constant
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/term-structures/richness/tradfi
+  method: get
+  operationId: tradfi-volatility-term-structures-richness
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/open-interest/tradfi
+  method: get
+  operationId: tradfi-open-interest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/metrics/tradfi
+  method: get
+  operationId: tradfi-volatility-metrics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/trades-flow/decorated-trades/tradfi
+  method: get
+  operationId: tradfi-trades-flow-decorated-trades
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/instruments/most-traded/tradfi
+  method: get
+  operationId: tradfi-trades-flow-instruments-most-traded
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/trades-flow/options-yields/tradfi
+  method: get
+  operationId: tradfi-trades-flow-options-yields
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/trades-flow/option-volumes/tradfi
+  method: get
+  operationId: get_derivativesanalyticstrades-flowoption-volumestradfi
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/altcoin/atm/hourly
+  method: get
+  operationId: get_analyticsvolatilityaltcoinatmhourly
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/atm/deribit-vs-model-hourly
+  method: get
+  operationId: get_analyticsvolatilityatmderibit-vs-model-hourly
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/volatility/level-1-quotes-instrument/tradfi
+  method: get
+  operationId: get_marketsderivativesanalyticsvolatilitylevel-1-quotes-instrumenttradfi
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/depth/bid-ask-spread
+  method: get
+  operationId: futures-perpetuals-order-book-depth-bid-ask-spread
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/depth/pressure
+  method: get
+  operationId: spot-analytics-order-book-depth-pressure
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /analytics/futures-perpetuals/depth
+  method: get
+  operationId: futures-perpetual-analytics-order-book-depth
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -122,9 +1326,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /markets/options/exchanges/reference
+- path: /spot/exchanges/information
   method: get
-  operationId: getOptionsExchangesReference
+  operationId: get-market-exchanges
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -132,9 +1336,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /markets/options/trades/{instrument}
+- path: /spot/exchanges/reference
   method: get
-  operationId: getOptionsTrades
+  operationId: spot-exchanges-reference
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -142,9 +1346,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /markets/options/order-book-snapshots/{instrument}
+- path: /spot/order-book-snapshots/information
   method: get
-  operationId: getOptionsOrderBookSnapshots
+  operationId: spot-order-book-information
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -152,9 +1356,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /defi/dex/trades/{pair}
+- path: /spot/order-book-snapshots/{instrument}
   method: get
-  operationId: getDefiDexTrades
+  operationId: spot-order-book-snapshots
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -162,9 +1366,569 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /defi/lending/protocols
+- path: /spot/order-book-events/{instrument}
   method: get
-  operationId: getDefiLendingProtocols
+  operationId: spot-order-book-events
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/tickers/information
+  method: get
+  operationId: spot-tickers-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/tickers/{instrument}
+  method: get
+  operationId: spot-tickers-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/trades/information
+  method: get
+  operationId: spot-trades-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/trades/{instrument}
+  method: get
+  operationId: spot-trades-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/ohlcv/information
+  method: get
+  operationId: get-market-ohlc-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/ohlcv/{instrument}
+  method: get
+  operationId: get-historical-ohlc
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/batch-ohlcv/{exchange}
+  method: get
+  operationId: batch-historical-ond
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/reference-rates/{assetId}
+  method: get
+  operationId: spot-reference-rates-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/exchanges/information
+  method: get
+  operationId: options-exchanges-pairs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/exchanges/reference
+  method: get
+  operationId: options-exchanges-reference
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/liquidations/information
+  method: get
+  operationId: options-liquidations-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/liquidations/{instrument}
+  method: get
+  operationId: options-liquidations-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/ohlcv/information
+  method: get
+  operationId: options-ohlcv-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/ohlcv/{instrument}
+  method: get
+  operationId: options-ohlcv-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/batch-ohlcv/{exchange}
+  method: get
+  operationId: batch-historical-ond-1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/open-interest/information
+  method: get
+  operationId: options-open-interest-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/open-interest/{instrument}
+  method: get
+  operationId: options-open-interest-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/batch-open-interest/{exchange}
+  method: get
+  operationId: batch-historical-ent-2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/order-book-events/information
+  method: get
+  operationId: options-order-book-events-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/order-book-events/{instrument}
+  method: get
+  operationId: options-order-book-events-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/order-book-snapshots/information
+  method: get
+  operationId: options-order-book-snapshots-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/order-book-snapshots/{instrument}
+  method: get
+  operationId: options-order-book-snapshots-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/tickers/information
+  method: get
+  operationId: options-tickers-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/tickers/{instrument}
+  method: get
+  operationId: options-tickers-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/trades/information
+  method: get
+  operationId: options-trades-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /options/trades/{instrument}
+  method: get
+  operationId: options-trades-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/exchanges/information
+  method: get
+  operationId: futures-exchanges-pairs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/exchanges/reference
+  method: get
+  operationId: futures-exchanges-reference
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/funding-rates/information
+  method: get
+  operationId: futures-funding-rates-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/funding-rates/{instrument}
+  method: get
+  operationId: futures-funding-rates-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/batch-funding-rates/{exchange}
+  method: get
+  operationId: batch-historical-ent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/insurance-fund/information
+  method: get
+  operationId: futures-insurance-funds-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/insurance-fund/{instrument}
+  method: get
+  operationId: futures-insurance-funds-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/liquidations/information
+  method: get
+  operationId: futures-liquidations-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/liquidations/{instrument}
+  method: get
+  operationId: futures-liquidations-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/long-short-ratio/information
+  method: get
+  operationId: futures-long-short-ratio-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/long-short-ratio/{instrument}
+  method: get
+  operationId: futures-long-short-ratio-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/ohlcv/information
+  method: get
+  operationId: futures-ohlcv-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/ohlcv/{instrument}
+  method: get
+  operationId: futures-ohlcv-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/batch-ohlcv/{exchange}
+  method: get
+  operationId: ohlcv-ond
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/open-interest/information
+  method: get
+  operationId: futures-open-interest-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/open-interest/{instrument}
+  method: get
+  operationId: futures-open-interest-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/batch-open-interest/{exchange}
+  method: get
+  operationId: batch-historical-ent-1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/order-book-snapshots/information
+  method: get
+  operationId: futures-order-books-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/order-book-events/{instrument}
+  method: get
+  operationId: futures-order-books-events-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/order-book-snapshots/{instrument}
+  method: get
+  operationId: futures-order-book-snapshots-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/tickers/information
+  method: get
+  operationId: futures-tickers-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/tickers/{instrument}
+  method: get
+  operationId: futures-tickers-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/trades/information
+  method: get
+  operationId: futures-trades-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /futures/trades/{instrument}
+  method: get
+  operationId: futures-trades-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{asset}/supply/latest
+  method: get
+  operationId: market-metrics-asset-supply-latest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /{asset}/supply/historical
+  method: get
+  operationId: market-metrics-asset-supply-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /exchanges/{exchange}/assets/volumes/historical
+  method: get
+  operationId: market-metrics-exchanges-assets-volumes-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /exchanges/{exchange}/pairs/volumes/historical
+  method: get
+  operationId: market-metrics-exchanges-pairs-volumes-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /exchanges/{exchange}/pairs/volumes/latest
+  method: get
+  operationId: market-metrics-exchanges-pairs-volumes-latest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /exchanges/{exchange}/assets/volumes/latest
+  method: get
+  operationId: market-metrics-exchanges-assets-volumes-latest
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -245,6 +2009,406 @@ operations:
 - path: /blockchains/{blockchainId}/tokens/{address}/holders
   method: get
   operationId: getTokenHolders
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /markets/options/exchanges/reference
+  method: get
+  operationId: getOptionsExchangesReference
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /markets/options/trades/{instrument}
+  method: get
+  operationId: getOptionsTrades
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /markets/options/order-book-snapshots/{instrument}
+  method: get
+  operationId: getOptionsOrderBookSnapshots
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/prices/assets/information/
+  method: get
+  operationId: spot-prices-assets-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/vwap/assets/{asset}/historical
+  method: get
+  operationId: spot-vwap-assets-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/vwap/pairs/{pair}/historical
+  method: get
+  operationId: spot-vwap-pairs-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/vwap/assets/information
+  method: get
+  operationId: spot-vwap-assets-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/vwap/pairs/information
+  method: get
+  operationId: spot-vwap-pairs-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/prices/assets/{asset}/latest/
+  method: get
+  operationId: spot-prices-assets-latest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/prices/assets/{asset}/historical/
+  method: get
+  operationId: spot-prices-assets-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/prices/pairs/information/
+  method: get
+  operationId: spot-prices-pairs-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/prices/pairs/{pair}/latest/
+  method: get
+  operationId: spot-prices-pairs-latest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/prices/pairs/{pair}/historical/
+  method: get
+  operationId: spot-prices-pairs-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/twap/pairs/information
+  method: get
+  operationId: spot-twap-pairs-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /spot/twap/pairs/{pair}/historical
+  method: get
+  operationId: spot-twap-pairs-historical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /prices/spot/instruments/information
+  method: get
+  operationId: instrument-pair-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /prices/spot/assets/information
+  method: get
+  operationId: asset-information
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /prices/spot/assets
+  method: get
+  operationId: asset-price-new
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /prices/spot/instruments
+  method: get
+  operationId: pair-price-new
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /markets/spot/exchanges/reference
+  method: get
+  operationId: getSpotExchangesReference
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /markets/spot/prices/{pair}/latest
+  method: get
+  operationId: getSpotPriceLatest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /markets/spot/ohlcv/{pair}/historical
+  method: get
+  operationId: getSpotOhlcvHistorical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /markets/spot/tickers/{pair}
+  method: get
+  operationId: getSpotTickers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /markets/spot/trades/{pair}
+  method: get
+  operationId: getSpotTrades
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /markets/spot/order-book-snapshots/{pair}
+  method: get
+  operationId: getSpotOrderBookSnapshots
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /depth/information
+  method: get
+  operationId: spot-analytics-information-order-book-depth
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /trade/information/pairs
+  method: get
+  operationId: spot-analytics-information-trade-analytics-pairs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /trade/information/exchanges
+  method: get
+  operationId: spot-analytics-information-trade-exchange-support-per-pair
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /depth/bid-ask-spread
+  method: get
+  operationId: spot-analytics-order-book-depth-bid-ask-spread
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /depth/average-time-series
+  method: get
+  operationId: spot-analytics-order-book-depth-average
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /depth
+  method: get
+  operationId: spot-analytics-order-book-depth
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /depth/dashboard
+  method: get
+  operationId: spot-analytics-order-book-depth-dashboard
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /depth/lwap
+  method: get
+  operationId: spot-analytics-order-book-depth-lwap
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /depth/pressure
+  method: get
+  operationId: spot-analytics-order-book-depth-pressure
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /trade/frequency
+  method: get
+  operationId: spot-analytics-trade-frequency
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /trade/pressure
+  method: get
+  operationId: spot-analytics-trade-pressure
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /trade/vwap/global
+  method: get
+  operationId: get_tradevwapglobal
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /trade/vwap
+  method: get
+  operationId: spot-analytics-vwap-twap
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /volumes/asset
+  method: get
+  operationId: spot-analytics-volumes-exchange
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /volumes/exchange
+  method: get
+  operationId: spot-analytics-volumes-exchange
   x-agentic-access:
     action-class: connected
     consequence: read

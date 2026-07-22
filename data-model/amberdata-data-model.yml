@@ -1,0 +1,80 @@
+generated: '2026-07-22'
+method: derived
+source: openapi/ (9 published specs — path/parameter structure)
+description: >-
+  Entity graph of Amberdata's data surface, derived from the published OpenAPI
+  path structure and shared identifier parameters. Amberdata is a read-only
+  market/on-chain data platform: entities are reference and time-series data
+  sets keyed by exchange, instrument/pair, asset, pool, or address rather than
+  user-created resources.
+entities:
+  - name: Exchange
+    id_fields: [exchange]
+    domains: [market, derivatives, spot, defi-market]
+    description: Trading venue (e.g. gdax, binance, deribit); root reference entity for all market data.
+  - name: Instrument / Pair
+    id_fields: [instrument, pair]
+    domains: [market, derivatives, spot, price]
+    description: Tradable market on an exchange (spot pairs like btc_usd; futures/options instruments).
+  - name: Asset
+    id_fields: [asset, symbol]
+    domains: [price, metrics, arc]
+    description: Digital asset; ARC provides reference & classification data per asset.
+  - name: OrderBook
+    id_fields: [exchange, pair]
+    domains: [market, spot]
+    description: Order-book snapshots, events, and depth analytics per exchange+pair.
+  - name: Trade
+    id_fields: [exchange, pair]
+    domains: [market, spot, defi-market]
+    description: Executed trades and trade aggregations per market.
+  - name: OHLCV / Ticker
+    id_fields: [exchange, pair]
+    domains: [market]
+    description: Price/candle and ticker time series per market.
+  - name: FuturesContract
+    id_fields: [instrument, exchange]
+    domains: [derivatives]
+    description: Futures/perpetuals with funding rates, open interest, liquidations, long/short ratios.
+  - name: OptionsContract
+    id_fields: [instrument, exchange]
+    domains: [derivatives]
+    description: Options with implied volatility, Greeks, volatility surfaces and term structures.
+  - name: Block
+    id_fields: [blockNumber, hash]
+    domains: [blockchain]
+    description: On-chain block; parent of transactions.
+  - name: Transaction
+    id_fields: [hash]
+    domains: [blockchain]
+    description: On-chain transaction; belongs to a block and references addresses.
+  - name: Address
+    id_fields: [address]
+    domains: [blockchain]
+    description: On-chain account/contract with balances (current, historical, batch) and token holdings.
+  - name: Token
+    id_fields: [tokenAddress]
+    domains: [blockchain]
+    description: Token contract; joined to addresses through balances and transfers.
+  - name: Pool
+    id_fields: [poolAddress]
+    domains: [defi, defi-market]
+    description: DEX liquidity pool; keyed by pool address (e.g. Uniswap v3 pools) for trades and liquidity data.
+  - name: LendingProtocol
+    id_fields: [protocol]
+    domains: [defi]
+    description: DeFi lending protocol (e.g. compoundv2, aave) with assets, rates, and positions.
+relationships:
+  - {from: Exchange, to: Instrument / Pair, kind: has_many, via: exchange}
+  - {from: Instrument / Pair, to: Trade, kind: has_many, via: pair}
+  - {from: Instrument / Pair, to: OrderBook, kind: has_one, via: pair}
+  - {from: Instrument / Pair, to: OHLCV / Ticker, kind: has_many, via: pair}
+  - {from: FuturesContract, to: Exchange, kind: belongs_to, via: exchange}
+  - {from: OptionsContract, to: Exchange, kind: belongs_to, via: exchange}
+  - {from: OptionsContract, to: Asset, kind: belongs_to, via: currency}
+  - {from: Block, to: Transaction, kind: has_many, via: blockNumber}
+  - {from: Transaction, to: Address, kind: belongs_to, via: from/to address}
+  - {from: Address, to: Token, kind: has_many, via: token balances}
+  - {from: Pool, to: Trade, kind: has_many, via: poolAddress}
+  - {from: LendingProtocol, to: Asset, kind: has_many, via: protocol assets}
+  - {from: Asset, to: Instrument / Pair, kind: has_many, via: base/quote asset}

@@ -1,0 +1,37 @@
+generated: '2026-07-22'
+method: derived
+source: openapi/ (9 published specs) + https://docs.amberdata.io/http/http-api-fundamentals
+standards:
+  - id: api-key-auth
+    conforms: true
+    evidence: All REST specs declare an apiKey securityScheme (x-api-key header); documented in API Fundamentals.
+  - id: oauth2
+    conforms: false
+    evidence: No oauth2 security schemes in any published spec; no OAuth documentation.
+  - id: oidc
+    conforms: false
+    evidence: No openIdConnect scheme; /.well-known/openid-configuration serves no OIDC document.
+  - id: cursor-pagination
+    conforms: true
+    evidence: Documented cursor pagination via payload.metadata.next (docs.amberdata.io/http/http-pagination-and-timeframes).
+  - id: dated-api-versioning
+    conforms: true
+    evidence: Backwards-incompatible changes released as dated versions selected with the api-version header.
+  - id: json-rpc-2.0
+    conforms: true
+    evidence: WebSocket streaming control channel uses JSON-RPC 2.0 subscribe/unsubscribe (asyncapi/amberdata-asyncapi.yml).
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use a custom status/title/description/payload envelope, not application/problem+json.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: /.well-known/security.txt returns 404 on www.amberdata.io and docs.amberdata.io (403 on api.amberdata.com).
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: No Sunset header support documented; deprecations announced via changelog.
+  - id: mcp
+    conforms: true
+    evidence: Public MCP server at https://docs.amberdata.io/mcp discovered via /.well-known/mcp.json (docs-assistant scope).
+  - id: http-compression
+    conforms: true
+    evidence: Accept-Encoding compression (gzip/deflate/br) enforced on Market Data APIs since 2025-07-01.

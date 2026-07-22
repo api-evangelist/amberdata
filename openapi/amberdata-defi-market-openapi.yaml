@@ -1,0 +1,1150 @@
+openapi: 3.1.0
+info:
+  title: Defi Market API
+  version: '2'
+servers:
+  - url: https://api.amberdata.com/market/defi
+security:
+  - sec0: []
+paths:
+  /metrics/exchanges/{exchange}/latest:
+    get:
+      summary: Exchanges Latest
+      description: >-
+        Retrieves the latest exchange daily metrics for the specified
+        decentralized exchange.
+      operationId: defi-metrics-exchanges-latest
+      parameters:
+        - name: exchange
+          in: path
+          description: >-
+            Exchange for which to return the global metrics - can be specified
+            as:<BR/>- a name: `uniswapv2`<BR/>- an id:
+            `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f`
+          schema:
+            type: string
+            default: uniswapv2
+          required: true
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return
+            payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr
+            | human_readable`
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        exchangeId:
+                          type: string
+                          example: '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f'
+                        timestamp:
+                          type: string
+                          example: '2020-12-29T07:00:00.000Z'
+                        liquidityTotalWETH:
+                          type: string
+                          example: '696597.309479738872001810'
+                        liquidityTotalUSD:
+                          type: string
+                          example: '493048636.201664275395561830'
+                        pairsTradedTotal:
+                          type: integer
+                          example: 52
+                        pairsCumulativeTotal:
+                          type: integer
+                          example: 27293
+                        tradesTotal:
+                          type: integer
+                          example: 85
+      deprecated: false
+  /metrics/exchanges/{exchange}/historical:
+    get:
+      summary: Exchanges Historical
+      description: >-
+        Retrieves historical daily exchange metrics for the specified
+        decentralized exchange.
+      operationId: defi-metrics-exchanges-historical
+      parameters:
+        - name: exchange
+          in: path
+          description: >-
+            Exchange for which to return the global metrics - can be specified
+            as:<BR/>- a name: `uniswapv2`<BR/>- an id:
+            `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f`
+          schema:
+            type: string
+            default: uniswapv2
+          required: true
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).<BR/>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR/>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data before this date
+            (exclusive).<BR/>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR/>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return
+            payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr
+            | human_readable`
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        exchangeId:
+                          type: string
+                          example: '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f'
+                        timestamp:
+                          type: string
+                          example: '2020-12-29T06:00:00.000Z'
+                        liquidityTotalWETH:
+                          type: string
+                          example: '696597.309479738872001810'
+                        liquidityTotalUSD:
+                          type: string
+                          example: '493048636.201664275395561830'
+                        pairsTradedTotal:
+                          type: integer
+                          example: 52
+                        pairsCumulativeTotal:
+                          type: integer
+                          example: 27293
+                        tradesTotal:
+                          type: integer
+                          example: 85
+      deprecated: false
+  /ohlcv/{pool}/latest/:
+    get:
+      summary: Latest
+      description: >-
+        Retrieves the latest open-high-low-close for the specified pair.
+        Includes data for exchanges depending on where the pair is traded.
+
+        Asset information is included in the payload.
+
+        Base & Quote information is using the first and second asset in a
+        pool/pair, which is the represented price.
+      operationId: defi-ohlcv-latest
+      parameters:
+        - name: pool
+          in: path
+          description: >-
+            The pool to retrieve the most current data. Can be the pool/pair
+            symbols or address.
+          schema:
+            type: string
+            default: DAI_USDC
+          required: true
+        - name: exchange
+          in: query
+          description: >-
+            The exchange(s) for which to retrieve OHLCV. Example:
+            exchange=uniswapv3
+          schema:
+            type: string
+            default: uniswapv2
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return
+            payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr
+            | human_readable`
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      '0xae461ca67b15dc8dc81ce7615e0320da1a9ab8d5':
+                        type: object
+                        properties:
+                          exchangeName:
+                            type: string
+                            example: uniswapv2
+                          exchangeId:
+                            type: string
+                            example: '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f'
+                          pair:
+                            type: string
+                            example: DAI_USDC
+                          pairAddress:
+                            type: string
+                            example: '0xae461ca67b15dc8dc81ce7615e0320da1a9ab8d5'
+                          baseAddress:
+                            type: string
+                            example: '0x6b175474e89094c44da98b954eedeac495271d0f'
+                          baseCurrencyAddress:
+                            type: string
+                            example: ''
+                          baseName:
+                            type: string
+                            example: Dai Stablecoin
+                          baseSymbol:
+                            type: string
+                            example: DAI
+                          baseDecimals:
+                            type: string
+                            example: '18'
+                          quoteAddress:
+                            type: string
+                            example: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+                          quoteCurrencyAddress:
+                            type: string
+                            example: ''
+                          quoteName:
+                            type: string
+                            example: USD Coin
+                          quoteSymbol:
+                            type: string
+                            example: USDC
+                          quoteDecimals:
+                            type: string
+                            example: '6'
+                          blockchainNetworkId:
+                            type: string
+                            example: '1'
+                          blockchainId:
+                            type: string
+                            example: 1c9c969065fcd1cf
+                          timestamp:
+                            type: integer
+                            example: 1654289760000
+                          index:
+                            type: integer
+                            example: 6
+                          poolAddresses:
+                            type: array
+                            items:
+                              type: string
+                              example: ''
+                          pairName:
+                            type: string
+                            example: null
+                          poolNames:
+                            type: string
+                            example: null
+                          poolSymbols:
+                            type: string
+                            example: null
+                          poolDecimals:
+                            type: string
+                            example: null
+                          poolUnderlyingAddresses:
+                            type: string
+                            example: null
+                          poolUnderlyingNames:
+                            type: string
+                            example: null
+                          poolUnderlyingSymbols:
+                            type: string
+                            example: null
+                          poolUnderlyingDecimals:
+                            type: string
+                            example: null
+                          pairNormalized:
+                            type: string
+                            example: dai_usdc
+                          fee:
+                            type: number
+                            example: 0.003
+                          milliseconds:
+                            type: integer
+                            example: 1654289760000
+                          open:
+                            type: string
+                            example: '1.00264698775035179406'
+                          high:
+                            type: string
+                            example: '1.00264698775035179406'
+                          low:
+                            type: string
+                            example: '1.00264698775035179406'
+                          close:
+                            type: string
+                            example: '1.00264698775035179406'
+                          volume:
+                            type: string
+                            example: '56.960215'
+                          trades:
+                            type: integer
+                            example: 1
+      deprecated: false
+  /ohlcv/{pool}/historical/:
+    get:
+      summary: Historical
+      description: >-
+        Retrieves the historical (time series) open-high-low-close for the
+        specified pair. Includes data for  exchanges depending on where the pair
+        is traded.
+
+        Base & Quote information is using the first and second asset in a
+        pool/pair, which is the represented price.
+      operationId: defi-ohlcv-historical
+      parameters:
+        - name: pool
+          in: path
+          description: >-
+            The pool to retrieve the most current data. Can be the pool/pair
+            symbols or address.
+          schema:
+            type: string
+            default: DAI_WETH
+          required: true
+        - name: exchange
+          in: query
+          description: >-
+            The exchange(s) for which to retrieve OHLCV. Example:
+            exchange=uniswapv2, uniswapv3
+          schema:
+            type: string
+        - name: startDate
+          in: query
+          description: FIlter by pairs after this date.
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          description: FIlter by pairs before this date.
+          schema:
+            type: string
+            format: date-time
+        - name: timeInterval
+          in: query
+          description: >-
+            **[Optional]** Time interval.<BR/>**[Defaults]** `minutes | hours |
+            days*`
+          schema:
+            type: string
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return
+            payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr
+            | human_readable`
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    description: HTTP status code
+                  title:
+                    type: string
+                    example: OK
+                    description: Status title
+                  description:
+                    type: string
+                    example: Successful request
+                    description: Status description
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          columns:
+                            type: array
+                            items:
+                              type: string
+                            example:
+                              - timestamp
+                              - open
+                              - high
+                              - low
+                              - close
+                              - volume
+                              - quoteVolume
+                              - trades
+                              - exchangeId
+                              - pairAddress
+                              - baseAddress
+                              - quoteAddress
+                            description: Column names for the data arrays
+                          startDate:
+                            type: integer
+                            format: int64
+                            example: 1727904832187
+                            description: Start date in milliseconds since epoch
+                          endDate:
+                            type: integer
+                            format: int64
+                            example: 1759527232187
+                            description: End date in milliseconds since epoch
+                      data:
+                        type: object
+                        additionalProperties:
+                          type: array
+                          items:
+                            type: array
+                            items:
+                              oneOf:
+                                - type: integer
+                                - type: string
+                            minItems: 12
+                            maxItems: 12
+                            description: >-
+                              Array containing [timestamp, open, high, low,
+                              close, volume, quoteVolume, trades, exchangeId,
+                              pairAddress, baseAddress, quoteAddress]
+                        description: Trading data indexed by pair address
+                        example:
+                          '0x10d05e057cb1ee7eac0559aa7f09bf06f44fd718':
+                            - - 1727913600000
+                              - '0.0004105818335350145800011301445552145'
+                              - '0.0004105818335350145800011301445552145'
+                              - '0.0004105818335350145800011301445552145'
+                              - '0.0004105818335350145800011301445552145'
+                              - '6.3820423846392694'
+                              - >-
+                                0.0026203506639833680000000000000000002340430932402863
+                              - '1'
+                              - '0x10d05e057cb1ee7eac0559aa7f09bf06f44fd718'
+                              - '0x05f4e094c8f77d001a05dc7ffef208ccbea47079'
+                              - '0x6b175474e89094c44da98b954eedeac495271d0f'
+                              - '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+      deprecated: false
+  /metrics/exchanges/{exchange}/assets/{asset}/latest:
+    get:
+      summary: Assets Latest
+      description: >-
+        Retrieves the latest daily metrics for the specified asset (for example
+        DAI).
+      operationId: defi-metrics-assets-latest
+      parameters:
+        - name: exchange
+          in: path
+          description: >-
+            Exchange of the asset for which to return the metrics - can be
+            specified as:<BR/>- a name: `uniswapv2`<BR/>- an id:
+            `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f`
+          schema:
+            type: string
+            default: uniswapv2
+          required: true
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return
+            payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr
+            | human_readable`
+          schema:
+            type: string
+        - name: asset
+          in: path
+          description: >-
+            Asset for which to return the metrics, for example:<BR/>-
+            `0x6b175474e89094c44da98b954eedeac495271d0f` (DAI)
+          schema:
+            type: string
+            default: '0x6b175474e89094c44da98b954eedeac495271d0f'
+          required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        exchangeId:
+                          type: string
+                          example: '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f'
+                        timestamp:
+                          type: string
+                          example: '2020-12-29T07:00:00.000Z'
+                        liquidityTotalNative:
+                          type: string
+                          example: '493048636.201664275395561830'
+                        liquidityTotalUSD:
+                          type: string
+                          example: '121952471.481071009865993322'
+      deprecated: false
+  /metrics/exchanges/{exchange}/assets/{asset}/historical:
+    get:
+      summary: Assets Historical
+      description: >-
+        Retrieves historical daily metrics for the specified asset (for example
+        DAI).
+      operationId: defi-metrics-assets-historical
+      parameters:
+        - name: exchange
+          in: path
+          description: >-
+            Exchange for which to return the global metrics - can be specified
+            as:<BR/>- a name: `uniswapv2`<BR/>- an id:
+            `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f`
+          schema:
+            type: string
+            default: uniswapv2
+          required: true
+        - name: asset
+          in: path
+          description: >-
+            Asset for which to return the metrics, for example:<BR/>-
+            `0x6b175474e89094c44da98b954eedeac495271d0f` (DAI)
+          schema:
+            type: string
+            default: '0x6b175474e89094c44da98b954eedeac495271d0f'
+          required: true
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data before this date
+            (exclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return
+            payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr
+            | human_readable`
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        exchangeId:
+                          type: string
+                          example: '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f'
+                        timestamp:
+                          type: string
+                          example: '2020-12-29T06:00:00.000Z'
+                        liquidityTotalNative:
+                          type: string
+                          example: '493048636.201664275395561830'
+                        liquidityTotalUSD:
+                          type: string
+                          example: '335.274877053807418927'
+      deprecated: false
+  /metrics/exchanges/{exchange}/pairs/{pair}/latest:
+    get:
+      summary: Pairs Latest
+      description: >-
+        Retrieves the latest minute by minute metrics for the specified pair
+        (for example DAI_WETH).
+      operationId: defi-metrics-pairs-latest
+      parameters:
+        - name: exchange
+          in: path
+          description: >-
+            Exchange of the asset for which to return the metrics - can be
+            specified as:<BR/>- a name: `uniswapv2`<BR/>- an id:
+            `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f`
+          schema:
+            type: string
+            default: uniswapv2
+          required: true
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return
+            payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr
+            | human_readable`
+          schema:
+            type: string
+        - name: pair
+          in: path
+          description: >-
+            Pair for which to return the metrics, for example:<BR/>-
+            `0xa478c2975ab1ea89e8196811f51a7b7ade33eb11` (DAI_WETH)
+          schema:
+            type: string
+            default: '0xa478c2975ab1ea89e8196811f51a7b7ade33eb11'
+          required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        exchangeId:
+                          type: string
+                          example: '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f'
+                        timestamp:
+                          type: string
+                          example: '2020-12-29T07:00:00.000Z'
+                        address:
+                          type: string
+                          example: '0x6b175474e89094c44da98b954eedeac495271d0f'
+                        feesNative:
+                          type: string
+                          example: '1.535162374359281676'
+                        feesUSD:
+                          type: string
+                          example: '1.537493485860114379'
+                        liquidityTotalNative:
+                          type: string
+                          example: '79732489.660759360681767727'
+                        liquidityTotalUSD:
+                          type: string
+                          example: '79853561.754983786842105053'
+                        pairsTradedTotal:
+                          type: integer
+                          example: 1
+                        tradesTotal:
+                          type: integer
+                          example: 11
+                        priceNative:
+                          type: string
+                          example: '0.00061015503280647554'
+                        volumeTotalNative:
+                          type: string
+                          example: '511.720791453093891836'
+                        volumeTotalUSD:
+                          type: string
+                          example: '512.497828620038126212'
+      deprecated: false
+  /metrics/exchanges/{exchange}/pairs/{pair}/historical:
+    get:
+      summary: Pairs Historical
+      description: >-
+        Retrieves historical daily metrics for the specified pair (for example
+        DAI_WETH).
+      operationId: defi-metrics-pairs-historical
+      parameters:
+        - name: exchange
+          in: path
+          description: >-
+            Exchange for which to return the global metrics - can be specified
+            as:<BR/>- a name: `uniswapv2`<BR/>- an id:
+            `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f`
+          schema:
+            type: string
+            default: uniswapv2
+          required: true
+        - name: pair
+          in: path
+          description: >-
+            Pair for which to return the metrics, for example:<BR/>-
+            `0xa478c2975ab1ea89e8196811f51a7b7ade33eb11` (DAI_WETH)
+          schema:
+            type: string
+            default: '0xa478c2975ab1ea89e8196811f51a7b7ade33eb11'
+          required: true
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T00:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data before this date
+            (exclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-02T00:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return
+            payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr
+            | human_readable`
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        exchangeId:
+                          type: string
+                          example: '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f'
+                        timestamp:
+                          type: string
+                          example: '2020-12-29T06:00:00.000Z'
+                        address:
+                          type: string
+                          example: '0x6b175474e89094c44da98b954eedeac495271d0f'
+                        feesNative:
+                          type: string
+                          example: '143.946130507571397825'
+                        feesUSD:
+                          type: string
+                          example: '144.013821392561330123'
+                        liquidityTotalNative:
+                          type: string
+                          example: '103973505.181589129290317518'
+                        liquidityTotalUSD:
+                          type: string
+                          example: '104022398.879227475227263226'
+                        pairsTradedTotal:
+                          type: integer
+                          example: 1
+                        tradesTotal:
+                          type: integer
+                          example: 3445
+                        priceNative:
+                          type: string
+                          example: '0.00075603290509702245'
+                        volumeTotalNative:
+                          type: string
+                          example: '47982.043502523799274881'
+                        volumeTotalUSD:
+                          type: string
+                          example: '48004.607130853776707797'
+      deprecated: false
+  /liquidity/information/:
+    get:
+      summary: Information
+      description: Retrieves information about supported exchange-pairs for liquidity.
+      operationId: defi-liquidity-information
+      parameters:
+        - name: exchange
+          in: query
+          description: >-
+            Only return data for the specified exchange(s) (comma separated).
+            Example: uniswapv2
+          schema:
+            type: string
+        - name: includeMetadata
+          in: query
+          description: >-
+            **[Optional]** Include data for asset pair and pool
+            information.<BR/>**[Defaults]** `false* | true`<BR/>**NOTE** If
+            using this without specifying an exchange the endpoint will not
+            return data.
+          schema:
+            type: boolean
+            default: true
+        - name: includeDates
+          in: query
+          description: >-
+            **[Optional]** Include date ranges for each
+            record.<BR/>**[Defaults]** `false* | true`<BR/>**NOTE**
+            includeMetadata is required for includeDates to return a valid
+            response.<BR/>
+          schema:
+            type: boolean
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return
+            payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr
+            | human_readable`
+          schema:
+            type: string
+        - name: size
+          in: query
+          description: The number of records per page.
+          schema:
+            type: integer
+            format: int32
+            default: 100
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      curvev1:
+                        type: object
+                        properties:
+                          RC_bBADGER_5_DAI_2021_6_30_3Crv:
+                            type: object
+                            example: {}
+                          RC_WETH_1400_DAI_2021_7_31_3Crv:
+                            type: object
+                            example: {}
+                          RC_BDI_150_DAI_2021_6_30_3Crv:
+                            type: object
+                            example: {}
+                          ycDAI_ycUSDC_ycUSDT_PAX:
+                            type: object
+                            example: {}
+                          MBTC_crvRenWSBTC:
+                            type: object
+                            example: {}
+                          BBTC_crvRenWSBTC:
+                            type: object
+                            example: {}
+                          RC_DEFI5_60_DAI_2021_5_31_3Crv:
+                            type: object
+                            example: {}
+                          xCOVER_3Crv:
+                            type: object
+                            example: {}
+                          EURS_sEUR:
+                            type: object
+                            example: {}
+                          USDN_3Crv:
+                            type: object
+                            example: {}
+      deprecated: false
+  /dex/exchanges:
+    get:
+      summary: Information - DEX Protocols
+      description: Retrieves list of supported Ethereum decentralized exchanges (DEX).
+      operationId: defi-information-dex-exchanges
+      parameters:
+        - name: exchange
+          in: query
+          description: >-
+            **[Optional]** The exchange for which to retrieve the requested data
+            (address or name).<BR/>**[Examples]**
+            `0x1f98431c8ad98523631ae4a59f267346ea31f984 | uniswapv3`
+          schema:
+            type: string
+        - name: sortBy
+          in: query
+          description: >-
+            **[Optional]** Sorting criteria for exchanges.<BR/>**[Defaults]**
+            `name* | numPairs`
+          schema:
+            type: string
+            default: numPairs
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        exchangeName:
+                          type: string
+                          example: uniswapv2
+                        exchangeId:
+                          type: string
+                          example: '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f'
+                        numPairs:
+                          type: string
+                          example: '329843'
+      deprecated: false
+  /dex/pairs:
+    get:
+      summary: Information - Pairs in DEX Protocols
+      description: Retrieves supported DEX Pairs.
+      operationId: defi-information-dex-pairs
+      parameters:
+        - name: exchange
+          in: query
+          description: >-
+            The exchange for which to retrieve the requested data (address or
+            name).<BR/>**[Examples]**
+            `0x1f98431c8ad98523631ae4a59f267346ea31f984 | uniswapv3`
+          required: true
+          schema:
+            type: string
+            default: uniswapv3
+        - name: pair
+          in: query
+          description: >-
+            The pair for which to retrieve the request data
+            (address).<BR/>**[Example]**
+            `0x5777d92f208679db4b9778590fa3cab3ac9e2168`
+          schema:
+            type: string
+        - name: asset
+          in: query
+          description: >-
+            The asset for which to retrieve the requested data (address or
+            symbol).<BR/>**[Examples]**
+            `0x6b175474e89094c44da98b954eedeac495271d0f | DAI`
+          schema:
+            type: string
+        - name: size
+          in: query
+          description: '**[Optional]** Maximum number of items in *payload.data*.<BR/>'
+          schema:
+            type: integer
+            format: int32
+            default: 1000
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                            example: >-
+                              https://api.amberdata.com/market/defi/dex/pairs?size=10&exchange=uniswapv3&format=json&page=1
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchangeName:
+                              type: string
+                              example: uniswapv3
+                            exchangeId:
+                              type: string
+                              example: '0x1f98431c8ad98523631ae4a59f267346ea31f984'
+                            pairName:
+                              type: string
+                              example: RALPH_WETH
+                            pairAddress:
+                              type: string
+                              example: '0x0000d36ab86d213c14d93cd5ae78615a20596505'
+                            baseAddress:
+                              type: string
+                              example: '0x60f99e81d7e9634d1de93af5301e3321c960a575'
+                            baseName:
+                              type: string
+                              example: Rekt Ralph
+                            baseSymbol:
+                              type: string
+                              example: RALPH
+                            baseDecimals:
+                              type: string
+                              example: '18'
+                            quoteAddress:
+                              type: string
+                              example: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+                            quoteName:
+                              type: string
+                              example: Wrapped Ether
+                            quoteSymbol:
+                              type: string
+                              example: WETH
+                            quoteDecimals:
+                              type: string
+                              example: '18'
+                            poolFees:
+                              type: string
+                              example: '0.01'
+                            poolAddresses:
+                              type: array
+                              items:
+                                type: string
+                                example: '0x60f99e81d7e9634d1de93af5301e3321c960a575'
+                            poolNames:
+                              type: array
+                              items:
+                                type: string
+                                example: Rekt Ralph
+                            poolSymbols:
+                              type: array
+                              items:
+                                type: string
+                                example: RALPH
+                            poolDecimals:
+                              type: array
+                              items:
+                                type: string
+                                example: '18'
+      deprecated: false
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      x-default: API_KEY
+      name: x-api-key
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

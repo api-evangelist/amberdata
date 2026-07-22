@@ -1,0 +1,2361 @@
+openapi: 3.1.0
+info:
+  title: Defi API
+  version: '2'
+servers:
+  - url: https://api.amberdata.com/defi
+security:
+  - sec0: []
+paths:
+  /lending/{protocolId}/protocol:
+    get:
+      summary: Protocol Lens
+      description: >-
+        This API retrieves information about all of the actions that occurred on
+        the protocol within a certain timespan.
+      operationId: defi-lending-protocol-lens
+      parameters:
+        - name: protocolId
+          in: path
+          schema:
+            type: string
+            enum:
+              - aavev2
+              - aavev3
+              - makerdao
+              - compoundv2
+            default: aavev2
+          required: true
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data before this date
+            (exclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: size
+          in: query
+          description: >-
+            **[Optional]** Number of records per page. If not specified, the API
+            will default to and try to return 1000 actions under
+            **payload.data**.
+          schema:
+            type: integer
+            format: int32
+        - name: direction
+          in: query
+          description: >-
+            **[Optional]** The order in which to return the results (ascending
+            or descending). By default. records are returned in ascending order,
+            so the oldest records are returned first.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: timeFormat
+          in: query
+          schema:
+            type: string
+            enum:
+              - milliseconds
+              - ms
+              - iso
+              - iso8601
+              - hr
+              - human_readable
+        - name: x-amberdata-blockchain-id
+          in: header
+          description: >-
+            **[Optional]** The id of the blockchain for which you want protocol
+            data from. Defaults to `ethereum-mainnet` if not specified. Use the
+            [Information
+            Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols)
+            API to view the supported protocol and blockchain id combinations.
+          schema:
+            type: string
+            enum:
+              - ethereum-mainnet
+              - polygon-mainnet
+              - avalanche-mainnet
+              - arbitrum-mainnet
+              - optimism-mainnet
+            default: polygon-mainnet
+        - name: action
+          in: query
+          description: '**[Optional]** Payload only includes data filtered by the action.'
+          schema:
+            type: string
+            enum:
+              - Deposit
+              - Withdraw
+              - LiquidationCall
+              - Repay
+              - Borrow
+              - FlashLoan
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                            example: >-
+                              https://api.amberdata.com/defi/lending/aavev2/protocol?cursor=N4IgDgTg9gLlDGUA2BJAJiAXCAhjgbgKb4BMIANCAJYB28SArmoQIJJIAqEONAzjvBhUoNAKJEaMXlgBmOJL0KUhAW0IAxKBBU4YWEAAsGOmgCVCONDgBGSQhRBoqEQoOE19LAMoBhB7xgcCBgAEV17TABGADZoyIAGAHYATkSSaPjMykIaNDCYCJi4yPSAFkyKyl4qAC8IkABmB2YiJCgwQggAWShmWXlFShktHT1sACteEQcwHABzQsotKjnaeS9A4PzC2ISUjIr4pYgVtaRRXO2sIsiS6PLDgF8gA
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            action:
+                              type: string
+                              example: UseReserveAsCollateral
+                            timestamp:
+                              type: string
+                              example: 2022-08-21 11:00:03 000
+                            blockNumber:
+                              type: integer
+                              example: 15383603
+                              default: 0
+                            transactionHash:
+                              type: string
+                              example: >-
+                                0x0bee33572d60aaf827adb727c0db3fc72f78c7c80257c69bafa37c180907666d
+                            logIndex:
+                              type: integer
+                              example: 529
+                              default: 0
+                            assetId:
+                              type: string
+                              example: '0xae7ab96520de3a18e5e111b5eaab095312d7fe84'
+                            assetSymbol:
+                              type: string
+                              example: STETH
+                            marketId:
+                              type: string
+                              example: '0xb53c1a33016b2dc2ff3653530bff1848a515c8c5'
+                            market:
+                              type: string
+                              example: main
+                            reserveAsCollateralEnabled:
+                              type: boolean
+                              example: true
+                              default: true
+                            user:
+                              type: string
+                              example: '0xb9428f4e0c0c104f89dfd1fd3f4ca89549666666'
+      deprecated: false
+  /lending/{protocolId}/wallets/{walletAddress}:
+    get:
+      summary: Wallet Lens
+      description: >-
+        This API retrieves information about all of the actions taken by a
+        specific wallet on the protocol within a certain timespan.
+      operationId: defi-lending-wallet-lens
+      parameters:
+        - name: protocolId
+          in: path
+          schema:
+            type: string
+            enum:
+              - aavev2
+              - aavev3
+              - compoundv2
+              - makerdao
+            default: aavev2
+          required: true
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+            default: '2022-09-01'
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data before this date
+            (exclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+            default: '2022-10-31'
+        - name: size
+          in: query
+          description: >-
+            **[Optional]** Number of records per page. If not specified, the API
+            will default to and try to return 1000 actions under
+            **payload.data**.
+          schema:
+            type: integer
+            format: int32
+        - name: direction
+          in: query
+          description: >-
+            **[Optional]** The order in which to return the results (ascending
+            or descending). By default. records are returned in ascending order,
+            so the oldest records are returned first.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: timeFormat
+          in: query
+          description: '**[Optional]** Time format of the timestamps in the return payload.'
+          schema:
+            type: string
+            enum:
+              - milliseconds
+              - ms
+              - iso
+              - iso8601
+              - hr
+              - human_readable
+        - name: x-amberdata-blockchain-id
+          in: header
+          description: >-
+            **[Optional]** The id of the blockchain for which you want protocol
+            data from. Defaults to `ethereum-mainnet` if not specified. Use the
+            [Information
+            Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols)
+            API to view the supported protocol and blockchain id combinations.
+          schema:
+            type: string
+            enum:
+              - ethereum-mainnet
+              - polygon-mainnet
+              - avalanche-mainnet
+              - arbitrum-mainnet
+              - optimism-mainnet
+        - name: walletAddress
+          in: path
+          description: The wallet address
+          schema:
+            type: string
+            default: '0x1ec5878ffc42e6d5d80422bdd06cf0712e5611fd'
+          required: true
+        - name: action
+          in: query
+          description: '**[Optional]** Payload only includes data filtered by the action.'
+          schema:
+            type: string
+            enum:
+              - Deposit
+              - Withdraw
+              - LiquidationCall
+              - Repay
+              - Borrow
+              - FlashLoan
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                            example: >-
+                              https://api.amberdata.com/defi/lending/aavev2/wallets/0xe26684de8d5a40a35c3fc15c9328c7f3a523759b?cursor=N4IgDgTg9gLlDGUA2BJAJiAXCAhjgbgKb4BMIANCAJYB28SArmoQIJJIAqEONAzjvBhUoNAKJEaMXlgBmOJL0KUhAW0IAxKBBU4YWEAAsGOmgCVCONDgBGSQhRBoqEQoOE19LAMoBhB7xgcCBgAEV17TABGADZoyMiSAAYAFmSAZkTMykIaNDCYCJi4hOjkzPLKXioALwiQNIdmIiQoMEIIAFkoZll5RUoZLR09bAArXhEHMBwAc0LKLSoZ2nkvQOD8wtjIxIB2AE5o8qyQReWaeVFczawi%2BJJS48SAXyA
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            action:
+                              type: string
+                              example: Withdraw
+                            timestamp:
+                              type: string
+                              example: 2022-08-21 11:09:05 000
+                            blockNumber:
+                              type: integer
+                              example: 15383647
+                              default: 0
+                            transactionHash:
+                              type: string
+                              example: >-
+                                0xc03a13328450f14094551250865c7e3b3f97ccae37a3cc1079efed098033c2b7
+                            logIndex:
+                              type: integer
+                              example: 669
+                              default: 0
+                            assetId:
+                              type: string
+                              example: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+                            assetSymbol:
+                              type: string
+                              example: WETH
+                            marketId:
+                              type: string
+                              example: '0xb53c1a33016b2dc2ff3653530bff1848a515c8c5'
+                            market:
+                              type: string
+                              example: main
+                            amount:
+                              type: number
+                              example: 0.4072108498457563
+                              default: 0
+                            user:
+                              type: string
+                              example: '0xe26684de8d5a40a35c3fc15c9328c7f3a523759b'
+                            to:
+                              type: string
+                              example: '0xe26684de8d5a40a35c3fc15c9328c7f3a523759b'
+      deprecated: false
+  /lending/{protocolId}/assets/{asset}:
+    get:
+      summary: Asset Lens
+      description: >-
+        This API retrieves information about all of the actions that occurred
+        for a specific asset on the protocol within a certain timespan.
+      operationId: defi-lending-asset-lens
+      parameters:
+        - name: protocolId
+          in: path
+          schema:
+            type: string
+            enum:
+              - aavev2
+              - aavev3
+              - compoundv2
+              - makerdao
+            default: aavev2
+          required: true
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data before this date
+            (exclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: size
+          in: query
+          description: >-
+            **[Optional]** Number of records per page. If not specified, the API
+            will default to and try to return 1000 actions under
+            **payload.data**.
+          schema:
+            type: integer
+            format: int32
+        - name: direction
+          in: query
+          description: >-
+            **[Optional]** The order in which to return the results (ascending
+            or descending). By default. records are returned in ascending order,
+            so the oldest records are returned first.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: timeFormat
+          in: query
+          description: '**[Optional]** Time format of the timestamps in the return payload.'
+          schema:
+            type: string
+            enum:
+              - milliseconds
+              - ms
+              - iso
+              - iso8601
+              - hr
+              - human_readable
+        - name: x-amberdata-blockchain-id
+          in: header
+          description: >-
+            **[Optional]** The id of the blockchain for which you want protocol
+            data from. Defaults to `ethereum-mainnet` if not specified. Use the
+            [Information
+            Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols)
+            API to view the supported protocol and blockchain id combinations.
+          schema:
+            type: string
+            enum:
+              - ethereum-mainnet
+              - polygon-mainnet
+              - avalanche-mainnet
+              - arbitrum-mainnet
+              - optimism-mainnet
+        - name: asset
+          in: path
+          description: '**[Examples]** `WETH` The token symbol'
+          schema:
+            type: string
+            default: WETH
+          required: true
+        - name: action
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data filtered by the
+            action.<BR>**[Examples]**
+            `UseReserveAsCollateral|Deposit|Withdraw|LiquidationCall|Repay|Borrow|FlashLoan`
+          schema:
+            type: string
+            enum:
+              - Deposit
+              - Withdraw
+              - LiquidationCall
+              - Repay
+              - Borrow
+              - FlashLoan
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                            example: >-
+                              https://api.amberdata.com/defi/lending/aavev2/assets/WETH?cursor=N4IgDgTg9gLlDGUA2BJAJiAXCAhjgbgKb4BMIANCALY4QDWhMWAdgK5JKUCWz8SraQgEEOAFQg5mAZxzwYXKMwCiRZjClYAZjiRTCleVUIAxKBBpNsAC1Y1mAJUI40OAEZJCFEGi4RCchWYsECEAZQBhLykYWhgAERwYT0wARgA2NJSABgAOFJSAFgBWLNLKQmY0BKSsdMyUkjSC0pbKKS4AL2SQAGYvQSIkKDBCCABZKEEtHT1KTTMLYIArKUUvMBwAc2SUyjMuTZ4dUJiIeMSdjOyAdgBONJaykH3D5h0lSurL%2Bsbmx8ocFI9DB0MEsgAPeBZEh4HA9W6uEgkHqaQg5NBZHBZQhFeAFTQka5ONC3XI9eDXIppeDwMgAXyAA
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            action:
+                              type: string
+                              example: Withdraw
+                            timestamp:
+                              type: string
+                              example: 2022-08-21 11:09:05 000
+                            blockNumber:
+                              type: integer
+                              example: 15383647
+                              default: 0
+                            transactionHash:
+                              type: string
+                              example: >-
+                                0xc03a13328450f14094551250865c7e3b3f97ccae37a3cc1079efed098033c2b7
+                            logIndex:
+                              type: integer
+                              example: 669
+                              default: 0
+                            assetId:
+                              type: string
+                              example: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+                            assetSymbol:
+                              type: string
+                              example: WETH
+                            marketId:
+                              type: string
+                              example: '0xb53c1a33016b2dc2ff3653530bff1848a515c8c5'
+                            market:
+                              type: string
+                              example: main
+                            amount:
+                              type: number
+                              example: 0.4072108498457563
+                              default: 0
+                            user:
+                              type: string
+                              example: '0xe26684de8d5a40a35c3fc15c9328c7f3a523759b'
+                            to:
+                              type: string
+                              example: '0xe26684de8d5a40a35c3fc15c9328c7f3a523759b'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /lending/{protocolId}/governance:
+    get:
+      summary: Governance Lens
+      description: >-
+        This API retrieves information about all of the governance actions that
+        occurred for the protocol within a certain timespan.
+      operationId: defi-lending-governance-lens
+      parameters:
+        - name: startDate
+          in: query
+          description: >-
+            Payload only includes data after this date
+            (inclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+            default: '2022-09-01'
+        - name: endDate
+          in: query
+          description: >-
+            Payload only includes data before this date
+            (exclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+            default: '2022-09-30'
+        - name: size
+          in: query
+          description: Number of records per page
+          schema:
+            type: integer
+            format: int32
+        - name: direction
+          in: query
+          description: >-
+            The order in which to return the results (ascending or descending).
+            By default. records are returned in descending order, so the most
+            recent records are returned first.
+          schema:
+            type: string
+        - name: timeFormat
+          in: query
+          description: >-
+            Time format of the timestamps in the return
+            payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr
+            | human_readable`
+          schema:
+            type: string
+        - name: proposalId
+          in: query
+          description: The proposal id to filter results by
+          schema:
+            type: string
+        - name: address
+          in: query
+          description: The wallet address to filter results by
+          schema:
+            type: string
+        - name: support
+          in: query
+          description: Filter results by votes for or votes against
+          schema:
+            type: boolean
+        - name: protocolId
+          in: path
+          description: >-
+            **Note**: Aave has the same governance regardless of protocol
+            version (v2 vs. v3).
+          schema:
+            type: string
+            enum:
+              - aavev2
+              - aavev3
+              - compoundv2
+              - makerdao
+            default: aavev2
+          required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                            example: >-
+                              https://api.amberdata.com/defi/lending/aavev3/governance?cursor=N4IgRgNg9gxg1jAFgQwJYDsCSATEAuEARhgE5SA2EgBnIFYAzGbY%2BkAGhAAcAnKAF1hQIOfCGTIAbgFMJAZnYg%2BqALZSAYlG7LkfUYgCu29ACUpybMkhSF2VNykwlUdKICCAZQDCCgM59k3HwAIjrWeITkACyEtAAc5ADssrRUqRxS6NghfGERkbJJsgBM5LGpVBw%2BqABeYSDyHPSa2roEAFY%2BzgqcyADmuRyaqL0YyBDu-oHZuVGEVIQJsUXlFSBDI%2BhjAKKZ0-h5BbLFpeUcEMh%2BACoqUn7Iypz7s3GJyWcXfAAyUL2YmVIAD3wRRK7z8AAVeJwoD4xiICLRIiAAL5AA
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            action:
+                              type: string
+                              example: Proposal
+                            proposalId:
+                              type: string
+                              example: '54'
+                            timestamp:
+                              type: string
+                              example: 2022-01-06 07:07:31 000
+                            title:
+                              type: string
+                              example: Risk Parameter Updates 2021-12-29
+                            shortDescription:
+                              type: string
+                              example: Risk parameter updates
+                            ipfsHash:
+                              type: string
+                              example: QmZc8PLPsfT98kiVuECZDYh4nJgjwSgthNNBNhGz5kCTfZ
+                            creator:
+                              type: string
+                              example: '0x683a4f9915d6216f73d6df50151725036bd26c02'
+      deprecated: false
+  /lending/protocols/information:
+    get:
+      summary: Information - Lending Protocols
+      description: >-
+        This API lists the supported DeFi lending protocols and provides
+        snapshots of aggregate metrics.
+      operationId: defi-lending-information-protocols
+      parameters:
+        - name: blockchain
+          in: query
+          description: The blockchainId or blockchain slug to filter results by
+          schema:
+            type: string
+            enum:
+              - ethereum-mainnet
+              - polygon-mainnet
+              - avalanche-mainnet
+              - arbitrum-mainnet
+              - optimism-mainnet
+        - name: protocol
+          in: query
+          description: The protocol to filter results by
+          schema:
+            type: string
+            enum:
+              - makerdao
+              - compound
+              - compoundv2
+              - aave
+              - aavev2
+              - aavev3
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** If provided, returns the associated state of this
+            protocol up to the specified date. <BR>**[Examples]** `2023-01-01`
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        protocolId:
+                          type: string
+                          example: aavev2
+                        protocolName:
+                          type: string
+                          example: aave
+                        protocolVersion:
+                          type: string
+                          example: v2
+                        blockchain:
+                          type: string
+                          example: ethereum-mainnet
+                        numAssets:
+                          type: integer
+                          example: 37
+                          default: 0
+                        totalDepositedUSD:
+                          type: number
+                          example: 2450326532.6253276
+                          default: 0
+                        totalCollateralUSD:
+                          type: number
+                          example: 2411068465.347387
+                          default: 0
+                        totalBorrowedUSD:
+                          type: number
+                          example: 601548244.8033507
+                          default: 0
+      deprecated: false
+  /lending/assets/information:
+    get:
+      summary: Information - Assets in Lending Protocols
+      description: >-
+        This API lists the supported assets across the available lending
+        protocols and provides snapshots of aggregate metrics.
+      operationId: defi-lending-information-assets
+      parameters:
+        - name: blockchain
+          in: query
+          description: The blockchainId or blockchain slug to filter results by
+          schema:
+            type: string
+            enum:
+              - ethereum-mainnet
+              - polygon-mainnet
+              - avalanche-mainnet
+              - arbitrum-mainnet
+              - optimism-mainnet
+        - name: protocol
+          in: query
+          description: The protocol to filter results by
+          schema:
+            type: string
+            enum:
+              - makerdao
+              - compound
+              - compoundv2
+              - compoundv3
+              - aave
+              - aavev2
+              - aavev3
+        - name: asset
+          in: query
+          description: The asset id or symbol to filter the results by.
+          schema:
+            type: string
+        - name: market
+          in: query
+          description: The market id or name to filter the results by.
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** If provided, returns the associated state of this
+            asset up to the specified date since the first transaction involving
+            this asset. <BR><BR>If not specified, returns the **current** (now)
+            state of the asset since the first transaction involving the asset.
+            <BR><BR>**[Examples]** `2023-01-01`
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        protocolId:
+                          type: string
+                          example: aavev2
+                        protocolName:
+                          type: string
+                          example: aave
+                        protocolVersion:
+                          type: string
+                          example: v2
+                        blockchain:
+                          type: string
+                          example: ethereum-mainnet
+                        assetId:
+                          type: string
+                          example: '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599'
+                        assetSymbol:
+                          type: string
+                          example: WBTC
+                        market:
+                          type: string
+                          example: main
+                        decimals:
+                          type: integer
+                          example: 8
+                          default: 0
+                        borrowRateStable:
+                          type: number
+                          example: 0.04319282678448013
+                          default: 0
+                        borrowRateVariable:
+                          type: number
+                          example: 0.005277130713792051
+                          default: 0
+                        lendRate:
+                          type: number
+                          example: 0.000181012705707908
+                          default: 0
+                        totalDepositedUSD:
+                          type: number
+                          example: 588524548.0301714
+                          default: 0
+                        totalCollateralUSD:
+                          type: number
+                          example: 588062085.8247572
+                          default: 0
+                        totalBorrowedUSD:
+                          type: number
+                          example: 50467940.46065201
+                          default: 0
+                        totalLiquidationsUSD:
+                          type: number
+                          example: 224678377.90751523
+                          default: 0
+                        loanToValueRatio:
+                          type: number
+                          example: 0.72
+                          default: 0
+                        isActive:
+                          type: boolean
+                          example: true
+                          default: true
+      deprecated: false
+  /lending/{protocolId}/metrics/summary:
+    get:
+      summary: Lending Protocol Summary Metrics
+      description: This API provides aggregated insights into the lending protocols.
+      operationId: lending-protocol-metrics-summary
+      parameters:
+        - name: protocolId
+          in: path
+          schema:
+            type: string
+            enum:
+              - aavev2
+              - aavev3
+              - makerdao
+              - compoundv2
+            default: aavev3
+          required: true
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data before this date
+            (exclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: timeFormat
+          in: query
+          description: '**[Optional]** Time format of the timestamps in the return payload.'
+          schema:
+            type: string
+            enum:
+              - milliseconds
+              - ms
+              - iso
+              - iso8601
+              - hr
+              - human_readable
+            default: hr
+        - name: x-amberdata-blockchain-id
+          in: header
+          description: >-
+            **[Optional]** The id of the blockchain for which you want data
+            from. Defaults to `ethereum-mainnet` if not specified. Use the
+            [Information
+            Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols)
+            API to view the supported protocol and blockchain id combinations.
+          schema:
+            type: string
+            enum:
+              - ethereum-mainnet
+              - polygon-mainnet
+              - avalanche-mainnet
+              - arbitrum-mainnet
+              - optimism-mainnet
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          metrics:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                timestamp:
+                                  type: string
+                                  example: 2023-04-15 23:59:59 999
+                                totalDepositedUSD:
+                                  type: number
+                                  example: 6222493181.885701
+                                totalBorrowedUSD:
+                                  type: number
+                                  example: 1823899948.8358312
+                                cumulativeLiquidatedUSD:
+                                  type: number
+                                  example: 1191296637.9286466
+                                cumulativeProtocolRevenueUSD:
+                                  type: number
+                                  example: 37393417.20677932
+                                cumulativeInterestAccumulatedUSD:
+                                  type: number
+                                  example: 306905185.2241058
+                                intervalProtocolRevenueUSD:
+                                  type: number
+                                  example: 19426.00786467653
+                                intervalInterestAccumulatedUSD:
+                                  type: number
+                                  example: 129690.42546114429
+                                intervalNumberOfDeposits:
+                                  type: integer
+                                  example: 194
+                                intervalNumberOfWithdraws:
+                                  type: integer
+                                  example: 167
+                                intervalNumberOfRepays:
+                                  type: integer
+                                  example: 84
+                                intervalNumberOfBorrows:
+                                  type: integer
+                                  example: 135
+                                intervalNumberOfLiquidations:
+                                  type: integer
+                                  example: 0
+                                intervalNumberOfUsers:
+                                  type: integer
+                                  example: 184
+                                intervalDepositedUSD:
+                                  type: number
+                                  example: 76866301.15099154
+                                intervalWithdrawnUSD:
+                                  type: number
+                                  example: 54899588.095887944
+                                intervalRepaidUSD:
+                                  type: number
+                                  example: 27420866.29421422
+                                intervalBorrowedUSD:
+                                  type: number
+                                  example: 30527102.567837324
+                                intervalLiquidatedUSD:
+                                  type: number
+                                  example: 0
+                                intervalFlashLoanedUSD:
+                                  type: number
+                                  example: 4162717.1348569775
+      deprecated: false
+  /lending/{protocolId}/assets/{assetId}/metrics/summary:
+    get:
+      summary: Lending Asset Summary Metrics
+      description: >-
+        This API provides aggregated insights into the asset markets across
+        various lending protocols.
+      operationId: lending-asset-summary-metrics
+      parameters:
+        - name: protocolId
+          in: path
+          schema:
+            type: string
+            enum:
+              - aavev2
+              - aavev3
+              - compoundv2
+              - makerdao
+            default: aavev3
+          required: true
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data before this date
+            (exclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: timeFormat
+          in: query
+          description: '**[Optional]** Time format of the timestamps in the return payload.'
+          schema:
+            type: string
+            enum:
+              - milliseconds
+              - ms
+              - iso
+              - iso8601
+              - hr
+              - human_readable
+            default: hr
+        - name: x-amberdata-blockchain-id
+          in: header
+          description: >-
+            **[Optional]** The id of the blockchain for which you want data
+            from. Defaults to `ethereum-mainnet` if not specified. Use the
+            [Information
+            Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols)
+            API to view the supported protocol and blockchain id combinations.
+          schema:
+            type: string
+            enum:
+              - ethereum-mainnet
+              - avalanche-mainnet
+              - arbitrum-mainnet
+              - optimism-mainnet
+        - name: assetId
+          in: path
+          description: >-
+            **[Examples]** `USDC | WETH`. The requested asset must exist on the
+            specified protocol.
+          schema:
+            type: string
+            default: WETH
+          required: true
+        - name: market
+          in: query
+          description: >-
+            **[Optional]** Applies only when `protocolId = makerdao`. Get only
+            the aggregate data for the specific asset market.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          metrics:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                timestamp:
+                                  type: string
+                                  example: 2023-01-27 23:59:59 999
+                                totalDepositedUSD:
+                                  type: number
+                                  example: 798407.1054579312
+                                totalBorrowedUSD:
+                                  type: number
+                                  example: 693408.5213470148
+                                cumulativeLiquidatedUSD:
+                                  type: number
+                                  example: 0
+                                intervalDepositedUSD:
+                                  type: number
+                                  example: 802410.1450574565
+                                intervalWithdrawnUSD:
+                                  type: number
+                                  example: 4025.045964467924
+                                intervalRepaidUSD:
+                                  type: number
+                                  example: 28431.264610794253
+                                intervalBorrowedUSD:
+                                  type: number
+                                  example: 721813.6375024171
+                                intervalLiquidatedUSD:
+                                  type: number
+                                  example: 0
+                                intervalFlashLoanedUSD:
+                                  type: number
+                                  example: 0
+      deprecated: false
+  /lending/{protocolId}/wallets/{address}/portfolio:
+    get:
+      summary: Track Positions - Lending Wallets
+      description: >-
+        This API retrieves the balances of a given address within supported
+        lending protocols.
+      operationId: track-positions-lending-wallet
+      parameters:
+        - name: protocolId
+          in: path
+          schema:
+            type: string
+            enum:
+              - aavev2
+              - aavev3
+              - compoundv2
+              - compoundv3
+              - makerdao
+            default: aavev3
+          required: true
+        - name: x-amberdata-blockchain-id
+          in: header
+          description: >-
+            **[Optional]** The id of the blockchain for which you want protocol
+            data from. Defaults to `ethereum-mainnet` if not specified. Use the
+            [Information
+            Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols)
+            API to view the supported protocol and blockchain id combinations.
+          required: true
+          schema:
+            type: string
+            enum:
+              - ethereum-mainnet
+              - polygon-mainnet
+              - avalanche-mainnet
+              - arbitrum-mainnet
+              - optimism-mainnet
+            default: polygon-mainnet
+        - name: address
+          in: path
+          description: >-
+            The address for which the portfolio summary is desired. Example
+            address is for `aavev3` plus `polygon-mainnet` **only**.
+          schema:
+            type: string
+            default: '0x884d6fa3a4b349880486ad4d7c833ca968c785d8'
+          required: true
+        - name: timeFormat
+          in: query
+          description: '**[Optional]** Time format of the timestamps in the return payload.'
+          schema:
+            type: string
+            enum:
+              - milliseconds
+              - ms
+              - iso
+              - iso8601
+              - hr
+              - human_readable
+            default: hr
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** If provided, returns the balances of the address at
+            this date. Enables historical look-back of the
+            portfolio.<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`<BR>**[Warning]** Cannot be combined with
+            `blockNumber`, use only one, either `endDate` or `blockNumber`.
+          schema:
+            type: string
+        - name: blockNumber
+          in: query
+          description: >-
+            **[Optional]** If provided, returns the balances of the address when
+            this block was finalized. Enables historical look-back of the
+            portfolio.<BR>**[Warning]** Cannot be combined with `endDate`, use
+            only one, either `blockNumber` or `endDate`.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                            example: null
+                      data:
+                        type: object
+                        properties:
+                          timestamp:
+                            type: string
+                            example: 2022-11-07 20:02:00 000
+                          totalLiquidityETH:
+                            type: number
+                            example: 1.960386955045967
+                            default: 0
+                          totalLiquidityUSD:
+                            type: number
+                            example: 3141.9905883303727
+                            default: 0
+                          totalCollateralETH:
+                            type: number
+                            example: 1.960386955045967
+                            default: 0
+                          totalCollateralUSD:
+                            type: number
+                            example: 3141.9905883303727
+                            default: 0
+                          totalBorrowedETH:
+                            type: number
+                            example: 0.8354476352995496
+                            default: 0
+                          totalBorrowedUSD:
+                            type: number
+                            example: 1339.005343
+                            default: 0
+                          availableToBorrowETH:
+                            type: number
+                            example: 0.5745894213541245
+                            default: 0
+                          availableToBorrowUSD:
+                            type: number
+                            example: 920.9174491811094
+                            default: 0
+                          netWorthETH:
+                            type: number
+                            example: 1.1249393197464175
+                            default: 0
+                          netWorthUSD:
+                            type: number
+                            example: 1802.985245330373
+                            default: 0
+                          lifetimeRewardsETH:
+                            type: integer
+                            example: 0
+                            default: 0
+                          lifetimeRewardsUSD:
+                            type: integer
+                            example: 0
+                            default: 0
+                          unclaimedRewardsETH:
+                            type: integer
+                            example: 0
+                            default: 0
+                          unclaimedRewardsUSD:
+                            type: integer
+                            example: 0
+                            default: 0
+                          healthFactor:
+                            type: number
+                            example: 1.805087884251727
+                            default: 0
+                          loanToValueRatio:
+                            type: number
+                            example: 0.719264659981688
+                            default: 0
+                          liquidationThresholdRatio:
+                            type: number
+                            example: 0.769264659981688
+                            default: 0
+                          positions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                assetId:
+                                  type: string
+                                  example: '0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6'
+                                assetSymbol:
+                                  type: string
+                                  example: WBTC
+                                positionType:
+                                  type: string
+                                  example: Lend
+                                isCollateral:
+                                  type: boolean
+                                  example: true
+                                  default: true
+                                loanToValueRatio:
+                                  type: number
+                                  example: 0.7
+                                  default: 0
+                                liquidationThresholdRatio:
+                                  type: number
+                                  example: 0.75
+                                  default: 0
+                                amountNative:
+                                  type: number
+                                  example: 0.09259605
+                                  default: 0
+                                amountUSD:
+                                  type: number
+                                  example: 1931.4029813334043
+                                  default: 0
+                                interestRateAPY:
+                                  type: number
+                                  example: 0.00035615996484214454
+                                  default: 0
+                                interestRateType:
+                                  type: string
+                                  example: Stable
+      deprecated: false
+  /dex/uniswapv3/pools/{poolAddress}/liquidity-distribution:
+    get:
+      summary: Uniswap v3 Liquidity Distribution
+      description: >-
+        This API provides the **current** distribution of the liquidity in a
+        specified Uniswap v3 pool.
+      operationId: uniswap-v3-liquidity-distribution
+      parameters:
+        - name: poolAddress
+          in: path
+          description: A token pair's liquidity pool address. Default is `USDC/WETH 0.05%`
+          schema:
+            type: string
+            default: '0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640'
+          required: true
+        - name: activeTick
+          in: query
+          description: >-
+            When set to `true`, return just the current trading price,
+            `tickIndex`, and the associated data.<br><br>**Cannot** be combined
+            with `price*USD{Min|Max}` filters.
+          schema:
+            type: boolean
+        - name: price0USDMin
+          in: query
+          description: Minimum (inclusive) price of token 0 in US dollars.
+          schema:
+            type: number
+            format: double
+            default: 0.95
+        - name: price0USDMax
+          in: query
+          description: Maximum (exclusive) price of token 0 in US dollars.
+          schema:
+            type: number
+            format: double
+            default: 1.05
+        - name: price1USDMin
+          in: query
+          description: Minimum (inclusive) price of token 1 in US dollars.
+          schema:
+            type: number
+            format: double
+        - name: price1USDMax
+          in: query
+          description: Maximum (exclusive) price of token 1 in US dollars.
+          schema:
+            type: number
+            format: double
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type:
+                              - string
+                              - 'null'
+                            example: null
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            isActiveTick:
+                              type: boolean
+                              example: true
+                            liquidity:
+                              type: string
+                              example: '2241499413487953201'
+                            price0USD:
+                              type: number
+                              example: 26834.9
+                            price1USD:
+                              type: number
+                              example: 1812.74
+                            token0AmountLocked:
+                              type: number
+                              example: 58300.91207979999
+                            token1AmountLocked:
+                              type: number
+                              example: 862439.5278076923
+                            tickIndex:
+                              type: integer
+                              example: 257220
+      deprecated: false
+  /stablecoins/{assetSymbol}/lending/metrics/summary:
+    get:
+      summary: Stablecoins in DeFi Lending - Aggregate Insights
+      description: >-
+        Easily analyze a stablecoin's metrics across multiple DeFi lending
+        protocols.
+      operationId: stablecoins-in-defi-lending-aggregate-insights
+      parameters:
+        - name: assetSymbol
+          in: path
+          schema:
+            type: string
+            enum:
+              - USDC
+              - USDT
+              - DAI
+              - BUSD
+              - TUSD
+            default: USDC
+          required: true
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: timeInterval
+          in: query
+          description: Determines whether the metrics are aggregated by hour or by day.
+          schema:
+            type: string
+            enum:
+              - days
+              - hours
+            default: days
+        - name: protocol
+          in: query
+          description: Drill down into the stablecoin's metrics by specifying a protocol.
+          schema:
+            type: string
+            enum:
+              - aavev2
+              - aavev3
+              - makerdao
+              - compoundv2
+              - compoundv3
+        - name: x-amberdata-blockchain-id
+          in: header
+          description: >-
+            **[Optional]** The id of the blockchain for which you want data
+            from. Defaults to `ethereum-mainnet` if not specified.
+          schema:
+            type: string
+            enum:
+              - ethereum-mainnet
+              - avalanche-mainnet
+              - arbitrum-mainnet
+              - optimism-mainnet
+        - name: timeFormat
+          in: query
+          description: '**[Optional]** Time format of the timestamps in the return payload.'
+          schema:
+            type: string
+            enum:
+              - milliseconds
+              - ms
+              - iso
+              - iso8601
+              - hr
+              - human_readable
+            default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          blockchainId:
+                            type: string
+                            example: avalanche-mainnet
+                          protocols:
+                            type: array
+                            items:
+                              type: string
+                              example: aavev2
+                      data:
+                        type: object
+                        properties:
+                          metrics:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                timestamp:
+                                  type: integer
+                                  example: 1685145599999
+                                depositedUSD:
+                                  type: number
+                                  example: 12245600.841895984
+                                borrowedUSD:
+                                  type: number
+                                  example: 111607.91129839412
+                                withdrawnUSD:
+                                  type: number
+                                  example: 8063459.152456514
+                                repaidUSD:
+                                  type: number
+                                  example: 214781.74953266996
+                                liquidatedUSD:
+                                  type: number
+                                  example: 0
+                                liquidatedProfitUSD:
+                                  type: number
+                                  example: 0
+                                flashLoanedUSD:
+                                  type: number
+                                  example: 55544.3264730185
+                                interestEarnedUSD:
+                                  type: number
+                                  example: 2590.714350187115
+                                interestPaidUSD:
+                                  type: number
+                                  example: 287.8571500207906
+                                numberOfDeposits:
+                                  type: integer
+                                  example: 186
+                                numberOfBorrows:
+                                  type: integer
+                                  example: 37
+                                numberOfWithdraws:
+                                  type: integer
+                                  example: 191
+                                numberOfRepays:
+                                  type: integer
+                                  example: 26
+                                numberOfLiquidations:
+                                  type: integer
+                                  example: 0
+                                depositRatio:
+                                  type: number
+                                  example: 0.8472260491461453
+                                borrowRatio:
+                                  type: number
+                                  example: 0.01629069721658102
+                                withdrawRatio:
+                                  type: number
+                                  example: 1.176971865549357
+                                liquidationRatio:
+                                  type: number
+                                  example: 0
+                                totalDepositedUSD:
+                                  type: number
+                                  example: 63039186.64521183
+                                totalCollateralUSD:
+                                  type: number
+                                  example: 159364840.70693165
+                                totalBorrowedUSD:
+                                  type: number
+                                  example: 39488498.24221587
+                                cumulativeLiquidatedUSD:
+                                  type: number
+                                  example: 25058036.913995497
+                                cumulativeLiquidatedProfitUSD:
+                                  type: number
+                                  example: 1130173.4298008725
+                                cumulativeInterestEarnedUSD:
+                                  type: number
+                                  example: 28758573.133691713
+                                totalUtilizationRatio:
+                                  type: number
+                                  example: 0.6264119247676753
+                                totalDepositConcentration:
+                                  type: number
+                                  example: 0.18215099394158993
+                                totalBorrowConcentration:
+                                  type: number
+                                  example: 0.37577326222343804
+      deprecated: false
+  /lending/wallets/{walletAddress}/returns:
+    get:
+      summary: Profit & Loss Analytics in DeFi Lending
+      description: >-
+        Analyze a wallet's historical yield, net worth and interest owed from
+        lending and borrowing assets across different DeFi protocols.
+      operationId: profit-and-loss-analytics-in-defi-lending
+      parameters:
+        - name: walletAddress
+          in: path
+          description: >-
+            The address to analyze. <BR><BR>**Note** Across different
+            blockchains, a single user will most likely have different addresses
+            i.e. the address on ethereum-mainnet will not be the same address on
+            avalanche-mainnet.
+          schema:
+            type: string
+            default: '0x884d6fa3a4b349880486ad4d7c833ca968c785d8'
+          required: true
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).<BR>**[Formats]** `seconds | milliseconds |
+            iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 |
+            2020-09-01T01:00:00`
+          schema:
+            type: string
+            format: date-time
+        - name: x-amberdata-blockchain-id
+          in: header
+          description: >-
+            **[Optional]** The id of the blockchain for which you want data
+            from. Defaults to `ethereum-mainnet` if not specified.
+          schema:
+            type: string
+            enum:
+              - ethereum-mainnet
+              - avalanche-mainnet
+              - arbitrum-mainnet
+              - optimism-mainnet
+        - name: timeFormat
+          in: query
+          description: '**[Optional]** Time format of the timestamps in the return payload.'
+          schema:
+            type: string
+            enum:
+              - milliseconds
+              - ms
+              - iso
+              - iso8601
+              - hr
+              - human_readable
+            default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          blockchainId:
+                            type: string
+                            example: ethereum-mainnet
+                      data:
+                        type: object
+                        properties:
+                          metrics:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                timestamp:
+                                  type: string
+                                  example: 2023-02-01 23:59:59 999
+                                totalLiquidityUSD:
+                                  type: number
+                                  example: 8656.285473022097
+                                totalCollateralUSD:
+                                  type: number
+                                  example: 4358.700898606331
+                                totalBorrowedUSD:
+                                  type: number
+                                  example: 0
+                                netWorthUSD:
+                                  type: number
+                                  example: 8656.285473022097
+                                changeInLendInterestUSD:
+                                  type: number
+                                  example: 0.5259982184550633
+                                changeInBorrowInterestUSD:
+                                  type: number
+                                  example: 0.0014350103195127153
+                                marketValueLendInterestUSD:
+                                  type: number
+                                  example: 0.3368423914981944
+                                marketValueBorrowInterestUSD:
+                                  type: number
+                                  example: 0
+                                cumulativeLendInterestUSD:
+                                  type: number
+                                  example: 19.6001513365206
+                                cumulativeBorrowInterestUSD:
+                                  type: number
+                                  example: 0.049160105311165075
+                                netWorthInProtocols:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      protocolId:
+                                        type: string
+                                        example: aavev2
+                                      totalLiquidityUSD:
+                                        type: number
+                                        example: 4358.700898606331
+                                      totalCollateralUSD:
+                                        type: number
+                                        example: 4358.700898606331
+                                      totalBorrowedUSD:
+                                        type: number
+                                        example: 0
+                                      netWorthUSD:
+                                        type: number
+                                        example: 4358.700898606331
+                                      changeInLendInterestUSD:
+                                        type: number
+                                        example: 0.3338916490191206
+                                      changeInBorrowInterestUSD:
+                                        type: number
+                                        example: 0.0014350103195127153
+                                      marketValueLendInterestUSD:
+                                        type: number
+                                        example: 0.18517998485067053
+                                      marketValueBorrowInterestUSD:
+                                        type: number
+                                        example: 0
+                                      cumulativeLendInterestUSD:
+                                        type: number
+                                        example: 11.058956431389353
+                                      cumulativeBorrowInterestUSD:
+                                        type: number
+                                        example: 0.049160105311165075
+      deprecated: false
+  /dex/ohlcv/information/:
+    get:
+      summary: Information
+      description: Retrieves information about supported exchange-pairs for ohlcv.
+      operationId: defi-ohlcv-information
+      parameters:
+        - name: exchange
+          in: query
+          description: >-
+            Only return data for the specified exchange(s) (comma separated).
+            Example: uniswapv3
+          schema:
+            type: string
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return
+            payload.<BR/>**[Defaults]** `milliseconds | ms | iso | iso8601* | hr
+            | human_readable`
+          schema:
+            type: string
+        - name: size
+          in: query
+          description: The number of records per page.
+          schema:
+            type: integer
+            format: int32
+            default: 100
+        - name: api-version
+          in: header
+          description: Desired Endpoint Version
+          schema:
+            type: string
+            enum:
+              - '2023-09-30'
+            default: '2023-09-30'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          uniswapv3:
+                            type: object
+                            properties:
+                              BCZ_WETH:
+                                type: object
+                                properties:
+                                  address:
+                                    type: string
+                                    example: '0x0001fcbba8eb491c3ccfeddc5a5caba1a98c4c28'
+                                  baseAddress:
+                                    type: string
+                                    example: '0xbef81556ef066ec840a540595c8d12f516b6378f'
+                                  baseDecimals:
+                                    type: string
+                                    example: '18'
+                                  baseName:
+                                    type: string
+                                    example: BinanceCZ
+                                  baseSymbol:
+                                    type: string
+                                    example: BCZ
+                                  blockchainId:
+                                    type: string
+                                    example: 1c9c969065fcd1cf
+                                  endDate:
+                                    type: string
+                                    example: '2021-07-17T00:00:00Z'
+                                  pairName:
+                                    type: string
+                                    example: BCZ_WETH
+                                  poolFees:
+                                    type: string
+                                    example: '0.01'
+                                  quoteAddress:
+                                    type: string
+                                    example: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+                                  quoteDecimals:
+                                    type: string
+                                    example: '18'
+                                  quoteName:
+                                    type: string
+                                    example: Wrapped Ether
+                                  quoteSymbol:
+                                    type: string
+                                    example: WETH
+                                  startDate:
+                                    type: string
+                                    example: '2021-07-17T00:00:00Z'
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                            example: >-
+                              https://api.amberdata.com/defi/dex/ohlcv/information?cursor=H4sIAAAAAAAA_0qtSM5IzEtPtS3NyywuTywoM1YrycxNdcsvyk0ssc0szlfLT0srTi2xNVUrzqxKtTUFBAAA___rFeOJMQAAAA==
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+      deprecated: false
+  /dex/trades:
+    get:
+      summary: DEX Trades Historical
+      description: Retrieves the historical (time series) DEX trades.
+      operationId: dex-trades-all-blockchains
+      parameters:
+        - name: startDate
+          in: query
+          description: 'Filter by trades after this date.<br><br>**Examples**: `2025-02-05`'
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          description: >-
+            Filter by trades before this date.<br><br>If `endDate` is not
+            specified but `startDate` is, the endpoint will return trades
+            spanning from `startDate` to the **now** i.e. the time the request
+            was made.
+          schema:
+            type: string
+            format: date-time
+        - name: blockchain
+          in: query
+          description: Filter for trades on just this network/blockchain.
+          required: true
+          schema:
+            type: string
+            enum:
+              - ethereum-mainnet
+              - polygon-mainnet
+              - arbitrum-mainnet
+              - bnb-mainnet
+              - optimism-mainnet
+              - avalanche-mainnet
+            default: ethereum-mainnet
+        - name: protocolName
+          in: query
+          description: >-
+            Filter for trades from this protocol. Use the [DEX
+            Information](https://docs.amberdata.io/reference/dex-all-blockchains-information)
+            endpoint to see available protocols.
+          schema:
+            type: string
+        - name: liquidityPoolAddress
+          in: query
+          description: Filter by the smart contract address of the liquidity pool
+          schema:
+            type: string
+        - name: assetBoughtAddress
+          in: query
+          description: >-
+            Filter by the smart contract address of the asset that was bought in
+            the trade
+          schema:
+            type: string
+        - name: assetSoldAddress
+          in: query
+          description: >-
+            Filter by the smart contract address of the asset that was sold in
+            the trade
+          schema:
+            type: string
+        - name: walletAddress
+          in: query
+          description: >-
+            Filter by a specific address that was either the initiator or
+            recipient of the trade
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            assetBoughtAddress:
+                              type: string
+                              example: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+                            assetBoughtAmount:
+                              type: string
+                              example: '16.1794651319315006'
+                            assetBoughtAmountRaw:
+                              type: string
+                              example: '16179465131931500625'
+                            assetBoughtDecimals:
+                              type: integer
+                              example: 18
+                            assetBoughtPrice:
+                              type: string
+                              example: '0.000000000054573194'
+                            assetBoughtSymbol:
+                              type: string
+                              example: weth
+                            assetPair:
+                              type: string
+                              example: >-
+                                0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2-0x761d38e5ddf6ccf6cf7c55759d5210750b5d60f3
+                            assetSoldAddress:
+                              type: string
+                              example: '0x761d38e5ddf6ccf6cf7c55759d5210750b5d60f3'
+                            assetSoldAmount:
+                              type: string
+                              example: '296472755569.2866327389741926'
+                            assetSoldAmountRaw:
+                              type: string
+                              example: '296472755569286632738974192626'
+                            assetSoldDecimals:
+                              type: integer
+                              example: 18
+                            assetSoldPrice:
+                              type: string
+                              example: '18324014616.785653102374439753'
+                            assetSoldSymbol:
+                              type: string
+                              example: elon
+                            blockNumber:
+                              type: integer
+                              example: 21440571
+                            blockchain:
+                              type: string
+                              example: ethereum-mainnet
+                            callerAddress:
+                              type: string
+                              example: '0x7a250d5630b4cf539739df2c5dacb4c659f2488d'
+                            event:
+                              type: string
+                              example: >-
+                                Swap (index_topic_1 address sender, uint256
+                                amount0In, uint256 amount1In, uint256
+                                amount0Out, uint256 amount1Out, index_topic_2
+                                address to)
+                            liquidityPoolAddress:
+                              type: string
+                              example: '0x7b73644935b8e68019ac6356c40661e1bc315860'
+                            logIndex:
+                              type: integer
+                              example: 4
+                            project:
+                              type: string
+                              example: uniswap
+                            protocolName:
+                              type: string
+                              example: uniswap_v2
+                            receiverAddress:
+                              type: string
+                              example: '0xa568bd1f7038bdea2fca05881168eef8fd4ffa33'
+                            timestamp:
+                              type: string
+                              example: '2024-12-20T01:52:47.000Z'
+                            tradeFeeBought:
+                              type: string
+                              example: '0.048538395395794502'
+                            tradeFeeSold:
+                              type: string
+                              example: '889418266.707859898216922578'
+                            tradeId:
+                              type: string
+                              example: >-
+                                0x6a1bfd5881c74188933ee27ee95af994457fd4a96c9b65f7b1505c06306390c5_4
+                            transactionFee:
+                              type: string
+                              example: '1982124877779670'
+                            transactionFromAddress:
+                              type: string
+                              example: '0xa568bd1f7038bdea2fca05881168eef8fd4ffa33'
+                            transactionGasPrice:
+                              type: string
+                              example: '20035630019'
+                            transactionGasUsed:
+                              type: string
+                              example: '98930'
+                            transactionHash:
+                              type: string
+                              example: >-
+                                0x6a1bfd5881c74188933ee27ee95af994457fd4a96c9b65f7b1505c06306390c5
+                            transactionToAddress:
+                              type: string
+                              example: '0x7a250d5630b4cf539739df2c5dacb4c659f2488d'
+      deprecated: false
+  /dex/information:
+    get:
+      summary: DEX Protocols Information
+      description: >-
+        Retrieves information about the supported liquidity pools across
+        blockchains and DEX protocols.
+      operationId: dex-all-blockchains-information
+      parameters:
+        - name: activeAfterDate
+          in: query
+          description: >-
+            Filter by date to find liquidity pools that have been active after
+            the specified date<br><br>**Examples**: `2025-02-05`
+          schema:
+            type: string
+            format: date-time
+        - name: blockchain
+          in: query
+          description: Filter for liquidity pools on just this network/blockchain.
+          required: true
+          schema:
+            type: string
+            enum:
+              - ethereum-mainnet
+              - polygon-mainnet
+              - arbitrum-mainnet
+              - bnb-mainnet
+              - optimism-mainnet
+              - avalanche-mainnet
+            default: ethereum-mainnet
+        - name: protocolName
+          in: query
+          description: Filter by a protocol of interest
+          schema:
+            type: string
+        - name: liquidityPoolAddress
+          in: query
+          description: Filter by the smart contract address of the liquidity pool
+          schema:
+            type: string
+        - name: assetAddress
+          in: query
+          description: Filter by the smart contract address for an asset of interest
+          schema:
+            type: string
+        - name: assetSymbol
+          in: query
+          description: >-
+            Filter by the short-form identifier of an asset.<br><br> **We
+            recommended using `assetAddress` as assets can have duplicate
+            symbols on-chain.**
+          schema:
+            type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            blockchain:
+                              type: string
+                              example: arbitrum-mainnet
+                            firstKnownTradeDate:
+                              type: string
+                              example: '2024-12-06T08:37:49.000Z'
+                            lastKnownTradeDate:
+                              type: string
+                              example: '2024-12-19T23:59:59.000Z'
+                            liquidityPoolAddress:
+                              type: string
+                              example: '0xbb4c7c0380f13c0bb947ac08db20af18898d9cfb'
+                            liquidityPoolFees:
+                              type: number
+                              example: 13.400999999999994
+                            poolComposition:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  assetAddress:
+                                    type: string
+                                    example: '0x82af49447d8a07e3bd95bd0d56f35241523fbab1'
+                                  assetDecimals:
+                                    type: integer
+                                    example: 18
+                                  assetSymbol:
+                                    type: string
+                                    example: weth
+                            protocolName:
+                              type: string
+                              example: uniswap_v3
+      deprecated: false
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      x-default: API_KEY
+      name: x-api-key
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

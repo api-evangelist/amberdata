@@ -1,0 +1,142 @@
+openapi: 3.0.1
+info:
+  title: Amberdata DeFi Options API
+  description: Amberdata's institutional-grade digital asset and blockchain data API. Provides spot market data (prices, OHLCV, tickers, trades, order books), derivatives across futures and options (funding rates, open interest, liquidations, implied volatility, Greeks), DeFi (DEX and lending), and on-chain blockchain data (blocks, transactions, addresses, tokens). Every request requires the x-api-key header. An optional api-version header selects a dated API version.
+  termsOfService: https://www.amberdata.io/terms-of-service
+  contact:
+    name: Amberdata Support
+    url: https://www.amberdata.io/contact
+  version: '1.0'
+servers:
+- url: https://api.amberdata.com
+  description: Amberdata REST API
+security:
+- apiKeyAuth: []
+tags:
+- name: Options
+  description: Options market data and analytics.
+paths:
+  /markets/options/exchanges/reference:
+    get:
+      operationId: getOptionsExchangesReference
+      tags:
+      - Options
+      summary: Options instruments and reference
+      description: Returns all available exchanges, currencies, and option instruments, filterable by a timestamp for historical reference.
+      parameters:
+      - $ref: '#/components/parameters/Exchange'
+      - $ref: '#/components/parameters/Currency'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/options/trades/{instrument}:
+    get:
+      operationId: getOptionsTrades
+      tags:
+      - Options
+      summary: Options trades
+      description: Returns trade data for the specified options instrument.
+      parameters:
+      - $ref: '#/components/parameters/InstrumentPath'
+      - $ref: '#/components/parameters/Exchange'
+      - $ref: '#/components/parameters/StartDate'
+      - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /markets/options/order-book-snapshots/{instrument}:
+    get:
+      operationId: getOptionsOrderBookSnapshots
+      tags:
+      - Options
+      summary: Options order book snapshots
+      description: Returns order book snapshots for the specified options instrument.
+      parameters:
+      - $ref: '#/components/parameters/InstrumentPath'
+      - $ref: '#/components/parameters/Exchange'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      description: Standard Amberdata API envelope. The requested data is returned under the payload property, alongside the HTTP status and a status message.
+      properties:
+        status:
+          type: integer
+          description: HTTP-style status code echoed in the response body.
+          example: 200
+        title:
+          type: string
+          description: Human-readable status message.
+          example: OK
+        description:
+          type: string
+          description: Additional context about the response.
+        payload:
+          type: object
+          description: The response payload. Shape varies by endpoint; time series endpoints typically return metadata plus a data array.
+          properties:
+            metadata:
+              type: object
+              description: Metadata describing the payload (columns, request params, etc.).
+            data:
+              type: array
+              description: The array of records for the requested resource.
+              items:
+                type: object
+  parameters:
+    StartDate:
+      name: startDate
+      in: query
+      required: false
+      description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    InstrumentPath:
+      name: instrument
+      in: path
+      required: true
+      description: The instrument identifier for the futures or options contract.
+      schema:
+        type: string
+    Exchange:
+      name: exchange
+      in: query
+      required: false
+      description: Filter by exchange (e.g. binance, coinbase, deribit).
+      schema:
+        type: string
+    Currency:
+      name: currency
+      in: query
+      required: false
+      description: Filter by underlying currency (e.g. BTC, ETH).
+      schema:
+        type: string
+    EndDate:
+      name: endDate
+      in: query
+      required: false
+      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Unique, user-specific API key. Required on every REST request via the x-api-key header.

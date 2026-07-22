@@ -1,0 +1,46 @@
+generated: '2026-07-22'
+method: searched
+source: probed /.well-known/ on www.amberdata.io, api.amberdata.com, docs.amberdata.io
+hosts:
+  - host: https://docs.amberdata.io
+    documents:
+      - path: /.well-known/mcp.json
+        status: 200
+        file: amberdata-mcp.json
+        note: Mintlify-hosted MCP discovery document; server url https://docs.amberdata.io/mcp (transport http, authentication none)
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 308
+        note: redirects to https://docs.amberdata.io/ (docs shell, not an OIDC document)
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://www.amberdata.io
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://api.amberdata.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+        note: API gateway returns 403 for all unauthenticated paths (x-api-key required)
+      - path: /.well-known/openid-configuration
+        status: 403
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+      - path: /.well-known/api-catalog
+        status: 403
+      - path: /.well-known/ai-plugin.json
+        status: 403

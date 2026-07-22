@@ -1,0 +1,227 @@
+openapi: 3.0.1
+info:
+  title: Amberdata DeFi On-Chain API
+  description: Amberdata's institutional-grade digital asset and blockchain data API. Provides spot market data (prices, OHLCV, tickers, trades, order books), derivatives across futures and options (funding rates, open interest, liquidations, implied volatility, Greeks), DeFi (DEX and lending), and on-chain blockchain data (blocks, transactions, addresses, tokens). Every request requires the x-api-key header. An optional api-version header selects a dated API version.
+  termsOfService: https://www.amberdata.io/terms-of-service
+  contact:
+    name: Amberdata Support
+    url: https://www.amberdata.io/contact
+  version: '1.0'
+servers:
+- url: https://api.amberdata.com
+  description: Amberdata REST API
+security:
+- apiKeyAuth: []
+tags:
+- name: On-Chain
+  description: On-chain blockchain data (blocks, transactions, addresses, tokens).
+paths:
+  /blockchains/{blockchainId}/blocks:
+    get:
+      operationId: getBlocks
+      tags:
+      - On-Chain
+      summary: Blocks
+      description: Returns block information for the specified blockchain, including block number, hash, timestamp, and aggregate metrics.
+      parameters:
+      - $ref: '#/components/parameters/BlockchainId'
+      - $ref: '#/components/parameters/StartDate'
+      - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/transactions:
+    get:
+      operationId: getTransactions
+      tags:
+      - On-Chain
+      summary: Transactions
+      description: Returns transaction data including sending and receiving addresses (with token transfers), fees (gas), amounts, op codes, block number and hash, and timestamps.
+      parameters:
+      - $ref: '#/components/parameters/BlockchainId'
+      - $ref: '#/components/parameters/StartDate'
+      - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/transactions/{hash}:
+    get:
+      operationId: getTransaction
+      tags:
+      - On-Chain
+      summary: Transaction by hash
+      description: Returns a single transaction by its hash on the specified blockchain.
+      parameters:
+      - $ref: '#/components/parameters/BlockchainId'
+      - name: hash
+        in: path
+        required: true
+        description: The transaction hash.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/addresses/{address}/balances:
+    get:
+      operationId: getAddressBalances
+      tags:
+      - On-Chain
+      summary: Address balances
+      description: Returns account balance and token balances for the specified address on the given blockchain.
+      parameters:
+      - $ref: '#/components/parameters/BlockchainId'
+      - $ref: '#/components/parameters/AddressPath'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/addresses/{address}/transactions:
+    get:
+      operationId: getAddressTransactions
+      tags:
+      - On-Chain
+      summary: Address transactions
+      description: Returns transactions for the specified address on the given blockchain.
+      parameters:
+      - $ref: '#/components/parameters/BlockchainId'
+      - $ref: '#/components/parameters/AddressPath'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/tokens/{address}/information:
+    get:
+      operationId: getTokenInformation
+      tags:
+      - On-Chain
+      summary: Token information
+      description: Returns token information including name, symbol, contract address, decimals, total supply, and circulating supply.
+      parameters:
+      - $ref: '#/components/parameters/BlockchainId'
+      - $ref: '#/components/parameters/AddressPath'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/tokens/{address}/transfers:
+    get:
+      operationId: getTokenTransfers
+      tags:
+      - On-Chain
+      summary: Token transfers
+      description: Returns token transfers including sender, receiver, amount, transaction hash, and timestamp.
+      parameters:
+      - $ref: '#/components/parameters/BlockchainId'
+      - $ref: '#/components/parameters/AddressPath'
+      - $ref: '#/components/parameters/StartDate'
+      - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /blockchains/{blockchainId}/tokens/{address}/holders:
+    get:
+      operationId: getTokenHolders
+      tags:
+      - On-Chain
+      summary: Token holders
+      description: Returns token holder information including the number of holders, their addresses, and tokens held by each.
+      parameters:
+      - $ref: '#/components/parameters/BlockchainId'
+      - $ref: '#/components/parameters/AddressPath'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      description: Standard Amberdata API envelope. The requested data is returned under the payload property, alongside the HTTP status and a status message.
+      properties:
+        status:
+          type: integer
+          description: HTTP-style status code echoed in the response body.
+          example: 200
+        title:
+          type: string
+          description: Human-readable status message.
+          example: OK
+        description:
+          type: string
+          description: Additional context about the response.
+        payload:
+          type: object
+          description: The response payload. Shape varies by endpoint; time series endpoints typically return metadata plus a data array.
+          properties:
+            metadata:
+              type: object
+              description: Metadata describing the payload (columns, request params, etc.).
+            data:
+              type: array
+              description: The array of records for the requested resource.
+              items:
+                type: object
+  parameters:
+    BlockchainId:
+      name: blockchainId
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces.
+      schema:
+        type: string
+    StartDate:
+      name: startDate
+      in: query
+      required: false
+      description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    EndDate:
+      name: endDate
+      in: query
+      required: false
+      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    AddressPath:
+      name: address
+      in: path
+      required: true
+      description: The on-chain address or token contract address.
+      schema:
+        type: string
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Unique, user-specific API key. Required on every REST request via the x-api-key header.

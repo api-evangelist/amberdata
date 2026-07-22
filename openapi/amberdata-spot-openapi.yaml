@@ -1,0 +1,2945 @@
+openapi: 3.1.0
+info:
+  title: spot-analytics
+  version: '2'
+servers:
+  - url: https://api.amberdata.com/markets/spot/analytics
+security:
+  - sec0: []
+paths:
+  /depth/information:
+    get:
+      summary: Information Depth Analytics Pairs and Exchanges
+      description: >-
+        This endpoint retrieves all available exchanges and their associated
+        currency pairs, along with the earliest and latest dates of historical
+        data. It applies specifically to spot order book depth analytics.
+      operationId: spot-analytics-information-order-book-depth
+      parameters:
+        - name: exchange
+          in: query
+          description: >-
+            **[Optional]** The exchange for which to retrieve listed spot
+            instruments.
+
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          schema:
+            type: string
+        - name: pair
+          in: query
+          description: |-
+            **[Optional]** The currency pair for the spot instrument.
+            **[Examples]** ` btc_usd | btc_usdc | eth_usd `
+          schema:
+            type: string
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                        - endDate: '2025-03-05T21:39:00Z'
+                          exchange: gdax
+                          pair: btc_usd
+                          startDate: '2025-02-22T00:08:00Z'
+                        - endDate: '2025-03-05T21:39:00Z'
+                          exchange: gdax
+                          pair: btc_usdt
+                          startDate: '2025-02-22T00:08:00Z'
+                        - endDate: '2025-03-05T21:39:00Z'
+                          exchange: gdax
+                          pair: doge_usd
+                          startDate: '2025-02-22T00:07:00Z'
+                        - endDate: '2025-03-05T21:39:00Z'
+                          exchange: gdax
+                          pair: doge_usdt
+                          startDate: '2025-02-22T00:07:00Z'
+                        - endDate: '2025-03-05T21:39:00Z'
+                          exchange: gdax
+                          pair: eth_usd
+                          startDate: '2025-02-22T00:08:00Z'
+                        - endDate: '2025-03-05T21:39:00Z'
+                          exchange: gdax
+                          pair: eth_usdt
+                          startDate: '2025-02-22T00:07:00Z'
+                        - endDate: '2025-03-05T21:39:00Z'
+                          exchange: gdax
+                          pair: sol_usd
+                          startDate: '2025-02-22T00:06:00Z'
+                        - endDate: '2025-03-05T21:39:00Z'
+                          exchange: gdax
+                          pair: sol_usdt
+                          startDate: '2025-02-22T00:07:00Z'
+                        - endDate: '2025-03-05T21:39:00Z'
+                          exchange: gdax
+                          pair: sui_usd
+                          startDate: '2025-02-22T00:07:00Z'
+                        - endDate: '2025-03-05T21:39:00Z'
+                          exchange: gdax
+                          pair: usdt_usd
+                          startDate: '2025-02-22T00:08:00Z'
+                        - endDate: '2025-03-05T21:39:00Z'
+                          exchange: gdax
+                          pair: xrp_usd
+                          startDate: '2025-02-22T00:07:00Z'
+                        - endDate: '2025-03-05T21:39:00Z'
+                          exchange: gdax
+                          pair: xrp_usdt
+                          startDate: '2025-02-22T00:07:00Z'
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            endDate:
+                              type: string
+                              example: '2025-03-05T21:39:00Z'
+                              description: >-
+                                The last data observation for this pair's Depth
+                                analytics
+                            exchange:
+                              type: string
+                              example: gdax
+                              description: Exchange reflecting the pair
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: The subject pair
+                            startDate:
+                              type: string
+                              example: '2025-02-22T00:08:00Z'
+                              description: >-
+                                The first data observation for this pair's Depth
+                                analytics
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: {}
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+  /trade/information/pairs:
+    get:
+      summary: Information Trade Analytics Pairs
+      description: >-
+        This endpoint returns all the available pairs for a given exchange in
+        the spot "Trade Analytics" section. The associated startDate and endDate
+        represent the available history of trade data.
+      operationId: spot-analytics-information-trade-analytics-pairs
+      parameters:
+        - name: exchange
+          in: query
+          description: >-
+            **[Required]** The exchange for which to retrieve listed spot
+            instruments.
+
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          required: true
+          schema:
+            type: string
+            default: gdax
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                        - endDate: 2025-04-02 11:39:00 000
+                          exchange: gdax
+                          pair: 00_usd
+                          startDate: 2025-01-01 00:00:00 000
+                        - endDate: 2025-04-02 11:20:00 000
+                          exchange: gdax
+                          pair: 1inch_eur
+                          startDate: 2025-03-12 13:18:00 000
+                        - endDate: 2025-04-02 10:42:00 000
+                          exchange: gdax
+                          pair: 1inch_gbp
+                          startDate: 2025-03-12 13:14:00 000
+                        - endDate: 2025-04-02 11:28:00 000
+                          exchange: gdax
+                          pair: 1inch_usd
+                          startDate: 2025-01-01 00:00:00 000
+                        - endDate: 2025-04-02 11:39:00 000
+                          exchange: gdax
+                          pair: a8_usd
+                          startDate: 2025-01-01 00:02:00 000
+                        - endDate: 2025-04-02 11:43:00 000
+                          exchange: gdax
+                          pair: aave_btc
+                          startDate: 2025-03-12 13:11:00 000
+                        - endDate: 2025-04-02 11:44:00 000
+                          exchange: gdax
+                          pair: aave_eur
+                          startDate: 2025-03-12 13:11:00 000
+                        - endDate: 2025-04-02 11:32:00 000
+                          exchange: gdax
+                          pair: aave_gbp
+                          startDate: 2025-03-12 13:11:00 000
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            endDate:
+                              type: string
+                              example: 2025-04-02 11:39:00 000
+                              description: >-
+                                The last data observation for this pair's Trade
+                                analytics
+                            exchange:
+                              type: string
+                              example: gdax
+                              description: Exchange reflecting the pair
+                            pair:
+                              type: string
+                              example: 00_usd
+                              description: The subject pair
+                            startDate:
+                              type: string
+                              example: 2025-01-01 00:00:00 000
+                              description: >-
+                                The first data observation for this pair's Trade
+                                analytics
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: {}
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+  /trade/information/exchanges:
+    get:
+      summary: Information Trade Exchange Support per Pair
+      description: >-
+        This endpoint returns all the exchanges that provide support for a given
+        pair in the spot "Trade Analytics" section. The associated startDate and
+        endDate represent the available history of trade data.
+      operationId: spot-analytics-information-trade-exchange-support-per-pair
+      parameters:
+        - name: pair
+          in: query
+          description: |-
+            **[Required]** The currency pair for the spot instrument.
+            **[Examples]** ` btc_usd | btc_usdc | eth_usd `
+          required: true
+          schema:
+            type: string
+            default: btc_usd
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                        - endDate: 2025-04-02 10:52:00 000
+                          exchange: binanceus
+                          pair: btc_usd
+                          startDate: 2025-02-19 13:43:00 000
+                        - endDate: 2025-03-17 23:58:00 000
+                          exchange: bitstamp
+                          pair: btc_usd
+                          startDate: 2025-01-01 00:00:00 000
+                        - endDate: 2025-04-02 11:54:00 000
+                          exchange: bullish
+                          pair: btc_usd
+                          startDate: 2025-03-20 15:09:00 000
+                        - endDate: 2025-04-02 11:54:00 000
+                          exchange: cryptocom
+                          pair: btc_usd
+                          startDate: 2025-02-18 23:44:00 000
+                        - endDate: 2025-04-02 11:54:00 000
+                          exchange: gdax
+                          pair: btc_usd
+                          startDate: 2025-01-01 00:00:00 000
+                        - endDate: 2025-03-17 23:59:00 000
+                          exchange: gemini
+                          pair: btc_usd
+                          startDate: 2025-01-01 00:00:00 000
+                        - endDate: 2025-04-02 11:53:00 000
+                          exchange: hashkey
+                          pair: btc_usd
+                          startDate: 2025-02-28 19:14:00 000
+                        - endDate: 2025-03-17 23:59:00 000
+                          exchange: itbit
+                          pair: btc_usd
+                          startDate: 2025-01-01 00:00:00 000
+                        - endDate: 2025-03-17 23:59:00 000
+                          exchange: kraken
+                          pair: btc_usd
+                          startDate: 2025-01-01 00:00:00 000
+                      metadata:
+                        api-version: '2023-09-30'
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            endDate:
+                              type: string
+                              example: 2025-04-02 10:52:00 000
+                              description: >-
+                                The last data observation for this exchange's
+                                pair in Trade analytics
+                            exchange:
+                              type: string
+                              example: binanceus
+                              description: The supported exchange for Trade analytics
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: >-
+                                The supported pair for this exchange's Trade
+                                analytics
+                            startDate:
+                              type: string
+                              example: 2025-02-19 13:43:00 000
+                              description: >-
+                                The first data observation for this exchange's
+                                pair in Trade analytics
+                      metadata:
+                        type: object
+                        properties:
+                          api-version:
+                            type: string
+                            example: '2023-09-30'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: {}
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+  /depth/bid-ask-spread:
+    get:
+      summary: Bid Ask Spread
+      description: >-
+        This endpoint allows users to explore the bid-ask spread for a specific
+        trading pair or underlying asset across one or more exchanges. It
+        provides both the absolute dollar spread (based on the best bid and
+        offer) and the spread as a percentage of the mid-price.
+      operationId: spot-analytics-order-book-depth-bid-ask-spread
+      parameters:
+        - name: pair
+          in: query
+          description: |-
+            **[Required]** The currency pair for the spot instrument.
+            **[Examples]** ` btc_usd | btc_usdc | eth_usd `
+          required: true
+          schema:
+            type: string
+            default: btc_usd
+        - name: fuzzyMatch
+          in: query
+          description: >-
+            **[Required]** This parameter controls how the provided trading pair
+            symbol is interpreted. When set to FALSE, it returns data only for
+            the exact pair specified (e.g., btc_usd). When set to TRUE, it
+            enables fuzzy matching—users can then pass just the base asset
+            (e.g., btc) returns all pairs with that base (e.g., btc_eur,
+            btc_usd, btc_usdt, etc.), while passing a full pair like btc_usd
+            returns all pairs with the same base and similar USD-related quote
+            assets (e.g., btc_usd, btc_usdt, btc_usdc, etc.).
+          required: true
+          schema:
+            type: boolean
+            default: false
+        - name: exchange
+          in: query
+          description: |-
+            **[Optional]** The exchange for the associated bid ask spread.
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          schema:
+            type: string
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-27`
+          schema:
+            type: string
+            default: '2025-05-01'
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data up to this date
+            (exclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-28`
+          schema:
+            type: string
+            default: '2025-05-02'
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                        - bestAskPrice: 96589.6
+                          bestBidPrice: 96222.19
+                          exchange: binanceus
+                          midPrice: 96405.895
+                          pair: btc_usd
+                          spread: 367.4100000000035
+                          spreadPercent: 0.3811074001232015
+                          timestamp: 1746144000000
+                        - bestAskPrice: 96524.98
+                          bestBidPrice: 96523.62
+                          exchange: gdax
+                          midPrice: 96524.29999999999
+                          pair: btc_usd
+                          spread: 1.360000000000582
+                          spreadPercent: 0.0014089716268344678
+                          timestamp: 1746144000000
+                        - bestAskPrice: 96469.9
+                          bestBidPrice: 96469.8
+                          exchange: kraken
+                          midPrice: 96469.85
+                          pair: btc_usd
+                          spread: 0.09999999999126885
+                          spreadPercent: 0.00010365932982301604
+                          timestamp: 1746144000000
+                        - bestAskPrice: 96504.1
+                          bestBidPrice: 96486.8
+                          exchange: okex
+                          midPrice: 96495.45000000001
+                          pair: btc_usd
+                          spread: 17.30000000000291
+                          spreadPercent: 0.017928306464193813
+                          timestamp: 1746144000000
+                        - bestAskPrice: 96589.61
+                          bestBidPrice: 96222.19
+                          exchange: binanceus
+                          midPrice: 96405.9
+                          pair: btc_usd
+                          spread: 367.41999999999825
+                          spreadPercent: 0.3811177531665575
+                          timestamp: 1746143940000
+                        - bestAskPrice: 96537.56
+                          bestBidPrice: 96537.55
+                          exchange: gdax
+                          midPrice: 96537.555
+                          pair: btc_usd
+                          spread: 0.00999999999476131
+                          spreadPercent: 0.000010358663004010523
+                          timestamp: 1746143940000
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            bestAskPrice:
+                              type: number
+                              example: 96589.6
+                              description: The ask side of the BBO
+                            bestBidPrice:
+                              type: number
+                              example: 96222.19
+                              description: The bid side of the BBO
+                            exchange:
+                              type: string
+                              example: binanceus
+                              description: The subject exchange
+                            midPrice:
+                              type: number
+                              example: 96405.895
+                              description: The mid-price of the BBO
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: The subject pair
+                            spread:
+                              type: number
+                              example: 367.4100000000035
+                              description: The absolute BBO spread in quote terms
+                            spreadPercent:
+                              type: number
+                              example: 0.3811074001232015
+                              description: The absolute BBO spread divided by the mid-price
+                            timestamp:
+                              type: integer
+                              example: 1746144000000
+                              description: The observation timestamp
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: {}
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+  /depth/average-time-series:
+    get:
+      summary: Average Depth
+      description: >-
+        This endpoint allows user to view the average order book depth sizes per
+        level. The depth will be displayed in base terms for a given pair,
+        meaning btc_usd will have depth in btc terms. This endpoint is useful to
+        quickly observe what times liquidity enters the market.
+      operationId: spot-analytics-order-book-depth-average
+      parameters:
+        - name: exchange
+          in: query
+          description: >-
+            **[Required]** The select exchange for which to view average
+            liquidity depth.
+
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          required: true
+          schema:
+            type: string
+            default: gdax
+        - name: pair
+          in: query
+          description: >-
+            **[Required]** The currency pair for which to view average liquidity
+            depth.
+
+            **[Examples]** ` btc_usd | btc_usdc | eth_usd `
+          required: true
+          schema:
+            type: string
+            default: btc_usd
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-27`
+          schema:
+            type: string
+            default: '2025-03-01'
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data up to this date
+            (exclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-28`
+          schema:
+            type: string
+            default: '2025-03-05'
+        - name: timeInterval
+          in: query
+          description: >-
+            **[Optional]** Time interval of data frequency for the selected date
+            range. 
+
+            **[Examples]** ` hour | day`
+          required: true
+          schema:
+            type: string
+            default: hour
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                        - basisPoints005OrderCount: 50.11585807385952
+                          basisPoints005UsdMillion: 0.8164277240123664
+                          basisPoints010OrderCount: 101.4076755973932
+                          basisPoints010UsdMillion: 2.4200052792833198
+                          basisPoints015OrderCount: 139.33526430123098
+                          basisPoints015UsdMillion: 4.032354567973533
+                          basisPoints020OrderCount: 165.07965242577842
+                          basisPoints020UsdMillion: 5.12001239439905
+                          basisPoints025OrderCount: 186.58435916002895
+                          basisPoints025UsdMillion: 6.4849871469881615
+                          basisPoints050OrderCount: 276.2288196958726
+                          basisPoints050UsdMillion: 9.863984912294022
+                          basisPoints075OrderCount: 378.10065170166547
+                          basisPoints075UsdMillion: 12.520908232726379
+                          basisPoints100OrderCount: 488.112961622013
+                          basisPoints100UsdMillion: 14.552850237163344
+                          basisPoints125OrderCount: 598.8146270818247
+                          basisPoints125UsdMillion: 15.676340302313667
+                          basisPoints150OrderCount: 711.1810282404055
+                          basisPoints150UsdMillion: 16.402634998926477
+                          basisPoints175OrderCount: 818.9471397538016
+                          basisPoints175UsdMillion: 17.074406562577984
+                          basisPoints200OrderCount: 924.6719768283853
+                          basisPoints200UsdMillion: 17.7662278250877
+                          basisPoints225OrderCount: 1028.8030412744388
+                          basisPoints225UsdMillion: 18.780723026978027
+                          basisPoints250OrderCount: 1132.925416364953
+                          basisPoints250UsdMillion: 19.831425427851418
+                          basisPoints275OrderCount: 1237.8616944243302
+                          basisPoints275UsdMillion: 20.828206747480827
+                          basisPoints300OrderCount: 1343.599565532223
+                          basisPoints300UsdMillion: 21.786886527157147
+                          basisPoints325OrderCount: 1450.9840695148444
+                          basisPoints325UsdMillion: 22.605037085982346
+                          basisPoints350OrderCount: 1559.1361332367849
+                          basisPoints350UsdMillion: 23.519621849718725
+                          basisPoints375OrderCount: 1667.697320782042
+                          basisPoints375UsdMillion: 24.349440955298423
+                          basisPoints400OrderCount: 1776.0296886314266
+                          basisPoints400UsdMillion: 25.35195996759689
+                          basisPoints425OrderCount: 1883.4627081824765
+                          basisPoints425UsdMillion: 26.237260796265836
+                          basisPoints450OrderCount: 1992.1223750905142
+                          basisPoints450UsdMillion: 27.07583659480697
+                          basisPoints475OrderCount: 2104.102099927589
+                          basisPoints475UsdMillion: 27.9825818053164
+                          basisPoints500OrderCount: 2218.6082548877625
+                          basisPoints500UsdMillion: 28.787407998145866
+                          exchange: gdax
+                          pair: btc_usd
+                          side: ask
+                          timestamp: 2025-03-11 00:00:00 000
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            basisPoints005OrderCount:
+                              type: number
+                              example: 50.11585807385952
+                              description: >-
+                                The average number of orders composing depth
+                                5bps away from BBO
+                            basisPoints005UsdMillion:
+                              type: number
+                              example: 0.8164277240123664
+                              description: >-
+                                The average aggregated quote value (quote is
+                                often in USD) for 5bps away from BBO
+                            basisPoints010OrderCount:
+                              type: number
+                              example: 101.4076755973932
+                              description: >-
+                                The average number of orders composing depth
+                                10bps away from BBO
+                            basisPoints010UsdMillion:
+                              type: number
+                              example: 2.4200052792833198
+                              description: >-
+                                The average aggregated quote value (quote is
+                                often in USD) for 10bps away from BBO
+                            exchange:
+                              type: string
+                              example: gdax
+                              description: The subject exchange
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: The subject pair
+                            side:
+                              type: string
+                              example: ask
+                              description: The ask or bid side of the depth
+                            timestamp:
+                              type: string
+                              example: 2025-03-11 00:00:00 000
+                              description: The timestamp of the observation
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: {}
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+  /depth:
+    get:
+      summary: Depth
+      description: >-
+        Percentage depth profiles offer insights into the order book structure
+        and available liquidity at different price levels. By analyzing buy and
+        sell liquidity within a specified percentage range from the
+        best-bid/best-ask, traders can assess liquidity distribution and its
+        impact on market behavior. The order book depth endpoint returns
+        liquidity data in percentage-based tranches, measured in basis points,
+        at 1-minute intervals. If no date range is specified, the most recent 24
+        hours of data will be returned.
+      operationId: spot-analytics-order-book-depth
+      parameters:
+        - name: exchange
+          in: query
+          description: >-
+            **[Required]** The select exchange for which to view liquidity
+            depth.
+
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          required: true
+          schema:
+            type: string
+            default: gdax
+        - name: pair
+          in: query
+          description: |-
+            **[Required]** The currency pair for which to view liquidity depth.
+            **[Examples]** ` btc_usd | btc_usdc | eth_usd `
+          required: true
+          schema:
+            type: string
+            default: btc_usd
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-27`
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data up to this date
+            (exclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-28`
+          schema:
+            type: string
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            basisPoints005:
+                              type: number
+                              example: 6.830253600000002
+                              description: Depth at 5 basis points from BBO
+                            basisPoints005OrderCount:
+                              type: integer
+                              example: 60
+                              description: Number of orders at 5 basis points depth
+                            basisPoints005UsdMillion:
+                              type: number
+                              example: 0.564816653987364
+                              description: USD value in millions at 5 basis points depth
+                            bestAskPrice:
+                              type: number
+                              example: 82695.55
+                              description: The best ask price in the order book
+                            bestBidPrice:
+                              type: number
+                              example: 82691.18
+                              description: The best bid price in the order book
+                            exchange:
+                              type: string
+                              example: gdax
+                              description: The exchange where the depth data is from
+                            midPrice:
+                              type: number
+                              example: 82693.36499999999
+                              description: The mid-price between best bid and ask
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: The trading pair for the depth data
+                            side:
+                              type: string
+                              example: ask
+                              description: The side of the order book (ask or bid)
+                            spreadPercent:
+                              type: number
+                              example: 0.005284583593871039
+                              description: The spread percentage between best bid and ask
+                            timestamp:
+                              type: integer
+                              example: 1742342400000
+                              description: >-
+                                The timestamp for the depth data point in
+                                milliseconds
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                        - basisPoints005: 6.830253600000002
+                          basisPoints005OrderCount: 60
+                          basisPoints005UsdMillion: 0.564816653987364
+                          basisPoints010: 29.522870730000008
+                          basisPoints010OrderCount: 111
+                          basisPoints010UsdMillion: 2.441345525123707
+                          basisPoints015: 44.98593633999999
+                          basisPoints015OrderCount: 150
+                          basisPoints015UsdMillion: 3.7200384536303828
+                          basisPoints020: 63.778317060000006
+                          basisPoints020OrderCount: 192
+                          basisPoints020UsdMillion: 5.274043651728307
+                          basisPoints025: 85.55252507000004
+                          basisPoints025OrderCount: 228
+                          basisPoints025UsdMillion: 7.074626182285163
+                          basisPoints050: 122.20367462999992
+                          basisPoints050OrderCount: 336
+                          basisPoints050UsdMillion: 10.105433070519823
+                          basisPoints075: 157.26895277999978
+                          basisPoints075OrderCount: 457
+                          basisPoints075UsdMillion: 13.005098915404284
+                          basisPoints100: 173.7872608699996
+                          basisPoints100OrderCount: 571
+                          basisPoints100UsdMillion: 14.371053395473094
+                          basisPoints125: 176.1600231899997
+                          basisPoints125OrderCount: 680
+                          basisPoints125UsdMillion: 14.567265096059106
+                          basisPoints150: 189.4091800699996
+                          basisPoints150OrderCount: 801
+                          basisPoints150UsdMillion: 15.6628824618792
+                          basisPoints175: 207.83888358999965
+                          basisPoints175OrderCount: 921
+                          basisPoints175UsdMillion: 17.18689666190035
+                          basisPoints200: 228.8633147599998
+                          basisPoints200OrderCount: 1033
+                          basisPoints200UsdMillion: 18.92547762255855
+                          basisPoints225: 275.7434367699998
+                          basisPoints225OrderCount: 1167
+                          basisPoints225UsdMillion: 22.80215266317601
+                          basisPoints250: 318.46661659999984
+                          basisPoints250OrderCount: 1287
+                          basisPoints250UsdMillion: 26.335076166818844
+                          basisPoints275: 324.02097659999987
+                          basisPoints275OrderCount: 1430
+                          basisPoints275UsdMillion: 26.794384885640245
+                          basisPoints300: 363.1769934100001
+                          basisPoints300OrderCount: 1617
+                          basisPoints300UsdMillion: 30.032327675655726
+                          basisPoints325: 372.98405825000043
+                          basisPoints325OrderCount: 1820
+                          basisPoints325UsdMillion: 30.843306868048543
+                          basisPoints350: 384.7937300700006
+                          basisPoints350OrderCount: 2019
+                          basisPoints350UsdMillion: 31.819888370390032
+                          basisPoints375: 402.4399919800007
+                          basisPoints375OrderCount: 2204
+                          basisPoints375UsdMillion: 33.27911714739926
+                          basisPoints400: 431.12956241000063
+                          basisPoints400OrderCount: 2388
+                          basisPoints400UsdMillion: 35.65155426666046
+                          basisPoints425: 434.9075431700006
+                          basisPoints425OrderCount: 2539
+                          basisPoints425UsdMillion: 35.96396820861012
+                          basisPoints450: 441.3240401900004
+                          basisPoints450OrderCount: 2694
+                          basisPoints450UsdMillion: 36.49456993870637
+                          basisPoints475: 447.6692832100005
+                          basisPoints475OrderCount: 2832
+                          basisPoints475UsdMillion: 37.019279435772944
+                          basisPoints500: 450.29508528000065
+                          basisPoints500OrderCount: 2972
+                          basisPoints500UsdMillion: 37.23641584476522
+                          bestAskPrice: 82695.55
+                          bestBidPrice: 82691.18
+                          exchange: gdax
+                          midPrice: 82693.36499999999
+                          pair: btc_usd
+                          side: ask
+                          spreadPercent: 0.005284583593871039
+                          timestamp: 1742342400000
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: {}
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+  /depth/dashboard:
+    get:
+      summary: Depth Dashboard
+      description: >-
+        This endpoint provides the average order book depth across exchanges and
+        currency pairs over a specified time period. To retrieve the average
+        depth for the past 24 hours, set the hourAgo parameter to 24. The
+        response includes depth measurements at various basis point levels from
+        the BBO.
+      operationId: spot-analytics-order-book-depth-dashboard
+      parameters:
+        - name: exchange
+          in: query
+          description: |-
+            **[Required]** The exchange for which to retrieve liquidity depth.
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          required: true
+          schema:
+            type: string
+            default: gdax
+        - name: pair
+          in: query
+          description: |-
+            **[Optional]** The currency pair to retrieve liquidity depth.
+            **[Examples]** ` btc_usd | btc_usdc | eth_usd `
+          schema:
+            type: string
+        - name: hoursAgo
+          in: query
+          description: >-
+            **[Required]** Payload only includes data going back this number of
+            hours up to now.
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1 | 24 | 168`
+          required: true
+          schema:
+            type: string
+            default: '1'
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                        - basisPoints005Avg: 9.401234543928572
+                          basisPoints005UsdMillion: 0.8362791425902734
+                          basisPoints010Avg: 33.4589952475
+                          basisPoints010UsdMillion: 2.977331789492856
+                          basisPoints015Avg: 48.26654494428573
+                          basisPoints015UsdMillion: 4.295080580089795
+                          basisPoints020Avg: 60.502773086249995
+                          basisPoints020UsdMillion: 5.383912833758577
+                          basisPoints025Avg: 72.67447120107144
+                          basisPoints025UsdMillion: 6.467176793384661
+                          basisPoints050Avg: 107.73277508214282
+                          basisPoints050UsdMillion: 9.586148396668023
+                          basisPoints075Avg: 131.27418873642856
+                          basisPoints075UsdMillion: 11.68077021486782
+                          basisPoints100Avg: 149.33848501964283
+                          basisPoints100UsdMillion: 13.288344480691334
+                          basisPoints125Avg: 156.1712182948214
+                          basisPoints125UsdMillion: 13.89561970593318
+                          basisPoints150Avg: 159.06672667392849
+                          basisPoints150UsdMillion: 14.152776714523336
+                          basisPoints175Avg: 162.1023070374999
+                          basisPoints175UsdMillion: 14.422205970560144
+                          basisPoints200Avg: 163.636911395357
+                          basisPoints200UsdMillion: 14.558796552896421
+                          basisPoints225Avg: 168.5982969091071
+                          basisPoints225UsdMillion: 15.001013535304601
+                          basisPoints250Avg: 174.94764086875006
+                          basisPoints250UsdMillion: 15.566209884819328
+                          basisPoints275Avg: 179.26595198482138
+                          basisPoints275UsdMillion: 15.950231329138596
+                          basisPoints300Avg: 183.3951665717857
+                          basisPoints300UsdMillion: 16.3172551153197
+                          basisPoints325Avg: 188.75657228053555
+                          basisPoints325UsdMillion: 16.794767513487276
+                          basisPoints350Avg: 195.12496656714276
+                          basisPoints350UsdMillion: 17.361693638792417
+                          basisPoints375Avg: 203.70150304749993
+                          basisPoints375UsdMillion: 18.125329138233376
+                          basisPoints400Avg: 224.07660832410696
+                          basisPoints400UsdMillion: 19.940580871428985
+                          basisPoints425Avg: 245.53254425642817
+                          basisPoints425UsdMillion: 21.850674019291123
+                          basisPoints450Avg: 268.9725459998209
+                          basisPoints450UsdMillion: 23.935951474578236
+                          basisPoints475Avg: 284.06341766303456
+                          basisPoints475UsdMillion: 25.277041027641026
+                          basisPoints500Avg: 298.445947001427
+                          basisPoints500UsdMillion: 26.556690917608318
+                          exchange: gdax
+                          pair: btc_usd
+                          side: ask
+                        - basisPoints005Avg: 10.787776116964285
+                          basisPoints005UsdMillion: 0.9603206933466637
+                          basisPoints010Avg: 32.997112661785714
+                          basisPoints010UsdMillion: 2.9364426954190725
+                          basisPoints015Avg: 47.464132261071434
+                          basisPoints015UsdMillion: 4.223595252379741
+                          basisPoints020Avg: 59.663405261964286
+                          basisPoints020UsdMillion: 5.309160456228423
+                          basisPoints025Avg: 68.76697274125
+                          basisPoints025UsdMillion: 6.119256539282075
+                          basisPoints050Avg: 98.74593045946428
+                          basisPoints050UsdMillion: 8.78632199575771
+                          basisPoints075Avg: 125.9904346496429
+                          basisPoints075UsdMillion: 11.209914603176367
+                          basisPoints100Avg: 152.6229010428572
+                          basisPoints100UsdMillion: 13.578242795297774
+                          basisPoints125Avg: 172.79567598107153
+                          basisPoints125UsdMillion: 15.373685351653338
+                          basisPoints150Avg: 187.33424776267861
+                          basisPoints150UsdMillion: 16.667557260857322
+                          basisPoints175Avg: 201.1325491351786
+                          basisPoints175UsdMillion: 17.89581405996473
+                          basisPoints200Avg: 213.77307337482142
+                          basisPoints200UsdMillion: 19.020518676666864
+                          basisPoints225Avg: 224.1634065199999
+                          basisPoints225UsdMillion: 19.944477842338227
+                          basisPoints250Avg: 238.76315926910706
+                          basisPoints250UsdMillion: 21.24411061084825
+                          basisPoints275Avg: 249.31504905392845
+                          basisPoints275UsdMillion: 22.18400659751382
+                          basisPoints300Avg: 256.21995993107123
+                          basisPoints300UsdMillion: 22.79808261203308
+                          basisPoints325Avg: 263.6064879801783
+                          basisPoints325UsdMillion: 23.455003753408526
+                          basisPoints350Avg: 272.6028786167854
+                          basisPoints350UsdMillion: 24.255617937881052
+                          basisPoints375Avg: 281.8979424932139
+                          basisPoints375UsdMillion: 25.083445153214658
+                          basisPoints400Avg: 288.2444660867854
+                          basisPoints400UsdMillion: 25.647089540450402
+                          basisPoints425Avg: 298.02978690535696
+                          basisPoints425UsdMillion: 26.516905314952048
+                          basisPoints450Avg: 311.6647462498213
+                          basisPoints450UsdMillion: 27.729906912213323
+                          basisPoints475Avg: 328.1130076466067
+                          basisPoints475UsdMillion: 29.195136775790168
+                          basisPoints500Avg: 334.3264517832139
+                          basisPoints500UsdMillion: 29.74844577831809
+                          exchange: gdax
+                          pair: btc_usd
+                          side: bid
+                      metadata:
+                        api-version: '2023-09-30'
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            basisPointsXXXAvg:
+                              type: number
+                              example: 9.401234543928572
+                              description: >-
+                                The average depth in coin (base) for xxx bps
+                                from BBO
+                            basisPointsXXXUsdMillion:
+                              type: number
+                              example: 0.8362791425902734
+                              description: >-
+                                The average depth in quote (often USD) for xxx
+                                bps from BBO, in millions
+                            exchange:
+                              type: string
+                              example: gdax
+                              description: The subject exchange
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: The subject pair
+                            side:
+                              type: string
+                              example: ask
+                              description: The ask or bid side of the depth
+                      metadata:
+                        type: object
+                        properties:
+                          api-version:
+                            type: string
+                            example: '2023-09-30'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: {}
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+  /depth/lwap:
+    get:
+      summary: LWAP
+      description: >-
+        Liquidity Weighted Average Price (LWAP) represents the average execution
+        price achieved when trading through all resting orders in the order book
+        (sweeping the book), up to a specified depth. For example, if you sell
+        through the book down to 50 basis points away from the
+        best-bid/best-ask, LWAP calculates the average execution price for that
+        trade.
+      operationId: spot-analytics-order-book-depth-lwap
+      parameters:
+        - name: exchange
+          in: query
+          description: >-
+            **[Required]** The exchange for which to retrieve listed spot
+            instruments.
+
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          required: true
+          schema:
+            type: string
+            default: gdax
+        - name: pair
+          in: query
+          description: |-
+            **[Required]** The currency pair for the spot instrument.
+            **[Examples]** ` btc_usd | btc_usdc | eth_usd `
+          required: true
+          schema:
+            type: string
+            default: btc_usd
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-27`
+          schema:
+            type: string
+            default: '2025-03-15'
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data up to this date
+            (exclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-27`
+          schema:
+            type: string
+            default: '2025-03-16'
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                        - basisPoints005: 5.54432285
+                          basisPoints005OrderCount: 61
+                          basisPoints025: 55.42346636999996
+                          basisPoints025OrderCount: 212
+                          basisPoints050: 86.13989642000006
+                          basisPoints050OrderCount: 264
+                          basisPoints100: 162.79283695000004
+                          basisPoints100OrderCount: 398
+                          bestAskPrice: 84160.01
+                          bestBidPrice: 84160
+                          exchange: gdax
+                          lwap005: 84182.63687387163
+                          lwap005ExecutionVersusBBO: 0.026885540854415524
+                          lwap005UsdMillion: 0.46673571719305906
+                          lwap025: 84275.95356466963
+                          lwap025ExecutionVersusBBO: 0.13776562606115927
+                          lwap025UsdMillion: 4.670865478191145
+                          lwap050: 84332.34147661841
+                          lwap050ExecutionVersusBBO: 0.20476646404679055
+                          lwap050UsdMillion: 7.264379159651985
+                          lwap100: 84549.86045854498
+                          lwap100ExecutionVersusBBO: 0.4632252996939812
+                          lwap100UsdMillion: 13.764111647773168
+                          midPrice: 84160.005
+                          pair: btc_usd
+                          side: ask
+                          slippage005UsdVersusBBO: 12548.44219280892
+                          slippage025UsdVersusBBO: 643484.7068504592
+                          slippage050UsdVersusBBO: 1487501.2340171328
+                          slippage100UsdVersusBBO: 6375884.743061143
+                          spreadPercent: 0.000011882128565416923
+                          timestamp: 2025-03-15 00:27:00 000
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            basisPointsXXX:
+                              type: number
+                              example: 5.54432285
+                              description: >-
+                                The total volume size in coins (base) for xxx
+                                bps away from BBO
+                            basisPointsXXXOrderCount:
+                              type: integer
+                              example: 61
+                              description: The total order count for xxx bps away from BBO
+                            bestAskPrice:
+                              type: number
+                              example: 84160.01
+                              description: The best ask price
+                            bestBidPrice:
+                              type: number
+                              example: 84160
+                              description: The best bid price
+                            exchange:
+                              type: string
+                              example: gdax
+                              description: The subject exchange
+                            lwapXXX:
+                              type: number
+                              example: 84182.63687387163
+                              description: >-
+                                The executed liquidity average weighted price
+                                from sweeping the book through xxx bps from BBO
+                            lwapXXXExecutionVersusBBO:
+                              type: number
+                              example: 0.026885540854415524
+                              description: >-
+                                The slippage in decimal percentage terms from
+                                sweeping the book through XXX bps through BBO
+                            lwapXXXUsdMillion:
+                              type: number
+                              example: 0.46673571719305906
+                              description: >-
+                                The total executed volume in quote (often USD)
+                                from sweeping the book through XXX bps through
+                                BBO
+                            midPrice:
+                              type: number
+                              example: 84160.005
+                              description: The mid-price between BBO
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: The subject pair
+                            side:
+                              type: string
+                              example: ask
+                              description: The ask or bid side of the LWAP
+                            slippageXXXUsdVersusBBO:
+                              type: number
+                              example: 12548.44219280892
+                              description: >-
+                                The average slippage in quote terms (often USD)
+                                from sweeping the book through XXX bps through
+                                BBO versus executing at BBO
+                            spreadPercent:
+                              type: number
+                              example: 0.000011882128565416923
+                              description: The absolute BBO spread divided by mid-price
+                            timestamp:
+                              type: string
+                              example: 2025-03-15 00:27:00 000
+                              description: The observation timestamp
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: {}
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+  /depth/pressure:
+    get:
+      summary: Pressure
+      description: >-
+        Order book pressure is a market indicator that measures the relative
+        balance between buy and sell orders. It is calculated as: 
+        Order_Book_Pressure = (bid depth − ask depth) This metric provides
+        insight into market sentiment by quantifying the dominance of buyers or
+        sellers. A positive value indicates stronger bid depth, while a negative
+        value signals sell-side dominance.
+      operationId: spot-analytics-order-book-depth-pressure
+      parameters:
+        - name: exchange
+          in: query
+          description: >-
+            **[Required]** The exchange for which to retrieve listed spot
+            instruments.
+
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          required: true
+          schema:
+            type: string
+            default: gdax
+        - name: pair
+          in: query
+          description: |-
+            **[Required]** The currency pair for the spot instrument.
+            **[Examples]** ` btc_usd | btc_usdc | eth_usd `
+          required: true
+          schema:
+            type: string
+            default: btc_usd
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-27`
+          schema:
+            type: string
+            default: '2025-03-01'
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data up to this date
+            (exclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-28`
+          schema:
+            type: string
+            default: '2025-03-02'
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                        - exchange: gdax
+                          midPrice: 84297.735
+                          pair: btc_usd
+                          pressure005Net: 3.80466251
+                          pressure005Percentage: 13.333760348234334
+                          pressure005TotalSize: 28.53405499
+                          pressure025Net: -2.7184777299999467
+                          pressure025Percentage: -2.157767634675136
+                          pressure025TotalSize: 125.98565695000003
+                          pressure050Net: 0.5284337700000776
+                          pressure050Percentage: 0.29330641402634117
+                          pressure050TotalSize: 180.16440988999997
+                          pressure100Net: -0.6416217599998504
+                          pressure100Percentage: -0.20727994616122
+                          pressure100TotalSize: 309.54357711999995
+                          pressure200Net: 14.13135428000004
+                          pressure200Percentage: 3.975967811253675
+                          pressure200TotalSize: 355.41923251999964
+                          pressure300Net: 30.990556530000077
+                          pressure300Percentage: 7.110619364599486
+                          pressure300TotalSize: 435.8348399899993
+                          pressure400Net: 24.651642440000273
+                          pressure400Percentage: 4.895576417323962
+                          pressure400TotalSize: 503.5493338999995
+                          pressure500Net: 24.744126750000305
+                          pressure500Percentage: 4.430437047235998
+                          pressure500TotalSize: 558.50306609
+                          timestamp: 2025-03-01 00:00:00 000
+                        - exchange: gdax
+                          midPrice: 84277.07500000001
+                          pair: btc_usd
+                          pressure005Net: -4.981465730000002
+                          pressure005Percentage: -21.907836042326455
+                          pressure005TotalSize: 22.73828287
+                          pressure025Net: 4.809048920000009
+                          pressure025Percentage: 4.063638084882511
+                          pressure025TotalSize: 118.34343560000005
+                          pressure050Net: 9.480321980000028
+                          pressure050Percentage: 4.932255718676169
+                          pressure050TotalSize: 192.21067439999996
+                          pressure100Net: 1.054601320000188
+                          pressure100Percentage: 0.33866744066817495
+                          pressure100TotalSize: 311.3973158799999
+                          pressure200Net: 14.074613320000026
+                          pressure200Percentage: 3.914888101658378
+                          pressure200TotalSize: 359.5150858599996
+                          pressure300Net: 31.191258530000084
+                          pressure300Percentage: 7.086596212660097
+                          pressure300TotalSize: 440.14443032999924
+                          pressure400Net: 24.505557460000432
+                          pressure400Percentage: 4.8289312922276295
+                          pressure400TotalSize: 507.47372403999964
+                          pressure500Net: 26.535550050000438
+                          pressure500Percentage: 4.732611756518565
+                          pressure500TotalSize: 560.69568803
+                          timestamp: 2025-03-01 00:01:00 000
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                              example: gdax
+                              description: The subject exchange
+                            midPrice:
+                              type: number
+                              example: 84297.735
+                              description: The mid-price between BBO
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: The subject pair
+                            pressureXXXNet:
+                              type: number
+                              example: 3.80466251
+                              description: >-
+                                The size imbalance (in base) between bid depth -
+                                ask depth XXX bps away from BBO
+                            pressureXXXPercentage:
+                              type: number
+                              example: 13.333760348234334
+                              description: >-
+                                The size imbalance, as a percentage of total
+                                size, between bid depth - ask depth XXX bps away
+                                from BBO
+                            pressureXXXTotalSize:
+                              type: number
+                              example: 28.53405499
+                              description: >-
+                                The total size of bid depth + ask depth XXX bps
+                                away from BBO
+                            timestamp:
+                              type: string
+                              example: 2025-03-01 00:00:00 000
+                              description: The observation timestamp
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: {}
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+  /trade/frequency:
+    get:
+      summary: Trade Frequency
+      description: >-
+        This endpoint condenses raw trade data into 1-minute increments, making
+        it easier to analyze aggregated statistics without parsing millions of
+        individual trades. It includes a breakdown of trades by quote size,
+        allowing users to filter by specific trade sizes or view all trades. Key
+        metrics provided are total volume traded, VWAP (volume-weighted average
+        price), trade count, and net buy/sell aggressor volumes.
+      operationId: spot-analytics-trade-frequency
+      parameters:
+        - name: exchange
+          in: query
+          description: >-
+            **[Optional]** The exchange for which to retrieve listed spot
+            instruments.
+
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          schema:
+            type: string
+            default: gdax
+        - name: pair
+          in: query
+          description: |-
+            **[Required]** The currency pair for the spot instrument.
+            **[Examples]** ` btc_usd | btc_usdc | eth_usd `
+          required: true
+          schema:
+            type: string
+            default: btc_usd
+        - name: fuzzyMatch
+          in: query
+          description: >-
+            **[Required]** This parameter allows users to return either a
+            specific pair, such as btc_usd, when set to FALSE, or return every
+            pair related to an underlying asset, such as BTC, when set to TRUE
+            (ex: btc_eur, btc_usd, btc_usdt, etc)
+          required: true
+          schema:
+            type: boolean
+            default: false
+        - name: orderSizeCategoryUsd
+          in: query
+          description: >-
+            **[Optional]** Users can specify to return all aggregated trades or
+            only trades that fit a specific size threshold (0-1k, 1k-10k,
+            10k-100k, 100k+, ALL).
+             Users can specify by passing the lower threshold flag ` 0 | 1k | 10k | 100k | All `
+          schema:
+            type: string
+            default: All
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-27`
+          schema:
+            type: string
+            default: '2025-05-01'
+        - name: endDate
+          in: query
+          description: |-
+            **[Optional]** Payload only includes data up to this date.
+            **[Formats]** `seconds | milliseconds | iso8601` 
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-28`
+          schema:
+            type: string
+            default: '2025-05-01'
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+        - name: timeInterval
+          in: query
+          required: false
+          description: >-
+            **[Optional]** Time interval of data frequency for the selected date
+            range. 
+
+            **[Examples]** ` minute | hour | day`
+          schema:
+            type: string
+            default: day
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                        - avgTradeSizeUsd: 2430.788381711542
+                          buyTradeCount: 248726
+                          buyVolumeCoin: 4368.776665650001
+                          close: 96495.11
+                          exchange: gdax
+                          high: 97546.99
+                          low: 94136.79
+                          netBuyVolumeCoin: 403.52652067
+                          open: 96165.11
+                          orderSizeCategoryUsd: All
+                          pair: btc_usd
+                          sellTradeCount: 207596
+                          sellVolumeCoin: 3965.2501449799993
+                          timestamp: 2025-05-01 00:00:00 000
+                          totalTradeCount: 456322
+                          totalVolumeUsd: 801971245.3019549
+                          vwap: 96235.22440469854
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            avgTradeSizeUsd:
+                              type: number
+                              example: 182850.664267192
+                              description: The average trade size for the time interval
+                            buyTradeCount:
+                              type: integer
+                              example: 30
+                              description: >-
+                                The buy order count. Buy and sell counts are
+                                measured by aggressor behaviour
+                            buyVolumeCoin:
+                              type:
+                                - number
+                                - 'null'
+                              example: 5430
+                              description: >-
+                                The buy coin (base) volume. Buy and sell are
+                                measured by aggressor behaviour
+                            close:
+                              type: number
+                              example: 94229.78
+                              description: The time interval close price
+                            exchange:
+                              type: string
+                              example: gdax
+                              description: >-
+                                The subject exchange used for calculating trade
+                                frequency
+                            high:
+                              type: number
+                              example: 95229.78
+                              description: The time interval high price
+                            low:
+                              type: number
+                              example: 94229.78
+                              description: The time interval low price
+                            netBuyVolumeCoin:
+                              type: number
+                              example: 403.52652067
+                              description: >-
+                                The buy order volume minus sell order volume in
+                                coin (base) terms. Buy and sell counts are
+                                measured by aggressor behaviour
+                            open:
+                              type: number
+                              example: 93229.78
+                              description: The time interval open price
+                            orderSizeCategoryUsd:
+                              type: string
+                              example: 100K+
+                              description: >-
+                                The trade size threshold in quote terms (often
+                                USD) used for the calculation
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: The subject pair
+                            sellTradeCount:
+                              type: number
+                              example: 207596
+                              description: The total amount of sell trades
+                            sellVolumeCoin:
+                              type: number
+                              example: 3965.2501449799993
+                              description: >-
+                                The total amount of sell volume in coin (base)
+                                terms
+                            timestamp:
+                              type: string
+                              example: 2025-04-15 00:00:00 000
+                              description: The timestamp used for the calculation
+                            totalTradeCount:
+                              type: number
+                              example: 456322
+                              description: The total number of trades
+                            totalVolumeUsd:
+                              type: number
+                              example: 549390273.3037565
+                              description: >-
+                                The total quote (often USD) volume used for the
+                                calculation
+                            vwap:
+                              type: number
+                              example: 105724.81842395054
+                              description: Trade-weighted average price
+      security:
+        - ApiKeyAuth: []
+  /trade/pressure:
+    get:
+      summary: Trade Pressure
+      description: >-
+        This endpoint provides net trade data (buy aggressors minus sell
+        aggressors) to help users identify which side of the market is more
+        aggressive. Users can also filter by "orderSizeCategoryUsd" to analyze
+        behavior across different market segments. Other details revolve around
+        trade count.
+      operationId: spot-analytics-trade-pressure
+      parameters:
+        - name: exchange
+          in: query
+          description: >-
+            **[Optional]** The exchange for which to retrieve listed spot
+            instruments.
+
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          schema:
+            type: string
+            default: gdax
+        - name: pair
+          in: query
+          description: |-
+            **[Required]** The currency pair for the spot instrument.
+            **[Examples]** ` btc_usd | btc_usdc | eth_usd `
+          required: true
+          schema:
+            type: string
+            default: btc_usd
+        - name: fuzzyMatch
+          in: query
+          description: >-
+            **[Required]** This parameter allows users to return either a
+            specific pair, such as btc_usd, when set to FALSE, or return every
+            pair related to an underlying asset, such as BTC, when set to TRUE
+            (ex: btc_eur, btc_usd, btc_usdt, etc)
+          required: true
+          schema:
+            type: boolean
+            default: false
+        - name: orderSizeCategoryUsd
+          in: query
+          description: >-
+            **[Optional]** Users can specify to return all aggregated trades or
+            only trades that fit a specific size threshold (0-1k, 1k-10k,
+            10k-100k, 100k+, ALL).
+             Users can specify by passing the lower threshold flag ` 0 | 1k | 10k | 100k | All `
+          schema:
+            type: string
+        - name: startDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-27`
+          schema:
+            type: string
+            default: '2025-04-15'
+        - name: endDate
+          in: query
+          description: >-
+            **[Optional]** Payload only includes data up to this date
+            (exclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-28`
+          schema:
+            type: string
+            default: '2025-04-16'
+        - name: timeInterval
+          in: query
+          description: >-
+            **[Optional]** Time interval of data frequency for the selected date
+            range. 
+
+            **[Examples]** ` minute | hour | day`
+          schema:
+            type: string
+        - name: timeFormat
+          in: query
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                        - close: 83622.17
+                          exchange: gdax
+                          high: 86491.4
+                          low: 83592.77
+                          netBuyTradeCount: 64529
+                          netBuyVolumeCoin: 2.5356237300000544
+                          netBuyVolumeUsd: 516634.4543056437
+                          open: 84590.37
+                          orderSizeCategoryUsd: All
+                          pair: btc_usd
+                          timestamp: 2025-04-15 00:00:00 000
+                          totalVolumeCoin: 6461.770244209999
+                          totalVolumeUsd: 549390273.3037565
+                        - close: 83603.53
+                          exchange: gdax
+                          high: 83622.52
+                          low: 83593.72
+                          netBuyTradeCount: -20
+                          netBuyVolumeCoin: -2.2689633999999996
+                          netBuyVolumeUsd: -189697.15606547246
+                          open: 83610.81
+                          orderSizeCategoryUsd: All
+                          pair: btc_usd
+                          timestamp: 2025-04-16 00:00:00 000
+                          totalVolumeCoin: 5.332700320000002
+                          totalVolumeUsd: 445841.5172556046
+                      metadata:
+                        api-version: '2023-09-30'
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            close:
+                              type: number
+                              example: 83622.17
+                              description: The time interval closing price
+                            exchange:
+                              type: string
+                              example: gdax
+                              description: >-
+                                The subject exchange used for calculating trade
+                                pressure
+                            high:
+                              type: number
+                              example: 86491.4
+                              description: The time interval high price
+                            low:
+                              type: number
+                              example: 83592.77
+                              description: The time interval low price
+                            netBuyTradeCount:
+                              type: integer
+                              example: 64529
+                              description: >-
+                                The buy order count minus sell order count. Buy
+                                and sell counts are measured by aggressor
+                                behaviour
+                            netBuyVolumeCoin:
+                              type: number
+                              example: 2.5356237300000544
+                              description: >-
+                                The buy order volume minus sell order volume in
+                                coin (base) terms. Buy and sell counts are
+                                measured by aggressor behaviour
+                            netBuyVolumeUsd:
+                              type: number
+                              example: 516634.4543056437
+                              escription: >-
+                                The buy order volume minus sell order volume in
+                                USD (quote) terms. Buy and sell counts are
+                                measured by aggressor behaviour. Note some pairs
+                                may note be quoted in USD, in that case, quote
+                                currency
+                            open:
+                              type: number
+                              example: 84590.37
+                              description: The time interval open price
+                            orderSizeCategoryUsd:
+                              type: string
+                              example: All
+                              description: >-
+                                The trade size threshold in quote terms (often
+                                USD) used for the calculation
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: The pair used for the calculation
+                            timestamp:
+                              type: string
+                              example: 2025-04-15 00:00:00 000
+                              description: The timestamp used for the calculation
+                            totalVolumeCoin:
+                              type: number
+                              example: 6461.770244209999
+                              description: >-
+                                The total base (often crypto) volume used for
+                                the calculation
+                            totalVolumeUsd:
+                              type: number
+                              example: 549390273.3037565
+                              description: >-
+                                The total quote (often USD) volume used for the
+                                calculation
+                      metadata:
+                        type: object
+                        properties:
+                          api-version:
+                            type: string
+                            example: '2023-09-30'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: {}
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+        - ApiKeyAuth: []
+  /trade/vwap/global:
+    get:
+      description: ''
+      operationId: get_tradevwapglobal
+      responses:
+        '200':
+          description: ''
+      parameters:
+        - name: pair
+          in: query
+          required: true
+          description: |-
+            **[Required]** The currency pair for the spot instrument.
+            **[Examples]** ` btc_usd | btc_usdc | eth_usd `
+          schema:
+            type: string
+            default: btc_usdt
+        - name: exchange
+          in: query
+          required: true
+          description: >-
+            **[Required]** The exchange for which to retrieve listed spot
+            instruments.
+
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          schema:
+            type: string
+            default: gdax
+        - name: startDate
+          in: query
+          required: true
+          description: >-
+            **[Required]** Payload only includes data after this date
+            (inclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-27`
+          schema:
+            type: string
+            default: '2025-02-05T00:00:00'
+        - name: endDate
+          in: query
+          required: true
+          description: |-
+            **[Required]** Payload only includes data up to this date.
+            **[Formats]** `seconds | milliseconds | iso8601` 
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-28`
+          schema:
+            type: string
+            default: '2025-02-05T00:00:15'
+        - name: timeInterval
+          in: query
+          required: false
+          description: >-
+            **[Optional]** Time interval of data frequency for the selected date
+            range. 
+
+            **[Examples]** ` minute | hour | day`
+          schema:
+            type: string
+            default: minute
+        - name: timeFormat
+          in: query
+          required: false
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+      security:
+        - ApiKeyAuth: []
+  /trade/vwap:
+    get:
+      summary: VWAP - TWAP
+      description: >-
+        The VWAP (Volume Weighted Average Price) for BTC/USDT and other pairs on
+        a crypto exchanges like Binance, is calculated every minute using trade
+        data. VWAP is computed by taking the sum of the product of each trade’s
+        price and size (i.e., trade price × trade volume) within the 1-minute
+        interval, and dividing that by the total traded volume in that same
+        interval. This provides a time-specific average price that accounts for
+        trade size, offering a more accurate reflection of market activity than
+        a simple average. The TWAP users the time-weighted average of the
+        “close” price for each 1-minute candle. We use the close price because
+        it’s the last traded price for that minute, which provides as consistent
+        price that matches the minute’s end as closely as possible.
+      operationId: spot-analytics-vwap-twap
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                New Example:
+                  summary: New Example
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 23:00:00 000
+                          totalVolumeUSD: 17077624.10253145
+                          twap: 105726.12016666665
+                          vwap: 105724.81842395054
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 22:00:00 000
+                          totalVolumeUSD: 29901190.234523397
+                          twap: 106000.51333333335
+                          vwap: 106044.21872588272
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 21:00:00 000
+                          totalVolumeUSD: 11549771.859701945
+                          twap: 106338.51900000003
+                          vwap: 106347.79507951892
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 20:00:00 000
+                          totalVolumeUSD: 9735085.984966466
+                          twap: 106333.61000000002
+                          vwap: 106322.86687463883
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 19:00:00 000
+                          totalVolumeUSD: 6827882.382201663
+                          twap: 106358.19366666669
+                          vwap: 106355.23768030593
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 18:00:00 000
+                          totalVolumeUSD: 9869478.716884736
+                          twap: 106311.98866666664
+                          vwap: 106300.60451925016
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 17:00:00 000
+                          totalVolumeUSD: 13292180.074134275
+                          twap: 106302.93316666667
+                          vwap: 106311.10648933919
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 16:00:00 000
+                          totalVolumeUSD: 18507205.192912556
+                          twap: 106202.98033333335
+                          vwap: 106199.19117720834
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 15:00:00 000
+                          totalVolumeUSD: 13773886.83343635
+                          twap: 106027.39916666666
+                          vwap: 106063.01158809518
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 14:00:00 000
+                          totalVolumeUSD: 8186574.408960278
+                          twap: 105791.74616666674
+                          vwap: 105765.1241644865
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 13:00:00 000
+                          totalVolumeUSD: 9083039.802297479
+                          twap: 105797.45016666663
+                          vwap: 105896.6942760686
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 12:00:00 000
+                          totalVolumeUSD: 5633478.100658474
+                          twap: 105699.21833333331
+                          vwap: 105690.20520154337
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 11:00:00 000
+                          totalVolumeUSD: 5376178.2150859935
+                          twap: 105624.55266666666
+                          vwap: 105653.57221582466
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 10:00:00 000
+                          totalVolumeUSD: 4597719.486216294
+                          twap: 105252.75383333329
+                          vwap: 105229.85623988796
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 09:00:00 000
+                          totalVolumeUSD: 7621615.302100955
+                          twap: 105310.27333333336
+                          vwap: 105300.53282667995
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 08:00:00 000
+                          totalVolumeUSD: 2806791.298968891
+                          twap: 105506.08466666666
+                          vwap: 105498.35833966617
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 07:00:00 000
+                          totalVolumeUSD: 3736490.295869334
+                          twap: 105520.44233333334
+                          vwap: 105527.339573059
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 06:00:00 000
+                          totalVolumeUSD: 3972474.0227431855
+                          twap: 105580.118
+                          vwap: 105562.43588218733
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 05:00:00 000
+                          totalVolumeUSD: 5204434.701969851
+                          twap: 105599.48866666667
+                          vwap: 105601.56391191226
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 04:00:00 000
+                          totalVolumeUSD: 4616634.252113115
+                          twap: 105597.29466666664
+                          vwap: 105588.77625246809
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 03:00:00 000
+                          totalVolumeUSD: 3315188.01312173
+                          twap: 105504.52783333334
+                          vwap: 105508.71296682941
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 02:00:00 000
+                          totalVolumeUSD: 4278195.527676096
+                          twap: 105584.38616666665
+                          vwap: 105596.48203364453
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 01:00:00 000
+                          totalVolumeUSD: 5272046.963051804
+                          twap: 105640.23016666668
+                          vwap: 105617.56397541084
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-08 00:00:00 000
+                          totalVolumeUSD: 7474428.606706913
+                          twap: 105572.94466666666
+                          vwap: 105572.19499775872
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-07 23:00:00 000
+                          totalVolumeUSD: 11810499.390065463
+                          twap: 105726.95783333332
+                          vwap: 105726.27792341512
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-07 22:00:00 000
+                          totalVolumeUSD: 11505596.556401853
+                          twap: 105875.62700000002
+                          vwap: 105884.83995103992
+                        - exchange: gdax
+                          pair: btc_usd
+                          timestamp: 2025-06-07 21:00:00 000
+                          totalVolumeUSD: 7034260.681824598
+                          twap: 105883.99866666668
+                          vwap: 105883.8105750041
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                              example: gdax
+                              description: >-
+                                Exchange hosting the pair for VWAP/TWAP
+                                calculations
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: Underlying pair for VWAP/TWAP calculations
+                            timestamp:
+                              type: string
+                              example: 2025-06-08 23:00:00 000
+                              description: Timestamp reflecting the VWAP/TWAP calculations
+                            totalVolumeUSD:
+                              type: number
+                              example: 17077624.10253145
+                              description: Raw total volume in quote terms (often USD)
+                            twap:
+                              type: number
+                              example: 105726.12016666665
+                              description: >-
+                                Time-weighted average price. Underlying time
+                                increments are in minutes
+                            vwap:
+                              type: number
+                              example: 105724.81842395054
+                              description: Trade-weighted average price
+      parameters:
+        - name: pair
+          in: query
+          required: true
+          description: |-
+            **[Required]** The currency pair for the spot instrument.
+            **[Examples]** ` btc_usd | btc_usdc | eth_usd `
+          schema:
+            type: string
+            default: btc_usd
+        - name: exchange
+          in: query
+          required: true
+          description: >-
+            **[Required]** The exchange for which to retrieve listed spot
+            instruments.
+
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          schema:
+            type: string
+            default: gdax
+        - name: startDate
+          in: query
+          required: false
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-27`
+          schema:
+            type: string
+            default: '2025-06-01'
+        - name: endDate
+          in: query
+          required: false
+          description: |-
+            **[Optional]** Payload only includes data up to this date.
+            **[Formats]** `seconds | milliseconds | iso8601` 
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-28`
+          schema:
+            type: string
+            default: '2025-06-02'
+        - name: timeInterval
+          in: query
+          required: false
+          description: >-
+            **[Optional]** Time interval of data frequency for the selected date
+            range. 
+
+            **[Examples]** ` minute | hour | day`
+          schema:
+            type: string
+            default: day
+        - name: timeFormat
+          in: query
+          required: false
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+        - name: orderSizeCategoryUsd
+          in: query
+          required: true
+          description: >-
+            **[Required]** Users can specify to return all aggregated trades, or
+            trades of a specific size threshold. (0-1k, 1k-10k, 10k-100k, 100k+,
+            ALL) by passing in the lower value of the range ` 0 | 1k | 10k |
+            100k | All `
+          schema:
+            type: string
+            default: All
+      security:
+        - ApiKeyAuth: []
+  /volumes/asset:
+    get:
+      summary: Asset Volume USD
+      description: >-
+        This endpoint displays the total volume per base asset or specifc pair,
+        normalized to USD. This means that crypto-to-crypto pairs (such as
+        ETH_BTC) are converted to USD before aggregation. Users can pass an
+        optional boolean parameter to include pairs where the asset is on the
+        quote side, example xyz_btc where btc is target asset.
+      operationId: spot-analytics-volumes-exchange
+      parameters:
+        - name: exchange
+          in: query
+          required: true
+          description: |-
+            **[Required]** The exchange for which to retrieve asset USD volume.
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          schema:
+            type: string
+            default: gdax
+        - name: asset
+          in: query
+          required: true
+          description: |-
+            **[Required]** The exchange for which to retrieve asset USD volume.
+            **[Examples]** ` btc | eth | sol | xrp`
+          schema:
+            type: string
+            default: btc
+        - name: quoteAssetIncluded
+          in: query
+          required: true
+          description: >-
+            **[Required]** Whether the USD asset volumes from the quote side are
+            included.
+
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          schema:
+            type: boolean
+            default: false
+        - name: pair
+          in: query
+          required: false
+          description: >-
+            **[Optional]** The parameter to isolate USD volume to only a
+            specific pair.
+
+            **[Examples]** ` btc_usd | eth_usdt | sol_usd | xrp_usdc`
+          schema:
+            type: string
+            default: null
+        - name: startDate
+          in: query
+          required: false
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-27`
+          schema:
+            type: string
+            default: '2025-06-01'
+        - name: endDate
+          in: query
+          required: false
+          description: |-
+            **[Optional]** Payload only includes data up to this date.
+            **[Formats]** `seconds | milliseconds | iso8601` 
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-28`
+          schema:
+            type: string
+            default: '2025-06-05'
+        - name: timeInterval
+          in: query
+          required: false
+          description: >-
+            **[Optional]** Time interval of data frequency for the selected date
+            range. 
+
+            **[Examples]** ` minute | hour | day`
+          schema:
+            type: string
+            default: day
+        - name: timeFormat
+          in: query
+          required: false
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+        - name: orderSizeCategoryUsd
+          in: query
+          required: true
+          description: >-
+            **[Required]** Users can specify to return all aggregated trades, or
+            trades of a specific size threshold. (0-1k, 1k-10k, 10k-100k, 100k+,
+            ALL) by passing in the lower value of the range ` 0 | 1k | 10k |
+            100k | All `
+          schema:
+            type: string
+            default: ALL
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                New Example:
+                  summary: New Example
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                        - exchange: binance
+                          timestamp: 2025-06-04 00:00:00 000
+                          totalVolumeUSD: 67022419665.659546
+                          totalVolumeUSDBillions: 67.02241966565954
+                        - exchange: binanceus
+                          timestamp: 2025-06-04 00:00:00 000
+                          totalVolumeUSD: 10036190.677076299
+                          totalVolumeUSDBillions: 0.010036190677076298
+                        - exchange: gdax
+                          timestamp: 2025-06-04 00:00:00 000
+                          totalVolumeUSD: 5434906189.482691
+                          totalVolumeUSDBillions: 5.434906189482691
+                      metadata:
+                        api-version: '2023-09-30'
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                              example: binance
+                              description: Exchange reflecting the volume USD
+                            timestamp:
+                              type: string
+                              example: 2025-06-04 00:00:00 000
+                              description: Date reflecting the total volume USD
+                            totalVolumeUSD:
+                              type: number
+                              example: 67022419665.659546
+                              description: Raw total volume in USD terms
+                            totalVolumeUSDBillions:
+                              type: number
+                              example: 67.02241966565954
+                              description: >-
+                                Conversion of raw total volume in USD terms into
+                                billions to be easily human readable
+                      metadata:
+                        type: object
+                        properties:
+                          api-version:
+                            type: string
+                            example: '2023-09-30'
+      security:
+        - ApiKeyAuth: []
+  /volumes/exchange:
+    get:
+      summary: Exchange Volume USD
+      description: >-
+        This endpoint displays the total volume per exchange for all available
+        pairs, normalized to USD. This means that crypto-to-crypto pairs (such
+        as ETH_BTC) are converted to USD before aggregation. Users can pass an
+        exchange parameter to isolate volume data for a specific exchange or
+        leave it blank to retrieve data for all supported exchanges. Users can
+        also isolate volume that meet a size threshold using the
+        “orderSizeCategoryUsd” parameter. A useful example might be to pass
+        100k+ threshold to measure which exchanges have the most “large ticket”
+        volume (aka “whale” volume).
+      operationId: spot-analytics-volumes-exchange
+      parameters:
+        - name: exchange
+          in: query
+          required: false
+          description: |-
+            **[Optional]** The exchange for which to retrieve USD volume.
+            **[Examples]** ` gdax | okex | binance | binanceus`
+          schema:
+            type: string
+            default: ''
+        - name: startDate
+          in: query
+          required: false
+          description: >-
+            **[Optional]** Payload only includes data after this date
+            (inclusive).
+
+            **[Formats]** `seconds | milliseconds | iso8601` 
+
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-27`
+          schema:
+            type: string
+            default: '2025-06-01'
+        - name: endDate
+          in: query
+          required: false
+          description: |-
+            **[Optional]** Payload only includes data up to this date.
+            **[Formats]** `seconds | milliseconds | iso8601` 
+            **[Examples]** `1578531600 | 1578531600000 | 2025-02-28`
+          schema:
+            type: string
+            default: '2025-06-05'
+        - name: timeInterval
+          in: query
+          required: false
+          description: >-
+            **[Optional]** Time interval of data frequency for the selected date
+            range. 
+
+            **[Examples]** ` minute | hour | day`
+          schema:
+            type: string
+            default: day
+        - name: timeFormat
+          in: query
+          required: false
+          description: >-
+            **[Optional]** Time format of the timestamps in the return payload. 
+
+            **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr |
+            human_readable`
+          schema:
+            type: string
+            default: hr
+        - name: orderSizeCategoryUsd
+          in: query
+          required: true
+          description: >-
+            **[Required]** Users can specify to return all aggregated trades, or
+            trades of a specific size threshold. (0-1k, 1k-10k, 10k-100k, 100k+,
+            ALL) by passing in the lower value of the range ` 0 | 1k | 10k |
+            100k | All `
+          schema:
+            type: string
+            default: ALL
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                New Example:
+                  summary: New Example
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                        - exchange: binance
+                          timestamp: 2025-06-04 00:00:00 000
+                          totalVolumeUSD: 67022419665.659546
+                          totalVolumeUSDBillions: 67.02241966565954
+                        - exchange: binanceus
+                          timestamp: 2025-06-04 00:00:00 000
+                          totalVolumeUSD: 10036190.677076299
+                          totalVolumeUSDBillions: 0.010036190677076298
+                        - exchange: bitfinex
+                          timestamp: 2025-06-04 00:00:00 000
+                          totalVolumeUSD: 398537591611.8082
+                          totalVolumeUSDBillions: 398.53759161180824
+                        - exchange: gdax
+                          timestamp: 2025-06-04 00:00:00 000
+                          totalVolumeUSD: 5434906189.482691
+                          totalVolumeUSDBillions: 5.434906189482691
+                      metadata:
+                        api-version: '2023-09-30'
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                              example: binance
+                              description: Exchange reflecting the volume USD
+                            timestamp:
+                              type: string
+                              example: 2025-06-04 00:00:00 000
+                              description: Date reflecting the total volume USD
+                            totalVolumeUSD:
+                              type: number
+                              example: 67022419665.659546
+                              description: Raw total volume in USD terms
+                            totalVolumeUSDBillions:
+                              type: number
+                              example: 67.02241966565954
+                              description: >-
+                                Conversion of raw total volume in USD terms into
+                                billions to be easily human readable
+                      metadata:
+                        type: object
+                        properties:
+                          api-version:
+                            type: string
+                            example: '2023-09-30'
+      security:
+        - ApiKeyAuth: []
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

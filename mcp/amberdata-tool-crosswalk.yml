@@ -1,0 +1,67 @@
+generated: '2026-07-22'
+method: derived
+source: mcp/amberdata-mcp.yml + openapi/ (9 published specs, verified via live tools/list 2026-07-22)
+description: >-
+  Crosswalk between Amberdata's public MCP server (docs.amberdata.io/mcp) and
+  its published OpenAPI surface. The MCP server is a documentation-assistant
+  server (Mintlify-hosted): its tools search and read the docs corpus —
+  including the nine published OpenAPI specs — but none of them invoke the
+  REST data APIs, so no tool binds to a REST operationId.
+surfaces:
+  openapi:
+    - openapi/amberdata-market-openapi.yaml
+    - openapi/amberdata-derivatives-openapi.yaml
+    - openapi/amberdata-spot-openapi.yaml
+    - openapi/amberdata-price-openapi.yaml
+    - openapi/amberdata-metrics-openapi.yaml
+    - openapi/amberdata-blockchain-openapi.yaml
+    - openapi/amberdata-defi-openapi.yaml
+    - openapi/amberdata-defi-market-openapi.yaml
+    - openapi/amberdata-arc-openapi.yaml
+  graphql: null
+  mcp:
+    url: https://docs.amberdata.io/mcp
+    gated: false
+    note: tools/list is public (no auth); tool schemas captured live
+crosswalk: []
+mcp_only:
+  - tool: search_amberdata_docs
+    reason: Documentation knowledge-base search (Mintlify docs corpus); not backed by any REST data operation.
+  - tool: query_docs_filesystem_amberdata_docs
+    reason: Read-only virtualized filesystem over docs pages and OpenAPI specs; a docs-retrieval surface, not an API operation.
+  - tool: submit_feedback
+    reason: Docs feedback submission; no corresponding public REST operation.
+rest_only:
+  - capability: Market data (exchanges, pairs, order books, tickers, trades, OHLCV, funding, twap/vwap)
+    operations_file: openapi/amberdata-market-openapi.yaml
+    operation_count: 55
+  - capability: Derivatives analytics (futures, perpetuals, options, volatility, Greeks)
+    operations_file: openapi/amberdata-derivatives-openapi.yaml
+    operation_count: 69
+  - capability: Spot analytics (order-book depth, trade analytics)
+    operations_file: openapi/amberdata-spot-openapi.yaml
+    operation_count: 15
+  - capability: Prices, VWAP and asset pricing
+    operations_file: openapi/amberdata-price-openapi.yaml
+    operation_count: 16
+  - capability: Market metrics
+    operations_file: openapi/amberdata-metrics-openapi.yaml
+    operation_count: 6
+  - capability: Blockchain / on-chain data (addresses, balances, tokens, transactions)
+    operations_file: openapi/amberdata-blockchain-openapi.yaml
+    operation_count: 25
+  - capability: DeFi protocol data (lending, DEX)
+    operations_file: openapi/amberdata-defi-openapi.yaml
+    operation_count: 15
+  - capability: DeFi market data
+    operations_file: openapi/amberdata-defi-market-openapi.yaml
+    operation_count: 11
+  - capability: Asset reference and classification (ARC)
+    operations_file: openapi/amberdata-arc-openapi.yaml
+    operation_count: 4
+coverage:
+  mcp_tools_named: 3
+  mcp_tools_bound_to_rest: 0
+  mcp_only: 3
+  rest_operations_total: 216
+  rest_operations_with_tool: 0

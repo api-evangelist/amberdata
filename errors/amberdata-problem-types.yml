@@ -1,0 +1,47 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.amberdata.io/http/http-api-fundamentals
+format: custom-envelope
+envelope:
+  fields: [status, title, description, payload]
+  error_field: description
+  notes: >-
+    Amberdata does not use RFC 9457 application/problem+json. Errors return the
+    standard response envelope with the HTTP status in `status`, the IANA
+    status name in `title`, and the reason for the error in `description`.
+problems:
+  - status: 400
+    title: Bad Request
+    detail: Invalid request format, or query results exceed the 10 MB response limit.
+    remediation: Narrow the query (shorter startDate/endDate range, fewer instruments) or fix malformed parameters.
+  - status: 401
+    title: Unauthorized
+    detail: Invalid or missing API key.
+    remediation: Send a valid user-specific key in the x-api-key header.
+  - status: 403
+    title: Forbidden
+    detail: Access to the endpoint is not authorized under the current subscription.
+    remediation: >-
+      Ensure the endpoint, market, and exchange are included in your
+      subscription (On-Demand keys are restricted to the purchased
+      markets/exchanges and require the matching exchange parameter).
+  - status: 404
+    title: Not Found
+    detail: The requested resource does not exist (e.g. unknown instrument or address).
+    remediation: Verify instrument/pair/address identifiers against the reference endpoints.
+  - status: 429
+    title: Too Many Requests
+    detail: The per-second rate limit or daily quota for the API key was exceeded.
+    remediation: Back off and retry; see rate-limits/amberdata-rate-limits.yml for tier limits.
+  - status: 500
+    title: Internal Server Error
+    detail: Amberdata had a problem with its server.
+    remediation: Retry with backoff; check https://status.amberdata.io.
+  - status: 502
+    title: Bad Gateway
+    detail: Upstream gateway error.
+    remediation: Retry with backoff.
+  - status: 504
+    title: Gateway Timeout
+    detail: The request exceeded the 28-second processing limit.
+    remediation: Reduce the query window or use pagination to return smaller pages.

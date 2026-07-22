@@ -1,0 +1,27 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.amberdata.io/http/http-api-fundamentals
+versioning:
+  scheme: dated-version-header
+  header: api-version
+  example: '2023-09-30'
+  docs: https://docs.amberdata.io/http/http-api-fundamentals
+  backwards_compatible_changes:
+    - Adding new API resources
+    - Adding new optional request parameters to existing methods
+    - Adding new properties to existing responses
+    - Changing the order of properties in existing responses
+    - Changing the length/format of opaque Amberdata-generated strings
+deprecation:
+  policy_url: https://docs.amberdata.io/changelog/api-changes
+  sunset_header: false
+  notes: >-
+    Deprecations and discontinuations are announced on the "API Changes &
+    Deprecations" changelog with migration deadlines (e.g. batch endpoint
+    migration required before 2025-06-30; Arkham spot & futures data
+    discontinued 2026-02-16; OKCoin data ended 2025-10-01 on the OKX
+    rebranding; REST historical order-book access limited to 18 months since
+    2025-05-15). No RFC 8594 Sunset header support is documented.
+status_page: https://status.amberdata.io
+sla: null
+deprecated_operations: []

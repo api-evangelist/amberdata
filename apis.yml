@@ -8,7 +8,20 @@ description: Amberdata delivers institutional-grade digital asset and blockchain
   options (funding rates, open interest, liquidations, implied volatility, Greeks),
   DeFi (DEX trades and lending), and on-chain blockchain data (blocks, transactions,
   addresses, tokens, transfers), plus low-latency WebSocket streaming.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amberdata.png
 tags:
 - Crypto
 - Blockchain
@@ -18,94 +31,9 @@ tags:
 - DeFi
 - On-Chain
 created: '2026-06-21'
-modified: '2026-06-21'
+modified: '2026-07-22'
 specificationVersion: '0.19'
 apis:
-- aid: amberdata:spot-market-data
-  name: Amberdata Spot Market Data API
-  tags:
-  - Spot
-  - Market Data
-  - Prices
-  - OHLCV
-  - Trades
-  - Order Books
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.amberdata.io/reference/spot-reference
-  baseURL: https://api.amberdata.com
-  properties:
-  - url: https://docs.amberdata.io/http/http-api-fundamentals
-    type: Documentation
-  - url: https://docs.amberdata.io/reference/spot-reference
-    type: APIReference
-  - url: openapi/amberdata-openapi.yml
-    type: OpenAPI
-  - url: asyncapi/amberdata-asyncapi.yml
-    type: AsyncAPI
-  description: Spot market data across supported exchanges - reference rates, prices,
-    OHLCV, tickers, historical trades, and order book snapshots and events for any
-    traded pair (e.g. eth_usd, btc_usd).
-- aid: amberdata:derivatives
-  name: Amberdata Derivatives API
-  tags:
-  - Derivatives
-  - Futures
-  - Options
-  - Funding Rates
-  - Open Interest
-  - Implied Volatility
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.amberdata.io/reference/futures-exchanges-reference
-  baseURL: https://api.amberdata.com
-  properties:
-  - url: https://docs.amberdata.io/http/analytics/derivatives/instruments-information
-    type: Documentation
-  - url: https://docs.amberdata.io/reference/futures-exchanges-reference
-    type: APIReference
-  - url: openapi/amberdata-openapi.yml
-    type: OpenAPI
-  description: Futures and options market data and analytics - OHLCV, tickers, trades,
-    open interest, funding rates, liquidations, long/short ratio, order books, plus
-    options implied volatility, Greeks, term structure, and skew.
-- aid: amberdata:defi
-  name: Amberdata DeFi API
-  tags:
-  - DeFi
-  - DEX
-  - Lending
-  - Uniswap
-  - Liquidity
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.amberdata.io/reference/defi-reference
-  baseURL: https://api.amberdata.com
-  properties:
-  - url: https://docs.amberdata.io/reference/defi-reference
-    type: Documentation
-  - url: openapi/amberdata-openapi.yml
-    type: OpenAPI
-  description: Decentralized finance data covering DEX pair prices, trades and liquidity
-    (e.g. Uniswap V3), and lending protocol, asset, and wallet position metrics.
-- aid: amberdata:on-chain
-  name: Amberdata On-Chain API
-  tags:
-  - On-Chain
-  - Blockchain
-  - Blocks
-  - Transactions
-  - Addresses
-  - Tokens
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.amberdata.io/docs/transactions
-  baseURL: https://api.amberdata.com
-  properties:
-  - url: https://docs.amberdata.io/docs/transactions
-    type: Documentation
-  - url: openapi/amberdata-openapi.yml
-    type: OpenAPI
-  description: On-chain blockchain data across supported networks - blocks, transactions,
-    addresses (balances, token balances, transactions), tokens (information, transfers,
-    holders), and account balances, sourced from Amberdata's own full nodes from
-    the genesis block forward.
 - aid: amberdata:websocket-streaming
   name: Amberdata WebSocket Streaming API
   tags:
@@ -123,9 +51,219 @@ apis:
     type: APIReference
   - url: asyncapi/amberdata-asyncapi.yml
     type: AsyncAPI
-  description: Low-latency real-time WebSocket streaming over a JSON-RPC 2.0 subscribe
-    interface for spot trades and prices, DEX data, and on-chain events, authenticated
-    with the x-api-key header.
+  description: >-
+    Low-latency real-time WebSocket streaming over a JSON-RPC 2.0 subscribe interface for spot trades
+    and prices, DEX data, and on-chain events, authenticated with the x-api-key header.
+- aid: amberdata:amberdata-defi-api
+  name: Amberdata DeFi API
+  description: Decentralized finance (DEX and lending) data.
+  humanURL: https://docs.amberdata.io/reference/defi-reference
+  baseURL: https://api.amberdata.com/defi
+  tags:
+  - DeFi
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-defi-openapi.yaml
+  - type: OpenAPI
+    url: openapi/amberdata-defi-market-openapi.yaml
+  - type: Overlay
+    url: overlays/amberdata-defi-overlay.yaml
+  - type: Overlay
+    url: overlays/amberdata-defi-market-overlay.yaml
+  - type: OpenAPI
+    url: openapi/amberdata-defi-api-openapi.yml
+  - type: Documentation
+    url: https://docs.amberdata.io/http/http-api-fundamentals
+  - type: APIReference
+    url: https://docs.amberdata.io/reference/spot-reference
+  - type: AsyncAPI
+    url: asyncapi/amberdata-asyncapi.yml
+  - type: Documentation
+    url: https://docs.amberdata.io/http/analytics/derivatives/instruments-information
+  - type: APIReference
+    url: https://docs.amberdata.io/reference/futures-exchanges-reference
+  - type: Documentation
+    url: https://docs.amberdata.io/reference/defi-reference
+  - type: Documentation
+    url: https://docs.amberdata.io/docs/transactions
+- aid: amberdata:amberdata-futures-api
+  name: Amberdata Futures API
+  description: Futures and perpetuals market data and derivatives analytics (funding rates, open interest, liquidations, basis).
+  humanURL: https://docs.amberdata.io/reference/futures-exchanges-reference
+  baseURL: https://api.amberdata.com/markets/derivatives
+  tags:
+  - Futures
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-derivatives-openapi.yaml
+  - type: Overlay
+    url: overlays/amberdata-derivatives-overlay.yaml
+  - type: OpenAPI
+    url: openapi/amberdata-futures-api-openapi.yml
+  - type: Documentation
+    url: https://docs.amberdata.io/http/http-api-fundamentals
+  - type: APIReference
+    url: https://docs.amberdata.io/reference/spot-reference
+  - type: AsyncAPI
+    url: asyncapi/amberdata-asyncapi.yml
+  - type: Documentation
+    url: https://docs.amberdata.io/http/analytics/derivatives/instruments-information
+  - type: APIReference
+    url: https://docs.amberdata.io/reference/futures-exchanges-reference
+  - type: Documentation
+    url: https://docs.amberdata.io/reference/defi-reference
+  - type: Documentation
+    url: https://docs.amberdata.io/docs/transactions
+- aid: amberdata:amberdata-on-chain-api
+  name: Amberdata On-Chain API
+  description: On-chain blockchain data (blocks, transactions, addresses, tokens).
+  humanURL: https://docs.amberdata.io/docs/transactions
+  baseURL: https://api.amberdata.com/blockchains
+  tags:
+  - On-Chain
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-blockchain-openapi.yaml
+  - type: Overlay
+    url: overlays/amberdata-blockchain-overlay.yaml
+  - type: OpenAPI
+    url: openapi/amberdata-on-chain-api-openapi.yml
+  - type: Documentation
+    url: https://docs.amberdata.io/http/http-api-fundamentals
+  - type: APIReference
+    url: https://docs.amberdata.io/reference/spot-reference
+  - type: AsyncAPI
+    url: asyncapi/amberdata-asyncapi.yml
+  - type: Documentation
+    url: https://docs.amberdata.io/http/analytics/derivatives/instruments-information
+  - type: APIReference
+    url: https://docs.amberdata.io/reference/futures-exchanges-reference
+  - type: Documentation
+    url: https://docs.amberdata.io/reference/defi-reference
+  - type: Documentation
+    url: https://docs.amberdata.io/docs/transactions
+- aid: amberdata:amberdata-options-api
+  name: Amberdata Options API
+  description: Options market data and volatility analytics (implied volatility, Greeks, surfaces, term structures).
+  humanURL: https://docs.amberdata.io/reference/spot-reference
+  baseURL: https://api.amberdata.com/markets/derivatives
+  tags:
+  - Options
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-derivatives-openapi.yaml
+  - type: Overlay
+    url: overlays/amberdata-derivatives-overlay.yaml
+  - type: OpenAPI
+    url: openapi/amberdata-options-api-openapi.yml
+  - type: Documentation
+    url: https://docs.amberdata.io/http/http-api-fundamentals
+  - type: APIReference
+    url: https://docs.amberdata.io/reference/spot-reference
+  - type: AsyncAPI
+    url: asyncapi/amberdata-asyncapi.yml
+  - type: Documentation
+    url: https://docs.amberdata.io/http/analytics/derivatives/instruments-information
+  - type: APIReference
+    url: https://docs.amberdata.io/reference/futures-exchanges-reference
+  - type: Documentation
+    url: https://docs.amberdata.io/reference/defi-reference
+  - type: Documentation
+    url: https://docs.amberdata.io/docs/transactions
+- aid: amberdata:amberdata-spot-api
+  name: Amberdata Spot API
+  description: Spot market analytics across supported exchanges (order-book depth, trade analytics).
+  humanURL: https://docs.amberdata.io/reference/spot-reference
+  baseURL: https://api.amberdata.com/markets/spot/analytics
+  tags:
+  - Spot
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-spot-openapi.yaml
+  - type: Overlay
+    url: overlays/amberdata-spot-overlay.yaml
+  - type: OpenAPI
+    url: openapi/amberdata-spot-api-openapi.yml
+  - type: Documentation
+    url: https://docs.amberdata.io/http/http-api-fundamentals
+  - type: APIReference
+    url: https://docs.amberdata.io/reference/spot-reference
+  - type: AsyncAPI
+    url: asyncapi/amberdata-asyncapi.yml
+  - type: Documentation
+    url: https://docs.amberdata.io/http/analytics/derivatives/instruments-information
+  - type: APIReference
+    url: https://docs.amberdata.io/reference/futures-exchanges-reference
+  - type: Documentation
+    url: https://docs.amberdata.io/reference/defi-reference
+  - type: Documentation
+    url: https://docs.amberdata.io/docs/transactions
+- aid: amberdata:amberdata-market-data-api
+  name: Amberdata Market Data API
+  description: Spot, futures, and options market data — exchanges reference, tickers, trades, OHLCV, order-book snapshots and events, funding rates, open interest, and liquidations.
+  humanURL: https://docs.amberdata.io/data-dictionary/api-specs
+  baseURL: https://api.amberdata.com/markets
+  tags:
+  - Market Data
+  - Spot
+  - Futures
+  - Options
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-market-openapi.yaml
+  - type: Overlay
+    url: overlays/amberdata-market-overlay.yaml
+  - type: Documentation
+    url: https://docs.amberdata.io/http/http-api-fundamentals
+  - type: APIReference
+    url: https://docs.amberdata.io/data-dictionary/api-specs
+- aid: amberdata:amberdata-price-api
+  name: Amberdata Price API
+  description: Latest and historical global asset and pair prices, VWAP, TWAP, and reference rates.
+  humanURL: https://docs.amberdata.io/data-dictionary/api-specs
+  baseURL: https://api.amberdata.com/markets
+  tags:
+  - Prices
+  - VWAP
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-price-openapi.yaml
+  - type: Overlay
+    url: overlays/amberdata-price-overlay.yaml
+  - type: Documentation
+    url: https://docs.amberdata.io/http/http-api-fundamentals
+- aid: amberdata:amberdata-market-metrics-api
+  name: Amberdata Market Metrics API
+  description: Cross-market metrics and analytics series for digital assets.
+  humanURL: https://docs.amberdata.io/data-dictionary/api-specs
+  baseURL: https://api.amberdata.com/market/metrics
+  tags:
+  - Metrics
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-metrics-openapi.yaml
+  - type: Overlay
+    url: overlays/amberdata-metrics-overlay.yaml
+  - type: Documentation
+    url: https://docs.amberdata.io/http/http-api-fundamentals
+- aid: amberdata:amberdata-arc-api
+  name: Amberdata ARC API
+  description: Asset Reference & Classification (ARC) — reference data, classifications, and updates for digital assets.
+  humanURL: https://docs.amberdata.io/data-dictionary/arc-overview
+  baseURL: https://api.amberdata.com/arc
+  tags:
+  - Reference Data
+  - Classification
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-arc-openapi.yaml
+  - type: Overlay
+    url: overlays/amberdata-arc-overlay.yaml
+  - type: Documentation
+    url: https://docs.amberdata.io/data-dictionary/arc-overview
+  - type: SourceCode
+    url: https://github.com/amberdata/arc
 common:
 - type: AgenticAccess
   url: agentic-access/amberdata-agentic-access.yml
@@ -149,6 +287,50 @@ common:
   url: rate-limits/amberdata-rate-limits.yml
 - type: FinOps
   url: finops/amberdata-finops.yml
+- type: APIReference
+  url: https://docs.amberdata.io/data-dictionary/api-specs
+- type: GettingStarted
+  url: https://docs.amberdata.io/real-time/websocket-getting-started
+- type: Support
+  url: mailto:support@amberdata.io
+- type: Pricing
+  url: https://www.amberdata.io/pricing
+- type: TermsOfService
+  url: https://www.amberdata.io/terms
+- type: PrivacyPolicy
+  url: https://www.amberdata.io/privacy
+- type: StatusPage
+  url: https://status.amberdata.io
+- type: Deprecation
+  url: https://docs.amberdata.io/changelog/api-changes
+- type: ChangeLog
+  url: changelog/amberdata-changelog.yml
+- type: Postman
+  url: collections/amberdata.postman_collection.json
+- type: Packages
+  url: packages/amberdata-packages.yml
+- type: SDKs
+  url: packages/amberdata-packages.yml
+- type: LLMsTxt
+  url: llms/amberdata-llms.txt
+- type: WellKnown
+  url: well-known/amberdata-well-known.yml
+- type: MCPServer
+  url: mcp/amberdata-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/amberdata-tool-crosswalk.yml
+- type: Conformance
+  url: conformance/amberdata-conformance.yml
+- type: ErrorCatalog
+  url: errors/amberdata-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/amberdata-lifecycle.yml
+- type: Conventions
+  url: conventions/amberdata-conventions.yml
+- type: DataModel
+  url: data-model/amberdata-data-model.yml
+- type: AgentSkill
+  url: skills/_index.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

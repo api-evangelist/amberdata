@@ -1,0 +1,19 @@
+generated: '2026-07-22'
+method: generated
+skills:
+  - file: amberdata-spot-market-snapshot.md
+    name: Get a spot market snapshot
+    api: openapi/amberdata-market-openapi.yaml
+    operations: [get-market-exchanges, spot-tickers-historical, spot-trades-historical, get-historical-ohlc, spot-order-book-snapshots]
+  - file: amberdata-options-volatility-surface.md
+    name: Analyze options volatility
+    api: openapi/amberdata-derivatives-openapi.yaml
+    operations: [derivatives-information-instruments, derivatives-volatility-delta-surfaces-constant, derivatives-volatility-term-structures-constant, derivatives-volatility-index, derivatives-volatility-implied-vs-realized]
+  - file: amberdata-onchain-address-portfolio.md
+    name: Profile an on-chain address
+    api: openapi/amberdata-blockchain-openapi.yaml
+    operations: [address-balances, get-address-tokens, portfolio, get-address-transactions, get-historical-account-balances]
+  - file: amberdata-asset-prices-vwap.md
+    name: Get asset prices and VWAP
+    api: openapi/amberdata-price-openapi.yaml
+    operations: [spot-prices-assets-information, spot-prices-assets-latest, spot-prices-assets-historical, spot-vwap-assets-historical, spot-twap-pairs-historical]

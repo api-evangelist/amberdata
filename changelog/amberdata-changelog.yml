@@ -1,0 +1,65 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.amberdata.io/changelog/product-updates
+docs:
+  - https://docs.amberdata.io/changelog/product-updates
+  - https://docs.amberdata.io/changelog/api-changes
+  - https://docs.amberdata.io/changelog/infrastructure
+  - https://docs.amberdata.io/changelog/fixes
+scheme: >-
+  Dated changelog in four streams (Product Updates, API Changes &
+  Deprecations, Infrastructure & Improvements, Fixes & Clarifications); API
+  versions themselves are dated api-version header values.
+entries:
+  - date: '2026-05-07'
+    category: product-update
+    breaking: false
+    highlights: Bullish options data now available.
+  - date: '2026-03-31'
+    category: product-update
+    breaking: false
+    highlights: New metricType parameter for the Futures Long/Short Ratio endpoints.
+  - date: '2026-03-06'
+    category: infrastructure
+    breaking: false
+    highlights: Market Data API infrastructure upgrade effective this date.
+  - date: '2026-02-24'
+    category: product-update
+    breaking: false
+    highlights: Tokenized equity instruments now available.
+  - date: '2026-02-16'
+    category: api-change
+    breaking: true
+    highlights: Arkham spot and futures data discontinued.
+  - date: '2026-02-13'
+    category: product-update
+    breaking: false
+    highlights: New exchange coverage and dataset expansions.
+  - date: '2025-10-01'
+    category: api-change
+    breaking: true
+    highlights: OKCoin data no longer available (platform rebranded to OKX).
+  - date: '2025-08-29'
+    category: product-update
+    breaking: false
+    highlights: Arkham spot and futures data added (later discontinued 2026-02-16).
+  - date: '2025-07-01'
+    category: infrastructure
+    breaking: true
+    highlights: Compression (Accept-Encoding) required on Market Data APIs from this date.
+  - date: '2025-05-15'
+    category: api-change
+    breaking: true
+    highlights: REST historical order-book access limited to 18 months.
+  - date: '2025-03-06'
+    category: api-change
+    breaking: true
+    highlights: Batch endpoint migration notice — migrate to new batch endpoints before 2025-06-30.
+  - date: '2025-01-08'
+    category: api-change
+    breaking: true
+    highlights: Upcoming behavior changes to batch endpoints announced.
+  - date: '2025-01-06'
+    category: api-change
+    breaking: true
+    highlights: Changes to batch endpoint data retrieval limits.

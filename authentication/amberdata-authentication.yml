@@ -1,17 +1,40 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/amberdata-openapi.yml
+generated: '2026-07-22'
+method: searched
+docs: https://docs.amberdata.io/http/http-api-fundamentals
+notes: >-
+  Every REST request requires the user-specific x-api-key header (requests
+  without a valid key are refused); key types encode the subscription tier
+  (UAT trial, UAO on-demand, UAK enterprise). WebSocket connections to
+  wss://ws.web3api.io authenticate with the same x-api-key header on the
+  upgrade request. An optional dated api-version header selects the API
+  version. No OAuth surface is published.
+source: openapi/amberdata-arc-openapi.yaml, openapi/amberdata-blockchain-openapi.yaml, openapi/amberdata-defi-api-openapi.yml,
+  openapi/amberdata-defi-market-openapi.yaml, openapi/amberdata-defi-openapi.yaml, openapi/amberdata-derivatives-openapi.yaml,
+  openapi/amberdata-futures-api-openapi.yml, openapi/amberdata-market-openapi.yaml, openapi/amberdata-metrics-openapi.yaml,
+  openapi/amberdata-on-chain-api-openapi.yml, openapi/amberdata-options-api-openapi.yml, openapi/amberdata-price-openapi.yaml
+  ...
 summary:
   types:
   - apiKey
   api_key_in:
   - header
 schemes:
-- name: apiKeyAuth
+- name: sec0
   type: apiKey
   in: header
   parameter: x-api-key
-  description: Unique, user-specific API key. Required on every REST request via the x-api-key
-    header.
   sources:
-  - openapi/amberdata-openapi.yml
+  - openapi/amberdata-arc-openapi.yaml
+  - openapi/amberdata-blockchain-openapi.yaml
+  - openapi/amberdata-defi-api-openapi.yml
+  - openapi/amberdata-defi-market-openapi.yaml
+  - openapi/amberdata-defi-openapi.yaml
+  - openapi/amberdata-derivatives-openapi.yaml
+  - openapi/amberdata-futures-api-openapi.yml
+  - openapi/amberdata-market-openapi.yaml
+  - openapi/amberdata-metrics-openapi.yaml
+  - openapi/amberdata-on-chain-api-openapi.yml
+  - openapi/amberdata-options-api-openapi.yml
+  - openapi/amberdata-price-openapi.yaml
+  - openapi/amberdata-spot-api-openapi.yml
+  - openapi/amberdata-spot-openapi.yaml

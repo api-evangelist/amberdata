@@ -1,0 +1,89 @@
+generated: '2026-07-22'
+method: searched
+source: https://docs.amberdata.io/http/http-api-fundamentals
+docs:
+  - https://docs.amberdata.io/http/http-api-fundamentals
+  - https://docs.amberdata.io/http/http-pagination-and-timeframes
+  - https://docs.amberdata.io/http/http-query-parameters-and-optimization
+  - https://docs.amberdata.io/real-time/websocket-usage-guidelines
+authentication:
+  style: api-key
+  header: x-api-key
+  notes: >-
+    Every REST request requires the user-specific x-api-key header; requests
+    without a valid key are refused. WebSocket connections authenticate with
+    the same x-api-key header on the upgrade request. See
+    authentication/amberdata-authentication.yml.
+idempotency:
+  supported: false
+  notes: >-
+    No idempotency-key contract is documented. The public API surface is
+    read-only (GET) data retrieval, so requests are naturally idempotent, but
+    Amberdata publishes no Idempotency-Key header or replay semantics.
+pagination:
+  style: cursor
+  response_field: payload.metadata.next
+  notes: >-
+    Cursor pagination: the API returns the full URL for the next page at
+    payload.metadata.next (null when complete); clients re-issue the request
+    against that URL with the same headers. Some endpoints instead expose a
+    zero-based page query parameter. Endpoints enforce a maximum
+    startDate/endDate range per request (e.g. 30 days for DEX trades); long
+    timeframes must be chunked client-side.
+  parameters: [page, startDate, endDate]
+response_envelope:
+  fields:
+    - name: status
+      description: HTTP status of the response
+    - name: title
+      description: Human-readable name for the HTTP status (IANA registry)
+    - name: description
+      description: Description of the response; carries the error reason on failures
+    - name: payload
+      description: Object containing the actual data requested
+  notes: Every REST response body wraps data in this envelope; see errors/amberdata-problem-types.yml.
+versioning:
+  scheme: dated-version-header
+  header: api-version
+  example: '2023-09-30'
+  notes: >-
+    Backwards-incompatible changes ship as new dated versions selected per
+    request with the api-version header. Additive changes (new resources,
+    optional parameters, new response properties, property order) are
+    considered backwards-compatible. See lifecycle/amberdata-lifecycle.yml.
+compression:
+  required: true
+  header: Accept-Encoding
+  methods: [gzip, deflate, br]
+  notes: Compression is enforced for Market Data APIs (required since 2025-07-01); gzip recommended.
+rate_limiting:
+  throttled_status: 429
+  scheme: per-api-key by subscription tier
+  tiers:
+    - name: Trial Access (UAT keys)
+      limit: 15 calls/sec, 20k calls/day
+    - name: On-Demand Order (UAO keys)
+      limit: 20 calls/sec, 250k calls/day
+    - name: Enterprise (UAK keys)
+      limit: 60 calls/sec
+  see: rate-limits/amberdata-rate-limits.yml
+request_tracing:
+  documented: false
+field_expansion:
+  documented: false
+  notes: >-
+    No general expansion/sparse-fieldset convention; blockchain endpoints
+    accept a validationMethod query parameter (none | basic | full) to attach
+    block-validation proof data to responses.
+websocket:
+  control_protocol: JSON-RPC 2.0
+  methods: [subscribe, unsubscribe]
+  wildcard_subscriptions: >-
+    Supported for all features except Tickers and Order Book Events, which
+    require explicit exchange + pair/instrument.
+  see: asyncapi/amberdata-asyncapi.yml
+cross_links:
+  errors: errors/amberdata-problem-types.yml
+  lifecycle: lifecycle/amberdata-lifecycle.yml
+  authentication: authentication/amberdata-authentication.yml
+  rate_limits: rate-limits/amberdata-rate-limits.yml

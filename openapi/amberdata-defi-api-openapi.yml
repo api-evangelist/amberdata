@@ -1,0 +1,107 @@
+openapi: 3.0.1
+info:
+  title: Amberdata DeFi API
+  description: Amberdata's institutional-grade digital asset and blockchain data API. Provides spot market data (prices, OHLCV, tickers, trades, order books), derivatives across futures and options (funding rates, open interest, liquidations, implied volatility, Greeks), DeFi (DEX and lending), and on-chain blockchain data (blocks, transactions, addresses, tokens). Every request requires the x-api-key header. An optional api-version header selects a dated API version.
+  termsOfService: https://www.amberdata.io/terms-of-service
+  contact:
+    name: Amberdata Support
+    url: https://www.amberdata.io/contact
+  version: '1.0'
+servers:
+- url: https://api.amberdata.com
+  description: Amberdata REST API
+security:
+- apiKeyAuth: []
+tags:
+- name: DeFi
+  description: Decentralized finance (DEX and lending) data.
+paths:
+  /defi/dex/trades/{pair}:
+    get:
+      operationId: getDefiDexTrades
+      tags:
+      - DeFi
+      summary: DEX trades
+      description: Returns decentralized exchange (DEX) trade history for the specified pair (e.g. Uniswap V3 pools).
+      parameters:
+      - $ref: '#/components/parameters/PairPath'
+      - $ref: '#/components/parameters/StartDate'
+      - $ref: '#/components/parameters/EndDate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /defi/lending/protocols:
+    get:
+      operationId: getDefiLendingProtocols
+      tags:
+      - DeFi
+      summary: DeFi lending protocols
+      description: Returns lending protocol metrics across supported DeFi lending markets.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  parameters:
+    PairPath:
+      name: pair
+      in: path
+      required: true
+      description: The trading pair (e.g. eth_usd, btc_usd).
+      schema:
+        type: string
+    StartDate:
+      name: startDate
+      in: query
+      required: false
+      description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    EndDate:
+      name: endDate
+      in: query
+      required: false
+      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+  schemas:
+    ApiResponse:
+      type: object
+      description: Standard Amberdata API envelope. The requested data is returned under the payload property, alongside the HTTP status and a status message.
+      properties:
+        status:
+          type: integer
+          description: HTTP-style status code echoed in the response body.
+          example: 200
+        title:
+          type: string
+          description: Human-readable status message.
+          example: OK
+        description:
+          type: string
+          description: Additional context about the response.
+        payload:
+          type: object
+          description: The response payload. Shape varies by endpoint; time series endpoints typically return metadata plus a data array.
+          properties:
+            metadata:
+              type: object
+              description: Metadata describing the payload (columns, request params, etc.).
+            data:
+              type: array
+              description: The array of records for the requested resource.
+              items:
+                type: object
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Unique, user-specific API key. Required on every REST request via the x-api-key header.

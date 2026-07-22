@@ -1,0 +1,46 @@
+generated: '2026-07-22'
+method: searched
+source: npm registry search, PyPI, github.com/amberdata org (verified 2026-07-22)
+packages:
+  - language: python
+    registry: pypi
+    name: amberdata
+    url: https://pypi.org/project/amberdata/
+    install: pip install amberdata
+    version: 0.1.1
+    official: true
+    repository: https://github.com/amberdata/amberdata-py
+    note: "First-party Python library to access the Amberdata API (project URLs point at the amberdata GitHub org)."
+  - language: python
+    registry: github
+    name: amberdata-derivatives-sdk
+    url: https://github.com/amberdata/amberdata-derivatives-sdk
+    install: pip install git+https://github.com/amberdata/amberdata-derivatives-sdk.git
+    official: true
+    repository: https://github.com/amberdata/amberdata-derivatives-sdk
+    note: "First-party Python SDK for the Amberdata Derivatives API (AmberdataDerivatives + AmberdataTradFi clients); installed from GitHub, not published to PyPI."
+  - language: javascript
+    registry: npm
+    name: web3data-js
+    url: https://www.npmjs.com/package/web3data-js
+    install: npm install web3data-js
+    version: 0.7.5
+    official: true
+    repository: https://github.com/web3data/web3data-js
+    note: "JavaScript wrapper for Amberdata's public API (web3api.io era), published by the amberdata_opensource npm account. Last published 2021; may lag the current API surface."
+  - language: python
+    registry: pypi
+    name: amberdata-rest
+    url: https://pypi.org/project/amberdata-rest/
+    install: pip install amberdata-rest
+    version: 0.3.4
+    official: false
+    note: "Community REST SDK for Amberdata maintained by Firestorm Capital (technology@firestorm.capital)."
+  - language: javascript
+    registry: npm
+    name: amberdata-cli
+    url: https://www.npmjs.com/package/amberdata-cli
+    install: npm install -g amberdata-cli
+    version: 1.0.8
+    official: false
+    note: "Published by the amberdata_npm account (plausibly first-party) but carries no README, description, or repository link, so it is not verifiable as an official supported CLI."

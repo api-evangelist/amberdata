@@ -1,0 +1,22 @@
+{
+  "provider": "amberdata",
+  "sources": [
+    "amberdata-defi-api-openapi.yml",
+    "amberdata-futures-api-openapi.yml",
+    "amberdata-on-chain-api-openapi.yml",
+    "amberdata-options-api-openapi.yml",
+    "amberdata-spot-api-openapi.yml"
+  ],
+  "outputs": [
+    "amberdata-defi-api-openapi.yml",
+    "amberdata-futures-api-openapi.yml",
+    "amberdata-on-chain-api-openapi.yml",
+    "amberdata-options-api-openapi.yml",
+    "amberdata-spot-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

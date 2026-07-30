@@ -88,7 +88,9 @@ apis:
     url: https://docs.amberdata.io/docs/transactions
 - aid: amberdata:amberdata-futures-api
   name: Amberdata Futures API
-  description: Futures and perpetuals market data and derivatives analytics (funding rates, open interest, liquidations, basis).
+  description: >-
+    Futures and perpetuals market data and derivatives analytics (funding rates, open interest, liquidations,
+    basis).
   humanURL: https://docs.amberdata.io/reference/futures-exchanges-reference
   baseURL: https://api.amberdata.com/markets/derivatives
   tags:
@@ -144,7 +146,8 @@ apis:
     url: https://docs.amberdata.io/docs/transactions
 - aid: amberdata:amberdata-options-api
   name: Amberdata Options API
-  description: Options market data and volatility analytics (implied volatility, Greeks, surfaces, term structures).
+  description: >-
+    Options market data and volatility analytics (implied volatility, Greeks, surfaces, term structures).
   humanURL: https://docs.amberdata.io/reference/spot-reference
   baseURL: https://api.amberdata.com/markets/derivatives
   tags:
@@ -198,73 +201,42 @@ apis:
     url: https://docs.amberdata.io/reference/defi-reference
   - type: Documentation
     url: https://docs.amberdata.io/docs/transactions
-- aid: amberdata:amberdata-market-data-api
-  name: Amberdata Market Data API
-  description: Spot, futures, and options market data — exchanges reference, tickers, trades, OHLCV, order-book snapshots and events, funding rates, open interest, and liquidations.
-  humanURL: https://docs.amberdata.io/data-dictionary/api-specs
-  baseURL: https://api.amberdata.com/markets
-  tags:
-  - Market Data
-  - Spot
-  - Futures
-  - Options
-  properties:
-  - type: OpenAPI
-    url: openapi/amberdata-market-openapi.yaml
-  - type: Overlay
-    url: overlays/amberdata-market-overlay.yaml
-  - type: Documentation
-    url: https://docs.amberdata.io/http/http-api-fundamentals
-  - type: APIReference
-    url: https://docs.amberdata.io/data-dictionary/api-specs
-- aid: amberdata:amberdata-price-api
-  name: Amberdata Price API
-  description: Latest and historical global asset and pair prices, VWAP, TWAP, and reference rates.
-  humanURL: https://docs.amberdata.io/data-dictionary/api-specs
-  baseURL: https://api.amberdata.com/markets
-  tags:
-  - Prices
-  - VWAP
-  properties:
-  - type: OpenAPI
-    url: openapi/amberdata-price-openapi.yaml
-  - type: Overlay
-    url: overlays/amberdata-price-overlay.yaml
-  - type: Documentation
-    url: https://docs.amberdata.io/http/http-api-fundamentals
-- aid: amberdata:amberdata-market-metrics-api
-  name: Amberdata Market Metrics API
-  description: Cross-market metrics and analytics series for digital assets.
-  humanURL: https://docs.amberdata.io/data-dictionary/api-specs
-  baseURL: https://api.amberdata.com/market/metrics
-  tags:
-  - Metrics
-  - Analytics
-  properties:
-  - type: OpenAPI
-    url: openapi/amberdata-metrics-openapi.yaml
-  - type: Overlay
-    url: overlays/amberdata-metrics-overlay.yaml
-  - type: Documentation
-    url: https://docs.amberdata.io/http/http-api-fundamentals
-- aid: amberdata:amberdata-arc-api
-  name: Amberdata ARC API
-  description: Asset Reference & Classification (ARC) — reference data, classifications, and updates for digital assets.
-  humanURL: https://docs.amberdata.io/data-dictionary/arc-overview
-  baseURL: https://api.amberdata.com/arc
-  tags:
-  - Reference Data
-  - Classification
+- aid: amberdata:amberdata-arc-openapi
+  name: Amberdata Asset Reference & Classification API
+  description: >-
+    Amberdata Asset Reference & Classification API from Amberdata — 4 path(s) described in OpenAPI.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
   properties:
   - type: OpenAPI
     url: openapi/amberdata-arc-openapi.yaml
-  - type: Overlay
-    url: overlays/amberdata-arc-overlay.yaml
-  - type: Documentation
-    url: https://docs.amberdata.io/data-dictionary/arc-overview
-  - type: SourceCode
-    url: https://github.com/amberdata/arc
+- aid: amberdata:amberdata-market-openapi
+  name: Amberdata Market-api
+  description: Amberdata Market-api from Amberdata — 55 path(s) described in OpenAPI.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-market-openapi.yaml
+- aid: amberdata:amberdata-metrics-openapi
+  name: Amberdata Market Metrics
+  description: Amberdata Market Metrics from Amberdata — 6 path(s) described in OpenAPI.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-metrics-openapi.yaml
+- aid: amberdata:amberdata-price-openapi
+  name: Amberdata Pricing
+  description: Amberdata Pricing from Amberdata — 16 path(s) described in OpenAPI.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-price-openapi.yaml
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/amberdata/overview
 - type: AgenticAccess
   url: agentic-access/amberdata-agentic-access.yml
 - type: DomainSecurity

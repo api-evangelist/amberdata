@@ -1,0 +1,1034 @@
+{
+  "info": {
+    "_postman_id": "85237ac5-35fa-43ff-8ff4-2f7ea52dffed",
+    "name": "Amberdata DeFi On-Chain API",
+    "description": "Amberdata's institutional-grade digital asset and blockchain data API. Provides spot market data (prices, OHLCV, tickers, trades, order books), derivatives across futures and options (funding rates, open interest, liquidations, implied volatility, Greeks), DeFi (DEX and lending), and on-chain blockchain data (blocks, transactions, addresses, tokens). Every request requires the x-api-key header. An optional api-version header selects a dated API version.\n\nContact Support:\n Name: Amberdata Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:59:42.000Z",
+    "updatedAt": "2026-07-28T00:59:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-85237ac5-35fa-43ff-8ff4-2f7ea52dffed"
+  },
+  "item": [
+    {
+      "name": "blockchains",
+      "item": [
+        {
+          "name": "{blockchainId}",
+          "item": [
+            {
+              "name": "blocks",
+              "item": [
+                {
+                  "name": "Blocks",
+                  "id": "ba80e456-3775-4bbb-b458-65b3c6acd7eb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/blockchains/:blockchainId/blocks?startDate=<string>&endDate=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "blockchains",
+                        ":blockchainId",
+                        "blocks"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                          "key": "startDate",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                          "key": "endDate",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "cc7d8f96-dfe8-4bd2-be92-db6084ec2298",
+                          "key": "blockchainId",
+                          "value": "<string>",
+                          "description": "(Required) The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+                        }
+                      ]
+                    },
+                    "description": "Returns block information for the specified blockchain, including block number, hash, timestamp, and aggregate metrics."
+                  },
+                  "response": [
+                    {
+                      "id": "c80d0387-c7fd-417b-92b3-29b1cc2bf057",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/blockchains/:blockchainId/blocks?startDate=<string>&endDate=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "blockchains",
+                            ":blockchainId",
+                            "blocks"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "startDate",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "endDate",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "blockchainId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                      "createdAt": "2026-07-28T00:59:42.000Z",
+                      "updatedAt": "2026-07-28T00:59:42.000Z",
+                      "uid": "35240-c80d0387-c7fd-417b-92b3-29b1cc2bf057"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:59:42.000Z",
+                  "updatedAt": "2026-07-28T00:59:42.000Z",
+                  "uid": "35240-ba80e456-3775-4bbb-b458-65b3c6acd7eb"
+                }
+              ],
+              "id": "518a6c44-001b-4ca3-9f08-74983166bb99",
+              "createdAt": "2026-07-28T00:59:42.000Z",
+              "updatedAt": "2026-07-28T00:59:42.000Z",
+              "uid": "35240-518a6c44-001b-4ca3-9f08-74983166bb99"
+            },
+            {
+              "name": "transactions",
+              "item": [
+                {
+                  "name": "{hash}",
+                  "item": [
+                    {
+                      "name": "Transaction by hash",
+                      "id": "731a1d12-7005-4e27-b075-00807ad9ac48",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/blockchains/:blockchainId/transactions/:hash",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "blockchains",
+                            ":blockchainId",
+                            "transactions",
+                            ":hash"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fe80f644-c10c-4d6c-8f2f-1ebf7c080280",
+                              "key": "blockchainId",
+                              "value": "<string>",
+                              "description": "(Required) The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+                            },
+                            {
+                              "id": "16c96f97-1adf-4cd3-a3e6-c1ba74d818e5",
+                              "key": "hash",
+                              "value": "<string>",
+                              "description": "(Required) The transaction hash."
+                            }
+                          ]
+                        },
+                        "description": "Returns a single transaction by its hash on the specified blockchain."
+                      },
+                      "response": [
+                        {
+                          "id": "51e43184-a1e6-401a-b8b2-73d8c2a51b5d",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/blockchains/:blockchainId/transactions/:hash",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "blockchains",
+                                ":blockchainId",
+                                "transactions",
+                                ":hash"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "blockchainId"
+                                },
+                                {
+                                  "key": "hash"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:42.000Z",
+                          "updatedAt": "2026-07-28T00:59:42.000Z",
+                          "uid": "35240-51e43184-a1e6-401a-b8b2-73d8c2a51b5d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:42.000Z",
+                      "updatedAt": "2026-07-28T00:59:42.000Z",
+                      "uid": "35240-731a1d12-7005-4e27-b075-00807ad9ac48"
+                    }
+                  ],
+                  "id": "c0abf1dd-87a8-4569-9538-91a6b744378e",
+                  "createdAt": "2026-07-28T00:59:42.000Z",
+                  "updatedAt": "2026-07-28T00:59:42.000Z",
+                  "uid": "35240-c0abf1dd-87a8-4569-9538-91a6b744378e"
+                },
+                {
+                  "name": "Transactions",
+                  "id": "9fd9875b-f191-4acd-b6be-066a8db717f9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/blockchains/:blockchainId/transactions?startDate=<string>&endDate=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "blockchains",
+                        ":blockchainId",
+                        "transactions"
+                      ],
+                      "query": [
+                        {
+                          "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                          "key": "startDate",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                          "key": "endDate",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "17a0d9bb-9a1d-424a-bca8-f88012a3e244",
+                          "key": "blockchainId",
+                          "value": "<string>",
+                          "description": "(Required) The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+                        }
+                      ]
+                    },
+                    "description": "Returns transaction data including sending and receiving addresses (with token transfers), fees (gas), amounts, op codes, block number and hash, and timestamps."
+                  },
+                  "response": [
+                    {
+                      "id": "edc3e1a3-9329-4d21-a62f-3bcb8d86eb4a",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/blockchains/:blockchainId/transactions?startDate=<string>&endDate=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "blockchains",
+                            ":blockchainId",
+                            "transactions"
+                          ],
+                          "query": [
+                            {
+                              "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "startDate",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "endDate",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "blockchainId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                      "createdAt": "2026-07-28T00:59:42.000Z",
+                      "updatedAt": "2026-07-28T00:59:42.000Z",
+                      "uid": "35240-edc3e1a3-9329-4d21-a62f-3bcb8d86eb4a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:59:42.000Z",
+                  "updatedAt": "2026-07-28T00:59:42.000Z",
+                  "uid": "35240-9fd9875b-f191-4acd-b6be-066a8db717f9"
+                }
+              ],
+              "id": "cff671e9-a159-4e35-b500-cc52b4a5d3ba",
+              "createdAt": "2026-07-28T00:59:42.000Z",
+              "updatedAt": "2026-07-28T00:59:42.000Z",
+              "uid": "35240-cff671e9-a159-4e35-b500-cc52b4a5d3ba"
+            },
+            {
+              "name": "addresses",
+              "item": [
+                {
+                  "name": "{address}",
+                  "item": [
+                    {
+                      "name": "balances",
+                      "item": [
+                        {
+                          "name": "Address balances",
+                          "id": "66dd4803-38a2-489d-9b84-5a54f30ffb05",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/blockchains/:blockchainId/addresses/:address/balances",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "blockchains",
+                                ":blockchainId",
+                                "addresses",
+                                ":address",
+                                "balances"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f6607037-2b64-4f32-b28b-f2243016f801",
+                                  "key": "blockchainId",
+                                  "value": "<string>",
+                                  "description": "(Required) The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+                                },
+                                {
+                                  "id": "80b03968-bf6a-48cf-a18c-6eca931b180e",
+                                  "key": "address",
+                                  "value": "<string>",
+                                  "description": "(Required) The on-chain address or token contract address."
+                                }
+                              ]
+                            },
+                            "description": "Returns account balance and token balances for the specified address on the given blockchain."
+                          },
+                          "response": [
+                            {
+                              "id": "099b0911-58e3-4c53-9283-3abd490f7660",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/blockchains/:blockchainId/addresses/:address/balances",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "blockchains",
+                                    ":blockchainId",
+                                    "addresses",
+                                    ":address",
+                                    "balances"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "blockchainId"
+                                    },
+                                    {
+                                      "key": "address"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                              "createdAt": "2026-07-28T00:59:42.000Z",
+                              "updatedAt": "2026-07-28T00:59:42.000Z",
+                              "uid": "35240-099b0911-58e3-4c53-9283-3abd490f7660"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:59:42.000Z",
+                          "updatedAt": "2026-07-28T00:59:42.000Z",
+                          "uid": "35240-66dd4803-38a2-489d-9b84-5a54f30ffb05"
+                        }
+                      ],
+                      "id": "5f4d3637-641b-4396-958a-5ca60143f76e",
+                      "createdAt": "2026-07-28T00:59:42.000Z",
+                      "updatedAt": "2026-07-28T00:59:42.000Z",
+                      "uid": "35240-5f4d3637-641b-4396-958a-5ca60143f76e"
+                    },
+                    {
+                      "name": "transactions",
+                      "item": [
+                        {
+                          "name": "Address transactions",
+                          "id": "0c2e92e8-5729-4ed4-8870-f30db44742ae",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/blockchains/:blockchainId/addresses/:address/transactions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "blockchains",
+                                ":blockchainId",
+                                "addresses",
+                                ":address",
+                                "transactions"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "45002802-ad7d-4737-a030-738485884e69",
+                                  "key": "blockchainId",
+                                  "value": "<string>",
+                                  "description": "(Required) The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+                                },
+                                {
+                                  "id": "2e0c781e-c270-4db3-8013-cd7f50d4673e",
+                                  "key": "address",
+                                  "value": "<string>",
+                                  "description": "(Required) The on-chain address or token contract address."
+                                }
+                              ]
+                            },
+                            "description": "Returns transactions for the specified address on the given blockchain."
+                          },
+                          "response": [
+                            {
+                              "id": "f1c7c1a6-ecfe-46ac-bf20-711d20e42955",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/blockchains/:blockchainId/addresses/:address/transactions",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "blockchains",
+                                    ":blockchainId",
+                                    "addresses",
+                                    ":address",
+                                    "transactions"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "blockchainId"
+                                    },
+                                    {
+                                      "key": "address"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                              "createdAt": "2026-07-28T00:59:42.000Z",
+                              "updatedAt": "2026-07-28T00:59:42.000Z",
+                              "uid": "35240-f1c7c1a6-ecfe-46ac-bf20-711d20e42955"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:59:42.000Z",
+                          "updatedAt": "2026-07-28T00:59:42.000Z",
+                          "uid": "35240-0c2e92e8-5729-4ed4-8870-f30db44742ae"
+                        }
+                      ],
+                      "id": "70dce69d-7cff-4b88-981f-95cc08147d7f",
+                      "createdAt": "2026-07-28T00:59:42.000Z",
+                      "updatedAt": "2026-07-28T00:59:42.000Z",
+                      "uid": "35240-70dce69d-7cff-4b88-981f-95cc08147d7f"
+                    }
+                  ],
+                  "id": "240455bf-42a9-48b8-b9ca-2a35d4bc8fb1",
+                  "createdAt": "2026-07-28T00:59:42.000Z",
+                  "updatedAt": "2026-07-28T00:59:42.000Z",
+                  "uid": "35240-240455bf-42a9-48b8-b9ca-2a35d4bc8fb1"
+                }
+              ],
+              "id": "e384da5c-ab20-4414-a030-374c245c4371",
+              "createdAt": "2026-07-28T00:59:42.000Z",
+              "updatedAt": "2026-07-28T00:59:42.000Z",
+              "uid": "35240-e384da5c-ab20-4414-a030-374c245c4371"
+            },
+            {
+              "name": "tokens",
+              "item": [
+                {
+                  "name": "{address}",
+                  "item": [
+                    {
+                      "name": "information",
+                      "item": [
+                        {
+                          "name": "Token information",
+                          "id": "76eb3bcc-7913-4181-a328-d45ba6af6ec3",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/blockchains/:blockchainId/tokens/:address/information",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "blockchains",
+                                ":blockchainId",
+                                "tokens",
+                                ":address",
+                                "information"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "2e43405f-7540-497e-8892-42a745531e47",
+                                  "key": "blockchainId",
+                                  "value": "<string>",
+                                  "description": "(Required) The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+                                },
+                                {
+                                  "id": "845298f6-3063-430d-93c3-ec204e76144a",
+                                  "key": "address",
+                                  "value": "<string>",
+                                  "description": "(Required) The on-chain address or token contract address."
+                                }
+                              ]
+                            },
+                            "description": "Returns token information including name, symbol, contract address, decimals, total supply, and circulating supply."
+                          },
+                          "response": [
+                            {
+                              "id": "09231427-826b-43c0-bad4-a3d57dec57a2",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/blockchains/:blockchainId/tokens/:address/information",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "blockchains",
+                                    ":blockchainId",
+                                    "tokens",
+                                    ":address",
+                                    "information"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "blockchainId"
+                                    },
+                                    {
+                                      "key": "address"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                              "createdAt": "2026-07-28T00:59:42.000Z",
+                              "updatedAt": "2026-07-28T00:59:42.000Z",
+                              "uid": "35240-09231427-826b-43c0-bad4-a3d57dec57a2"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:59:42.000Z",
+                          "updatedAt": "2026-07-28T00:59:42.000Z",
+                          "uid": "35240-76eb3bcc-7913-4181-a328-d45ba6af6ec3"
+                        }
+                      ],
+                      "id": "f36d2727-eb77-4017-a422-db9dea821a92",
+                      "createdAt": "2026-07-28T00:59:42.000Z",
+                      "updatedAt": "2026-07-28T00:59:42.000Z",
+                      "uid": "35240-f36d2727-eb77-4017-a422-db9dea821a92"
+                    },
+                    {
+                      "name": "transfers",
+                      "item": [
+                        {
+                          "name": "Token transfers",
+                          "id": "21f9080a-ee92-41ec-9201-24ddb62b0024",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/blockchains/:blockchainId/tokens/:address/transfers?startDate=<string>&endDate=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "blockchains",
+                                ":blockchainId",
+                                "tokens",
+                                ":address",
+                                "transfers"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "startDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "endDate",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9f4dcb12-de59-440f-b10a-213788baccee",
+                                  "key": "blockchainId",
+                                  "value": "<string>",
+                                  "description": "(Required) The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+                                },
+                                {
+                                  "id": "6c3c3200-8aff-4f14-807a-86dcf4cf183d",
+                                  "key": "address",
+                                  "value": "<string>",
+                                  "description": "(Required) The on-chain address or token contract address."
+                                }
+                              ]
+                            },
+                            "description": "Returns token transfers including sender, receiver, amount, transaction hash, and timestamp."
+                          },
+                          "response": [
+                            {
+                              "id": "1ec43fe3-5a48-42a2-aa4f-c16c858d6a5e",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/blockchains/:blockchainId/tokens/:address/transfers?startDate=<string>&endDate=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "blockchains",
+                                    ":blockchainId",
+                                    "tokens",
+                                    ":address",
+                                    "transfers"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                      "key": "startDate",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                      "key": "endDate",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "blockchainId"
+                                    },
+                                    {
+                                      "key": "address"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                              "createdAt": "2026-07-28T00:59:42.000Z",
+                              "updatedAt": "2026-07-28T00:59:42.000Z",
+                              "uid": "35240-1ec43fe3-5a48-42a2-aa4f-c16c858d6a5e"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:59:42.000Z",
+                          "updatedAt": "2026-07-28T00:59:42.000Z",
+                          "uid": "35240-21f9080a-ee92-41ec-9201-24ddb62b0024"
+                        }
+                      ],
+                      "id": "61963854-06f5-4d17-bd4b-ca1828229ec8",
+                      "createdAt": "2026-07-28T00:59:42.000Z",
+                      "updatedAt": "2026-07-28T00:59:42.000Z",
+                      "uid": "35240-61963854-06f5-4d17-bd4b-ca1828229ec8"
+                    },
+                    {
+                      "name": "holders",
+                      "item": [
+                        {
+                          "name": "Token holders",
+                          "id": "238e7531-d3f0-4b75-8820-601b1d886e32",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/blockchains/:blockchainId/tokens/:address/holders",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "blockchains",
+                                ":blockchainId",
+                                "tokens",
+                                ":address",
+                                "holders"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7e9a5290-daf0-4b49-b8fc-50bce4bfeeb3",
+                                  "key": "blockchainId",
+                                  "value": "<string>",
+                                  "description": "(Required) The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+                                },
+                                {
+                                  "id": "9f671547-1c2e-495e-99e5-92d3f2e34772",
+                                  "key": "address",
+                                  "value": "<string>",
+                                  "description": "(Required) The on-chain address or token contract address."
+                                }
+                              ]
+                            },
+                            "description": "Returns token holder information including the number of holders, their addresses, and tokens held by each."
+                          },
+                          "response": [
+                            {
+                              "id": "3876a9e5-75ee-4f2b-862b-9356b4ce9067",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/blockchains/:blockchainId/tokens/:address/holders",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "blockchains",
+                                    ":blockchainId",
+                                    "tokens",
+                                    ":address",
+                                    "holders"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "blockchainId"
+                                    },
+                                    {
+                                      "key": "address"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                              "createdAt": "2026-07-28T00:59:42.000Z",
+                              "updatedAt": "2026-07-28T00:59:42.000Z",
+                              "uid": "35240-3876a9e5-75ee-4f2b-862b-9356b4ce9067"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:59:42.000Z",
+                          "updatedAt": "2026-07-28T00:59:42.000Z",
+                          "uid": "35240-238e7531-d3f0-4b75-8820-601b1d886e32"
+                        }
+                      ],
+                      "id": "72103e43-a9d8-4561-94f4-054c238c888b",
+                      "createdAt": "2026-07-28T00:59:42.000Z",
+                      "updatedAt": "2026-07-28T00:59:42.000Z",
+                      "uid": "35240-72103e43-a9d8-4561-94f4-054c238c888b"
+                    }
+                  ],
+                  "id": "d07bc4d9-f816-495d-9f32-87d06dc67ac7",
+                  "createdAt": "2026-07-28T00:59:42.000Z",
+                  "updatedAt": "2026-07-28T00:59:42.000Z",
+                  "uid": "35240-d07bc4d9-f816-495d-9f32-87d06dc67ac7"
+                }
+              ],
+              "id": "057d4d9f-51d8-4974-ad75-f6fb8bb8e79f",
+              "createdAt": "2026-07-28T00:59:42.000Z",
+              "updatedAt": "2026-07-28T00:59:42.000Z",
+              "uid": "35240-057d4d9f-51d8-4974-ad75-f6fb8bb8e79f"
+            }
+          ],
+          "id": "ffb02696-225f-4282-b69c-57e011df7b6b",
+          "createdAt": "2026-07-28T00:59:42.000Z",
+          "updatedAt": "2026-07-28T00:59:42.000Z",
+          "uid": "35240-ffb02696-225f-4282-b69c-57e011df7b6b"
+        }
+      ],
+      "id": "191c9db5-4577-42fc-8782-7ea6556e0921",
+      "createdAt": "2026-07-28T00:59:42.000Z",
+      "updatedAt": "2026-07-28T00:59:42.000Z",
+      "uid": "35240-191c9db5-4577-42fc-8782-7ea6556e0921"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.amberdata.com"
+    }
+  ]
+}

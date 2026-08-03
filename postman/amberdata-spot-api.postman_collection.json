@@ -1,0 +1,897 @@
+{
+  "info": {
+    "_postman_id": "a375e7ae-9590-4aa4-8db6-5640acad2053",
+    "name": "Amberdata DeFi Spot API",
+    "description": "Amberdata's institutional-grade digital asset and blockchain data API. Provides spot market data (prices, OHLCV, tickers, trades, order books), derivatives across futures and options (funding rates, open interest, liquidations, implied volatility, Greeks), DeFi (DEX and lending), and on-chain blockchain data (blocks, transactions, addresses, tokens). Every request requires the x-api-key header. An optional api-version header selects a dated API version.\n\nContact Support:\n Name: Amberdata Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:59:45.000Z",
+    "updatedAt": "2026-07-28T00:59:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a375e7ae-9590-4aa4-8db6-5640acad2053"
+  },
+  "item": [
+    {
+      "name": "markets",
+      "item": [
+        {
+          "name": "spot",
+          "item": [
+            {
+              "name": "exchanges",
+              "item": [
+                {
+                  "name": "reference",
+                  "item": [
+                    {
+                      "name": "Spot exchanges reference",
+                      "id": "c8d2e8b9-420d-4710-a8ca-7421eacc9018",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/markets/spot/exchanges/reference?exchange=<string>&pair=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "markets",
+                            "spot",
+                            "exchanges",
+                            "reference"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                              "key": "exchange",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by trading pair (e.g. eth_usd, btc_usd).",
+                              "key": "pair",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "description": "Returns reference information for all supported spot exchanges and the instruments (pairs) available on each."
+                      },
+                      "response": [
+                        {
+                          "id": "6b60965e-a473-4a29-b6eb-55ec4c3fb5a0",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/markets/spot/exchanges/reference?exchange=<string>&pair=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "markets",
+                                "spot",
+                                "exchanges",
+                                "reference"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                                  "key": "exchange",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by trading pair (e.g. eth_usd, btc_usd).",
+                                  "key": "pair",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:45.000Z",
+                          "updatedAt": "2026-07-28T00:59:45.000Z",
+                          "uid": "35240-6b60965e-a473-4a29-b6eb-55ec4c3fb5a0"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:45.000Z",
+                      "updatedAt": "2026-07-28T00:59:45.000Z",
+                      "uid": "35240-c8d2e8b9-420d-4710-a8ca-7421eacc9018"
+                    }
+                  ],
+                  "id": "45e84e64-d610-42de-82b8-de0f82277235",
+                  "createdAt": "2026-07-28T00:59:45.000Z",
+                  "updatedAt": "2026-07-28T00:59:45.000Z",
+                  "uid": "35240-45e84e64-d610-42de-82b8-de0f82277235"
+                }
+              ],
+              "id": "65cbceab-739f-4815-b120-ee1e2a60df73",
+              "createdAt": "2026-07-28T00:59:45.000Z",
+              "updatedAt": "2026-07-28T00:59:45.000Z",
+              "uid": "35240-65cbceab-739f-4815-b120-ee1e2a60df73"
+            },
+            {
+              "name": "prices",
+              "item": [
+                {
+                  "name": "{pair}",
+                  "item": [
+                    {
+                      "name": "latest",
+                      "item": [
+                        {
+                          "name": "Latest spot price for a pair",
+                          "id": "cc1a2189-c694-40b9-9c65-ae8a041787e5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/markets/spot/prices/:pair/latest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "markets",
+                                "spot",
+                                "prices",
+                                ":pair",
+                                "latest"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "5512034c-e4c4-429e-a201-2fafe8e02a75",
+                                  "key": "pair",
+                                  "value": "<string>",
+                                  "description": "(Required) The trading pair (e.g. eth_usd, btc_usd)."
+                                }
+                              ]
+                            },
+                            "description": "Returns the latest price for the specified spot pair (e.g. eth_usd)."
+                          },
+                          "response": [
+                            {
+                              "id": "77e5c748-2fee-40f5-9611-d54cab339c97",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/markets/spot/prices/:pair/latest",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "markets",
+                                    "spot",
+                                    "prices",
+                                    ":pair",
+                                    "latest"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "pair"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                              "createdAt": "2026-07-28T00:59:45.000Z",
+                              "updatedAt": "2026-07-28T00:59:45.000Z",
+                              "uid": "35240-77e5c748-2fee-40f5-9611-d54cab339c97"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:59:45.000Z",
+                          "updatedAt": "2026-07-28T00:59:45.000Z",
+                          "uid": "35240-cc1a2189-c694-40b9-9c65-ae8a041787e5"
+                        }
+                      ],
+                      "id": "ac948455-2ad2-4e4f-a5ef-1237cb091380",
+                      "createdAt": "2026-07-28T00:59:45.000Z",
+                      "updatedAt": "2026-07-28T00:59:45.000Z",
+                      "uid": "35240-ac948455-2ad2-4e4f-a5ef-1237cb091380"
+                    }
+                  ],
+                  "id": "73afa522-589a-4c3c-8ab2-48dd59039c33",
+                  "createdAt": "2026-07-28T00:59:45.000Z",
+                  "updatedAt": "2026-07-28T00:59:45.000Z",
+                  "uid": "35240-73afa522-589a-4c3c-8ab2-48dd59039c33"
+                }
+              ],
+              "id": "316ddc4c-0df8-498f-a765-1510c024d97f",
+              "createdAt": "2026-07-28T00:59:45.000Z",
+              "updatedAt": "2026-07-28T00:59:45.000Z",
+              "uid": "35240-316ddc4c-0df8-498f-a765-1510c024d97f"
+            },
+            {
+              "name": "ohlcv",
+              "item": [
+                {
+                  "name": "{pair}",
+                  "item": [
+                    {
+                      "name": "historical",
+                      "item": [
+                        {
+                          "name": "Historical spot OHLCV",
+                          "id": "3a82dbf2-c232-489f-9f72-d1d0bf2518ef",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/markets/spot/ohlcv/:pair/historical?exchange=<string>&startDate=<string>&endDate=<string>&timeInterval=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "markets",
+                                "spot",
+                                "ohlcv",
+                                ":pair",
+                                "historical"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                                  "key": "exchange",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "startDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "endDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Time resolution of the returned series (e.g. minutes, hours, days).",
+                                  "key": "timeInterval",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "36e23fc2-3656-4abf-ae79-6fe6d19ed634",
+                                  "key": "pair",
+                                  "value": "<string>",
+                                  "description": "(Required) The trading pair (e.g. eth_usd, btc_usd)."
+                                }
+                              ]
+                            },
+                            "description": "Returns historical OHLCV (open/high/low/close/volume) time series for the specified spot pair."
+                          },
+                          "response": [
+                            {
+                              "id": "5458113a-ed0b-47c7-978e-fc468825bda5",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/markets/spot/ohlcv/:pair/historical?exchange=<string>&startDate=<string>&endDate=<string>&timeInterval=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "markets",
+                                    "spot",
+                                    "ohlcv",
+                                    ":pair",
+                                    "historical"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                                      "key": "exchange",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                      "key": "startDate",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                      "key": "endDate",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Time resolution of the returned series (e.g. minutes, hours, days).",
+                                      "key": "timeInterval",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "pair"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                              "createdAt": "2026-07-28T00:59:45.000Z",
+                              "updatedAt": "2026-07-28T00:59:45.000Z",
+                              "uid": "35240-5458113a-ed0b-47c7-978e-fc468825bda5"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:59:45.000Z",
+                          "updatedAt": "2026-07-28T00:59:45.000Z",
+                          "uid": "35240-3a82dbf2-c232-489f-9f72-d1d0bf2518ef"
+                        }
+                      ],
+                      "id": "e6811775-9d7a-4e1e-95bd-da1338287345",
+                      "createdAt": "2026-07-28T00:59:45.000Z",
+                      "updatedAt": "2026-07-28T00:59:45.000Z",
+                      "uid": "35240-e6811775-9d7a-4e1e-95bd-da1338287345"
+                    }
+                  ],
+                  "id": "96b0ce0e-b36d-4a3b-913d-ddf9cd85819a",
+                  "createdAt": "2026-07-28T00:59:45.000Z",
+                  "updatedAt": "2026-07-28T00:59:45.000Z",
+                  "uid": "35240-96b0ce0e-b36d-4a3b-913d-ddf9cd85819a"
+                }
+              ],
+              "id": "f4e5fcdb-89f2-4c92-8a0a-9efe23419086",
+              "createdAt": "2026-07-28T00:59:45.000Z",
+              "updatedAt": "2026-07-28T00:59:45.000Z",
+              "uid": "35240-f4e5fcdb-89f2-4c92-8a0a-9efe23419086"
+            },
+            {
+              "name": "tickers",
+              "item": [
+                {
+                  "name": "{pair}",
+                  "item": [
+                    {
+                      "name": "Spot tickers",
+                      "id": "642f7580-8b65-4733-a7a7-1053619d2773",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/markets/spot/tickers/:pair?exchange=<string>&startDate=<string>&endDate=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "markets",
+                            "spot",
+                            "tickers",
+                            ":pair"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                              "key": "exchange",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "startDate",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "endDate",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "40721709-5e47-4d57-a257-2ee35412ef49",
+                              "key": "pair",
+                              "value": "<string>",
+                              "description": "(Required) The trading pair (e.g. eth_usd, btc_usd)."
+                            }
+                          ]
+                        },
+                        "description": "Returns historical and live best bid and best ask (top of book) for the specified spot instrument."
+                      },
+                      "response": [
+                        {
+                          "id": "cf715c1a-bdfc-484c-a5b6-628d40986776",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/markets/spot/tickers/:pair?exchange=<string>&startDate=<string>&endDate=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "markets",
+                                "spot",
+                                "tickers",
+                                ":pair"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                                  "key": "exchange",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "startDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "endDate",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "pair"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:45.000Z",
+                          "updatedAt": "2026-07-28T00:59:45.000Z",
+                          "uid": "35240-cf715c1a-bdfc-484c-a5b6-628d40986776"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:45.000Z",
+                      "updatedAt": "2026-07-28T00:59:45.000Z",
+                      "uid": "35240-642f7580-8b65-4733-a7a7-1053619d2773"
+                    }
+                  ],
+                  "id": "4530e18b-c612-414f-b2f9-16888b72d64a",
+                  "createdAt": "2026-07-28T00:59:45.000Z",
+                  "updatedAt": "2026-07-28T00:59:45.000Z",
+                  "uid": "35240-4530e18b-c612-414f-b2f9-16888b72d64a"
+                }
+              ],
+              "id": "f97126b3-65bc-4fe1-bc72-e160aaea857c",
+              "createdAt": "2026-07-28T00:59:45.000Z",
+              "updatedAt": "2026-07-28T00:59:45.000Z",
+              "uid": "35240-f97126b3-65bc-4fe1-bc72-e160aaea857c"
+            },
+            {
+              "name": "trades",
+              "item": [
+                {
+                  "name": "{pair}",
+                  "item": [
+                    {
+                      "name": "Historical spot trades",
+                      "id": "4cb73663-0d34-4130-b37c-295f5276c8e3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/markets/spot/trades/:pair?exchange=<string>&startDate=<string>&endDate=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "markets",
+                            "spot",
+                            "trades",
+                            ":pair"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                              "key": "exchange",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "startDate",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "endDate",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "5e92077d-ff47-4cac-95a2-d09a6594efd4",
+                              "key": "pair",
+                              "value": "<string>",
+                              "description": "(Required) The trading pair (e.g. eth_usd, btc_usd)."
+                            }
+                          ]
+                        },
+                        "description": "Returns historical (time series) trade data for the specified spot pair or instrument."
+                      },
+                      "response": [
+                        {
+                          "id": "7d32cd69-9597-4775-b9f2-b09d96b783c6",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/markets/spot/trades/:pair?exchange=<string>&startDate=<string>&endDate=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "markets",
+                                "spot",
+                                "trades",
+                                ":pair"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                                  "key": "exchange",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "startDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "endDate",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "pair"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:45.000Z",
+                          "updatedAt": "2026-07-28T00:59:45.000Z",
+                          "uid": "35240-7d32cd69-9597-4775-b9f2-b09d96b783c6"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:45.000Z",
+                      "updatedAt": "2026-07-28T00:59:45.000Z",
+                      "uid": "35240-4cb73663-0d34-4130-b37c-295f5276c8e3"
+                    }
+                  ],
+                  "id": "b1516d74-176f-4ea8-9180-9aa52cbea09d",
+                  "createdAt": "2026-07-28T00:59:45.000Z",
+                  "updatedAt": "2026-07-28T00:59:45.000Z",
+                  "uid": "35240-b1516d74-176f-4ea8-9180-9aa52cbea09d"
+                }
+              ],
+              "id": "37425cde-d2fb-4c9d-88cc-49029dd6cfed",
+              "createdAt": "2026-07-28T00:59:45.000Z",
+              "updatedAt": "2026-07-28T00:59:45.000Z",
+              "uid": "35240-37425cde-d2fb-4c9d-88cc-49029dd6cfed"
+            },
+            {
+              "name": "order-book-snapshots",
+              "item": [
+                {
+                  "name": "{pair}",
+                  "item": [
+                    {
+                      "name": "Spot order book snapshots",
+                      "id": "50bb6ff6-036e-4bf0-88e0-a0b3bc543f58",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/markets/spot/order-book-snapshots/:pair?exchange=<string>&startDate=<string>&endDate=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "markets",
+                            "spot",
+                            "order-book-snapshots",
+                            ":pair"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                              "key": "exchange",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "startDate",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "endDate",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "f5be2d2e-cc9c-4bd1-939a-2b06c0031371",
+                              "key": "pair",
+                              "value": "<string>",
+                              "description": "(Required) The trading pair (e.g. eth_usd, btc_usd)."
+                            }
+                          ]
+                        },
+                        "description": "Returns order book snapshots for the specified spot pair with granularity from 1 minute to 1 day."
+                      },
+                      "response": [
+                        {
+                          "id": "28888825-6d32-43ce-99b9-e28aee6cdf3d",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/markets/spot/order-book-snapshots/:pair?exchange=<string>&startDate=<string>&endDate=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "markets",
+                                "spot",
+                                "order-book-snapshots",
+                                ":pair"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                                  "key": "exchange",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "startDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "endDate",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "pair"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:45.000Z",
+                          "updatedAt": "2026-07-28T00:59:45.000Z",
+                          "uid": "35240-28888825-6d32-43ce-99b9-e28aee6cdf3d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:45.000Z",
+                      "updatedAt": "2026-07-28T00:59:45.000Z",
+                      "uid": "35240-50bb6ff6-036e-4bf0-88e0-a0b3bc543f58"
+                    }
+                  ],
+                  "id": "fcce8e8f-c149-4065-b454-efac8324c7c0",
+                  "createdAt": "2026-07-28T00:59:45.000Z",
+                  "updatedAt": "2026-07-28T00:59:45.000Z",
+                  "uid": "35240-fcce8e8f-c149-4065-b454-efac8324c7c0"
+                }
+              ],
+              "id": "a842b0e2-4e08-42d7-ae73-24989720d1b9",
+              "createdAt": "2026-07-28T00:59:45.000Z",
+              "updatedAt": "2026-07-28T00:59:45.000Z",
+              "uid": "35240-a842b0e2-4e08-42d7-ae73-24989720d1b9"
+            }
+          ],
+          "id": "043376ec-c405-4950-a470-f2f9a110aa2a",
+          "createdAt": "2026-07-28T00:59:45.000Z",
+          "updatedAt": "2026-07-28T00:59:45.000Z",
+          "uid": "35240-043376ec-c405-4950-a470-f2f9a110aa2a"
+        }
+      ],
+      "id": "466e9a99-a979-4b16-829c-3df7718f2096",
+      "createdAt": "2026-07-28T00:59:45.000Z",
+      "updatedAt": "2026-07-28T00:59:45.000Z",
+      "uid": "35240-466e9a99-a979-4b16-829c-3df7718f2096"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.amberdata.com"
+    }
+  ]
+}

@@ -1,0 +1,705 @@
+{
+  "info": {
+    "_postman_id": "716953ab-9e79-4328-890c-fa526c086616",
+    "name": "Amberdata DeFi Futures API",
+    "description": "Amberdata's institutional-grade digital asset and blockchain data API. Provides spot market data (prices, OHLCV, tickers, trades, order books), derivatives across futures and options (funding rates, open interest, liquidations, implied volatility, Greeks), DeFi (DEX and lending), and on-chain blockchain data (blocks, transactions, addresses, tokens). Every request requires the x-api-key header. An optional api-version header selects a dated API version.\n\nContact Support:\n Name: Amberdata Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:59:39.000Z",
+    "updatedAt": "2026-07-28T00:59:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-716953ab-9e79-4328-890c-fa526c086616"
+  },
+  "item": [
+    {
+      "name": "markets",
+      "item": [
+        {
+          "name": "futures",
+          "item": [
+            {
+              "name": "exchanges",
+              "item": [
+                {
+                  "name": "reference",
+                  "item": [
+                    {
+                      "name": "Futures exchanges reference",
+                      "id": "37fbc16c-4538-445f-928b-5bc8fa5a747f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/markets/futures/exchanges/reference?exchange=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "markets",
+                            "futures",
+                            "exchanges",
+                            "reference"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                              "key": "exchange",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "description": "Returns reference data for futures instruments across exchanges, including base and quote symbols, price and volume limits, precision, contract terms, and trading availability."
+                      },
+                      "response": [
+                        {
+                          "id": "7fb2466f-42f2-4044-9e08-38dfd5fc1d69",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/markets/futures/exchanges/reference?exchange=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "markets",
+                                "futures",
+                                "exchanges",
+                                "reference"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                                  "key": "exchange",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:39.000Z",
+                          "updatedAt": "2026-07-28T00:59:39.000Z",
+                          "uid": "35240-7fb2466f-42f2-4044-9e08-38dfd5fc1d69"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:39.000Z",
+                      "updatedAt": "2026-07-28T00:59:39.000Z",
+                      "uid": "35240-37fbc16c-4538-445f-928b-5bc8fa5a747f"
+                    }
+                  ],
+                  "id": "6116f3fa-f2d5-49ee-b1b4-218c6086d8d3",
+                  "createdAt": "2026-07-28T00:59:39.000Z",
+                  "updatedAt": "2026-07-28T00:59:39.000Z",
+                  "uid": "35240-6116f3fa-f2d5-49ee-b1b4-218c6086d8d3"
+                }
+              ],
+              "id": "7d07f0e2-40fb-4348-8341-0adebe1bde3f",
+              "createdAt": "2026-07-28T00:59:39.000Z",
+              "updatedAt": "2026-07-28T00:59:39.000Z",
+              "uid": "35240-7d07f0e2-40fb-4348-8341-0adebe1bde3f"
+            },
+            {
+              "name": "tickers",
+              "item": [
+                {
+                  "name": "{instrument}",
+                  "item": [
+                    {
+                      "name": "Futures tickers",
+                      "id": "2ec7fbe0-4dcc-4946-bee4-d52105af2e44",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/markets/futures/tickers/:instrument?exchange=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "markets",
+                            "futures",
+                            "tickers",
+                            ":instrument"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                              "key": "exchange",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "c879e85a-6f1c-47bb-961b-e9c11b540a2d",
+                              "key": "instrument",
+                              "value": "<string>",
+                              "description": "(Required) The instrument identifier for the futures or options contract."
+                            }
+                          ]
+                        },
+                        "description": "Returns ticker data for the specified futures instrument."
+                      },
+                      "response": [
+                        {
+                          "id": "1f3b27bb-8d7e-4746-a5b1-dab3c3f4ae39",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/markets/futures/tickers/:instrument?exchange=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "markets",
+                                "futures",
+                                "tickers",
+                                ":instrument"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                                  "key": "exchange",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "instrument"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:39.000Z",
+                          "updatedAt": "2026-07-28T00:59:39.000Z",
+                          "uid": "35240-1f3b27bb-8d7e-4746-a5b1-dab3c3f4ae39"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:39.000Z",
+                      "updatedAt": "2026-07-28T00:59:39.000Z",
+                      "uid": "35240-2ec7fbe0-4dcc-4946-bee4-d52105af2e44"
+                    }
+                  ],
+                  "id": "1f6b603c-01a2-489a-a410-00b23a78922a",
+                  "createdAt": "2026-07-28T00:59:39.000Z",
+                  "updatedAt": "2026-07-28T00:59:39.000Z",
+                  "uid": "35240-1f6b603c-01a2-489a-a410-00b23a78922a"
+                }
+              ],
+              "id": "759f917c-366a-4899-95a4-328c257b862f",
+              "createdAt": "2026-07-28T00:59:39.000Z",
+              "updatedAt": "2026-07-28T00:59:39.000Z",
+              "uid": "35240-759f917c-366a-4899-95a4-328c257b862f"
+            },
+            {
+              "name": "funding-rates",
+              "item": [
+                {
+                  "name": "{instrument}",
+                  "item": [
+                    {
+                      "name": "Futures funding rates",
+                      "id": "a4522c7f-4bd1-43df-823e-8b6675c9da29",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/markets/futures/funding-rates/:instrument?exchange=<string>&startDate=<string>&endDate=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "markets",
+                            "futures",
+                            "funding-rates",
+                            ":instrument"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                              "key": "exchange",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "startDate",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "endDate",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "53593bf0-a717-4ff0-85c6-97257e97c275",
+                              "key": "instrument",
+                              "value": "<string>",
+                              "description": "(Required) The instrument identifier for the futures or options contract."
+                            }
+                          ]
+                        },
+                        "description": "Returns funding rate data for the specified futures instrument."
+                      },
+                      "response": [
+                        {
+                          "id": "1889ca3d-b3d0-4050-9f6b-df723b0c0603",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/markets/futures/funding-rates/:instrument?exchange=<string>&startDate=<string>&endDate=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "markets",
+                                "futures",
+                                "funding-rates",
+                                ":instrument"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                                  "key": "exchange",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "startDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "endDate",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "instrument"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:39.000Z",
+                          "updatedAt": "2026-07-28T00:59:39.000Z",
+                          "uid": "35240-1889ca3d-b3d0-4050-9f6b-df723b0c0603"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:39.000Z",
+                      "updatedAt": "2026-07-28T00:59:39.000Z",
+                      "uid": "35240-a4522c7f-4bd1-43df-823e-8b6675c9da29"
+                    }
+                  ],
+                  "id": "3927826f-83b9-4e63-ae75-864e08ff53bc",
+                  "createdAt": "2026-07-28T00:59:39.000Z",
+                  "updatedAt": "2026-07-28T00:59:39.000Z",
+                  "uid": "35240-3927826f-83b9-4e63-ae75-864e08ff53bc"
+                }
+              ],
+              "id": "58cabc1c-4a53-4cf5-abca-1103f38d80d0",
+              "createdAt": "2026-07-28T00:59:39.000Z",
+              "updatedAt": "2026-07-28T00:59:39.000Z",
+              "uid": "35240-58cabc1c-4a53-4cf5-abca-1103f38d80d0"
+            },
+            {
+              "name": "open-interest",
+              "item": [
+                {
+                  "name": "{instrument}",
+                  "item": [
+                    {
+                      "name": "Futures open interest",
+                      "id": "04a4b6db-28e3-4b26-9251-0a129fefbef8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/markets/futures/open-interest/:instrument?exchange=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "markets",
+                            "futures",
+                            "open-interest",
+                            ":instrument"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                              "key": "exchange",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "ae1a1a1f-f87a-4be2-ae73-787fd478d564",
+                              "key": "instrument",
+                              "value": "<string>",
+                              "description": "(Required) The instrument identifier for the futures or options contract."
+                            }
+                          ]
+                        },
+                        "description": "Returns open interest data for the specified futures instrument."
+                      },
+                      "response": [
+                        {
+                          "id": "35e6dcf9-d802-4275-88a0-f33b9e6d657b",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/markets/futures/open-interest/:instrument?exchange=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "markets",
+                                "futures",
+                                "open-interest",
+                                ":instrument"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                                  "key": "exchange",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "instrument"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:39.000Z",
+                          "updatedAt": "2026-07-28T00:59:39.000Z",
+                          "uid": "35240-35e6dcf9-d802-4275-88a0-f33b9e6d657b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:39.000Z",
+                      "updatedAt": "2026-07-28T00:59:39.000Z",
+                      "uid": "35240-04a4b6db-28e3-4b26-9251-0a129fefbef8"
+                    }
+                  ],
+                  "id": "ca9aa8f9-9ddd-4f20-9b92-e82ca7a3f51c",
+                  "createdAt": "2026-07-28T00:59:39.000Z",
+                  "updatedAt": "2026-07-28T00:59:39.000Z",
+                  "uid": "35240-ca9aa8f9-9ddd-4f20-9b92-e82ca7a3f51c"
+                }
+              ],
+              "id": "599ac029-f386-43bb-9d48-3da2954cf8a0",
+              "createdAt": "2026-07-28T00:59:39.000Z",
+              "updatedAt": "2026-07-28T00:59:39.000Z",
+              "uid": "35240-599ac029-f386-43bb-9d48-3da2954cf8a0"
+            },
+            {
+              "name": "liquidations",
+              "item": [
+                {
+                  "name": "{instrument}",
+                  "item": [
+                    {
+                      "name": "Futures liquidations",
+                      "id": "462ac088-e924-4adf-aea1-15c14918bddc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/markets/futures/liquidations/:instrument?exchange=<string>&startDate=<string>&endDate=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "markets",
+                            "futures",
+                            "liquidations",
+                            ":instrument"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                              "key": "exchange",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "startDate",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "endDate",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "b68657d5-2ced-4782-bba0-d8f4106ebd4e",
+                              "key": "instrument",
+                              "value": "<string>",
+                              "description": "(Required) The instrument identifier for the futures or options contract."
+                            }
+                          ]
+                        },
+                        "description": "Returns liquidation events for the specified futures instrument."
+                      },
+                      "response": [
+                        {
+                          "id": "60b5d4c7-e7fc-4741-a17d-e4fca95fc8bc",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/markets/futures/liquidations/:instrument?exchange=<string>&startDate=<string>&endDate=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "markets",
+                                "futures",
+                                "liquidations",
+                                ":instrument"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                                  "key": "exchange",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "startDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "endDate",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "instrument"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:39.000Z",
+                          "updatedAt": "2026-07-28T00:59:39.000Z",
+                          "uid": "35240-60b5d4c7-e7fc-4741-a17d-e4fca95fc8bc"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:39.000Z",
+                      "updatedAt": "2026-07-28T00:59:39.000Z",
+                      "uid": "35240-462ac088-e924-4adf-aea1-15c14918bddc"
+                    }
+                  ],
+                  "id": "cd32ecd1-d032-423d-a074-ee0c95c77ebc",
+                  "createdAt": "2026-07-28T00:59:39.000Z",
+                  "updatedAt": "2026-07-28T00:59:39.000Z",
+                  "uid": "35240-cd32ecd1-d032-423d-a074-ee0c95c77ebc"
+                }
+              ],
+              "id": "c95d392f-d928-457e-8d12-d3c2684d3ffa",
+              "createdAt": "2026-07-28T00:59:39.000Z",
+              "updatedAt": "2026-07-28T00:59:39.000Z",
+              "uid": "35240-c95d392f-d928-457e-8d12-d3c2684d3ffa"
+            }
+          ],
+          "id": "f2a74ff2-9ef0-42b3-8013-1be4c57197b2",
+          "createdAt": "2026-07-28T00:59:39.000Z",
+          "updatedAt": "2026-07-28T00:59:39.000Z",
+          "uid": "35240-f2a74ff2-9ef0-42b3-8013-1be4c57197b2"
+        }
+      ],
+      "id": "4bf80fce-5139-4438-a799-29d240e1028c",
+      "createdAt": "2026-07-28T00:59:39.000Z",
+      "updatedAt": "2026-07-28T00:59:39.000Z",
+      "uid": "35240-4bf80fce-5139-4438-a799-29d240e1028c"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.amberdata.com"
+    }
+  ]
+}

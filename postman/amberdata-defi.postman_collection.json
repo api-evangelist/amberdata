@@ -1,0 +1,2686 @@
+{
+  "info": {
+    "_postman_id": "115f4b57-9fc6-4e3b-bb15-19568ec92ee0",
+    "name": "Defi API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:59:32.000Z",
+    "updatedAt": "2026-07-28T00:59:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-115f4b57-9fc6-4e3b-bb15-19568ec92ee0"
+  },
+  "item": [
+    {
+      "name": "lending",
+      "item": [
+        {
+          "name": "{protocolId}",
+          "item": [
+            {
+              "name": "protocol",
+              "item": [
+                {
+                  "name": "Protocol Lens",
+                  "id": "28466b2d-d946-4a84-8216-ae2dfe334115",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "**[Optional]** The id of the blockchain for which you want protocol data from. Defaults to `ethereum-mainnet` if not specified. Use the [Information Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols) API to view the supported protocol and blockchain id combinations.",
+                        "key": "x-amberdata-blockchain-id",
+                        "value": "polygon-mainnet"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lending/:protocolId/protocol?startDate=<dateTime>&endDate=<dateTime>&size=<integer>&direction=asc&timeFormat=ms&action=Borrow",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lending",
+                        ":protocolId",
+                        "protocol"
+                      ],
+                      "query": [
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                          "key": "startDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                          "key": "endDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "**[Optional]** Number of records per page. If not specified, the API will default to and try to return 1000 actions under **payload.data**.",
+                          "key": "size",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "**[Optional]** The order in which to return the results (ascending or descending). By default. records are returned in ascending order, so the oldest records are returned first.",
+                          "key": "direction",
+                          "value": "asc"
+                        },
+                        {
+                          "key": "timeFormat",
+                          "value": "ms"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data filtered by the action.",
+                          "key": "action",
+                          "value": "Borrow"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "c2d86751-2f42-4693-b92e-b0529c739d15",
+                          "key": "protocolId",
+                          "value": "aavev2",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "This API retrieves information about all of the actions that occurred on the protocol within a certain timespan."
+                  },
+                  "response": [
+                    {
+                      "id": "39e5c18f-6563-4968-b88e-d2414fe883b1",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "**[Optional]** The id of the blockchain for which you want protocol data from. Defaults to `ethereum-mainnet` if not specified. Use the [Information Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols) API to view the supported protocol and blockchain id combinations.",
+                            "key": "x-amberdata-blockchain-id",
+                            "value": "polygon-mainnet"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/lending/:protocolId/protocol?startDate=<dateTime>&endDate=<dateTime>&size=<integer>&direction=asc&timeFormat=ms&action=Borrow",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "lending",
+                            ":protocolId",
+                            "protocol"
+                          ],
+                          "query": [
+                            {
+                              "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                              "key": "startDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                              "key": "endDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "**[Optional]** Number of records per page. If not specified, the API will default to and try to return 1000 actions under **payload.data**.",
+                              "key": "size",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "**[Optional]** The order in which to return the results (ascending or descending). By default. records are returned in ascending order, so the oldest records are returned first.",
+                              "key": "direction",
+                              "value": "asc"
+                            },
+                            {
+                              "key": "timeFormat",
+                              "value": "ms"
+                            },
+                            {
+                              "description": "**[Optional]** Payload only includes data filtered by the action.",
+                              "key": "action",
+                              "value": "Borrow"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "protocolId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"next\": \"<string>\"\n    },\n    \"data\": [\n      {\n        \"action\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"blockNumber\": 0,\n        \"transactionHash\": \"<string>\",\n        \"logIndex\": 0,\n        \"assetId\": \"<string>\",\n        \"assetSymbol\": \"<string>\",\n        \"marketId\": \"<string>\",\n        \"market\": \"<string>\",\n        \"reserveAsCollateralEnabled\": true,\n        \"user\": \"<string>\"\n      },\n      {\n        \"action\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"blockNumber\": 0,\n        \"transactionHash\": \"<string>\",\n        \"logIndex\": 0,\n        \"assetId\": \"<string>\",\n        \"assetSymbol\": \"<string>\",\n        \"marketId\": \"<string>\",\n        \"market\": \"<string>\",\n        \"reserveAsCollateralEnabled\": true,\n        \"user\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T00:59:33.000Z",
+                      "updatedAt": "2026-07-28T00:59:33.000Z",
+                      "uid": "35240-39e5c18f-6563-4968-b88e-d2414fe883b1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:59:33.000Z",
+                  "updatedAt": "2026-07-28T00:59:33.000Z",
+                  "uid": "35240-28466b2d-d946-4a84-8216-ae2dfe334115"
+                }
+              ],
+              "id": "9e8a686b-cabc-452e-a09d-3f281c394913",
+              "createdAt": "2026-07-28T00:59:32.000Z",
+              "updatedAt": "2026-07-28T00:59:32.000Z",
+              "uid": "35240-9e8a686b-cabc-452e-a09d-3f281c394913"
+            },
+            {
+              "name": "wallets",
+              "item": [
+                {
+                  "name": "{walletAddress}",
+                  "item": [
+                    {
+                      "name": "Wallet Lens",
+                      "id": "8c84f44d-e4af-424f-9994-f9be68e86402",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "**[Optional]** The id of the blockchain for which you want protocol data from. Defaults to `ethereum-mainnet` if not specified. Use the [Information Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols) API to view the supported protocol and blockchain id combinations.",
+                            "key": "x-amberdata-blockchain-id",
+                            "value": "optimism-mainnet"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/lending/:protocolId/wallets/:walletAddress?startDate=2022-09-01&endDate=2022-10-31&size=<integer>&direction=asc&timeFormat=ms&action=Borrow",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "lending",
+                            ":protocolId",
+                            "wallets",
+                            ":walletAddress"
+                          ],
+                          "query": [
+                            {
+                              "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                              "key": "startDate",
+                              "value": "2022-09-01"
+                            },
+                            {
+                              "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                              "key": "endDate",
+                              "value": "2022-10-31"
+                            },
+                            {
+                              "description": "**[Optional]** Number of records per page. If not specified, the API will default to and try to return 1000 actions under **payload.data**.",
+                              "key": "size",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "**[Optional]** The order in which to return the results (ascending or descending). By default. records are returned in ascending order, so the oldest records are returned first.",
+                              "key": "direction",
+                              "value": "asc"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                              "key": "timeFormat",
+                              "value": "ms"
+                            },
+                            {
+                              "description": "**[Optional]** Payload only includes data filtered by the action.",
+                              "key": "action",
+                              "value": "Borrow"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "a700f016-69f0-4de4-983a-1ab5b3423e82",
+                              "key": "protocolId",
+                              "value": "aavev2",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "79f0195f-f601-4897-b07d-52682e05c7cb",
+                              "key": "walletAddress",
+                              "value": "0x1ec5878ffc42e6d5d80422bdd06cf0712e5611fd",
+                              "description": "(Required) The wallet address"
+                            }
+                          ]
+                        },
+                        "description": "This API retrieves information about all of the actions taken by a specific wallet on the protocol within a certain timespan."
+                      },
+                      "response": [
+                        {
+                          "id": "0180a7ec-ad50-44ad-82ba-a824c42d775c",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "**[Optional]** The id of the blockchain for which you want protocol data from. Defaults to `ethereum-mainnet` if not specified. Use the [Information Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols) API to view the supported protocol and blockchain id combinations.",
+                                "key": "x-amberdata-blockchain-id",
+                                "value": "optimism-mainnet"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/lending/:protocolId/wallets/:walletAddress?startDate=2022-09-01&endDate=2022-10-31&size=<integer>&direction=asc&timeFormat=ms&action=Borrow",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "lending",
+                                ":protocolId",
+                                "wallets",
+                                ":walletAddress"
+                              ],
+                              "query": [
+                                {
+                                  "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "startDate",
+                                  "value": "2022-09-01"
+                                },
+                                {
+                                  "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "endDate",
+                                  "value": "2022-10-31"
+                                },
+                                {
+                                  "description": "**[Optional]** Number of records per page. If not specified, the API will default to and try to return 1000 actions under **payload.data**.",
+                                  "key": "size",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "**[Optional]** The order in which to return the results (ascending or descending). By default. records are returned in ascending order, so the oldest records are returned first.",
+                                  "key": "direction",
+                                  "value": "asc"
+                                },
+                                {
+                                  "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                                  "key": "timeFormat",
+                                  "value": "ms"
+                                },
+                                {
+                                  "description": "**[Optional]** Payload only includes data filtered by the action.",
+                                  "key": "action",
+                                  "value": "Borrow"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "protocolId"
+                                },
+                                {
+                                  "key": "walletAddress"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"next\": \"<string>\"\n    },\n    \"data\": [\n      {\n        \"action\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"blockNumber\": 0,\n        \"transactionHash\": \"<string>\",\n        \"logIndex\": 0,\n        \"assetId\": \"<string>\",\n        \"assetSymbol\": \"<string>\",\n        \"marketId\": \"<string>\",\n        \"market\": \"<string>\",\n        \"amount\": 0,\n        \"user\": \"<string>\",\n        \"to\": \"<string>\"\n      },\n      {\n        \"action\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"blockNumber\": 0,\n        \"transactionHash\": \"<string>\",\n        \"logIndex\": 0,\n        \"assetId\": \"<string>\",\n        \"assetSymbol\": \"<string>\",\n        \"marketId\": \"<string>\",\n        \"market\": \"<string>\",\n        \"amount\": 0,\n        \"user\": \"<string>\",\n        \"to\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:33.000Z",
+                          "updatedAt": "2026-07-28T00:59:33.000Z",
+                          "uid": "35240-0180a7ec-ad50-44ad-82ba-a824c42d775c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:33.000Z",
+                      "updatedAt": "2026-07-28T00:59:33.000Z",
+                      "uid": "35240-8c84f44d-e4af-424f-9994-f9be68e86402"
+                    }
+                  ],
+                  "id": "143d6ea7-85ad-41c4-8f8e-8d511faec19a",
+                  "createdAt": "2026-07-28T00:59:32.000Z",
+                  "updatedAt": "2026-07-28T00:59:32.000Z",
+                  "uid": "35240-143d6ea7-85ad-41c4-8f8e-8d511faec19a"
+                },
+                {
+                  "name": "{address}",
+                  "item": [
+                    {
+                      "name": "portfolio",
+                      "item": [
+                        {
+                          "name": "Track Positions - Lending Wallets",
+                          "id": "eaa3832d-2789-4887-a0db-053644cd3488",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) **[Optional]** The id of the blockchain for which you want protocol data from. Defaults to `ethereum-mainnet` if not specified. Use the [Information Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols) API to view the supported protocol and blockchain id combinations.",
+                                "key": "x-amberdata-blockchain-id",
+                                "value": "polygon-mainnet"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/lending/:protocolId/wallets/:address/portfolio?timeFormat=hr&endDate=<string>&blockNumber=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "lending",
+                                ":protocolId",
+                                "wallets",
+                                ":address",
+                                "portfolio"
+                              ],
+                              "query": [
+                                {
+                                  "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                                  "key": "timeFormat",
+                                  "value": "hr"
+                                },
+                                {
+                                  "description": "**[Optional]** If provided, returns the balances of the address at this date. Enables historical look-back of the portfolio.<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`<BR>**[Warning]** Cannot be combined with `blockNumber`, use only one, either `endDate` or `blockNumber`.",
+                                  "key": "endDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "**[Optional]** If provided, returns the balances of the address when this block was finalized. Enables historical look-back of the portfolio.<BR>**[Warning]** Cannot be combined with `endDate`, use only one, either `blockNumber` or `endDate`.",
+                                  "key": "blockNumber",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "8dda0cf4-12c0-498c-a19d-e53ad73ff32b",
+                                  "key": "protocolId",
+                                  "value": "aavev3",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "6a27eee8-55a7-4baa-b66f-23efb5f6bdb6",
+                                  "key": "address",
+                                  "value": "0x884d6fa3a4b349880486ad4d7c833ca968c785d8",
+                                  "description": "(Required) The address for which the portfolio summary is desired. Example address is for `aavev3` plus `polygon-mainnet` **only**."
+                                }
+                              ]
+                            },
+                            "description": "This API retrieves the balances of a given address within supported lending protocols."
+                          },
+                          "response": [
+                            {
+                              "id": "410bf6e9-3dca-4e64-9b34-6df667fda430",
+                              "name": "200",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) **[Optional]** The id of the blockchain for which you want protocol data from. Defaults to `ethereum-mainnet` if not specified. Use the [Information Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols) API to view the supported protocol and blockchain id combinations.",
+                                    "key": "x-amberdata-blockchain-id",
+                                    "value": "polygon-mainnet"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/lending/:protocolId/wallets/:address/portfolio?timeFormat=hr&endDate=<string>&blockNumber=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "lending",
+                                    ":protocolId",
+                                    "wallets",
+                                    ":address",
+                                    "portfolio"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                                      "key": "timeFormat",
+                                      "value": "hr"
+                                    },
+                                    {
+                                      "description": "**[Optional]** If provided, returns the balances of the address at this date. Enables historical look-back of the portfolio.<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`<BR>**[Warning]** Cannot be combined with `blockNumber`, use only one, either `endDate` or `blockNumber`.",
+                                      "key": "endDate",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "**[Optional]** If provided, returns the balances of the address when this block was finalized. Enables historical look-back of the portfolio.<BR>**[Warning]** Cannot be combined with `endDate`, use only one, either `blockNumber` or `endDate`.",
+                                      "key": "blockNumber",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "protocolId"
+                                    },
+                                    {
+                                      "key": "address"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"next\": \"<string>\"\n    },\n    \"data\": {\n      \"timestamp\": \"<string>\",\n      \"totalLiquidityETH\": 0,\n      \"totalLiquidityUSD\": 0,\n      \"totalCollateralETH\": 0,\n      \"totalCollateralUSD\": 0,\n      \"totalBorrowedETH\": 0,\n      \"totalBorrowedUSD\": 0,\n      \"availableToBorrowETH\": 0,\n      \"availableToBorrowUSD\": 0,\n      \"netWorthETH\": 0,\n      \"netWorthUSD\": 0,\n      \"lifetimeRewardsETH\": 0,\n      \"lifetimeRewardsUSD\": 0,\n      \"unclaimedRewardsETH\": 0,\n      \"unclaimedRewardsUSD\": 0,\n      \"healthFactor\": 0,\n      \"loanToValueRatio\": 0,\n      \"liquidationThresholdRatio\": 0,\n      \"positions\": [\n        {\n          \"assetId\": \"<string>\",\n          \"assetSymbol\": \"<string>\",\n          \"positionType\": \"<string>\",\n          \"isCollateral\": true,\n          \"loanToValueRatio\": 0,\n          \"liquidationThresholdRatio\": 0,\n          \"amountNative\": 0,\n          \"amountUSD\": 0,\n          \"interestRateAPY\": 0,\n          \"interestRateType\": \"<string>\"\n        },\n        {\n          \"assetId\": \"<string>\",\n          \"assetSymbol\": \"<string>\",\n          \"positionType\": \"<string>\",\n          \"isCollateral\": true,\n          \"loanToValueRatio\": 0,\n          \"liquidationThresholdRatio\": 0,\n          \"amountNative\": 0,\n          \"amountUSD\": 0,\n          \"interestRateAPY\": 0,\n          \"interestRateType\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T00:59:33.000Z",
+                              "updatedAt": "2026-07-28T00:59:33.000Z",
+                              "uid": "35240-410bf6e9-3dca-4e64-9b34-6df667fda430"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:59:33.000Z",
+                          "updatedAt": "2026-07-28T00:59:33.000Z",
+                          "uid": "35240-eaa3832d-2789-4887-a0db-053644cd3488"
+                        }
+                      ],
+                      "id": "22188503-b2ed-4556-82d8-3452f8132f67",
+                      "createdAt": "2026-07-28T00:59:32.000Z",
+                      "updatedAt": "2026-07-28T00:59:32.000Z",
+                      "uid": "35240-22188503-b2ed-4556-82d8-3452f8132f67"
+                    }
+                  ],
+                  "id": "3be83537-115b-4447-ac5b-fa7628e88869",
+                  "createdAt": "2026-07-28T00:59:32.000Z",
+                  "updatedAt": "2026-07-28T00:59:32.000Z",
+                  "uid": "35240-3be83537-115b-4447-ac5b-fa7628e88869"
+                }
+              ],
+              "id": "ce538104-8ffa-4490-8d2d-22eca2040d84",
+              "createdAt": "2026-07-28T00:59:32.000Z",
+              "updatedAt": "2026-07-28T00:59:32.000Z",
+              "uid": "35240-ce538104-8ffa-4490-8d2d-22eca2040d84"
+            },
+            {
+              "name": "assets",
+              "item": [
+                {
+                  "name": "{asset}",
+                  "item": [
+                    {
+                      "name": "Asset Lens",
+                      "id": "2cd79382-7ae5-4513-805a-1301d186acf8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "**[Optional]** The id of the blockchain for which you want protocol data from. Defaults to `ethereum-mainnet` if not specified. Use the [Information Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols) API to view the supported protocol and blockchain id combinations.",
+                            "key": "x-amberdata-blockchain-id",
+                            "value": "optimism-mainnet"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/lending/:protocolId/assets/:asset?startDate=<dateTime>&endDate=<dateTime>&size=<integer>&direction=asc&timeFormat=ms&action=Borrow",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "lending",
+                            ":protocolId",
+                            "assets",
+                            ":asset"
+                          ],
+                          "query": [
+                            {
+                              "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                              "key": "startDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                              "key": "endDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "**[Optional]** Number of records per page. If not specified, the API will default to and try to return 1000 actions under **payload.data**.",
+                              "key": "size",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "**[Optional]** The order in which to return the results (ascending or descending). By default. records are returned in ascending order, so the oldest records are returned first.",
+                              "key": "direction",
+                              "value": "asc"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                              "key": "timeFormat",
+                              "value": "ms"
+                            },
+                            {
+                              "description": "**[Optional]** Payload only includes data filtered by the action.<BR>**[Examples]** `UseReserveAsCollateral|Deposit|Withdraw|LiquidationCall|Repay|Borrow|FlashLoan`",
+                              "key": "action",
+                              "value": "Borrow"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "5f9e9529-a5ed-4318-9e78-0400d1f42903",
+                              "key": "protocolId",
+                              "value": "aavev2",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "cf0a69df-47e2-4387-a280-0f62f6ba749c",
+                              "key": "asset",
+                              "value": "WETH",
+                              "description": "(Required) **[Examples]** `WETH` The token symbol"
+                            }
+                          ]
+                        },
+                        "description": "This API retrieves information about all of the actions that occurred for a specific asset on the protocol within a certain timespan."
+                      },
+                      "response": [
+                        {
+                          "id": "1946b1fd-dc7a-47ad-bcec-5cf9afbbb0fd",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "**[Optional]** The id of the blockchain for which you want protocol data from. Defaults to `ethereum-mainnet` if not specified. Use the [Information Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols) API to view the supported protocol and blockchain id combinations.",
+                                "key": "x-amberdata-blockchain-id",
+                                "value": "optimism-mainnet"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/lending/:protocolId/assets/:asset?startDate=<dateTime>&endDate=<dateTime>&size=<integer>&direction=asc&timeFormat=ms&action=Borrow",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "lending",
+                                ":protocolId",
+                                "assets",
+                                ":asset"
+                              ],
+                              "query": [
+                                {
+                                  "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "startDate",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "endDate",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "**[Optional]** Number of records per page. If not specified, the API will default to and try to return 1000 actions under **payload.data**.",
+                                  "key": "size",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "**[Optional]** The order in which to return the results (ascending or descending). By default. records are returned in ascending order, so the oldest records are returned first.",
+                                  "key": "direction",
+                                  "value": "asc"
+                                },
+                                {
+                                  "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                                  "key": "timeFormat",
+                                  "value": "ms"
+                                },
+                                {
+                                  "description": "**[Optional]** Payload only includes data filtered by the action.<BR>**[Examples]** `UseReserveAsCollateral|Deposit|Withdraw|LiquidationCall|Repay|Borrow|FlashLoan`",
+                                  "key": "action",
+                                  "value": "Borrow"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "protocolId"
+                                },
+                                {
+                                  "key": "asset"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"next\": \"<string>\"\n    },\n    \"data\": [\n      {\n        \"action\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"blockNumber\": 0,\n        \"transactionHash\": \"<string>\",\n        \"logIndex\": 0,\n        \"assetId\": \"<string>\",\n        \"assetSymbol\": \"<string>\",\n        \"marketId\": \"<string>\",\n        \"market\": \"<string>\",\n        \"amount\": 0,\n        \"user\": \"<string>\",\n        \"to\": \"<string>\"\n      },\n      {\n        \"action\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"blockNumber\": 0,\n        \"transactionHash\": \"<string>\",\n        \"logIndex\": 0,\n        \"assetId\": \"<string>\",\n        \"assetSymbol\": \"<string>\",\n        \"marketId\": \"<string>\",\n        \"market\": \"<string>\",\n        \"amount\": 0,\n        \"user\": \"<string>\",\n        \"to\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:33.000Z",
+                          "updatedAt": "2026-07-28T00:59:33.000Z",
+                          "uid": "35240-1946b1fd-dc7a-47ad-bcec-5cf9afbbb0fd"
+                        },
+                        {
+                          "id": "dc28283a-ebb7-4fea-b152-de35c9ad448b",
+                          "name": "400",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "**[Optional]** The id of the blockchain for which you want protocol data from. Defaults to `ethereum-mainnet` if not specified. Use the [Information Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols) API to view the supported protocol and blockchain id combinations.",
+                                "key": "x-amberdata-blockchain-id",
+                                "value": "optimism-mainnet"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/lending/:protocolId/assets/:asset?startDate=<dateTime>&endDate=<dateTime>&size=<integer>&direction=asc&timeFormat=ms&action=Borrow",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "lending",
+                                ":protocolId",
+                                "assets",
+                                ":asset"
+                              ],
+                              "query": [
+                                {
+                                  "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "startDate",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "endDate",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "**[Optional]** Number of records per page. If not specified, the API will default to and try to return 1000 actions under **payload.data**.",
+                                  "key": "size",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "**[Optional]** The order in which to return the results (ascending or descending). By default. records are returned in ascending order, so the oldest records are returned first.",
+                                  "key": "direction",
+                                  "value": "asc"
+                                },
+                                {
+                                  "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                                  "key": "timeFormat",
+                                  "value": "ms"
+                                },
+                                {
+                                  "description": "**[Optional]** Payload only includes data filtered by the action.<BR>**[Examples]** `UseReserveAsCollateral|Deposit|Withdraw|LiquidationCall|Repay|Borrow|FlashLoan`",
+                                  "key": "action",
+                                  "value": "Borrow"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "protocolId"
+                                },
+                                {
+                                  "key": "asset"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T00:59:33.000Z",
+                          "updatedAt": "2026-07-28T00:59:33.000Z",
+                          "uid": "35240-dc28283a-ebb7-4fea-b152-de35c9ad448b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:33.000Z",
+                      "updatedAt": "2026-07-28T00:59:33.000Z",
+                      "uid": "35240-2cd79382-7ae5-4513-805a-1301d186acf8"
+                    }
+                  ],
+                  "id": "222e6a3e-5d15-4d72-9b61-50badb90f843",
+                  "createdAt": "2026-07-28T00:59:32.000Z",
+                  "updatedAt": "2026-07-28T00:59:32.000Z",
+                  "uid": "35240-222e6a3e-5d15-4d72-9b61-50badb90f843"
+                },
+                {
+                  "name": "{assetId}",
+                  "item": [
+                    {
+                      "name": "metrics",
+                      "item": [
+                        {
+                          "name": "summary",
+                          "item": [
+                            {
+                              "name": "Lending Asset Summary Metrics",
+                              "id": "6fd02f52-823e-41b9-a6b5-1ab1b78a2e73",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "**[Optional]** The id of the blockchain for which you want data from. Defaults to `ethereum-mainnet` if not specified. Use the [Information Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols) API to view the supported protocol and blockchain id combinations.",
+                                    "key": "x-amberdata-blockchain-id",
+                                    "value": "ethereum-mainnet"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/lending/:protocolId/assets/:assetId/metrics/summary?startDate=<dateTime>&endDate=<dateTime>&timeFormat=hr&market=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "lending",
+                                    ":protocolId",
+                                    "assets",
+                                    ":assetId",
+                                    "metrics",
+                                    "summary"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                      "key": "startDate",
+                                      "value": "<dateTime>"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                      "key": "endDate",
+                                      "value": "<dateTime>"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                                      "key": "timeFormat",
+                                      "value": "hr"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Applies only when `protocolId = makerdao`. Get only the aggregate data for the specific asset market.",
+                                      "key": "market",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "4739450e-2579-4605-9b3b-d7216142069e",
+                                      "key": "protocolId",
+                                      "value": "aavev3",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "eda1b73b-de43-435b-96fe-78ae492e9992",
+                                      "key": "assetId",
+                                      "value": "WETH",
+                                      "description": "(Required) **[Examples]** `USDC | WETH`. The requested asset must exist on the specified protocol."
+                                    }
+                                  ]
+                                },
+                                "description": "This API provides aggregated insights into the asset markets across various lending protocols."
+                              },
+                              "response": [
+                                {
+                                  "id": "41463760-a1b6-45fb-81e3-ef244959aa2f",
+                                  "name": "200",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "**[Optional]** The id of the blockchain for which you want data from. Defaults to `ethereum-mainnet` if not specified. Use the [Information Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols) API to view the supported protocol and blockchain id combinations.",
+                                        "key": "x-amberdata-blockchain-id",
+                                        "value": "ethereum-mainnet"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/lending/:protocolId/assets/:assetId/metrics/summary?startDate=<dateTime>&endDate=<dateTime>&timeFormat=hr&market=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "lending",
+                                        ":protocolId",
+                                        "assets",
+                                        ":assetId",
+                                        "metrics",
+                                        "summary"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                          "key": "startDate",
+                                          "value": "<dateTime>"
+                                        },
+                                        {
+                                          "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                          "key": "endDate",
+                                          "value": "<dateTime>"
+                                        },
+                                        {
+                                          "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                                          "key": "timeFormat",
+                                          "value": "hr"
+                                        },
+                                        {
+                                          "description": "**[Optional]** Applies only when `protocolId = makerdao`. Get only the aggregate data for the specific asset market.",
+                                          "key": "market",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "protocolId"
+                                        },
+                                        {
+                                          "key": "assetId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": {\n      \"metrics\": [\n        {\n          \"timestamp\": \"<string>\",\n          \"totalDepositedUSD\": \"<number>\",\n          \"totalBorrowedUSD\": \"<number>\",\n          \"cumulativeLiquidatedUSD\": \"<number>\",\n          \"intervalDepositedUSD\": \"<number>\",\n          \"intervalWithdrawnUSD\": \"<number>\",\n          \"intervalRepaidUSD\": \"<number>\",\n          \"intervalBorrowedUSD\": \"<number>\",\n          \"intervalLiquidatedUSD\": \"<number>\",\n          \"intervalFlashLoanedUSD\": \"<number>\"\n        },\n        {\n          \"timestamp\": \"<string>\",\n          \"totalDepositedUSD\": \"<number>\",\n          \"totalBorrowedUSD\": \"<number>\",\n          \"cumulativeLiquidatedUSD\": \"<number>\",\n          \"intervalDepositedUSD\": \"<number>\",\n          \"intervalWithdrawnUSD\": \"<number>\",\n          \"intervalRepaidUSD\": \"<number>\",\n          \"intervalBorrowedUSD\": \"<number>\",\n          \"intervalLiquidatedUSD\": \"<number>\",\n          \"intervalFlashLoanedUSD\": \"<number>\"\n        }\n      ]\n    }\n  }\n}",
+                                  "createdAt": "2026-07-28T00:59:33.000Z",
+                                  "updatedAt": "2026-07-28T00:59:33.000Z",
+                                  "uid": "35240-41463760-a1b6-45fb-81e3-ef244959aa2f"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T00:59:33.000Z",
+                              "updatedAt": "2026-07-28T00:59:33.000Z",
+                              "uid": "35240-6fd02f52-823e-41b9-a6b5-1ab1b78a2e73"
+                            }
+                          ],
+                          "id": "83cfe86c-a759-431a-801a-10bc9231550d",
+                          "createdAt": "2026-07-28T00:59:32.000Z",
+                          "updatedAt": "2026-07-28T00:59:32.000Z",
+                          "uid": "35240-83cfe86c-a759-431a-801a-10bc9231550d"
+                        }
+                      ],
+                      "id": "52cb8f14-81f6-4995-b1f7-8b1c3b66fe80",
+                      "createdAt": "2026-07-28T00:59:32.000Z",
+                      "updatedAt": "2026-07-28T00:59:32.000Z",
+                      "uid": "35240-52cb8f14-81f6-4995-b1f7-8b1c3b66fe80"
+                    }
+                  ],
+                  "id": "f4a50f56-2e4a-4e1b-b875-e315b17c3cbb",
+                  "createdAt": "2026-07-28T00:59:32.000Z",
+                  "updatedAt": "2026-07-28T00:59:32.000Z",
+                  "uid": "35240-f4a50f56-2e4a-4e1b-b875-e315b17c3cbb"
+                }
+              ],
+              "id": "f6e4fe75-6677-46d3-9c52-3b15650da3d1",
+              "createdAt": "2026-07-28T00:59:32.000Z",
+              "updatedAt": "2026-07-28T00:59:32.000Z",
+              "uid": "35240-f6e4fe75-6677-46d3-9c52-3b15650da3d1"
+            },
+            {
+              "name": "governance",
+              "item": [
+                {
+                  "name": "Governance Lens",
+                  "id": "013e1705-d102-4bf9-82e6-ca26de764fc4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lending/:protocolId/governance?startDate=2022-09-01&endDate=2022-09-30&size=<integer>&direction=<string>&timeFormat=<string>&proposalId=<string>&address=<string>&support=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lending",
+                        ":protocolId",
+                        "governance"
+                      ],
+                      "query": [
+                        {
+                          "description": "Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                          "key": "startDate",
+                          "value": "2022-09-01"
+                        },
+                        {
+                          "description": "Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                          "key": "endDate",
+                          "value": "2022-09-30"
+                        },
+                        {
+                          "description": "Number of records per page",
+                          "key": "size",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The order in which to return the results (ascending or descending). By default. records are returned in descending order, so the most recent records are returned first.",
+                          "key": "direction",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The proposal id to filter results by",
+                          "key": "proposalId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The wallet address to filter results by",
+                          "key": "address",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter results by votes for or votes against",
+                          "key": "support",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "2a7a2804-3315-4a3c-a9d5-55b34c970d26",
+                          "key": "protocolId",
+                          "value": "aavev2",
+                          "description": "(Required) **Note**: Aave has the same governance regardless of protocol version (v2 vs. v3)."
+                        }
+                      ]
+                    },
+                    "description": "This API retrieves information about all of the governance actions that occurred for the protocol within a certain timespan."
+                  },
+                  "response": [
+                    {
+                      "id": "e28aff25-594c-48cf-8581-655adb641471",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/lending/:protocolId/governance?startDate=2022-09-01&endDate=2022-09-30&size=<integer>&direction=<string>&timeFormat=<string>&proposalId=<string>&address=<string>&support=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "lending",
+                            ":protocolId",
+                            "governance"
+                          ],
+                          "query": [
+                            {
+                              "description": "Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                              "key": "startDate",
+                              "value": "2022-09-01"
+                            },
+                            {
+                              "description": "Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                              "key": "endDate",
+                              "value": "2022-09-30"
+                            },
+                            {
+                              "description": "Number of records per page",
+                              "key": "size",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "The order in which to return the results (ascending or descending). By default. records are returned in descending order, so the most recent records are returned first.",
+                              "key": "direction",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                              "key": "timeFormat",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The proposal id to filter results by",
+                              "key": "proposalId",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The wallet address to filter results by",
+                              "key": "address",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter results by votes for or votes against",
+                              "key": "support",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "protocolId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"next\": \"<string>\"\n    },\n    \"data\": [\n      {\n        \"action\": \"<string>\",\n        \"proposalId\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"title\": \"<string>\",\n        \"shortDescription\": \"<string>\",\n        \"ipfsHash\": \"<string>\",\n        \"creator\": \"<string>\"\n      },\n      {\n        \"action\": \"<string>\",\n        \"proposalId\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"title\": \"<string>\",\n        \"shortDescription\": \"<string>\",\n        \"ipfsHash\": \"<string>\",\n        \"creator\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T00:59:33.000Z",
+                      "updatedAt": "2026-07-28T00:59:33.000Z",
+                      "uid": "35240-e28aff25-594c-48cf-8581-655adb641471"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:59:33.000Z",
+                  "updatedAt": "2026-07-28T00:59:33.000Z",
+                  "uid": "35240-013e1705-d102-4bf9-82e6-ca26de764fc4"
+                }
+              ],
+              "id": "3c5353ec-b013-4626-bca4-ebe1f26a95e3",
+              "createdAt": "2026-07-28T00:59:32.000Z",
+              "updatedAt": "2026-07-28T00:59:32.000Z",
+              "uid": "35240-3c5353ec-b013-4626-bca4-ebe1f26a95e3"
+            },
+            {
+              "name": "metrics",
+              "item": [
+                {
+                  "name": "summary",
+                  "item": [
+                    {
+                      "name": "Lending Protocol Summary Metrics",
+                      "id": "026ce34e-80cd-406b-b9c2-691124aee3b6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "**[Optional]** The id of the blockchain for which you want data from. Defaults to `ethereum-mainnet` if not specified. Use the [Information Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols) API to view the supported protocol and blockchain id combinations.",
+                            "key": "x-amberdata-blockchain-id",
+                            "value": "optimism-mainnet"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/lending/:protocolId/metrics/summary?startDate=<dateTime>&endDate=<dateTime>&timeFormat=hr",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "lending",
+                            ":protocolId",
+                            "metrics",
+                            "summary"
+                          ],
+                          "query": [
+                            {
+                              "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                              "key": "startDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                              "key": "endDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                              "key": "timeFormat",
+                              "value": "hr"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "8a16bfbe-09cd-48b1-abaa-e9a78de87a2a",
+                              "key": "protocolId",
+                              "value": "aavev3",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "This API provides aggregated insights into the lending protocols."
+                      },
+                      "response": [
+                        {
+                          "id": "4e12a78a-4ae5-4cb8-b2f5-e2386867b125",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "**[Optional]** The id of the blockchain for which you want data from. Defaults to `ethereum-mainnet` if not specified. Use the [Information Protocols](https://docs.amberdata.io/reference/defi-lending-information-protocols) API to view the supported protocol and blockchain id combinations.",
+                                "key": "x-amberdata-blockchain-id",
+                                "value": "optimism-mainnet"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/lending/:protocolId/metrics/summary?startDate=<dateTime>&endDate=<dateTime>&timeFormat=hr",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "lending",
+                                ":protocolId",
+                                "metrics",
+                                "summary"
+                              ],
+                              "query": [
+                                {
+                                  "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "startDate",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "endDate",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                                  "key": "timeFormat",
+                                  "value": "hr"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "protocolId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": {\n      \"metrics\": [\n        {\n          \"timestamp\": \"<string>\",\n          \"totalDepositedUSD\": \"<number>\",\n          \"totalBorrowedUSD\": \"<number>\",\n          \"cumulativeLiquidatedUSD\": \"<number>\",\n          \"cumulativeProtocolRevenueUSD\": \"<number>\",\n          \"cumulativeInterestAccumulatedUSD\": \"<number>\",\n          \"intervalProtocolRevenueUSD\": \"<number>\",\n          \"intervalInterestAccumulatedUSD\": \"<number>\",\n          \"intervalNumberOfDeposits\": \"<integer>\",\n          \"intervalNumberOfWithdraws\": \"<integer>\",\n          \"intervalNumberOfRepays\": \"<integer>\",\n          \"intervalNumberOfBorrows\": \"<integer>\",\n          \"intervalNumberOfLiquidations\": \"<integer>\",\n          \"intervalNumberOfUsers\": \"<integer>\",\n          \"intervalDepositedUSD\": \"<number>\",\n          \"intervalWithdrawnUSD\": \"<number>\",\n          \"intervalRepaidUSD\": \"<number>\",\n          \"intervalBorrowedUSD\": \"<number>\",\n          \"intervalLiquidatedUSD\": \"<number>\",\n          \"intervalFlashLoanedUSD\": \"<number>\"\n        },\n        {\n          \"timestamp\": \"<string>\",\n          \"totalDepositedUSD\": \"<number>\",\n          \"totalBorrowedUSD\": \"<number>\",\n          \"cumulativeLiquidatedUSD\": \"<number>\",\n          \"cumulativeProtocolRevenueUSD\": \"<number>\",\n          \"cumulativeInterestAccumulatedUSD\": \"<number>\",\n          \"intervalProtocolRevenueUSD\": \"<number>\",\n          \"intervalInterestAccumulatedUSD\": \"<number>\",\n          \"intervalNumberOfDeposits\": \"<integer>\",\n          \"intervalNumberOfWithdraws\": \"<integer>\",\n          \"intervalNumberOfRepays\": \"<integer>\",\n          \"intervalNumberOfBorrows\": \"<integer>\",\n          \"intervalNumberOfLiquidations\": \"<integer>\",\n          \"intervalNumberOfUsers\": \"<integer>\",\n          \"intervalDepositedUSD\": \"<number>\",\n          \"intervalWithdrawnUSD\": \"<number>\",\n          \"intervalRepaidUSD\": \"<number>\",\n          \"intervalBorrowedUSD\": \"<number>\",\n          \"intervalLiquidatedUSD\": \"<number>\",\n          \"intervalFlashLoanedUSD\": \"<number>\"\n        }\n      ]\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:33.000Z",
+                          "updatedAt": "2026-07-28T00:59:33.000Z",
+                          "uid": "35240-4e12a78a-4ae5-4cb8-b2f5-e2386867b125"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:33.000Z",
+                      "updatedAt": "2026-07-28T00:59:33.000Z",
+                      "uid": "35240-026ce34e-80cd-406b-b9c2-691124aee3b6"
+                    }
+                  ],
+                  "id": "00a08391-01ac-4e9d-931a-6ce1ff937f73",
+                  "createdAt": "2026-07-28T00:59:32.000Z",
+                  "updatedAt": "2026-07-28T00:59:32.000Z",
+                  "uid": "35240-00a08391-01ac-4e9d-931a-6ce1ff937f73"
+                }
+              ],
+              "id": "41eaebb6-ffd1-4aad-b748-2bcc6cdf65c0",
+              "createdAt": "2026-07-28T00:59:32.000Z",
+              "updatedAt": "2026-07-28T00:59:32.000Z",
+              "uid": "35240-41eaebb6-ffd1-4aad-b748-2bcc6cdf65c0"
+            }
+          ],
+          "id": "4152a5bd-5c40-48e2-b729-c772e6149acd",
+          "createdAt": "2026-07-28T00:59:32.000Z",
+          "updatedAt": "2026-07-28T00:59:32.000Z",
+          "uid": "35240-4152a5bd-5c40-48e2-b729-c772e6149acd"
+        },
+        {
+          "name": "protocols",
+          "item": [
+            {
+              "name": "information",
+              "item": [
+                {
+                  "name": "Information - Lending Protocols",
+                  "id": "a21d0bd9-a9e1-4ca8-a9b9-84c7710c65a3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lending/protocols/information?blockchain=optimism-mainnet&protocol=aave&endDate=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lending",
+                        "protocols",
+                        "information"
+                      ],
+                      "query": [
+                        {
+                          "description": "The blockchainId or blockchain slug to filter results by",
+                          "key": "blockchain",
+                          "value": "optimism-mainnet"
+                        },
+                        {
+                          "description": "The protocol to filter results by",
+                          "key": "protocol",
+                          "value": "aave"
+                        },
+                        {
+                          "description": "**[Optional]** If provided, returns the associated state of this protocol up to the specified date. <BR>**[Examples]** `2023-01-01`",
+                          "key": "endDate",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "This API lists the supported DeFi lending protocols and provides snapshots of aggregate metrics."
+                  },
+                  "response": [
+                    {
+                      "id": "728177e7-8c5e-478d-885d-e39ad3c46b5e",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/lending/protocols/information?blockchain=optimism-mainnet&protocol=aave&endDate=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "lending",
+                            "protocols",
+                            "information"
+                          ],
+                          "query": [
+                            {
+                              "description": "The blockchainId or blockchain slug to filter results by",
+                              "key": "blockchain",
+                              "value": "optimism-mainnet"
+                            },
+                            {
+                              "description": "The protocol to filter results by",
+                              "key": "protocol",
+                              "value": "aave"
+                            },
+                            {
+                              "description": "**[Optional]** If provided, returns the associated state of this protocol up to the specified date. <BR>**[Examples]** `2023-01-01`",
+                              "key": "endDate",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": [\n    {\n      \"protocolId\": \"<string>\",\n      \"protocolName\": \"<string>\",\n      \"protocolVersion\": \"<string>\",\n      \"blockchain\": \"<string>\",\n      \"numAssets\": 0,\n      \"totalDepositedUSD\": 0,\n      \"totalCollateralUSD\": 0,\n      \"totalBorrowedUSD\": 0\n    },\n    {\n      \"protocolId\": \"<string>\",\n      \"protocolName\": \"<string>\",\n      \"protocolVersion\": \"<string>\",\n      \"blockchain\": \"<string>\",\n      \"numAssets\": 0,\n      \"totalDepositedUSD\": 0,\n      \"totalCollateralUSD\": 0,\n      \"totalBorrowedUSD\": 0\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T00:59:33.000Z",
+                      "updatedAt": "2026-07-28T00:59:33.000Z",
+                      "uid": "35240-728177e7-8c5e-478d-885d-e39ad3c46b5e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:59:33.000Z",
+                  "updatedAt": "2026-07-28T00:59:33.000Z",
+                  "uid": "35240-a21d0bd9-a9e1-4ca8-a9b9-84c7710c65a3"
+                }
+              ],
+              "id": "adb19725-207f-4745-970e-40bc13813ca2",
+              "createdAt": "2026-07-28T00:59:32.000Z",
+              "updatedAt": "2026-07-28T00:59:32.000Z",
+              "uid": "35240-adb19725-207f-4745-970e-40bc13813ca2"
+            }
+          ],
+          "id": "718500e9-3939-4ad9-8eb1-c79e6b5cd943",
+          "createdAt": "2026-07-28T00:59:32.000Z",
+          "updatedAt": "2026-07-28T00:59:32.000Z",
+          "uid": "35240-718500e9-3939-4ad9-8eb1-c79e6b5cd943"
+        },
+        {
+          "name": "assets",
+          "item": [
+            {
+              "name": "information",
+              "item": [
+                {
+                  "name": "Information - Assets in Lending Protocols",
+                  "id": "9659b71e-42cc-4d96-bf0b-57bce00af602",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/lending/assets/information?blockchain=optimism-mainnet&protocol=aavev3&asset=<string>&market=<string>&endDate=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "lending",
+                        "assets",
+                        "information"
+                      ],
+                      "query": [
+                        {
+                          "description": "The blockchainId or blockchain slug to filter results by",
+                          "key": "blockchain",
+                          "value": "optimism-mainnet"
+                        },
+                        {
+                          "description": "The protocol to filter results by",
+                          "key": "protocol",
+                          "value": "aavev3"
+                        },
+                        {
+                          "description": "The asset id or symbol to filter the results by.",
+                          "key": "asset",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The market id or name to filter the results by.",
+                          "key": "market",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** If provided, returns the associated state of this asset up to the specified date since the first transaction involving this asset. <BR><BR>If not specified, returns the **current** (now) state of the asset since the first transaction involving the asset. <BR><BR>**[Examples]** `2023-01-01`",
+                          "key": "endDate",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "This API lists the supported assets across the available lending protocols and provides snapshots of aggregate metrics."
+                  },
+                  "response": [
+                    {
+                      "id": "4994f59e-651f-4103-afbb-65a4ba923474",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/lending/assets/information?blockchain=optimism-mainnet&protocol=aavev3&asset=<string>&market=<string>&endDate=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "lending",
+                            "assets",
+                            "information"
+                          ],
+                          "query": [
+                            {
+                              "description": "The blockchainId or blockchain slug to filter results by",
+                              "key": "blockchain",
+                              "value": "optimism-mainnet"
+                            },
+                            {
+                              "description": "The protocol to filter results by",
+                              "key": "protocol",
+                              "value": "aavev3"
+                            },
+                            {
+                              "description": "The asset id or symbol to filter the results by.",
+                              "key": "asset",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The market id or name to filter the results by.",
+                              "key": "market",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "**[Optional]** If provided, returns the associated state of this asset up to the specified date since the first transaction involving this asset. <BR><BR>If not specified, returns the **current** (now) state of the asset since the first transaction involving the asset. <BR><BR>**[Examples]** `2023-01-01`",
+                              "key": "endDate",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": [\n    {\n      \"protocolId\": \"<string>\",\n      \"protocolName\": \"<string>\",\n      \"protocolVersion\": \"<string>\",\n      \"blockchain\": \"<string>\",\n      \"assetId\": \"<string>\",\n      \"assetSymbol\": \"<string>\",\n      \"market\": \"<string>\",\n      \"decimals\": 0,\n      \"borrowRateStable\": 0,\n      \"borrowRateVariable\": 0,\n      \"lendRate\": 0,\n      \"totalDepositedUSD\": 0,\n      \"totalCollateralUSD\": 0,\n      \"totalBorrowedUSD\": 0,\n      \"totalLiquidationsUSD\": 0,\n      \"loanToValueRatio\": 0,\n      \"isActive\": true\n    },\n    {\n      \"protocolId\": \"<string>\",\n      \"protocolName\": \"<string>\",\n      \"protocolVersion\": \"<string>\",\n      \"blockchain\": \"<string>\",\n      \"assetId\": \"<string>\",\n      \"assetSymbol\": \"<string>\",\n      \"market\": \"<string>\",\n      \"decimals\": 0,\n      \"borrowRateStable\": 0,\n      \"borrowRateVariable\": 0,\n      \"lendRate\": 0,\n      \"totalDepositedUSD\": 0,\n      \"totalCollateralUSD\": 0,\n      \"totalBorrowedUSD\": 0,\n      \"totalLiquidationsUSD\": 0,\n      \"loanToValueRatio\": 0,\n      \"isActive\": true\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T00:59:33.000Z",
+                      "updatedAt": "2026-07-28T00:59:33.000Z",
+                      "uid": "35240-4994f59e-651f-4103-afbb-65a4ba923474"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:59:33.000Z",
+                  "updatedAt": "2026-07-28T00:59:33.000Z",
+                  "uid": "35240-9659b71e-42cc-4d96-bf0b-57bce00af602"
+                }
+              ],
+              "id": "836395a2-be22-4cb1-81a1-9d02a366b8b2",
+              "createdAt": "2026-07-28T00:59:32.000Z",
+              "updatedAt": "2026-07-28T00:59:32.000Z",
+              "uid": "35240-836395a2-be22-4cb1-81a1-9d02a366b8b2"
+            }
+          ],
+          "id": "66d29ed0-d16a-49ba-9c86-8a1b45234f6f",
+          "createdAt": "2026-07-28T00:59:32.000Z",
+          "updatedAt": "2026-07-28T00:59:32.000Z",
+          "uid": "35240-66d29ed0-d16a-49ba-9c86-8a1b45234f6f"
+        },
+        {
+          "name": "wallets",
+          "item": [
+            {
+              "name": "{walletAddress}",
+              "item": [
+                {
+                  "name": "returns",
+                  "item": [
+                    {
+                      "name": "Profit & Loss Analytics in DeFi Lending",
+                      "id": "bf78def8-9fff-4c1a-b0d2-87a03dff5fc5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "**[Optional]** The id of the blockchain for which you want data from. Defaults to `ethereum-mainnet` if not specified.",
+                            "key": "x-amberdata-blockchain-id",
+                            "value": "ethereum-mainnet"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/lending/wallets/:walletAddress/returns?startDate=<dateTime>&endDate=<dateTime>&timeFormat=hr",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "lending",
+                            "wallets",
+                            ":walletAddress",
+                            "returns"
+                          ],
+                          "query": [
+                            {
+                              "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                              "key": "startDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                              "key": "endDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                              "key": "timeFormat",
+                              "value": "hr"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "2badadaa-bb13-4119-bb22-5c6ea431d9d9",
+                              "key": "walletAddress",
+                              "value": "0x884d6fa3a4b349880486ad4d7c833ca968c785d8",
+                              "description": "(Required) The address to analyze. <BR><BR>**Note** Across different blockchains, a single user will most likely have different addresses i.e. the address on ethereum-mainnet will not be the same address on avalanche-mainnet."
+                            }
+                          ]
+                        },
+                        "description": "Analyze a wallet's historical yield, net worth and interest owed from lending and borrowing assets across different DeFi protocols."
+                      },
+                      "response": [
+                        {
+                          "id": "d1305c08-be04-456f-b138-2768cd377167",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "**[Optional]** The id of the blockchain for which you want data from. Defaults to `ethereum-mainnet` if not specified.",
+                                "key": "x-amberdata-blockchain-id",
+                                "value": "ethereum-mainnet"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/lending/wallets/:walletAddress/returns?startDate=<dateTime>&endDate=<dateTime>&timeFormat=hr",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "lending",
+                                "wallets",
+                                ":walletAddress",
+                                "returns"
+                              ],
+                              "query": [
+                                {
+                                  "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "startDate",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "endDate",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                                  "key": "timeFormat",
+                                  "value": "hr"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "walletAddress"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"blockchainId\": \"<string>\"\n    },\n    \"data\": {\n      \"metrics\": [\n        {\n          \"timestamp\": \"<string>\",\n          \"totalLiquidityUSD\": \"<number>\",\n          \"totalCollateralUSD\": \"<number>\",\n          \"totalBorrowedUSD\": \"<number>\",\n          \"netWorthUSD\": \"<number>\",\n          \"changeInLendInterestUSD\": \"<number>\",\n          \"changeInBorrowInterestUSD\": \"<number>\",\n          \"marketValueLendInterestUSD\": \"<number>\",\n          \"marketValueBorrowInterestUSD\": \"<number>\",\n          \"cumulativeLendInterestUSD\": \"<number>\",\n          \"cumulativeBorrowInterestUSD\": \"<number>\",\n          \"netWorthInProtocols\": [\n            {\n              \"protocolId\": \"<string>\",\n              \"totalLiquidityUSD\": \"<number>\",\n              \"totalCollateralUSD\": \"<number>\",\n              \"totalBorrowedUSD\": \"<number>\",\n              \"netWorthUSD\": \"<number>\",\n              \"changeInLendInterestUSD\": \"<number>\",\n              \"changeInBorrowInterestUSD\": \"<number>\",\n              \"marketValueLendInterestUSD\": \"<number>\",\n              \"marketValueBorrowInterestUSD\": \"<number>\",\n              \"cumulativeLendInterestUSD\": \"<number>\",\n              \"cumulativeBorrowInterestUSD\": \"<number>\"\n            },\n            {\n              \"protocolId\": \"<string>\",\n              \"totalLiquidityUSD\": \"<number>\",\n              \"totalCollateralUSD\": \"<number>\",\n              \"totalBorrowedUSD\": \"<number>\",\n              \"netWorthUSD\": \"<number>\",\n              \"changeInLendInterestUSD\": \"<number>\",\n              \"changeInBorrowInterestUSD\": \"<number>\",\n              \"marketValueLendInterestUSD\": \"<number>\",\n              \"marketValueBorrowInterestUSD\": \"<number>\",\n              \"cumulativeLendInterestUSD\": \"<number>\",\n              \"cumulativeBorrowInterestUSD\": \"<number>\"\n            }\n          ]\n        },\n        {\n          \"timestamp\": \"<string>\",\n          \"totalLiquidityUSD\": \"<number>\",\n          \"totalCollateralUSD\": \"<number>\",\n          \"totalBorrowedUSD\": \"<number>\",\n          \"netWorthUSD\": \"<number>\",\n          \"changeInLendInterestUSD\": \"<number>\",\n          \"changeInBorrowInterestUSD\": \"<number>\",\n          \"marketValueLendInterestUSD\": \"<number>\",\n          \"marketValueBorrowInterestUSD\": \"<number>\",\n          \"cumulativeLendInterestUSD\": \"<number>\",\n          \"cumulativeBorrowInterestUSD\": \"<number>\",\n          \"netWorthInProtocols\": [\n            {\n              \"protocolId\": \"<string>\",\n              \"totalLiquidityUSD\": \"<number>\",\n              \"totalCollateralUSD\": \"<number>\",\n              \"totalBorrowedUSD\": \"<number>\",\n              \"netWorthUSD\": \"<number>\",\n              \"changeInLendInterestUSD\": \"<number>\",\n              \"changeInBorrowInterestUSD\": \"<number>\",\n              \"marketValueLendInterestUSD\": \"<number>\",\n              \"marketValueBorrowInterestUSD\": \"<number>\",\n              \"cumulativeLendInterestUSD\": \"<number>\",\n              \"cumulativeBorrowInterestUSD\": \"<number>\"\n            },\n            {\n              \"protocolId\": \"<string>\",\n              \"totalLiquidityUSD\": \"<number>\",\n              \"totalCollateralUSD\": \"<number>\",\n              \"totalBorrowedUSD\": \"<number>\",\n              \"netWorthUSD\": \"<number>\",\n              \"changeInLendInterestUSD\": \"<number>\",\n              \"changeInBorrowInterestUSD\": \"<number>\",\n              \"marketValueLendInterestUSD\": \"<number>\",\n              \"marketValueBorrowInterestUSD\": \"<number>\",\n              \"cumulativeLendInterestUSD\": \"<number>\",\n              \"cumulativeBorrowInterestUSD\": \"<number>\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:33.000Z",
+                          "updatedAt": "2026-07-28T00:59:33.000Z",
+                          "uid": "35240-d1305c08-be04-456f-b138-2768cd377167"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:33.000Z",
+                      "updatedAt": "2026-07-28T00:59:33.000Z",
+                      "uid": "35240-bf78def8-9fff-4c1a-b0d2-87a03dff5fc5"
+                    }
+                  ],
+                  "id": "28c102d6-17b9-466d-91b8-897573a8e48b",
+                  "createdAt": "2026-07-28T00:59:32.000Z",
+                  "updatedAt": "2026-07-28T00:59:32.000Z",
+                  "uid": "35240-28c102d6-17b9-466d-91b8-897573a8e48b"
+                }
+              ],
+              "id": "10ff2fe9-63f0-4b59-bef0-1ba6e04289d2",
+              "createdAt": "2026-07-28T00:59:32.000Z",
+              "updatedAt": "2026-07-28T00:59:32.000Z",
+              "uid": "35240-10ff2fe9-63f0-4b59-bef0-1ba6e04289d2"
+            }
+          ],
+          "id": "42fb4edb-74e9-48e3-a20d-2643bdd1f0ba",
+          "createdAt": "2026-07-28T00:59:32.000Z",
+          "updatedAt": "2026-07-28T00:59:32.000Z",
+          "uid": "35240-42fb4edb-74e9-48e3-a20d-2643bdd1f0ba"
+        }
+      ],
+      "id": "f4fe5424-6377-4ea6-a56b-185090c7f2e2",
+      "createdAt": "2026-07-28T00:59:32.000Z",
+      "updatedAt": "2026-07-28T00:59:32.000Z",
+      "uid": "35240-f4fe5424-6377-4ea6-a56b-185090c7f2e2"
+    },
+    {
+      "name": "dex",
+      "item": [
+        {
+          "name": "uniswapv3",
+          "item": [
+            {
+              "name": "pools",
+              "item": [
+                {
+                  "name": "{poolAddress}",
+                  "item": [
+                    {
+                      "name": "liquidity-distribution",
+                      "item": [
+                        {
+                          "name": "Uniswap v3 Liquidity Distribution",
+                          "id": "47794f71-5191-4297-a535-d049ce7388c5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/dex/uniswapv3/pools/:poolAddress/liquidity-distribution?activeTick=<boolean>&price0USDMin=0.95&price0USDMax=1.05&price1USDMin=<double>&price1USDMax=<double>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "dex",
+                                "uniswapv3",
+                                "pools",
+                                ":poolAddress",
+                                "liquidity-distribution"
+                              ],
+                              "query": [
+                                {
+                                  "description": "When set to `true`, return just the current trading price, `tickIndex`, and the associated data.<br><br>**Cannot** be combined with `price*USD{Min|Max}` filters.",
+                                  "key": "activeTick",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "Minimum (inclusive) price of token 0 in US dollars.",
+                                  "key": "price0USDMin",
+                                  "value": "0.95"
+                                },
+                                {
+                                  "description": "Maximum (exclusive) price of token 0 in US dollars.",
+                                  "key": "price0USDMax",
+                                  "value": "1.05"
+                                },
+                                {
+                                  "description": "Minimum (inclusive) price of token 1 in US dollars.",
+                                  "key": "price1USDMin",
+                                  "value": "<double>"
+                                },
+                                {
+                                  "description": "Maximum (exclusive) price of token 1 in US dollars.",
+                                  "key": "price1USDMax",
+                                  "value": "<double>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "17e279e0-da5d-4a83-9bf7-ba4b19c70564",
+                                  "key": "poolAddress",
+                                  "value": "0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640",
+                                  "description": "(Required) A token pair's liquidity pool address. Default is `USDC/WETH 0.05%`"
+                                }
+                              ]
+                            },
+                            "description": "This API provides the **current** distribution of the liquidity in a specified Uniswap v3 pool."
+                          },
+                          "response": [
+                            {
+                              "id": "a42c7bdd-88dc-45fb-81b7-e90d194a52d3",
+                              "name": "200",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/dex/uniswapv3/pools/:poolAddress/liquidity-distribution?activeTick=<boolean>&price0USDMin=0.95&price0USDMax=1.05&price1USDMin=<double>&price1USDMax=<double>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "dex",
+                                    "uniswapv3",
+                                    "pools",
+                                    ":poolAddress",
+                                    "liquidity-distribution"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "When set to `true`, return just the current trading price, `tickIndex`, and the associated data.<br><br>**Cannot** be combined with `price*USD{Min|Max}` filters.",
+                                      "key": "activeTick",
+                                      "value": "<boolean>"
+                                    },
+                                    {
+                                      "description": "Minimum (inclusive) price of token 0 in US dollars.",
+                                      "key": "price0USDMin",
+                                      "value": "0.95"
+                                    },
+                                    {
+                                      "description": "Maximum (exclusive) price of token 0 in US dollars.",
+                                      "key": "price0USDMax",
+                                      "value": "1.05"
+                                    },
+                                    {
+                                      "description": "Minimum (inclusive) price of token 1 in US dollars.",
+                                      "key": "price1USDMin",
+                                      "value": "<double>"
+                                    },
+                                    {
+                                      "description": "Maximum (exclusive) price of token 1 in US dollars.",
+                                      "key": "price1USDMax",
+                                      "value": "<double>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "poolAddress"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"next\": \"<string,null>\"\n    },\n    \"data\": [\n      {\n        \"isActiveTick\": \"<boolean>\",\n        \"liquidity\": \"<string>\",\n        \"price0USD\": \"<number>\",\n        \"price1USD\": \"<number>\",\n        \"token0AmountLocked\": \"<number>\",\n        \"token1AmountLocked\": \"<number>\",\n        \"tickIndex\": \"<integer>\"\n      },\n      {\n        \"isActiveTick\": \"<boolean>\",\n        \"liquidity\": \"<string>\",\n        \"price0USD\": \"<number>\",\n        \"price1USD\": \"<number>\",\n        \"token0AmountLocked\": \"<number>\",\n        \"token1AmountLocked\": \"<number>\",\n        \"tickIndex\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                              "createdAt": "2026-07-28T00:59:33.000Z",
+                              "updatedAt": "2026-07-28T00:59:33.000Z",
+                              "uid": "35240-a42c7bdd-88dc-45fb-81b7-e90d194a52d3"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:59:33.000Z",
+                          "updatedAt": "2026-07-28T00:59:33.000Z",
+                          "uid": "35240-47794f71-5191-4297-a535-d049ce7388c5"
+                        }
+                      ],
+                      "id": "45c92535-2791-4f9c-a8f7-e6b4a8108f7f",
+                      "createdAt": "2026-07-28T00:59:32.000Z",
+                      "updatedAt": "2026-07-28T00:59:32.000Z",
+                      "uid": "35240-45c92535-2791-4f9c-a8f7-e6b4a8108f7f"
+                    }
+                  ],
+                  "id": "5ade4687-d95a-4b9d-b82c-ffbd57831cae",
+                  "createdAt": "2026-07-28T00:59:32.000Z",
+                  "updatedAt": "2026-07-28T00:59:32.000Z",
+                  "uid": "35240-5ade4687-d95a-4b9d-b82c-ffbd57831cae"
+                }
+              ],
+              "id": "542087e7-629a-48b2-96bb-b9cbc89c06fe",
+              "createdAt": "2026-07-28T00:59:32.000Z",
+              "updatedAt": "2026-07-28T00:59:32.000Z",
+              "uid": "35240-542087e7-629a-48b2-96bb-b9cbc89c06fe"
+            }
+          ],
+          "id": "f1a26f53-6c81-4cf1-94fd-5449b4a65605",
+          "createdAt": "2026-07-28T00:59:32.000Z",
+          "updatedAt": "2026-07-28T00:59:32.000Z",
+          "uid": "35240-f1a26f53-6c81-4cf1-94fd-5449b4a65605"
+        },
+        {
+          "name": "ohlcv",
+          "item": [
+            {
+              "name": "information",
+              "item": [
+                {
+                  "name": "Information",
+                  "id": "97f407e5-c8d6-446f-8496-04ca651f6be2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Desired Endpoint Version",
+                        "key": "api-version",
+                        "value": "2023-09-30"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/dex/ohlcv/information/?exchange=<string>&timeFormat=<string>&size=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dex",
+                        "ohlcv",
+                        "information",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Only return data for the specified exchange(s) (comma separated). Example: uniswapv3",
+                          "key": "exchange",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms | iso | iso8601* | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The number of records per page.",
+                          "key": "size",
+                          "value": "100"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves information about supported exchange-pairs for ohlcv."
+                  },
+                  "response": [
+                    {
+                      "id": "04f159c0-e78d-423f-b4e2-dec0b86ddedb",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Desired Endpoint Version",
+                            "key": "api-version",
+                            "value": "2023-09-30"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/dex/ohlcv/information/?exchange=<string>&timeFormat=<string>&size=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "dex",
+                            "ohlcv",
+                            "information",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "Only return data for the specified exchange(s) (comma separated). Example: uniswapv3",
+                              "key": "exchange",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms | iso | iso8601* | hr | human_readable`",
+                              "key": "timeFormat",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The number of records per page.",
+                              "key": "size",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": {\n      \"uniswapv3\": {\n        \"BCZ_WETH\": {\n          \"address\": \"<string>\",\n          \"baseAddress\": \"<string>\",\n          \"baseDecimals\": \"<string>\",\n          \"baseName\": \"<string>\",\n          \"baseSymbol\": \"<string>\",\n          \"blockchainId\": \"<string>\",\n          \"endDate\": \"<string>\",\n          \"pairName\": \"<string>\",\n          \"poolFees\": \"<string>\",\n          \"quoteAddress\": \"<string>\",\n          \"quoteDecimals\": \"<string>\",\n          \"quoteName\": \"<string>\",\n          \"quoteSymbol\": \"<string>\",\n          \"startDate\": \"<string>\"\n        }\n      }\n    },\n    \"metadata\": {\n      \"next\": \"<string>\"\n    }\n  },\n  \"status\": 0,\n  \"title\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T00:59:33.000Z",
+                      "updatedAt": "2026-07-28T00:59:33.000Z",
+                      "uid": "35240-04f159c0-e78d-423f-b4e2-dec0b86ddedb"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:59:33.000Z",
+                  "updatedAt": "2026-07-28T00:59:33.000Z",
+                  "uid": "35240-97f407e5-c8d6-446f-8496-04ca651f6be2"
+                }
+              ],
+              "id": "4535d39d-39ad-48e2-abf2-5a6eb8c51679",
+              "createdAt": "2026-07-28T00:59:32.000Z",
+              "updatedAt": "2026-07-28T00:59:32.000Z",
+              "uid": "35240-4535d39d-39ad-48e2-abf2-5a6eb8c51679"
+            }
+          ],
+          "id": "01584ac6-4542-4ff9-bb96-04da44f49a07",
+          "createdAt": "2026-07-28T00:59:32.000Z",
+          "updatedAt": "2026-07-28T00:59:32.000Z",
+          "uid": "35240-01584ac6-4542-4ff9-bb96-04da44f49a07"
+        },
+        {
+          "name": "trades",
+          "item": [
+            {
+              "name": "DEX Trades Historical",
+              "id": "134edc24-be40-4a67-ac39-2b978cca8a99",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dex/trades?startDate=<dateTime>&endDate=<dateTime>&blockchain=ethereum-mainnet&protocolName=<string>&liquidityPoolAddress=<string>&assetBoughtAddress=<string>&assetSoldAddress=<string>&walletAddress=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dex",
+                    "trades"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by trades after this date.<br><br>**Examples**: `2025-02-05`",
+                      "key": "startDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter by trades before this date.<br><br>If `endDate` is not specified but `startDate` is, the endpoint will return trades spanning from `startDate` to the **now** i.e. the time the request was made.",
+                      "key": "endDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "(Required) Filter for trades on just this network/blockchain.",
+                      "key": "blockchain",
+                      "value": "ethereum-mainnet"
+                    },
+                    {
+                      "description": "Filter for trades from this protocol. Use the [DEX Information](https://docs.amberdata.io/reference/dex-all-blockchains-information) endpoint to see available protocols.",
+                      "key": "protocolName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the smart contract address of the liquidity pool",
+                      "key": "liquidityPoolAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the smart contract address of the asset that was bought in the trade",
+                      "key": "assetBoughtAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the smart contract address of the asset that was sold in the trade",
+                      "key": "assetSoldAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by a specific address that was either the initiator or recipient of the trade",
+                      "key": "walletAddress",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieves the historical (time series) DEX trades."
+              },
+              "response": [
+                {
+                  "id": "8045c04c-99fd-49e5-9a74-793451111066",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/dex/trades?startDate=<dateTime>&endDate=<dateTime>&blockchain=ethereum-mainnet&protocolName=<string>&liquidityPoolAddress=<string>&assetBoughtAddress=<string>&assetSoldAddress=<string>&walletAddress=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dex",
+                        "trades"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by trades after this date.<br><br>**Examples**: `2025-02-05`",
+                          "key": "startDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter by trades before this date.<br><br>If `endDate` is not specified but `startDate` is, the endpoint will return trades spanning from `startDate` to the **now** i.e. the time the request was made.",
+                          "key": "endDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "(Required) Filter for trades on just this network/blockchain.",
+                          "key": "blockchain",
+                          "value": "ethereum-mainnet"
+                        },
+                        {
+                          "description": "Filter for trades from this protocol. Use the [DEX Information](https://docs.amberdata.io/reference/dex-all-blockchains-information) endpoint to see available protocols.",
+                          "key": "protocolName",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the smart contract address of the liquidity pool",
+                          "key": "liquidityPoolAddress",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the smart contract address of the asset that was bought in the trade",
+                          "key": "assetBoughtAddress",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the smart contract address of the asset that was sold in the trade",
+                          "key": "assetSoldAddress",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by a specific address that was either the initiator or recipient of the trade",
+                          "key": "walletAddress",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"assetBoughtAddress\": \"<string>\",\n        \"assetBoughtAmount\": \"<string>\",\n        \"assetBoughtAmountRaw\": \"<string>\",\n        \"assetBoughtDecimals\": \"<integer>\",\n        \"assetBoughtPrice\": \"<string>\",\n        \"assetBoughtSymbol\": \"<string>\",\n        \"assetPair\": \"<string>\",\n        \"assetSoldAddress\": \"<string>\",\n        \"assetSoldAmount\": \"<string>\",\n        \"assetSoldAmountRaw\": \"<string>\",\n        \"assetSoldDecimals\": \"<integer>\",\n        \"assetSoldPrice\": \"<string>\",\n        \"assetSoldSymbol\": \"<string>\",\n        \"blockNumber\": \"<integer>\",\n        \"blockchain\": \"<string>\",\n        \"callerAddress\": \"<string>\",\n        \"event\": \"<string>\",\n        \"liquidityPoolAddress\": \"<string>\",\n        \"logIndex\": \"<integer>\",\n        \"project\": \"<string>\",\n        \"protocolName\": \"<string>\",\n        \"receiverAddress\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"tradeFeeBought\": \"<string>\",\n        \"tradeFeeSold\": \"<string>\",\n        \"tradeId\": \"<string>\",\n        \"transactionFee\": \"<string>\",\n        \"transactionFromAddress\": \"<string>\",\n        \"transactionGasPrice\": \"<string>\",\n        \"transactionGasUsed\": \"<string>\",\n        \"transactionHash\": \"<string>\",\n        \"transactionToAddress\": \"<string>\"\n      },\n      {\n        \"assetBoughtAddress\": \"<string>\",\n        \"assetBoughtAmount\": \"<string>\",\n        \"assetBoughtAmountRaw\": \"<string>\",\n        \"assetBoughtDecimals\": \"<integer>\",\n        \"assetBoughtPrice\": \"<string>\",\n        \"assetBoughtSymbol\": \"<string>\",\n        \"assetPair\": \"<string>\",\n        \"assetSoldAddress\": \"<string>\",\n        \"assetSoldAmount\": \"<string>\",\n        \"assetSoldAmountRaw\": \"<string>\",\n        \"assetSoldDecimals\": \"<integer>\",\n        \"assetSoldPrice\": \"<string>\",\n        \"assetSoldSymbol\": \"<string>\",\n        \"blockNumber\": \"<integer>\",\n        \"blockchain\": \"<string>\",\n        \"callerAddress\": \"<string>\",\n        \"event\": \"<string>\",\n        \"liquidityPoolAddress\": \"<string>\",\n        \"logIndex\": \"<integer>\",\n        \"project\": \"<string>\",\n        \"protocolName\": \"<string>\",\n        \"receiverAddress\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"tradeFeeBought\": \"<string>\",\n        \"tradeFeeSold\": \"<string>\",\n        \"tradeId\": \"<string>\",\n        \"transactionFee\": \"<string>\",\n        \"transactionFromAddress\": \"<string>\",\n        \"transactionGasPrice\": \"<string>\",\n        \"transactionGasUsed\": \"<string>\",\n        \"transactionHash\": \"<string>\",\n        \"transactionToAddress\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:33.000Z",
+                  "updatedAt": "2026-07-28T00:59:33.000Z",
+                  "uid": "35240-8045c04c-99fd-49e5-9a74-793451111066"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:33.000Z",
+              "updatedAt": "2026-07-28T00:59:33.000Z",
+              "uid": "35240-134edc24-be40-4a67-ac39-2b978cca8a99"
+            }
+          ],
+          "id": "59930a11-5ad2-4059-ab5e-4f11b2dfcc58",
+          "createdAt": "2026-07-28T00:59:32.000Z",
+          "updatedAt": "2026-07-28T00:59:32.000Z",
+          "uid": "35240-59930a11-5ad2-4059-ab5e-4f11b2dfcc58"
+        },
+        {
+          "name": "information",
+          "item": [
+            {
+              "name": "DEX Protocols Information",
+              "id": "032eacc8-52bf-4226-ae3f-b671bc81314c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dex/information?activeAfterDate=<dateTime>&blockchain=ethereum-mainnet&protocolName=<string>&liquidityPoolAddress=<string>&assetAddress=<string>&assetSymbol=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dex",
+                    "information"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by date to find liquidity pools that have been active after the specified date<br><br>**Examples**: `2025-02-05`",
+                      "key": "activeAfterDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "(Required) Filter for liquidity pools on just this network/blockchain.",
+                      "key": "blockchain",
+                      "value": "ethereum-mainnet"
+                    },
+                    {
+                      "description": "Filter by a protocol of interest",
+                      "key": "protocolName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the smart contract address of the liquidity pool",
+                      "key": "liquidityPoolAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the smart contract address for an asset of interest",
+                      "key": "assetAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by the short-form identifier of an asset.<br><br> **We recommended using `assetAddress` as assets can have duplicate symbols on-chain.**",
+                      "key": "assetSymbol",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieves information about the supported liquidity pools across blockchains and DEX protocols."
+              },
+              "response": [
+                {
+                  "id": "61161f67-2b32-497c-9d03-cb09faae870d",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/dex/information?activeAfterDate=<dateTime>&blockchain=ethereum-mainnet&protocolName=<string>&liquidityPoolAddress=<string>&assetAddress=<string>&assetSymbol=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dex",
+                        "information"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by date to find liquidity pools that have been active after the specified date<br><br>**Examples**: `2025-02-05`",
+                          "key": "activeAfterDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "(Required) Filter for liquidity pools on just this network/blockchain.",
+                          "key": "blockchain",
+                          "value": "ethereum-mainnet"
+                        },
+                        {
+                          "description": "Filter by a protocol of interest",
+                          "key": "protocolName",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the smart contract address of the liquidity pool",
+                          "key": "liquidityPoolAddress",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the smart contract address for an asset of interest",
+                          "key": "assetAddress",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by the short-form identifier of an asset.<br><br> **We recommended using `assetAddress` as assets can have duplicate symbols on-chain.**",
+                          "key": "assetSymbol",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"blockchain\": \"<string>\",\n        \"firstKnownTradeDate\": \"<string>\",\n        \"lastKnownTradeDate\": \"<string>\",\n        \"liquidityPoolAddress\": \"<string>\",\n        \"liquidityPoolFees\": \"<number>\",\n        \"poolComposition\": [\n          {\n            \"assetAddress\": \"<string>\",\n            \"assetDecimals\": \"<integer>\",\n            \"assetSymbol\": \"<string>\"\n          },\n          {\n            \"assetAddress\": \"<string>\",\n            \"assetDecimals\": \"<integer>\",\n            \"assetSymbol\": \"<string>\"\n          }\n        ],\n        \"protocolName\": \"<string>\"\n      },\n      {\n        \"blockchain\": \"<string>\",\n        \"firstKnownTradeDate\": \"<string>\",\n        \"lastKnownTradeDate\": \"<string>\",\n        \"liquidityPoolAddress\": \"<string>\",\n        \"liquidityPoolFees\": \"<number>\",\n        \"poolComposition\": [\n          {\n            \"assetAddress\": \"<string>\",\n            \"assetDecimals\": \"<integer>\",\n            \"assetSymbol\": \"<string>\"\n          },\n          {\n            \"assetAddress\": \"<string>\",\n            \"assetDecimals\": \"<integer>\",\n            \"assetSymbol\": \"<string>\"\n          }\n        ],\n        \"protocolName\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:33.000Z",
+                  "updatedAt": "2026-07-28T00:59:33.000Z",
+                  "uid": "35240-61161f67-2b32-497c-9d03-cb09faae870d"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:33.000Z",
+              "updatedAt": "2026-07-28T00:59:33.000Z",
+              "uid": "35240-032eacc8-52bf-4226-ae3f-b671bc81314c"
+            }
+          ],
+          "id": "dd043685-6fd9-45da-8a07-6ae14cad910f",
+          "createdAt": "2026-07-28T00:59:32.000Z",
+          "updatedAt": "2026-07-28T00:59:32.000Z",
+          "uid": "35240-dd043685-6fd9-45da-8a07-6ae14cad910f"
+        }
+      ],
+      "id": "eda097aa-25c8-4634-92f8-398639883e66",
+      "createdAt": "2026-07-28T00:59:32.000Z",
+      "updatedAt": "2026-07-28T00:59:32.000Z",
+      "uid": "35240-eda097aa-25c8-4634-92f8-398639883e66"
+    },
+    {
+      "name": "stablecoins",
+      "item": [
+        {
+          "name": "{assetSymbol}",
+          "item": [
+            {
+              "name": "lending",
+              "item": [
+                {
+                  "name": "metrics",
+                  "item": [
+                    {
+                      "name": "summary",
+                      "item": [
+                        {
+                          "name": "Stablecoins in DeFi Lending - Aggregate Insights",
+                          "id": "68d662ab-552c-4d67-bce6-27abc5932544",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "**[Optional]** The id of the blockchain for which you want data from. Defaults to `ethereum-mainnet` if not specified.",
+                                "key": "x-amberdata-blockchain-id",
+                                "value": "ethereum-mainnet"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/stablecoins/:assetSymbol/lending/metrics/summary?startDate=<dateTime>&endDate=<dateTime>&timeInterval=days&protocol=aavev2&timeFormat=hr",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "stablecoins",
+                                ":assetSymbol",
+                                "lending",
+                                "metrics",
+                                "summary"
+                              ],
+                              "query": [
+                                {
+                                  "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "startDate",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "endDate",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "Determines whether the metrics are aggregated by hour or by day.",
+                                  "key": "timeInterval",
+                                  "value": "days"
+                                },
+                                {
+                                  "description": "Drill down into the stablecoin's metrics by specifying a protocol.",
+                                  "key": "protocol",
+                                  "value": "aavev2"
+                                },
+                                {
+                                  "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                                  "key": "timeFormat",
+                                  "value": "hr"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "24cdf0d4-e475-4a7b-bcab-5da341595d93",
+                                  "key": "assetSymbol",
+                                  "value": "USDC",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Easily analyze a stablecoin's metrics across multiple DeFi lending protocols."
+                          },
+                          "response": [
+                            {
+                              "id": "04ae2c4a-0a0c-49b7-894b-906bb7096e47",
+                              "name": "200",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "**[Optional]** The id of the blockchain for which you want data from. Defaults to `ethereum-mainnet` if not specified.",
+                                    "key": "x-amberdata-blockchain-id",
+                                    "value": "ethereum-mainnet"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/stablecoins/:assetSymbol/lending/metrics/summary?startDate=<dateTime>&endDate=<dateTime>&timeInterval=days&protocol=aavev2&timeFormat=hr",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "stablecoins",
+                                    ":assetSymbol",
+                                    "lending",
+                                    "metrics",
+                                    "summary"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                      "key": "startDate",
+                                      "value": "<dateTime>"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                      "key": "endDate",
+                                      "value": "<dateTime>"
+                                    },
+                                    {
+                                      "description": "Determines whether the metrics are aggregated by hour or by day.",
+                                      "key": "timeInterval",
+                                      "value": "days"
+                                    },
+                                    {
+                                      "description": "Drill down into the stablecoin's metrics by specifying a protocol.",
+                                      "key": "protocol",
+                                      "value": "aavev2"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Time format of the timestamps in the return payload.",
+                                      "key": "timeFormat",
+                                      "value": "hr"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "assetSymbol"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"blockchainId\": \"<string>\",\n      \"protocols\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"data\": {\n      \"metrics\": [\n        {\n          \"timestamp\": \"<integer>\",\n          \"depositedUSD\": \"<number>\",\n          \"borrowedUSD\": \"<number>\",\n          \"withdrawnUSD\": \"<number>\",\n          \"repaidUSD\": \"<number>\",\n          \"liquidatedUSD\": \"<number>\",\n          \"liquidatedProfitUSD\": \"<number>\",\n          \"flashLoanedUSD\": \"<number>\",\n          \"interestEarnedUSD\": \"<number>\",\n          \"interestPaidUSD\": \"<number>\",\n          \"numberOfDeposits\": \"<integer>\",\n          \"numberOfBorrows\": \"<integer>\",\n          \"numberOfWithdraws\": \"<integer>\",\n          \"numberOfRepays\": \"<integer>\",\n          \"numberOfLiquidations\": \"<integer>\",\n          \"depositRatio\": \"<number>\",\n          \"borrowRatio\": \"<number>\",\n          \"withdrawRatio\": \"<number>\",\n          \"liquidationRatio\": \"<number>\",\n          \"totalDepositedUSD\": \"<number>\",\n          \"totalCollateralUSD\": \"<number>\",\n          \"totalBorrowedUSD\": \"<number>\",\n          \"cumulativeLiquidatedUSD\": \"<number>\",\n          \"cumulativeLiquidatedProfitUSD\": \"<number>\",\n          \"cumulativeInterestEarnedUSD\": \"<number>\",\n          \"totalUtilizationRatio\": \"<number>\",\n          \"totalDepositConcentration\": \"<number>\",\n          \"totalBorrowConcentration\": \"<number>\"\n        },\n        {\n          \"timestamp\": \"<integer>\",\n          \"depositedUSD\": \"<number>\",\n          \"borrowedUSD\": \"<number>\",\n          \"withdrawnUSD\": \"<number>\",\n          \"repaidUSD\": \"<number>\",\n          \"liquidatedUSD\": \"<number>\",\n          \"liquidatedProfitUSD\": \"<number>\",\n          \"flashLoanedUSD\": \"<number>\",\n          \"interestEarnedUSD\": \"<number>\",\n          \"interestPaidUSD\": \"<number>\",\n          \"numberOfDeposits\": \"<integer>\",\n          \"numberOfBorrows\": \"<integer>\",\n          \"numberOfWithdraws\": \"<integer>\",\n          \"numberOfRepays\": \"<integer>\",\n          \"numberOfLiquidations\": \"<integer>\",\n          \"depositRatio\": \"<number>\",\n          \"borrowRatio\": \"<number>\",\n          \"withdrawRatio\": \"<number>\",\n          \"liquidationRatio\": \"<number>\",\n          \"totalDepositedUSD\": \"<number>\",\n          \"totalCollateralUSD\": \"<number>\",\n          \"totalBorrowedUSD\": \"<number>\",\n          \"cumulativeLiquidatedUSD\": \"<number>\",\n          \"cumulativeLiquidatedProfitUSD\": \"<number>\",\n          \"cumulativeInterestEarnedUSD\": \"<number>\",\n          \"totalUtilizationRatio\": \"<number>\",\n          \"totalDepositConcentration\": \"<number>\",\n          \"totalBorrowConcentration\": \"<number>\"\n        }\n      ]\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T00:59:33.000Z",
+                              "updatedAt": "2026-07-28T00:59:33.000Z",
+                              "uid": "35240-04ae2c4a-0a0c-49b7-894b-906bb7096e47"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T00:59:33.000Z",
+                          "updatedAt": "2026-07-28T00:59:33.000Z",
+                          "uid": "35240-68d662ab-552c-4d67-bce6-27abc5932544"
+                        }
+                      ],
+                      "id": "ab30b2dc-0c42-4927-9080-d903ab0a53f6",
+                      "createdAt": "2026-07-28T00:59:32.000Z",
+                      "updatedAt": "2026-07-28T00:59:32.000Z",
+                      "uid": "35240-ab30b2dc-0c42-4927-9080-d903ab0a53f6"
+                    }
+                  ],
+                  "id": "1c7e36d0-87c9-4ba7-9329-ea207858dfc6",
+                  "createdAt": "2026-07-28T00:59:32.000Z",
+                  "updatedAt": "2026-07-28T00:59:32.000Z",
+                  "uid": "35240-1c7e36d0-87c9-4ba7-9329-ea207858dfc6"
+                }
+              ],
+              "id": "18e23bf8-734d-4141-a3b5-9c83e7806751",
+              "createdAt": "2026-07-28T00:59:32.000Z",
+              "updatedAt": "2026-07-28T00:59:32.000Z",
+              "uid": "35240-18e23bf8-734d-4141-a3b5-9c83e7806751"
+            }
+          ],
+          "id": "e0b0ca00-613c-4c32-887d-8dc0bbb368a1",
+          "createdAt": "2026-07-28T00:59:32.000Z",
+          "updatedAt": "2026-07-28T00:59:32.000Z",
+          "uid": "35240-e0b0ca00-613c-4c32-887d-8dc0bbb368a1"
+        }
+      ],
+      "id": "db7f5523-9440-4676-a08b-5643c13c674a",
+      "createdAt": "2026-07-28T00:59:32.000Z",
+      "updatedAt": "2026-07-28T00:59:32.000Z",
+      "uid": "35240-db7f5523-9440-4676-a08b-5643c13c674a"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.amberdata.com/defi"
+    }
+  ]
+}

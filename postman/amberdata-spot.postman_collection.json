@@ -1,0 +1,3156 @@
+{
+  "info": {
+    "_postman_id": "8b85a1af-80bc-4db8-a3f2-49d30dd64569",
+    "name": "spot-analytics",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:59:44.000Z",
+    "updatedAt": "2026-07-28T00:59:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8b85a1af-80bc-4db8-a3f2-49d30dd64569"
+  },
+  "item": [
+    {
+      "name": "depth",
+      "item": [
+        {
+          "name": "information",
+          "item": [
+            {
+              "name": "Information Depth Analytics Pairs and Exchanges",
+              "id": "76a5289a-1fc9-4f8c-82a6-0200e5fc03f3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/depth/information?exchange=<string>&pair=<string>&timeFormat=hr",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "depth",
+                    "information"
+                  ],
+                  "query": [
+                    {
+                      "description": "**[Optional]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                      "key": "exchange",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "**[Optional]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                      "key": "pair",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                      "key": "timeFormat",
+                      "value": "hr"
+                    }
+                  ]
+                },
+                "description": "This endpoint retrieves all available exchanges and their associated currency pairs, along with the earliest and latest dates of historical data. It applies specifically to spot order book depth analytics."
+              },
+              "response": [
+                {
+                  "id": "98abede6-97d6-46d0-88c6-3da14a993e2d",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/depth/information?exchange=<string>&pair=<string>&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "depth",
+                        "information"
+                      ],
+                      "query": [
+                        {
+                          "description": "**[Optional]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"endDate\": \"<string>\",\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"startDate\": \"<string>\"\n      },\n      {\n        \"endDate\": \"<string>\",\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"startDate\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-98abede6-97d6-46d0-88c6-3da14a993e2d"
+                },
+                {
+                  "id": "4f708a33-f4b5-47d4-ac36-fe8887f61016",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/depth/information?exchange=<string>&pair=<string>&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "depth",
+                        "information"
+                      ],
+                      "query": [
+                        {
+                          "description": "**[Optional]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-4f708a33-f4b5-47d4-ac36-fe8887f61016"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-76a5289a-1fc9-4f8c-82a6-0200e5fc03f3"
+            }
+          ],
+          "id": "361fa462-7abc-4dbd-84b1-b424d89e026b",
+          "createdAt": "2026-07-28T00:59:44.000Z",
+          "updatedAt": "2026-07-28T00:59:44.000Z",
+          "uid": "35240-361fa462-7abc-4dbd-84b1-b424d89e026b"
+        },
+        {
+          "name": "bid-ask-spread",
+          "item": [
+            {
+              "name": "Bid Ask Spread",
+              "id": "af2c2d30-37fb-4c5c-8648-68183643e0f0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/depth/bid-ask-spread?pair=btc_usd&fuzzyMatch=false&exchange=<string>&startDate=2025-05-01&endDate=2025-05-02&timeFormat=hr",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "depth",
+                    "bid-ask-spread"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                      "key": "pair",
+                      "value": "btc_usd"
+                    },
+                    {
+                      "description": "(Required) **[Required]** This parameter controls how the provided trading pair symbol is interpreted. When set to FALSE, it returns data only for the exact pair specified (e.g., btc_usd). When set to TRUE, it enables fuzzy matching\u2014users can then pass just the base asset (e.g., btc) returns all pairs with that base (e.g., btc_eur, btc_usd, btc_usdt, etc.), while passing a full pair like btc_usd returns all pairs with the same base and similar USD-related quote assets (e.g., btc_usd, btc_usdt, btc_usdc, etc.).",
+                      "key": "fuzzyMatch",
+                      "value": "false"
+                    },
+                    {
+                      "description": "**[Optional]** The exchange for the associated bid ask spread.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                      "key": "exchange",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                      "key": "startDate",
+                      "value": "2025-05-01"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                      "key": "endDate",
+                      "value": "2025-05-02"
+                    },
+                    {
+                      "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                      "key": "timeFormat",
+                      "value": "hr"
+                    }
+                  ]
+                },
+                "description": "This endpoint allows users to explore the bid-ask spread for a specific trading pair or underlying asset across one or more exchanges. It provides both the absolute dollar spread (based on the best bid and offer) and the spread as a percentage of the mid-price."
+              },
+              "response": [
+                {
+                  "id": "4c3bb0c9-8a2a-493b-99d1-5beef13f0b2f",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/depth/bid-ask-spread?pair=btc_usd&fuzzyMatch=false&exchange=<string>&startDate=2025-05-01&endDate=2025-05-02&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "depth",
+                        "bid-ask-spread"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "btc_usd"
+                        },
+                        {
+                          "description": "(Required) **[Required]** This parameter controls how the provided trading pair symbol is interpreted. When set to FALSE, it returns data only for the exact pair specified (e.g., btc_usd). When set to TRUE, it enables fuzzy matching\u2014users can then pass just the base asset (e.g., btc) returns all pairs with that base (e.g., btc_eur, btc_usd, btc_usdt, etc.), while passing a full pair like btc_usd returns all pairs with the same base and similar USD-related quote assets (e.g., btc_usd, btc_usdt, btc_usdc, etc.).",
+                          "key": "fuzzyMatch",
+                          "value": "false"
+                        },
+                        {
+                          "description": "**[Optional]** The exchange for the associated bid ask spread.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-05-01"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                          "key": "endDate",
+                          "value": "2025-05-02"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"bestAskPrice\": \"<number>\",\n        \"bestBidPrice\": \"<number>\",\n        \"exchange\": \"<string>\",\n        \"midPrice\": \"<number>\",\n        \"pair\": \"<string>\",\n        \"spread\": \"<number>\",\n        \"spreadPercent\": \"<number>\",\n        \"timestamp\": \"<integer>\"\n      },\n      {\n        \"bestAskPrice\": \"<number>\",\n        \"bestBidPrice\": \"<number>\",\n        \"exchange\": \"<string>\",\n        \"midPrice\": \"<number>\",\n        \"pair\": \"<string>\",\n        \"spread\": \"<number>\",\n        \"spreadPercent\": \"<number>\",\n        \"timestamp\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-4c3bb0c9-8a2a-493b-99d1-5beef13f0b2f"
+                },
+                {
+                  "id": "d16ef4d8-473a-419c-bdff-9f1ce174cba6",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/depth/bid-ask-spread?pair=btc_usd&fuzzyMatch=false&exchange=<string>&startDate=2025-05-01&endDate=2025-05-02&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "depth",
+                        "bid-ask-spread"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "btc_usd"
+                        },
+                        {
+                          "description": "(Required) **[Required]** This parameter controls how the provided trading pair symbol is interpreted. When set to FALSE, it returns data only for the exact pair specified (e.g., btc_usd). When set to TRUE, it enables fuzzy matching\u2014users can then pass just the base asset (e.g., btc) returns all pairs with that base (e.g., btc_eur, btc_usd, btc_usdt, etc.), while passing a full pair like btc_usd returns all pairs with the same base and similar USD-related quote assets (e.g., btc_usd, btc_usdt, btc_usdc, etc.).",
+                          "key": "fuzzyMatch",
+                          "value": "false"
+                        },
+                        {
+                          "description": "**[Optional]** The exchange for the associated bid ask spread.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-05-01"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                          "key": "endDate",
+                          "value": "2025-05-02"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-d16ef4d8-473a-419c-bdff-9f1ce174cba6"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-af2c2d30-37fb-4c5c-8648-68183643e0f0"
+            }
+          ],
+          "id": "31530e4b-e15a-4a1a-8281-572734583429",
+          "createdAt": "2026-07-28T00:59:44.000Z",
+          "updatedAt": "2026-07-28T00:59:44.000Z",
+          "uid": "35240-31530e4b-e15a-4a1a-8281-572734583429"
+        },
+        {
+          "name": "average-time-series",
+          "item": [
+            {
+              "name": "Average Depth",
+              "id": "adbea13a-20c0-4ac3-ab89-a80c5064d5b2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/depth/average-time-series?exchange=gdax&pair=btc_usd&startDate=2025-03-01&endDate=2025-03-05&timeInterval=hour&timeFormat=hr",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "depth",
+                    "average-time-series"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) **[Required]** The select exchange for which to view average liquidity depth.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                      "key": "exchange",
+                      "value": "gdax"
+                    },
+                    {
+                      "description": "(Required) **[Required]** The currency pair for which to view average liquidity depth.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                      "key": "pair",
+                      "value": "btc_usd"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                      "key": "startDate",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                      "key": "endDate",
+                      "value": "2025-03-05"
+                    },
+                    {
+                      "description": "(Required) **[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` hour | day`",
+                      "key": "timeInterval",
+                      "value": "hour"
+                    },
+                    {
+                      "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                      "key": "timeFormat",
+                      "value": "hr"
+                    }
+                  ]
+                },
+                "description": "This endpoint allows user to view the average order book depth sizes per level. The depth will be displayed in base terms for a given pair, meaning btc_usd will have depth in btc terms. This endpoint is useful to quickly observe what times liquidity enters the market."
+              },
+              "response": [
+                {
+                  "id": "89eca948-57f1-4195-b0cd-a3e2dd5e5d0d",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/depth/average-time-series?exchange=gdax&pair=btc_usd&startDate=2025-03-01&endDate=2025-03-05&timeInterval=hour&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "depth",
+                        "average-time-series"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The select exchange for which to view average liquidity depth.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "(Required) **[Required]** The currency pair for which to view average liquidity depth.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "btc_usd"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-03-01"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                          "key": "endDate",
+                          "value": "2025-03-05"
+                        },
+                        {
+                          "description": "(Required) **[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` hour | day`",
+                          "key": "timeInterval",
+                          "value": "hour"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"basisPoints005OrderCount\": \"<number>\",\n        \"basisPoints005UsdMillion\": \"<number>\",\n        \"basisPoints010OrderCount\": \"<number>\",\n        \"basisPoints010UsdMillion\": \"<number>\",\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"side\": \"<string>\",\n        \"timestamp\": \"<string>\"\n      },\n      {\n        \"basisPoints005OrderCount\": \"<number>\",\n        \"basisPoints005UsdMillion\": \"<number>\",\n        \"basisPoints010OrderCount\": \"<number>\",\n        \"basisPoints010UsdMillion\": \"<number>\",\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"side\": \"<string>\",\n        \"timestamp\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-89eca948-57f1-4195-b0cd-a3e2dd5e5d0d"
+                },
+                {
+                  "id": "a8b1f9a1-1b4c-48c9-9dea-e8d67a68052a",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/depth/average-time-series?exchange=gdax&pair=btc_usd&startDate=2025-03-01&endDate=2025-03-05&timeInterval=hour&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "depth",
+                        "average-time-series"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The select exchange for which to view average liquidity depth.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "(Required) **[Required]** The currency pair for which to view average liquidity depth.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "btc_usd"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-03-01"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                          "key": "endDate",
+                          "value": "2025-03-05"
+                        },
+                        {
+                          "description": "(Required) **[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` hour | day`",
+                          "key": "timeInterval",
+                          "value": "hour"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-a8b1f9a1-1b4c-48c9-9dea-e8d67a68052a"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-adbea13a-20c0-4ac3-ab89-a80c5064d5b2"
+            }
+          ],
+          "id": "10e2d59f-2a43-4225-8a18-728e7ad7b5bd",
+          "createdAt": "2026-07-28T00:59:44.000Z",
+          "updatedAt": "2026-07-28T00:59:44.000Z",
+          "uid": "35240-10e2d59f-2a43-4225-8a18-728e7ad7b5bd"
+        },
+        {
+          "name": "dashboard",
+          "item": [
+            {
+              "name": "Depth Dashboard",
+              "id": "d6bba622-c02c-49f8-9ac7-95a434027cf6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/depth/dashboard?exchange=gdax&pair=<string>&hoursAgo=1&timeFormat=hr",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "depth",
+                    "dashboard"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) **[Required]** The exchange for which to retrieve liquidity depth.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                      "key": "exchange",
+                      "value": "gdax"
+                    },
+                    {
+                      "description": "**[Optional]** The currency pair to retrieve liquidity depth.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                      "key": "pair",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) **[Required]** Payload only includes data going back this number of hours up to now.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1 | 24 | 168`",
+                      "key": "hoursAgo",
+                      "value": "1"
+                    },
+                    {
+                      "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                      "key": "timeFormat",
+                      "value": "hr"
+                    }
+                  ]
+                },
+                "description": "This endpoint provides the average order book depth across exchanges and currency pairs over a specified time period. To retrieve the average depth for the past 24 hours, set the hourAgo parameter to 24. The response includes depth measurements at various basis point levels from the BBO."
+              },
+              "response": [
+                {
+                  "id": "d8702756-2203-4065-be1e-2642caec1034",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/depth/dashboard?exchange=gdax&pair=<string>&hoursAgo=1&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "depth",
+                        "dashboard"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The exchange for which to retrieve liquidity depth.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "**[Optional]** The currency pair to retrieve liquidity depth.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) **[Required]** Payload only includes data going back this number of hours up to now.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1 | 24 | 168`",
+                          "key": "hoursAgo",
+                          "value": "1"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"basisPointsXXXAvg\": \"<number>\",\n        \"basisPointsXXXUsdMillion\": \"<number>\",\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"side\": \"<string>\"\n      },\n      {\n        \"basisPointsXXXAvg\": \"<number>\",\n        \"basisPointsXXXUsdMillion\": \"<number>\",\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"side\": \"<string>\"\n      }\n    ],\n    \"metadata\": {\n      \"api-version\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-d8702756-2203-4065-be1e-2642caec1034"
+                },
+                {
+                  "id": "a2d9226f-b791-4106-ad66-8f4560745983",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/depth/dashboard?exchange=gdax&pair=<string>&hoursAgo=1&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "depth",
+                        "dashboard"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The exchange for which to retrieve liquidity depth.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "**[Optional]** The currency pair to retrieve liquidity depth.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) **[Required]** Payload only includes data going back this number of hours up to now.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1 | 24 | 168`",
+                          "key": "hoursAgo",
+                          "value": "1"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-a2d9226f-b791-4106-ad66-8f4560745983"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-d6bba622-c02c-49f8-9ac7-95a434027cf6"
+            }
+          ],
+          "id": "7388aeaf-5c5a-455a-8307-0dd1669d4fa4",
+          "createdAt": "2026-07-28T00:59:44.000Z",
+          "updatedAt": "2026-07-28T00:59:44.000Z",
+          "uid": "35240-7388aeaf-5c5a-455a-8307-0dd1669d4fa4"
+        },
+        {
+          "name": "lwap",
+          "item": [
+            {
+              "name": "LWAP",
+              "id": "c586a9bc-ccda-4bf0-b685-c1f34b626147",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/depth/lwap?exchange=gdax&pair=btc_usd&startDate=2025-03-15&endDate=2025-03-16&timeFormat=hr",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "depth",
+                    "lwap"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) **[Required]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                      "key": "exchange",
+                      "value": "gdax"
+                    },
+                    {
+                      "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                      "key": "pair",
+                      "value": "btc_usd"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                      "key": "startDate",
+                      "value": "2025-03-15"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                      "key": "endDate",
+                      "value": "2025-03-16"
+                    },
+                    {
+                      "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                      "key": "timeFormat",
+                      "value": "hr"
+                    }
+                  ]
+                },
+                "description": "Liquidity Weighted Average Price (LWAP) represents the average execution price achieved when trading through all resting orders in the order book (sweeping the book), up to a specified depth. For example, if you sell through the book down to 50 basis points away from the best-bid/best-ask, LWAP calculates the average execution price for that trade."
+              },
+              "response": [
+                {
+                  "id": "ab8aa241-2931-4c0d-af0c-55ae412c8d4b",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/depth/lwap?exchange=gdax&pair=btc_usd&startDate=2025-03-15&endDate=2025-03-16&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "depth",
+                        "lwap"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "btc_usd"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-03-15"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "endDate",
+                          "value": "2025-03-16"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"basisPointsXXX\": \"<number>\",\n        \"basisPointsXXXOrderCount\": \"<integer>\",\n        \"bestAskPrice\": \"<number>\",\n        \"bestBidPrice\": \"<number>\",\n        \"exchange\": \"<string>\",\n        \"lwapXXX\": \"<number>\",\n        \"lwapXXXExecutionVersusBBO\": \"<number>\",\n        \"lwapXXXUsdMillion\": \"<number>\",\n        \"midPrice\": \"<number>\",\n        \"pair\": \"<string>\",\n        \"side\": \"<string>\",\n        \"slippageXXXUsdVersusBBO\": \"<number>\",\n        \"spreadPercent\": \"<number>\",\n        \"timestamp\": \"<string>\"\n      },\n      {\n        \"basisPointsXXX\": \"<number>\",\n        \"basisPointsXXXOrderCount\": \"<integer>\",\n        \"bestAskPrice\": \"<number>\",\n        \"bestBidPrice\": \"<number>\",\n        \"exchange\": \"<string>\",\n        \"lwapXXX\": \"<number>\",\n        \"lwapXXXExecutionVersusBBO\": \"<number>\",\n        \"lwapXXXUsdMillion\": \"<number>\",\n        \"midPrice\": \"<number>\",\n        \"pair\": \"<string>\",\n        \"side\": \"<string>\",\n        \"slippageXXXUsdVersusBBO\": \"<number>\",\n        \"spreadPercent\": \"<number>\",\n        \"timestamp\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-ab8aa241-2931-4c0d-af0c-55ae412c8d4b"
+                },
+                {
+                  "id": "2f2a5196-da73-4d5e-9242-c7141687e8c5",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/depth/lwap?exchange=gdax&pair=btc_usd&startDate=2025-03-15&endDate=2025-03-16&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "depth",
+                        "lwap"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "btc_usd"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-03-15"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "endDate",
+                          "value": "2025-03-16"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-2f2a5196-da73-4d5e-9242-c7141687e8c5"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-c586a9bc-ccda-4bf0-b685-c1f34b626147"
+            }
+          ],
+          "id": "845db3e1-557d-4109-bfc1-f4e9413077d7",
+          "createdAt": "2026-07-28T00:59:44.000Z",
+          "updatedAt": "2026-07-28T00:59:44.000Z",
+          "uid": "35240-845db3e1-557d-4109-bfc1-f4e9413077d7"
+        },
+        {
+          "name": "pressure",
+          "item": [
+            {
+              "name": "Pressure",
+              "id": "5fa59f10-79fa-45e3-ae87-277970b529ee",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/depth/pressure?exchange=gdax&pair=btc_usd&startDate=2025-03-01&endDate=2025-03-02&timeFormat=hr",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "depth",
+                    "pressure"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) **[Required]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                      "key": "exchange",
+                      "value": "gdax"
+                    },
+                    {
+                      "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                      "key": "pair",
+                      "value": "btc_usd"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                      "key": "startDate",
+                      "value": "2025-03-01"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                      "key": "endDate",
+                      "value": "2025-03-02"
+                    },
+                    {
+                      "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                      "key": "timeFormat",
+                      "value": "hr"
+                    }
+                  ]
+                },
+                "description": "Order book pressure is a market indicator that measures the relative balance between buy and sell orders. It is calculated as:  Order_Book_Pressure = (bid depth \u2212 ask depth) This metric provides insight into market sentiment by quantifying the dominance of buyers or sellers. A positive value indicates stronger bid depth, while a negative value signals sell-side dominance."
+              },
+              "response": [
+                {
+                  "id": "76750b0d-f4bb-4333-b829-0bec72023411",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/depth/pressure?exchange=gdax&pair=btc_usd&startDate=2025-03-01&endDate=2025-03-02&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "depth",
+                        "pressure"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "btc_usd"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-03-01"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                          "key": "endDate",
+                          "value": "2025-03-02"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"exchange\": \"<string>\",\n        \"midPrice\": \"<number>\",\n        \"pair\": \"<string>\",\n        \"pressureXXXNet\": \"<number>\",\n        \"pressureXXXPercentage\": \"<number>\",\n        \"pressureXXXTotalSize\": \"<number>\",\n        \"timestamp\": \"<string>\"\n      },\n      {\n        \"exchange\": \"<string>\",\n        \"midPrice\": \"<number>\",\n        \"pair\": \"<string>\",\n        \"pressureXXXNet\": \"<number>\",\n        \"pressureXXXPercentage\": \"<number>\",\n        \"pressureXXXTotalSize\": \"<number>\",\n        \"timestamp\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-76750b0d-f4bb-4333-b829-0bec72023411"
+                },
+                {
+                  "id": "0d3987ba-49fe-44cd-9dc5-963343453377",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/depth/pressure?exchange=gdax&pair=btc_usd&startDate=2025-03-01&endDate=2025-03-02&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "depth",
+                        "pressure"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "btc_usd"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-03-01"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                          "key": "endDate",
+                          "value": "2025-03-02"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-0d3987ba-49fe-44cd-9dc5-963343453377"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-5fa59f10-79fa-45e3-ae87-277970b529ee"
+            }
+          ],
+          "id": "2b4fc414-1bac-4d3e-9d57-3c0cb782ba88",
+          "createdAt": "2026-07-28T00:59:44.000Z",
+          "updatedAt": "2026-07-28T00:59:44.000Z",
+          "uid": "35240-2b4fc414-1bac-4d3e-9d57-3c0cb782ba88"
+        },
+        {
+          "name": "Depth",
+          "id": "b229f9b9-8bdb-435e-8938-4d9df48e81e2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "x-api-key",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/depth?exchange=gdax&pair=btc_usd&startDate=<string>&endDate=<string>&timeFormat=hr",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "depth"
+              ],
+              "query": [
+                {
+                  "description": "(Required) **[Required]** The select exchange for which to view liquidity depth.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                  "key": "exchange",
+                  "value": "gdax"
+                },
+                {
+                  "description": "(Required) **[Required]** The currency pair for which to view liquidity depth.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                  "key": "pair",
+                  "value": "btc_usd"
+                },
+                {
+                  "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                  "key": "startDate",
+                  "value": "<string>"
+                },
+                {
+                  "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                  "key": "endDate",
+                  "value": "<string>"
+                },
+                {
+                  "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                  "key": "timeFormat",
+                  "value": "hr"
+                }
+              ]
+            },
+            "description": "Percentage depth profiles offer insights into the order book structure and available liquidity at different price levels. By analyzing buy and sell liquidity within a specified percentage range from the best-bid/best-ask, traders can assess liquidity distribution and its impact on market behavior. The order book depth endpoint returns liquidity data in percentage-based tranches, measured in basis points, at 1-minute intervals. If no date range is specified, the most recent 24 hours of data will be returned."
+          },
+          "response": [
+            {
+              "id": "4f3d768f-7ac8-4ca8-bd85-a31837dc491e",
+              "name": "200",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/depth?exchange=gdax&pair=btc_usd&startDate=<string>&endDate=<string>&timeFormat=hr",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "depth"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) **[Required]** The select exchange for which to view liquidity depth.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                      "key": "exchange",
+                      "value": "gdax"
+                    },
+                    {
+                      "description": "(Required) **[Required]** The currency pair for which to view liquidity depth.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                      "key": "pair",
+                      "value": "btc_usd"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                      "key": "timeFormat",
+                      "value": "hr"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"basisPoints005\": \"<number>\",\n        \"basisPoints005OrderCount\": \"<integer>\",\n        \"basisPoints005UsdMillion\": \"<number>\",\n        \"bestAskPrice\": \"<number>\",\n        \"bestBidPrice\": \"<number>\",\n        \"exchange\": \"<string>\",\n        \"midPrice\": \"<number>\",\n        \"pair\": \"<string>\",\n        \"side\": \"<string>\",\n        \"spreadPercent\": \"<number>\",\n        \"timestamp\": \"<integer>\"\n      },\n      {\n        \"basisPoints005\": \"<number>\",\n        \"basisPoints005OrderCount\": \"<integer>\",\n        \"basisPoints005UsdMillion\": \"<number>\",\n        \"bestAskPrice\": \"<number>\",\n        \"bestBidPrice\": \"<number>\",\n        \"exchange\": \"<string>\",\n        \"midPrice\": \"<number>\",\n        \"pair\": \"<string>\",\n        \"side\": \"<string>\",\n        \"spreadPercent\": \"<number>\",\n        \"timestamp\": \"<integer>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-4f3d768f-7ac8-4ca8-bd85-a31837dc491e"
+            },
+            {
+              "id": "1ae9f66e-9499-4933-b43a-718d92fede34",
+              "name": "400",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/depth?exchange=gdax&pair=btc_usd&startDate=<string>&endDate=<string>&timeFormat=hr",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "depth"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) **[Required]** The select exchange for which to view liquidity depth.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                      "key": "exchange",
+                      "value": "gdax"
+                    },
+                    {
+                      "description": "(Required) **[Required]** The currency pair for which to view liquidity depth.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                      "key": "pair",
+                      "value": "btc_usd"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                      "key": "timeFormat",
+                      "value": "hr"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-1ae9f66e-9499-4933-b43a-718d92fede34"
+            }
+          ],
+          "createdAt": "2026-07-28T00:59:44.000Z",
+          "updatedAt": "2026-07-28T00:59:44.000Z",
+          "uid": "35240-b229f9b9-8bdb-435e-8938-4d9df48e81e2"
+        }
+      ],
+      "id": "bc91601e-b291-43ae-ad53-f73938179c5c",
+      "createdAt": "2026-07-28T00:59:44.000Z",
+      "updatedAt": "2026-07-28T00:59:44.000Z",
+      "uid": "35240-bc91601e-b291-43ae-ad53-f73938179c5c"
+    },
+    {
+      "name": "trade",
+      "item": [
+        {
+          "name": "information",
+          "item": [
+            {
+              "name": "pairs",
+              "item": [
+                {
+                  "name": "Information Trade Analytics Pairs",
+                  "id": "f2c449c8-c2c5-424c-9df2-d05eaa30a8ce",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-api-key",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/trade/information/pairs?exchange=gdax&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "trade",
+                        "information",
+                        "pairs"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    },
+                    "description": "This endpoint returns all the available pairs for a given exchange in the spot \"Trade Analytics\" section. The associated startDate and endDate represent the available history of trade data."
+                  },
+                  "response": [
+                    {
+                      "id": "8f5db611-66e9-46c6-9b61-a9f20c275db8",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/trade/information/pairs?exchange=gdax&timeFormat=hr",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "trade",
+                            "information",
+                            "pairs"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) **[Required]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                              "key": "exchange",
+                              "value": "gdax"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                              "key": "timeFormat",
+                              "value": "hr"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"endDate\": \"<string>\",\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"startDate\": \"<string>\"\n      },\n      {\n        \"endDate\": \"<string>\",\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"startDate\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T00:59:44.000Z",
+                      "updatedAt": "2026-07-28T00:59:44.000Z",
+                      "uid": "35240-8f5db611-66e9-46c6-9b61-a9f20c275db8"
+                    },
+                    {
+                      "id": "7cf35d55-6c81-4a1b-907a-080b817ad524",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/trade/information/pairs?exchange=gdax&timeFormat=hr",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "trade",
+                            "information",
+                            "pairs"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) **[Required]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                              "key": "exchange",
+                              "value": "gdax"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                              "key": "timeFormat",
+                              "value": "hr"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T00:59:44.000Z",
+                      "updatedAt": "2026-07-28T00:59:44.000Z",
+                      "uid": "35240-7cf35d55-6c81-4a1b-907a-080b817ad524"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-f2c449c8-c2c5-424c-9df2-d05eaa30a8ce"
+                }
+              ],
+              "id": "a87f5ad8-7310-413c-a7fc-88e46515048d",
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-a87f5ad8-7310-413c-a7fc-88e46515048d"
+            },
+            {
+              "name": "exchanges",
+              "item": [
+                {
+                  "name": "Information Trade Exchange Support per Pair",
+                  "id": "323c7638-c7a4-4c6d-ab8f-112a14ba1df9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-api-key",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/trade/information/exchanges?pair=btc_usd&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "trade",
+                        "information",
+                        "exchanges"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "btc_usd"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    },
+                    "description": "This endpoint returns all the exchanges that provide support for a given pair in the spot \"Trade Analytics\" section. The associated startDate and endDate represent the available history of trade data."
+                  },
+                  "response": [
+                    {
+                      "id": "58aa2221-2b98-4943-9f52-d3c44c2cc517",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/trade/information/exchanges?pair=btc_usd&timeFormat=hr",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "trade",
+                            "information",
+                            "exchanges"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                              "key": "pair",
+                              "value": "btc_usd"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                              "key": "timeFormat",
+                              "value": "hr"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"endDate\": \"<string>\",\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"startDate\": \"<string>\"\n      },\n      {\n        \"endDate\": \"<string>\",\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"startDate\": \"<string>\"\n      }\n    ],\n    \"metadata\": {\n      \"api-version\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T00:59:44.000Z",
+                      "updatedAt": "2026-07-28T00:59:44.000Z",
+                      "uid": "35240-58aa2221-2b98-4943-9f52-d3c44c2cc517"
+                    },
+                    {
+                      "id": "83738a61-ddb5-42f1-a820-c5b545560930",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/trade/information/exchanges?pair=btc_usd&timeFormat=hr",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "trade",
+                            "information",
+                            "exchanges"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                              "key": "pair",
+                              "value": "btc_usd"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                              "key": "timeFormat",
+                              "value": "hr"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T00:59:44.000Z",
+                      "updatedAt": "2026-07-28T00:59:44.000Z",
+                      "uid": "35240-83738a61-ddb5-42f1-a820-c5b545560930"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-323c7638-c7a4-4c6d-ab8f-112a14ba1df9"
+                }
+              ],
+              "id": "d252bb1a-1a04-41bd-918f-5f4992060f45",
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-d252bb1a-1a04-41bd-918f-5f4992060f45"
+            }
+          ],
+          "id": "f9909aa3-e53a-4352-a6e2-47783c3db681",
+          "createdAt": "2026-07-28T00:59:44.000Z",
+          "updatedAt": "2026-07-28T00:59:44.000Z",
+          "uid": "35240-f9909aa3-e53a-4352-a6e2-47783c3db681"
+        },
+        {
+          "name": "frequency",
+          "item": [
+            {
+              "name": "Trade Frequency",
+              "id": "2136a104-1c46-47e8-acd1-ab18bdb4e102",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/trade/frequency?exchange=gdax&pair=btc_usd&fuzzyMatch=false&orderSizeCategoryUsd=All&startDate=2025-05-01&endDate=2025-05-01&timeFormat=hr&timeInterval=day",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "trade",
+                    "frequency"
+                  ],
+                  "query": [
+                    {
+                      "description": "**[Optional]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                      "key": "exchange",
+                      "value": "gdax"
+                    },
+                    {
+                      "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                      "key": "pair",
+                      "value": "btc_usd"
+                    },
+                    {
+                      "description": "(Required) **[Required]** This parameter allows users to return either a specific pair, such as btc_usd, when set to FALSE, or return every pair related to an underlying asset, such as BTC, when set to TRUE (ex: btc_eur, btc_usd, btc_usdt, etc)",
+                      "key": "fuzzyMatch",
+                      "value": "false"
+                    },
+                    {
+                      "description": "**[Optional]** Users can specify to return all aggregated trades or only trades that fit a specific size threshold (0-1k, 1k-10k, 10k-100k, 100k+, ALL).\n Users can specify by passing the lower threshold flag ` 0 | 1k | 10k | 100k | All `",
+                      "key": "orderSizeCategoryUsd",
+                      "value": "All"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                      "key": "startDate",
+                      "value": "2025-05-01"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                      "key": "endDate",
+                      "value": "2025-05-01"
+                    },
+                    {
+                      "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                      "key": "timeFormat",
+                      "value": "hr"
+                    },
+                    {
+                      "description": "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`",
+                      "key": "timeInterval",
+                      "value": "day"
+                    }
+                  ]
+                },
+                "description": "This endpoint condenses raw trade data into 1-minute increments, making it easier to analyze aggregated statistics without parsing millions of individual trades. It includes a breakdown of trades by quote size, allowing users to filter by specific trade sizes or view all trades. Key metrics provided are total volume traded, VWAP (volume-weighted average price), trade count, and net buy/sell aggressor volumes."
+              },
+              "response": [
+                {
+                  "id": "c2107dcc-e9bb-4a4e-9921-52ed9d4ca48a",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/trade/frequency?exchange=gdax&pair=btc_usd&fuzzyMatch=false&orderSizeCategoryUsd=All&startDate=2025-05-01&endDate=2025-05-01&timeFormat=hr&timeInterval=day",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "trade",
+                        "frequency"
+                      ],
+                      "query": [
+                        {
+                          "description": "**[Optional]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "btc_usd"
+                        },
+                        {
+                          "description": "(Required) **[Required]** This parameter allows users to return either a specific pair, such as btc_usd, when set to FALSE, or return every pair related to an underlying asset, such as BTC, when set to TRUE (ex: btc_eur, btc_usd, btc_usdt, etc)",
+                          "key": "fuzzyMatch",
+                          "value": "false"
+                        },
+                        {
+                          "description": "**[Optional]** Users can specify to return all aggregated trades or only trades that fit a specific size threshold (0-1k, 1k-10k, 10k-100k, 100k+, ALL).\n Users can specify by passing the lower threshold flag ` 0 | 1k | 10k | 100k | All `",
+                          "key": "orderSizeCategoryUsd",
+                          "value": "All"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-05-01"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                          "key": "endDate",
+                          "value": "2025-05-01"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        },
+                        {
+                          "description": "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`",
+                          "key": "timeInterval",
+                          "value": "day"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"avgTradeSizeUsd\": \"<number>\",\n        \"buyTradeCount\": \"<integer>\",\n        \"buyVolumeCoin\": \"<number,null>\",\n        \"close\": \"<number>\",\n        \"exchange\": \"<string>\",\n        \"high\": \"<number>\",\n        \"low\": \"<number>\",\n        \"netBuyVolumeCoin\": \"<number>\",\n        \"open\": \"<number>\",\n        \"orderSizeCategoryUsd\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"sellTradeCount\": \"<number>\",\n        \"sellVolumeCoin\": \"<number>\",\n        \"timestamp\": \"<string>\",\n        \"totalTradeCount\": \"<number>\",\n        \"totalVolumeUsd\": \"<number>\",\n        \"vwap\": \"<number>\"\n      },\n      {\n        \"avgTradeSizeUsd\": \"<number>\",\n        \"buyTradeCount\": \"<integer>\",\n        \"buyVolumeCoin\": \"<number,null>\",\n        \"close\": \"<number>\",\n        \"exchange\": \"<string>\",\n        \"high\": \"<number>\",\n        \"low\": \"<number>\",\n        \"netBuyVolumeCoin\": \"<number>\",\n        \"open\": \"<number>\",\n        \"orderSizeCategoryUsd\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"sellTradeCount\": \"<number>\",\n        \"sellVolumeCoin\": \"<number>\",\n        \"timestamp\": \"<string>\",\n        \"totalTradeCount\": \"<number>\",\n        \"totalVolumeUsd\": \"<number>\",\n        \"vwap\": \"<number>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-c2107dcc-e9bb-4a4e-9921-52ed9d4ca48a"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-2136a104-1c46-47e8-acd1-ab18bdb4e102"
+            }
+          ],
+          "id": "a0d887b1-4736-4c49-9917-440a4f2caed1",
+          "createdAt": "2026-07-28T00:59:44.000Z",
+          "updatedAt": "2026-07-28T00:59:44.000Z",
+          "uid": "35240-a0d887b1-4736-4c49-9917-440a4f2caed1"
+        },
+        {
+          "name": "pressure",
+          "item": [
+            {
+              "name": "Trade Pressure",
+              "id": "157dabe4-67c2-406b-80d3-d7bf4965a78a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/trade/pressure?exchange=gdax&pair=btc_usd&fuzzyMatch=false&orderSizeCategoryUsd=<string>&startDate=2025-04-15&endDate=2025-04-16&timeInterval=<string>&timeFormat=hr",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "trade",
+                    "pressure"
+                  ],
+                  "query": [
+                    {
+                      "description": "**[Optional]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                      "key": "exchange",
+                      "value": "gdax"
+                    },
+                    {
+                      "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                      "key": "pair",
+                      "value": "btc_usd"
+                    },
+                    {
+                      "description": "(Required) **[Required]** This parameter allows users to return either a specific pair, such as btc_usd, when set to FALSE, or return every pair related to an underlying asset, such as BTC, when set to TRUE (ex: btc_eur, btc_usd, btc_usdt, etc)",
+                      "key": "fuzzyMatch",
+                      "value": "false"
+                    },
+                    {
+                      "description": "**[Optional]** Users can specify to return all aggregated trades or only trades that fit a specific size threshold (0-1k, 1k-10k, 10k-100k, 100k+, ALL).\n Users can specify by passing the lower threshold flag ` 0 | 1k | 10k | 100k | All `",
+                      "key": "orderSizeCategoryUsd",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                      "key": "startDate",
+                      "value": "2025-04-15"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                      "key": "endDate",
+                      "value": "2025-04-16"
+                    },
+                    {
+                      "description": "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`",
+                      "key": "timeInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                      "key": "timeFormat",
+                      "value": "hr"
+                    }
+                  ]
+                },
+                "description": "This endpoint provides net trade data (buy aggressors minus sell aggressors) to help users identify which side of the market is more aggressive. Users can also filter by \"orderSizeCategoryUsd\" to analyze behavior across different market segments. Other details revolve around trade count."
+              },
+              "response": [
+                {
+                  "id": "db4ba45f-080d-420d-a564-bb608b89e6b3",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/trade/pressure?exchange=gdax&pair=btc_usd&fuzzyMatch=false&orderSizeCategoryUsd=<string>&startDate=2025-04-15&endDate=2025-04-16&timeInterval=<string>&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "trade",
+                        "pressure"
+                      ],
+                      "query": [
+                        {
+                          "description": "**[Optional]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "btc_usd"
+                        },
+                        {
+                          "description": "(Required) **[Required]** This parameter allows users to return either a specific pair, such as btc_usd, when set to FALSE, or return every pair related to an underlying asset, such as BTC, when set to TRUE (ex: btc_eur, btc_usd, btc_usdt, etc)",
+                          "key": "fuzzyMatch",
+                          "value": "false"
+                        },
+                        {
+                          "description": "**[Optional]** Users can specify to return all aggregated trades or only trades that fit a specific size threshold (0-1k, 1k-10k, 10k-100k, 100k+, ALL).\n Users can specify by passing the lower threshold flag ` 0 | 1k | 10k | 100k | All `",
+                          "key": "orderSizeCategoryUsd",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-04-15"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                          "key": "endDate",
+                          "value": "2025-04-16"
+                        },
+                        {
+                          "description": "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`",
+                          "key": "timeInterval",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"close\": \"<number>\",\n        \"exchange\": \"<string>\",\n        \"high\": \"<number>\",\n        \"low\": \"<number>\",\n        \"netBuyTradeCount\": \"<integer>\",\n        \"netBuyVolumeCoin\": \"<number>\",\n        \"netBuyVolumeUsd\": \"<number>\",\n        \"open\": \"<number>\",\n        \"orderSizeCategoryUsd\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"totalVolumeCoin\": \"<number>\",\n        \"totalVolumeUsd\": \"<number>\"\n      },\n      {\n        \"close\": \"<number>\",\n        \"exchange\": \"<string>\",\n        \"high\": \"<number>\",\n        \"low\": \"<number>\",\n        \"netBuyTradeCount\": \"<integer>\",\n        \"netBuyVolumeCoin\": \"<number>\",\n        \"netBuyVolumeUsd\": \"<number>\",\n        \"open\": \"<number>\",\n        \"orderSizeCategoryUsd\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"totalVolumeCoin\": \"<number>\",\n        \"totalVolumeUsd\": \"<number>\"\n      }\n    ],\n    \"metadata\": {\n      \"api-version\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-db4ba45f-080d-420d-a564-bb608b89e6b3"
+                },
+                {
+                  "id": "5341650c-115c-4502-9fe6-b4223ab6feac",
+                  "name": "400",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/trade/pressure?exchange=gdax&pair=btc_usd&fuzzyMatch=false&orderSizeCategoryUsd=<string>&startDate=2025-04-15&endDate=2025-04-16&timeInterval=<string>&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "trade",
+                        "pressure"
+                      ],
+                      "query": [
+                        {
+                          "description": "**[Optional]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "btc_usd"
+                        },
+                        {
+                          "description": "(Required) **[Required]** This parameter allows users to return either a specific pair, such as btc_usd, when set to FALSE, or return every pair related to an underlying asset, such as BTC, when set to TRUE (ex: btc_eur, btc_usd, btc_usdt, etc)",
+                          "key": "fuzzyMatch",
+                          "value": "false"
+                        },
+                        {
+                          "description": "**[Optional]** Users can specify to return all aggregated trades or only trades that fit a specific size threshold (0-1k, 1k-10k, 10k-100k, 100k+, ALL).\n Users can specify by passing the lower threshold flag ` 0 | 1k | 10k | 100k | All `",
+                          "key": "orderSizeCategoryUsd",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-04-15"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                          "key": "endDate",
+                          "value": "2025-04-16"
+                        },
+                        {
+                          "description": "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`",
+                          "key": "timeInterval",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-5341650c-115c-4502-9fe6-b4223ab6feac"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-157dabe4-67c2-406b-80d3-d7bf4965a78a"
+            }
+          ],
+          "id": "846c0274-c03e-4d9a-a4c7-4a39223e044f",
+          "createdAt": "2026-07-28T00:59:44.000Z",
+          "updatedAt": "2026-07-28T00:59:44.000Z",
+          "uid": "35240-846c0274-c03e-4d9a-a4c7-4a39223e044f"
+        },
+        {
+          "name": "vwap",
+          "item": [
+            {
+              "name": "global",
+              "item": [
+                {
+                  "name": "get tradevwapglobal",
+                  "id": "1f4f6ab9-c599-49ae-b521-c12ff8afc9d0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "x-api-key",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "header",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/trade/vwap/global?pair=btc_usdt&exchange=gdax&startDate=2025-02-05T00:00:00&endDate=2025-02-05T00:00:15&timeInterval=minute&timeFormat=hr",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "trade",
+                        "vwap",
+                        "global"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "btc_usdt"
+                        },
+                        {
+                          "description": "(Required) **[Required]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "(Required) **[Required]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-02-05T00:00:00"
+                        },
+                        {
+                          "description": "(Required) **[Required]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                          "key": "endDate",
+                          "value": "2025-02-05T00:00:15"
+                        },
+                        {
+                          "description": "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`",
+                          "key": "timeInterval",
+                          "value": "minute"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "0b78be71-9742-4400-a7f3-bb93554baa60",
+                      "name": "New Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/trade/vwap/global?pair=btc_usdt&exchange=gdax&startDate=2025-02-05T00:00:00&endDate=2025-02-05T00:00:15&timeInterval=minute&timeFormat=hr",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "trade",
+                            "vwap",
+                            "global"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                              "key": "pair",
+                              "value": "btc_usdt"
+                            },
+                            {
+                              "description": "(Required) **[Required]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                              "key": "exchange",
+                              "value": "gdax"
+                            },
+                            {
+                              "description": "(Required) **[Required]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                              "key": "startDate",
+                              "value": "2025-02-05T00:00:00"
+                            },
+                            {
+                              "description": "(Required) **[Required]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                              "key": "endDate",
+                              "value": "2025-02-05T00:00:15"
+                            },
+                            {
+                              "description": "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`",
+                              "key": "timeInterval",
+                              "value": "minute"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                              "key": "timeFormat",
+                              "value": "hr"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T00:59:44.000Z",
+                      "updatedAt": "2026-07-28T00:59:44.000Z",
+                      "uid": "35240-0b78be71-9742-4400-a7f3-bb93554baa60"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-1f4f6ab9-c599-49ae-b521-c12ff8afc9d0"
+                }
+              ],
+              "id": "49a83582-62b7-458a-a00d-2495c97b0fad",
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-49a83582-62b7-458a-a00d-2495c97b0fad"
+            },
+            {
+              "name": "VWAP - TWAP",
+              "id": "a8726a11-6b0e-4138-a323-29294e6b6aca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/trade/vwap?pair=btc_usd&exchange=gdax&startDate=2025-06-01&endDate=2025-06-02&timeInterval=day&timeFormat=hr&orderSizeCategoryUsd=All",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "trade",
+                    "vwap"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                      "key": "pair",
+                      "value": "btc_usd"
+                    },
+                    {
+                      "description": "(Required) **[Required]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                      "key": "exchange",
+                      "value": "gdax"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                      "key": "startDate",
+                      "value": "2025-06-01"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                      "key": "endDate",
+                      "value": "2025-06-02"
+                    },
+                    {
+                      "description": "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`",
+                      "key": "timeInterval",
+                      "value": "day"
+                    },
+                    {
+                      "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                      "key": "timeFormat",
+                      "value": "hr"
+                    },
+                    {
+                      "description": "(Required) **[Required]** Users can specify to return all aggregated trades, or trades of a specific size threshold. (0-1k, 1k-10k, 10k-100k, 100k+, ALL) by passing in the lower value of the range ` 0 | 1k | 10k | 100k | All `",
+                      "key": "orderSizeCategoryUsd",
+                      "value": "All"
+                    }
+                  ]
+                },
+                "description": "The VWAP (Volume Weighted Average Price) for BTC/USDT and other pairs on a crypto exchanges like Binance, is calculated every minute using trade data. VWAP is computed by taking the sum of the product of each trade\u2019s price and size (i.e., trade price \u00d7 trade volume) within the 1-minute interval, and dividing that by the total traded volume in that same interval. This provides a time-specific average price that accounts for trade size, offering a more accurate reflection of market activity than a simple average. The TWAP users the time-weighted average of the \u201cclose\u201d price for each 1-minute candle. We use the close price because it\u2019s the last traded price for that minute, which provides as consistent price that matches the minute\u2019s end as closely as possible."
+              },
+              "response": [
+                {
+                  "id": "833f8520-c17e-44aa-815b-21c8e695c14a",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/trade/vwap?pair=btc_usd&exchange=gdax&startDate=2025-06-01&endDate=2025-06-02&timeInterval=day&timeFormat=hr&orderSizeCategoryUsd=All",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "trade",
+                        "vwap"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The currency pair for the spot instrument.\n**[Examples]** ` btc_usd | btc_usdc | eth_usd `",
+                          "key": "pair",
+                          "value": "btc_usd"
+                        },
+                        {
+                          "description": "(Required) **[Required]** The exchange for which to retrieve listed spot instruments.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-06-01"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                          "key": "endDate",
+                          "value": "2025-06-02"
+                        },
+                        {
+                          "description": "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`",
+                          "key": "timeInterval",
+                          "value": "day"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        },
+                        {
+                          "description": "(Required) **[Required]** Users can specify to return all aggregated trades, or trades of a specific size threshold. (0-1k, 1k-10k, 10k-100k, 100k+, ALL) by passing in the lower value of the range ` 0 | 1k | 10k | 100k | All `",
+                          "key": "orderSizeCategoryUsd",
+                          "value": "All"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"totalVolumeUSD\": \"<number>\",\n        \"twap\": \"<number>\",\n        \"vwap\": \"<number>\"\n      },\n      {\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"totalVolumeUSD\": \"<number>\",\n        \"twap\": \"<number>\",\n        \"vwap\": \"<number>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-833f8520-c17e-44aa-815b-21c8e695c14a"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-a8726a11-6b0e-4138-a323-29294e6b6aca"
+            }
+          ],
+          "id": "9423ce8c-2152-4822-983f-70fca7d8869b",
+          "createdAt": "2026-07-28T00:59:44.000Z",
+          "updatedAt": "2026-07-28T00:59:44.000Z",
+          "uid": "35240-9423ce8c-2152-4822-983f-70fca7d8869b"
+        }
+      ],
+      "id": "e9926d67-a445-4056-89c7-25d3ff43065a",
+      "createdAt": "2026-07-28T00:59:44.000Z",
+      "updatedAt": "2026-07-28T00:59:44.000Z",
+      "uid": "35240-e9926d67-a445-4056-89c7-25d3ff43065a"
+    },
+    {
+      "name": "volumes",
+      "item": [
+        {
+          "name": "asset",
+          "item": [
+            {
+              "name": "Asset Volume USD",
+              "id": "3f465383-d7ef-4d52-9f4f-87df1201a380",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/volumes/asset?exchange=gdax&asset=btc&quoteAssetIncluded=false&pair=&startDate=2025-06-01&endDate=2025-06-05&timeInterval=day&timeFormat=hr&orderSizeCategoryUsd=ALL",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "volumes",
+                    "asset"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) **[Required]** The exchange for which to retrieve asset USD volume.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                      "key": "exchange",
+                      "value": "gdax"
+                    },
+                    {
+                      "description": "(Required) **[Required]** The exchange for which to retrieve asset USD volume.\n**[Examples]** ` btc | eth | sol | xrp`",
+                      "key": "asset",
+                      "value": "btc"
+                    },
+                    {
+                      "description": "(Required) **[Required]** Whether the USD asset volumes from the quote side are included.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                      "key": "quoteAssetIncluded",
+                      "value": "false"
+                    },
+                    {
+                      "description": "**[Optional]** The parameter to isolate USD volume to only a specific pair.\n**[Examples]** ` btc_usd | eth_usdt | sol_usd | xrp_usdc`",
+                      "key": "pair",
+                      "value": ""
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                      "key": "startDate",
+                      "value": "2025-06-01"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                      "key": "endDate",
+                      "value": "2025-06-05"
+                    },
+                    {
+                      "description": "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`",
+                      "key": "timeInterval",
+                      "value": "day"
+                    },
+                    {
+                      "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                      "key": "timeFormat",
+                      "value": "hr"
+                    },
+                    {
+                      "description": "(Required) **[Required]** Users can specify to return all aggregated trades, or trades of a specific size threshold. (0-1k, 1k-10k, 10k-100k, 100k+, ALL) by passing in the lower value of the range ` 0 | 1k | 10k | 100k | All `",
+                      "key": "orderSizeCategoryUsd",
+                      "value": "ALL"
+                    }
+                  ]
+                },
+                "description": "This endpoint displays the total volume per base asset or specifc pair, normalized to USD. This means that crypto-to-crypto pairs (such as ETH_BTC) are converted to USD before aggregation. Users can pass an optional boolean parameter to include pairs where the asset is on the quote side, example xyz_btc where btc is target asset."
+              },
+              "response": [
+                {
+                  "id": "4b71a1aa-fd64-4963-a8ab-757fa1e4fb78",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/volumes/asset?exchange=gdax&asset=btc&quoteAssetIncluded=false&pair=&startDate=2025-06-01&endDate=2025-06-05&timeInterval=day&timeFormat=hr&orderSizeCategoryUsd=ALL",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "volumes",
+                        "asset"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) **[Required]** The exchange for which to retrieve asset USD volume.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": "gdax"
+                        },
+                        {
+                          "description": "(Required) **[Required]** The exchange for which to retrieve asset USD volume.\n**[Examples]** ` btc | eth | sol | xrp`",
+                          "key": "asset",
+                          "value": "btc"
+                        },
+                        {
+                          "description": "(Required) **[Required]** Whether the USD asset volumes from the quote side are included.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "quoteAssetIncluded",
+                          "value": "false"
+                        },
+                        {
+                          "description": "**[Optional]** The parameter to isolate USD volume to only a specific pair.\n**[Examples]** ` btc_usd | eth_usdt | sol_usd | xrp_usdc`",
+                          "key": "pair",
+                          "value": ""
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-06-01"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                          "key": "endDate",
+                          "value": "2025-06-05"
+                        },
+                        {
+                          "description": "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`",
+                          "key": "timeInterval",
+                          "value": "day"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        },
+                        {
+                          "description": "(Required) **[Required]** Users can specify to return all aggregated trades, or trades of a specific size threshold. (0-1k, 1k-10k, 10k-100k, 100k+, ALL) by passing in the lower value of the range ` 0 | 1k | 10k | 100k | All `",
+                          "key": "orderSizeCategoryUsd",
+                          "value": "ALL"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"exchange\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"totalVolumeUSD\": \"<number>\",\n        \"totalVolumeUSDBillions\": \"<number>\"\n      },\n      {\n        \"exchange\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"totalVolumeUSD\": \"<number>\",\n        \"totalVolumeUSDBillions\": \"<number>\"\n      }\n    ],\n    \"metadata\": {\n      \"api-version\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-4b71a1aa-fd64-4963-a8ab-757fa1e4fb78"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-3f465383-d7ef-4d52-9f4f-87df1201a380"
+            }
+          ],
+          "id": "1b52afb5-a6c8-4041-b024-46211a59246c",
+          "createdAt": "2026-07-28T00:59:44.000Z",
+          "updatedAt": "2026-07-28T00:59:44.000Z",
+          "uid": "35240-1b52afb5-a6c8-4041-b024-46211a59246c"
+        },
+        {
+          "name": "exchange",
+          "item": [
+            {
+              "name": "Exchange Volume USD",
+              "id": "452301d7-be6f-48e2-b553-4a2e218a40a3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "apikey",
+                  "apikey": [
+                    {
+                      "key": "key",
+                      "value": "x-api-key",
+                      "type": "string"
+                    },
+                    {
+                      "key": "value",
+                      "value": "{{apiKey}}",
+                      "type": "string"
+                    },
+                    {
+                      "key": "in",
+                      "value": "header",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/volumes/exchange?exchange=&startDate=2025-06-01&endDate=2025-06-05&timeInterval=day&timeFormat=hr&orderSizeCategoryUsd=ALL",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "volumes",
+                    "exchange"
+                  ],
+                  "query": [
+                    {
+                      "description": "**[Optional]** The exchange for which to retrieve USD volume.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                      "key": "exchange",
+                      "value": ""
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                      "key": "startDate",
+                      "value": "2025-06-01"
+                    },
+                    {
+                      "description": "**[Optional]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                      "key": "endDate",
+                      "value": "2025-06-05"
+                    },
+                    {
+                      "description": "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`",
+                      "key": "timeInterval",
+                      "value": "day"
+                    },
+                    {
+                      "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                      "key": "timeFormat",
+                      "value": "hr"
+                    },
+                    {
+                      "description": "(Required) **[Required]** Users can specify to return all aggregated trades, or trades of a specific size threshold. (0-1k, 1k-10k, 10k-100k, 100k+, ALL) by passing in the lower value of the range ` 0 | 1k | 10k | 100k | All `",
+                      "key": "orderSizeCategoryUsd",
+                      "value": "ALL"
+                    }
+                  ]
+                },
+                "description": "This endpoint displays the total volume per exchange for all available pairs, normalized to USD. This means that crypto-to-crypto pairs (such as ETH_BTC) are converted to USD before aggregation. Users can pass an exchange parameter to isolate volume data for a specific exchange or leave it blank to retrieve data for all supported exchanges. Users can also isolate volume that meet a size threshold using the \u201corderSizeCategoryUsd\u201d parameter. A useful example might be to pass 100k+ threshold to measure which exchanges have the most \u201clarge ticket\u201d volume (aka \u201cwhale\u201d volume)."
+              },
+              "response": [
+                {
+                  "id": "8573c5a0-6819-48a7-ae1a-1ef29985f707",
+                  "name": "New Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/volumes/exchange?exchange=&startDate=2025-06-01&endDate=2025-06-05&timeInterval=day&timeFormat=hr&orderSizeCategoryUsd=ALL",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "volumes",
+                        "exchange"
+                      ],
+                      "query": [
+                        {
+                          "description": "**[Optional]** The exchange for which to retrieve USD volume.\n**[Examples]** ` gdax | okex | binance | binanceus`",
+                          "key": "exchange",
+                          "value": ""
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`",
+                          "key": "startDate",
+                          "value": "2025-06-01"
+                        },
+                        {
+                          "description": "**[Optional]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`",
+                          "key": "endDate",
+                          "value": "2025-06-05"
+                        },
+                        {
+                          "description": "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`",
+                          "key": "timeInterval",
+                          "value": "day"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "hr"
+                        },
+                        {
+                          "description": "(Required) **[Required]** Users can specify to return all aggregated trades, or trades of a specific size threshold. (0-1k, 1k-10k, 10k-100k, 100k+, ALL) by passing in the lower value of the range ` 0 | 1k | 10k | 100k | All `",
+                          "key": "orderSizeCategoryUsd",
+                          "value": "ALL"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"exchange\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"totalVolumeUSD\": \"<number>\",\n        \"totalVolumeUSDBillions\": \"<number>\"\n      },\n      {\n        \"exchange\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"totalVolumeUSD\": \"<number>\",\n        \"totalVolumeUSDBillions\": \"<number>\"\n      }\n    ],\n    \"metadata\": {\n      \"api-version\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:44.000Z",
+                  "updatedAt": "2026-07-28T00:59:44.000Z",
+                  "uid": "35240-8573c5a0-6819-48a7-ae1a-1ef29985f707"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:44.000Z",
+              "updatedAt": "2026-07-28T00:59:44.000Z",
+              "uid": "35240-452301d7-be6f-48e2-b553-4a2e218a40a3"
+            }
+          ],
+          "id": "e94f6eb5-aeda-4602-9a33-cd444da266b7",
+          "createdAt": "2026-07-28T00:59:44.000Z",
+          "updatedAt": "2026-07-28T00:59:44.000Z",
+          "uid": "35240-e94f6eb5-aeda-4602-9a33-cd444da266b7"
+        }
+      ],
+      "id": "760d93c8-7a05-49f0-88be-a038cbd1d771",
+      "createdAt": "2026-07-28T00:59:44.000Z",
+      "updatedAt": "2026-07-28T00:59:44.000Z",
+      "uid": "35240-760d93c8-7a05-49f0-88be-a038cbd1d771"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.amberdata.com/markets/spot/analytics"
+    }
+  ]
+}

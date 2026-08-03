@@ -1,0 +1,1596 @@
+{
+  "info": {
+    "_postman_id": "7672cbaf-9ef9-4e68-afcc-11e240f19ce6",
+    "name": "Defi Market API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:59:33.000Z",
+    "updatedAt": "2026-07-28T00:59:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7672cbaf-9ef9-4e68-afcc-11e240f19ce6"
+  },
+  "item": [
+    {
+      "name": "metrics",
+      "item": [
+        {
+          "name": "exchanges",
+          "item": [
+            {
+              "name": "{exchange}",
+              "item": [
+                {
+                  "name": "latest",
+                  "item": [
+                    {
+                      "name": "Exchanges Latest",
+                      "id": "ed337694-a2df-4e4b-bb96-75225237c6a3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/metrics/exchanges/:exchange/latest?timeFormat=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "metrics",
+                            "exchanges",
+                            ":exchange",
+                            "latest"
+                          ],
+                          "query": [
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                              "key": "timeFormat",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "7b5d61d1-06d9-4d8a-8d13-7dec0d2e1534",
+                              "key": "exchange",
+                              "value": "uniswapv2",
+                              "description": "(Required) Exchange for which to return the global metrics - can be specified as:<BR/>- a name: `uniswapv2`<BR/>- an id: `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f`"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves the latest exchange daily metrics for the specified decentralized exchange."
+                      },
+                      "response": [
+                        {
+                          "id": "2ea2cb92-bbdc-4424-867a-ee42241f16be",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/metrics/exchanges/:exchange/latest?timeFormat=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "metrics",
+                                "exchanges",
+                                ":exchange",
+                                "latest"
+                              ],
+                              "query": [
+                                {
+                                  "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                  "key": "timeFormat",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "exchange"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": [\n    {\n      \"exchangeId\": \"<string>\",\n      \"timestamp\": \"<string>\",\n      \"liquidityTotalWETH\": \"<string>\",\n      \"liquidityTotalUSD\": \"<string>\",\n      \"pairsTradedTotal\": \"<integer>\",\n      \"pairsCumulativeTotal\": \"<integer>\",\n      \"tradesTotal\": \"<integer>\"\n    },\n    {\n      \"exchangeId\": \"<string>\",\n      \"timestamp\": \"<string>\",\n      \"liquidityTotalWETH\": \"<string>\",\n      \"liquidityTotalUSD\": \"<string>\",\n      \"pairsTradedTotal\": \"<integer>\",\n      \"pairsCumulativeTotal\": \"<integer>\",\n      \"tradesTotal\": \"<integer>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T00:59:34.000Z",
+                          "updatedAt": "2026-07-28T00:59:34.000Z",
+                          "uid": "35240-2ea2cb92-bbdc-4424-867a-ee42241f16be"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:34.000Z",
+                      "updatedAt": "2026-07-28T00:59:34.000Z",
+                      "uid": "35240-ed337694-a2df-4e4b-bb96-75225237c6a3"
+                    }
+                  ],
+                  "id": "e6a22b69-5516-4b7d-927a-ad51b2416689",
+                  "createdAt": "2026-07-28T00:59:34.000Z",
+                  "updatedAt": "2026-07-28T00:59:34.000Z",
+                  "uid": "35240-e6a22b69-5516-4b7d-927a-ad51b2416689"
+                },
+                {
+                  "name": "historical",
+                  "item": [
+                    {
+                      "name": "Exchanges Historical",
+                      "id": "b083536d-dd04-45d0-993c-9f5cf98912a0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/metrics/exchanges/:exchange/historical?startDate=<dateTime>&endDate=<dateTime>&timeFormat=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "metrics",
+                            "exchanges",
+                            ":exchange",
+                            "historical"
+                          ],
+                          "query": [
+                            {
+                              "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR/>**[Formats]** `seconds | milliseconds | iso8601`<BR/>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                              "key": "startDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR/>**[Formats]** `seconds | milliseconds | iso8601`<BR/>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                              "key": "endDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                              "key": "timeFormat",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "b7ffeda2-abe1-46b0-90d4-610a22d7d626",
+                              "key": "exchange",
+                              "value": "uniswapv2",
+                              "description": "(Required) Exchange for which to return the global metrics - can be specified as:<BR/>- a name: `uniswapv2`<BR/>- an id: `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f`"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves historical daily exchange metrics for the specified decentralized exchange."
+                      },
+                      "response": [
+                        {
+                          "id": "c49edc77-95de-49d7-8cc4-419f4bd8a9d3",
+                          "name": "200",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/metrics/exchanges/:exchange/historical?startDate=<dateTime>&endDate=<dateTime>&timeFormat=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "metrics",
+                                "exchanges",
+                                ":exchange",
+                                "historical"
+                              ],
+                              "query": [
+                                {
+                                  "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR/>**[Formats]** `seconds | milliseconds | iso8601`<BR/>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "startDate",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR/>**[Formats]** `seconds | milliseconds | iso8601`<BR/>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "endDate",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                  "key": "timeFormat",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "exchange"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": [\n    {\n      \"exchangeId\": \"<string>\",\n      \"timestamp\": \"<string>\",\n      \"liquidityTotalWETH\": \"<string>\",\n      \"liquidityTotalUSD\": \"<string>\",\n      \"pairsTradedTotal\": \"<integer>\",\n      \"pairsCumulativeTotal\": \"<integer>\",\n      \"tradesTotal\": \"<integer>\"\n    },\n    {\n      \"exchangeId\": \"<string>\",\n      \"timestamp\": \"<string>\",\n      \"liquidityTotalWETH\": \"<string>\",\n      \"liquidityTotalUSD\": \"<string>\",\n      \"pairsTradedTotal\": \"<integer>\",\n      \"pairsCumulativeTotal\": \"<integer>\",\n      \"tradesTotal\": \"<integer>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T00:59:34.000Z",
+                          "updatedAt": "2026-07-28T00:59:34.000Z",
+                          "uid": "35240-c49edc77-95de-49d7-8cc4-419f4bd8a9d3"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:34.000Z",
+                      "updatedAt": "2026-07-28T00:59:34.000Z",
+                      "uid": "35240-b083536d-dd04-45d0-993c-9f5cf98912a0"
+                    }
+                  ],
+                  "id": "ae6d1c3f-aa0f-4b6d-becc-0dd5761f9e29",
+                  "createdAt": "2026-07-28T00:59:34.000Z",
+                  "updatedAt": "2026-07-28T00:59:34.000Z",
+                  "uid": "35240-ae6d1c3f-aa0f-4b6d-becc-0dd5761f9e29"
+                },
+                {
+                  "name": "assets",
+                  "item": [
+                    {
+                      "name": "{asset}",
+                      "item": [
+                        {
+                          "name": "latest",
+                          "item": [
+                            {
+                              "name": "Assets Latest",
+                              "id": "9255a8e6-29d4-4fc2-808d-f15b4f4a997e",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/metrics/exchanges/:exchange/assets/:asset/latest?timeFormat=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "metrics",
+                                    "exchanges",
+                                    ":exchange",
+                                    "assets",
+                                    ":asset",
+                                    "latest"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                      "key": "timeFormat",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "c93d2aa7-70d5-4453-b3de-26bafc8e9927",
+                                      "key": "exchange",
+                                      "value": "uniswapv2",
+                                      "description": "(Required) Exchange of the asset for which to return the metrics - can be specified as:<BR/>- a name: `uniswapv2`<BR/>- an id: `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f`"
+                                    },
+                                    {
+                                      "id": "0ae66c81-a0ba-4cf0-a090-f7f7bdbac225",
+                                      "key": "asset",
+                                      "value": "0x6b175474e89094c44da98b954eedeac495271d0f",
+                                      "description": "(Required) Asset for which to return the metrics, for example:<BR/>- `0x6b175474e89094c44da98b954eedeac495271d0f` (DAI)"
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves the latest daily metrics for the specified asset (for example DAI)."
+                              },
+                              "response": [
+                                {
+                                  "id": "80d35bec-16d8-4dc6-b7f5-0d6e56195054",
+                                  "name": "200",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/metrics/exchanges/:exchange/assets/:asset/latest?timeFormat=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "metrics",
+                                        "exchanges",
+                                        ":exchange",
+                                        "assets",
+                                        ":asset",
+                                        "latest"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                          "key": "timeFormat",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "exchange"
+                                        },
+                                        {
+                                          "key": "asset"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": [\n    {\n      \"exchangeId\": \"<string>\",\n      \"timestamp\": \"<string>\",\n      \"liquidityTotalNative\": \"<string>\",\n      \"liquidityTotalUSD\": \"<string>\"\n    },\n    {\n      \"exchangeId\": \"<string>\",\n      \"timestamp\": \"<string>\",\n      \"liquidityTotalNative\": \"<string>\",\n      \"liquidityTotalUSD\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T00:59:34.000Z",
+                                  "updatedAt": "2026-07-28T00:59:34.000Z",
+                                  "uid": "35240-80d35bec-16d8-4dc6-b7f5-0d6e56195054"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T00:59:34.000Z",
+                              "updatedAt": "2026-07-28T00:59:34.000Z",
+                              "uid": "35240-9255a8e6-29d4-4fc2-808d-f15b4f4a997e"
+                            }
+                          ],
+                          "id": "40124adc-08de-424e-bccc-f86d9e27411d",
+                          "createdAt": "2026-07-28T00:59:34.000Z",
+                          "updatedAt": "2026-07-28T00:59:34.000Z",
+                          "uid": "35240-40124adc-08de-424e-bccc-f86d9e27411d"
+                        },
+                        {
+                          "name": "historical",
+                          "item": [
+                            {
+                              "name": "Assets Historical",
+                              "id": "d1f61685-8f2d-4216-ad47-addb5b2360a2",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/metrics/exchanges/:exchange/assets/:asset/historical?startDate=<string>&endDate=<string>&timeFormat=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "metrics",
+                                    "exchanges",
+                                    ":exchange",
+                                    "assets",
+                                    ":asset",
+                                    "historical"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                      "key": "startDate",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                      "key": "endDate",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                      "key": "timeFormat",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "c6149ef0-0d34-425f-a816-29b9e0b7f17a",
+                                      "key": "exchange",
+                                      "value": "uniswapv2",
+                                      "description": "(Required) Exchange for which to return the global metrics - can be specified as:<BR/>- a name: `uniswapv2`<BR/>- an id: `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f`"
+                                    },
+                                    {
+                                      "id": "b8359e9b-5e8e-45b0-8243-b101ddbc60d9",
+                                      "key": "asset",
+                                      "value": "0x6b175474e89094c44da98b954eedeac495271d0f",
+                                      "description": "(Required) Asset for which to return the metrics, for example:<BR/>- `0x6b175474e89094c44da98b954eedeac495271d0f` (DAI)"
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves historical daily metrics for the specified asset (for example DAI)."
+                              },
+                              "response": [
+                                {
+                                  "id": "f93207fd-1125-4c1b-86cc-857b66c9d7f2",
+                                  "name": "200",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/metrics/exchanges/:exchange/assets/:asset/historical?startDate=<string>&endDate=<string>&timeFormat=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "metrics",
+                                        "exchanges",
+                                        ":exchange",
+                                        "assets",
+                                        ":asset",
+                                        "historical"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                          "key": "startDate",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                          "key": "endDate",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                          "key": "timeFormat",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "exchange"
+                                        },
+                                        {
+                                          "key": "asset"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": [\n    {\n      \"exchangeId\": \"<string>\",\n      \"timestamp\": \"<string>\",\n      \"liquidityTotalNative\": \"<string>\",\n      \"liquidityTotalUSD\": \"<string>\"\n    },\n    {\n      \"exchangeId\": \"<string>\",\n      \"timestamp\": \"<string>\",\n      \"liquidityTotalNative\": \"<string>\",\n      \"liquidityTotalUSD\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T00:59:34.000Z",
+                                  "updatedAt": "2026-07-28T00:59:34.000Z",
+                                  "uid": "35240-f93207fd-1125-4c1b-86cc-857b66c9d7f2"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T00:59:34.000Z",
+                              "updatedAt": "2026-07-28T00:59:34.000Z",
+                              "uid": "35240-d1f61685-8f2d-4216-ad47-addb5b2360a2"
+                            }
+                          ],
+                          "id": "8036e28a-02da-4767-9649-410bf448f090",
+                          "createdAt": "2026-07-28T00:59:34.000Z",
+                          "updatedAt": "2026-07-28T00:59:34.000Z",
+                          "uid": "35240-8036e28a-02da-4767-9649-410bf448f090"
+                        }
+                      ],
+                      "id": "c5c816e5-4258-4371-bb43-ad71e2e9f338",
+                      "createdAt": "2026-07-28T00:59:34.000Z",
+                      "updatedAt": "2026-07-28T00:59:34.000Z",
+                      "uid": "35240-c5c816e5-4258-4371-bb43-ad71e2e9f338"
+                    }
+                  ],
+                  "id": "f11451a2-9121-40da-a7bc-8569c8f826a1",
+                  "createdAt": "2026-07-28T00:59:34.000Z",
+                  "updatedAt": "2026-07-28T00:59:34.000Z",
+                  "uid": "35240-f11451a2-9121-40da-a7bc-8569c8f826a1"
+                },
+                {
+                  "name": "pairs",
+                  "item": [
+                    {
+                      "name": "{pair}",
+                      "item": [
+                        {
+                          "name": "latest",
+                          "item": [
+                            {
+                              "name": "Pairs Latest",
+                              "id": "a2561905-f5e9-489d-acfa-e5fddf632761",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/metrics/exchanges/:exchange/pairs/:pair/latest?timeFormat=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "metrics",
+                                    "exchanges",
+                                    ":exchange",
+                                    "pairs",
+                                    ":pair",
+                                    "latest"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                      "key": "timeFormat",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "c456b5b0-212f-4d11-8cfb-a5e60760d571",
+                                      "key": "exchange",
+                                      "value": "uniswapv2",
+                                      "description": "(Required) Exchange of the asset for which to return the metrics - can be specified as:<BR/>- a name: `uniswapv2`<BR/>- an id: `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f`"
+                                    },
+                                    {
+                                      "id": "7ec79b96-70ca-4b37-84b2-b2602de89091",
+                                      "key": "pair",
+                                      "value": "0xa478c2975ab1ea89e8196811f51a7b7ade33eb11",
+                                      "description": "(Required) Pair for which to return the metrics, for example:<BR/>- `0xa478c2975ab1ea89e8196811f51a7b7ade33eb11` (DAI_WETH)"
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves the latest minute by minute metrics for the specified pair (for example DAI_WETH)."
+                              },
+                              "response": [
+                                {
+                                  "id": "784f5b7f-c0d0-47ff-b4ca-6e29ba2d8c53",
+                                  "name": "200",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/metrics/exchanges/:exchange/pairs/:pair/latest?timeFormat=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "metrics",
+                                        "exchanges",
+                                        ":exchange",
+                                        "pairs",
+                                        ":pair",
+                                        "latest"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                          "key": "timeFormat",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "exchange"
+                                        },
+                                        {
+                                          "key": "pair"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": [\n    {\n      \"exchangeId\": \"<string>\",\n      \"timestamp\": \"<string>\",\n      \"address\": \"<string>\",\n      \"feesNative\": \"<string>\",\n      \"feesUSD\": \"<string>\",\n      \"liquidityTotalNative\": \"<string>\",\n      \"liquidityTotalUSD\": \"<string>\",\n      \"pairsTradedTotal\": \"<integer>\",\n      \"tradesTotal\": \"<integer>\",\n      \"priceNative\": \"<string>\",\n      \"volumeTotalNative\": \"<string>\",\n      \"volumeTotalUSD\": \"<string>\"\n    },\n    {\n      \"exchangeId\": \"<string>\",\n      \"timestamp\": \"<string>\",\n      \"address\": \"<string>\",\n      \"feesNative\": \"<string>\",\n      \"feesUSD\": \"<string>\",\n      \"liquidityTotalNative\": \"<string>\",\n      \"liquidityTotalUSD\": \"<string>\",\n      \"pairsTradedTotal\": \"<integer>\",\n      \"tradesTotal\": \"<integer>\",\n      \"priceNative\": \"<string>\",\n      \"volumeTotalNative\": \"<string>\",\n      \"volumeTotalUSD\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T00:59:34.000Z",
+                                  "updatedAt": "2026-07-28T00:59:34.000Z",
+                                  "uid": "35240-784f5b7f-c0d0-47ff-b4ca-6e29ba2d8c53"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T00:59:34.000Z",
+                              "updatedAt": "2026-07-28T00:59:34.000Z",
+                              "uid": "35240-a2561905-f5e9-489d-acfa-e5fddf632761"
+                            }
+                          ],
+                          "id": "12574efa-fa47-42d8-9f18-6a66e5890024",
+                          "createdAt": "2026-07-28T00:59:34.000Z",
+                          "updatedAt": "2026-07-28T00:59:34.000Z",
+                          "uid": "35240-12574efa-fa47-42d8-9f18-6a66e5890024"
+                        },
+                        {
+                          "name": "historical",
+                          "item": [
+                            {
+                              "name": "Pairs Historical",
+                              "id": "3a133405-2981-49a5-8cb9-9d3e76424d2b",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/metrics/exchanges/:exchange/pairs/:pair/historical?startDate=<dateTime>&endDate=<dateTime>&timeFormat=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "metrics",
+                                    "exchanges",
+                                    ":exchange",
+                                    "pairs",
+                                    ":pair",
+                                    "historical"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T00:00:00`",
+                                      "key": "startDate",
+                                      "value": "<dateTime>"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-02T00:00:00`",
+                                      "key": "endDate",
+                                      "value": "<dateTime>"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                      "key": "timeFormat",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "50de02f9-cc05-469f-a381-25f2f8ff0e56",
+                                      "key": "exchange",
+                                      "value": "uniswapv2",
+                                      "description": "(Required) Exchange for which to return the global metrics - can be specified as:<BR/>- a name: `uniswapv2`<BR/>- an id: `0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f`"
+                                    },
+                                    {
+                                      "id": "a272d813-de50-416a-b284-1d4907089745",
+                                      "key": "pair",
+                                      "value": "0xa478c2975ab1ea89e8196811f51a7b7ade33eb11",
+                                      "description": "(Required) Pair for which to return the metrics, for example:<BR/>- `0xa478c2975ab1ea89e8196811f51a7b7ade33eb11` (DAI_WETH)"
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves historical daily metrics for the specified pair (for example DAI_WETH)."
+                              },
+                              "response": [
+                                {
+                                  "id": "8a01622c-ba83-48a4-b5a7-51f9d7730a0e",
+                                  "name": "200",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/metrics/exchanges/:exchange/pairs/:pair/historical?startDate=<dateTime>&endDate=<dateTime>&timeFormat=<string>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "metrics",
+                                        "exchanges",
+                                        ":exchange",
+                                        "pairs",
+                                        ":pair",
+                                        "historical"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T00:00:00`",
+                                          "key": "startDate",
+                                          "value": "<dateTime>"
+                                        },
+                                        {
+                                          "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-02T00:00:00`",
+                                          "key": "endDate",
+                                          "value": "<dateTime>"
+                                        },
+                                        {
+                                          "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                          "key": "timeFormat",
+                                          "value": "<string>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "exchange"
+                                        },
+                                        {
+                                          "key": "pair"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": [\n    {\n      \"exchangeId\": \"<string>\",\n      \"timestamp\": \"<string>\",\n      \"address\": \"<string>\",\n      \"feesNative\": \"<string>\",\n      \"feesUSD\": \"<string>\",\n      \"liquidityTotalNative\": \"<string>\",\n      \"liquidityTotalUSD\": \"<string>\",\n      \"pairsTradedTotal\": \"<integer>\",\n      \"tradesTotal\": \"<integer>\",\n      \"priceNative\": \"<string>\",\n      \"volumeTotalNative\": \"<string>\",\n      \"volumeTotalUSD\": \"<string>\"\n    },\n    {\n      \"exchangeId\": \"<string>\",\n      \"timestamp\": \"<string>\",\n      \"address\": \"<string>\",\n      \"feesNative\": \"<string>\",\n      \"feesUSD\": \"<string>\",\n      \"liquidityTotalNative\": \"<string>\",\n      \"liquidityTotalUSD\": \"<string>\",\n      \"pairsTradedTotal\": \"<integer>\",\n      \"tradesTotal\": \"<integer>\",\n      \"priceNative\": \"<string>\",\n      \"volumeTotalNative\": \"<string>\",\n      \"volumeTotalUSD\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T00:59:34.000Z",
+                                  "updatedAt": "2026-07-28T00:59:34.000Z",
+                                  "uid": "35240-8a01622c-ba83-48a4-b5a7-51f9d7730a0e"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T00:59:34.000Z",
+                              "updatedAt": "2026-07-28T00:59:34.000Z",
+                              "uid": "35240-3a133405-2981-49a5-8cb9-9d3e76424d2b"
+                            }
+                          ],
+                          "id": "39286e02-a8c3-45be-96d3-6adb7bde483e",
+                          "createdAt": "2026-07-28T00:59:34.000Z",
+                          "updatedAt": "2026-07-28T00:59:34.000Z",
+                          "uid": "35240-39286e02-a8c3-45be-96d3-6adb7bde483e"
+                        }
+                      ],
+                      "id": "2d498cde-406f-4837-8874-3474d1caeb5e",
+                      "createdAt": "2026-07-28T00:59:34.000Z",
+                      "updatedAt": "2026-07-28T00:59:34.000Z",
+                      "uid": "35240-2d498cde-406f-4837-8874-3474d1caeb5e"
+                    }
+                  ],
+                  "id": "6a7c0b9f-fdb1-43cb-9a71-33d02d2fe9df",
+                  "createdAt": "2026-07-28T00:59:34.000Z",
+                  "updatedAt": "2026-07-28T00:59:34.000Z",
+                  "uid": "35240-6a7c0b9f-fdb1-43cb-9a71-33d02d2fe9df"
+                }
+              ],
+              "id": "e0dbe48a-d746-4dc5-9bc2-51bb4b107bea",
+              "createdAt": "2026-07-28T00:59:34.000Z",
+              "updatedAt": "2026-07-28T00:59:34.000Z",
+              "uid": "35240-e0dbe48a-d746-4dc5-9bc2-51bb4b107bea"
+            }
+          ],
+          "id": "e5dc3d04-2d95-4602-a1e4-93410fce9b2f",
+          "createdAt": "2026-07-28T00:59:34.000Z",
+          "updatedAt": "2026-07-28T00:59:34.000Z",
+          "uid": "35240-e5dc3d04-2d95-4602-a1e4-93410fce9b2f"
+        }
+      ],
+      "id": "3f6bcf5b-0889-4d7c-8af6-36d9b00c89f6",
+      "createdAt": "2026-07-28T00:59:34.000Z",
+      "updatedAt": "2026-07-28T00:59:34.000Z",
+      "uid": "35240-3f6bcf5b-0889-4d7c-8af6-36d9b00c89f6"
+    },
+    {
+      "name": "ohlcv",
+      "item": [
+        {
+          "name": "{pool}",
+          "item": [
+            {
+              "name": "latest",
+              "item": [
+                {
+                  "name": "Latest",
+                  "id": "66d61e81-2bbd-4658-84e6-0087e53286d1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ohlcv/:pool/latest/?exchange=uniswapv2&timeFormat=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ohlcv",
+                        ":pool",
+                        "latest",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "The exchange(s) for which to retrieve OHLCV. Example: exchange=uniswapv3",
+                          "key": "exchange",
+                          "value": "uniswapv2"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "f8500139-5ee3-496c-9212-23f477c09c22",
+                          "key": "pool",
+                          "value": "DAI_USDC",
+                          "description": "(Required) The pool to retrieve the most current data. Can be the pool/pair symbols or address."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the latest open-high-low-close for the specified pair. Includes data for exchanges depending on where the pair is traded.\nAsset information is included in the payload.\nBase & Quote information is using the first and second asset in a pool/pair, which is the represented price."
+                  },
+                  "response": [
+                    {
+                      "id": "e89519d3-3e31-42f4-a55c-4331840a9e46",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ohlcv/:pool/latest/?exchange=uniswapv2&timeFormat=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ohlcv",
+                            ":pool",
+                            "latest",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "The exchange(s) for which to retrieve OHLCV. Example: exchange=uniswapv3",
+                              "key": "exchange",
+                              "value": "uniswapv2"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                              "key": "timeFormat",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "pool"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"0xae461ca67b15dc8dc81ce7615e0320da1a9ab8d5\": {\n      \"exchangeName\": \"<string>\",\n      \"exchangeId\": \"<string>\",\n      \"pair\": \"<string>\",\n      \"pairAddress\": \"<string>\",\n      \"baseAddress\": \"<string>\",\n      \"baseCurrencyAddress\": \"<string>\",\n      \"baseName\": \"<string>\",\n      \"baseSymbol\": \"<string>\",\n      \"baseDecimals\": \"<string>\",\n      \"quoteAddress\": \"<string>\",\n      \"quoteCurrencyAddress\": \"<string>\",\n      \"quoteName\": \"<string>\",\n      \"quoteSymbol\": \"<string>\",\n      \"quoteDecimals\": \"<string>\",\n      \"blockchainNetworkId\": \"<string>\",\n      \"blockchainId\": \"<string>\",\n      \"timestamp\": \"<integer>\",\n      \"index\": \"<integer>\",\n      \"poolAddresses\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"pairName\": \"<string>\",\n      \"poolNames\": \"<string>\",\n      \"poolSymbols\": \"<string>\",\n      \"poolDecimals\": \"<string>\",\n      \"poolUnderlyingAddresses\": \"<string>\",\n      \"poolUnderlyingNames\": \"<string>\",\n      \"poolUnderlyingSymbols\": \"<string>\",\n      \"poolUnderlyingDecimals\": \"<string>\",\n      \"pairNormalized\": \"<string>\",\n      \"fee\": \"<number>\",\n      \"milliseconds\": \"<integer>\",\n      \"open\": \"<string>\",\n      \"high\": \"<string>\",\n      \"low\": \"<string>\",\n      \"close\": \"<string>\",\n      \"volume\": \"<string>\",\n      \"trades\": \"<integer>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T00:59:34.000Z",
+                      "updatedAt": "2026-07-28T00:59:34.000Z",
+                      "uid": "35240-e89519d3-3e31-42f4-a55c-4331840a9e46"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:59:34.000Z",
+                  "updatedAt": "2026-07-28T00:59:34.000Z",
+                  "uid": "35240-66d61e81-2bbd-4658-84e6-0087e53286d1"
+                }
+              ],
+              "id": "62662bd0-651a-480a-a379-1f04fa687b41",
+              "createdAt": "2026-07-28T00:59:34.000Z",
+              "updatedAt": "2026-07-28T00:59:34.000Z",
+              "uid": "35240-62662bd0-651a-480a-a379-1f04fa687b41"
+            },
+            {
+              "name": "historical",
+              "item": [
+                {
+                  "name": "Historical",
+                  "id": "61ca911f-49ef-4f9b-83ab-7912a29e2606",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ohlcv/:pool/historical/?exchange=<string>&startDate=<dateTime>&endDate=<dateTime>&timeInterval=<string>&timeFormat=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ohlcv",
+                        ":pool",
+                        "historical",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "The exchange(s) for which to retrieve OHLCV. Example: exchange=uniswapv2, uniswapv3",
+                          "key": "exchange",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "FIlter by pairs after this date.",
+                          "key": "startDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "FIlter by pairs before this date.",
+                          "key": "endDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "**[Optional]** Time interval.<BR/>**[Defaults]** `minutes | hours | days*`",
+                          "key": "timeInterval",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "62163416-5aae-4700-8c22-dcccd1aec5e4",
+                          "key": "pool",
+                          "value": "DAI_WETH",
+                          "description": "(Required) The pool to retrieve the most current data. Can be the pool/pair symbols or address."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the historical (time series) open-high-low-close for the specified pair. Includes data for  exchanges depending on where the pair is traded.\nBase & Quote information is using the first and second asset in a pool/pair, which is the represented price."
+                  },
+                  "response": [
+                    {
+                      "id": "2c4153ee-c2f9-4f4d-ab99-57ccf690a23c",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/ohlcv/:pool/historical/?exchange=<string>&startDate=<dateTime>&endDate=<dateTime>&timeInterval=<string>&timeFormat=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "ohlcv",
+                            ":pool",
+                            "historical",
+                            ""
+                          ],
+                          "query": [
+                            {
+                              "description": "The exchange(s) for which to retrieve OHLCV. Example: exchange=uniswapv2, uniswapv3",
+                              "key": "exchange",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "FIlter by pairs after this date.",
+                              "key": "startDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "FIlter by pairs before this date.",
+                              "key": "endDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "**[Optional]** Time interval.<BR/>**[Defaults]** `minutes | hours | days*`",
+                              "key": "timeInterval",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                              "key": "timeFormat",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "pool"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"columns\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"startDate\": \"<long>\",\n      \"endDate\": \"<long>\"\n    },\n    \"data\": {\n      \"dolor_97\": [\n        [\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\"\n        ],\n        [\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\",\n          \"<integer>\"\n        ]\n      ]\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T00:59:34.000Z",
+                      "updatedAt": "2026-07-28T00:59:34.000Z",
+                      "uid": "35240-2c4153ee-c2f9-4f4d-ab99-57ccf690a23c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T00:59:34.000Z",
+                  "updatedAt": "2026-07-28T00:59:34.000Z",
+                  "uid": "35240-61ca911f-49ef-4f9b-83ab-7912a29e2606"
+                }
+              ],
+              "id": "59331070-9388-4286-a009-6b243a9968b8",
+              "createdAt": "2026-07-28T00:59:34.000Z",
+              "updatedAt": "2026-07-28T00:59:34.000Z",
+              "uid": "35240-59331070-9388-4286-a009-6b243a9968b8"
+            }
+          ],
+          "id": "4e068af7-9ecb-4f8d-b0f7-8980f4400fa5",
+          "createdAt": "2026-07-28T00:59:34.000Z",
+          "updatedAt": "2026-07-28T00:59:34.000Z",
+          "uid": "35240-4e068af7-9ecb-4f8d-b0f7-8980f4400fa5"
+        }
+      ],
+      "id": "f38eb7c0-0b81-412a-bc3e-0030db613bf7",
+      "createdAt": "2026-07-28T00:59:34.000Z",
+      "updatedAt": "2026-07-28T00:59:34.000Z",
+      "uid": "35240-f38eb7c0-0b81-412a-bc3e-0030db613bf7"
+    },
+    {
+      "name": "liquidity",
+      "item": [
+        {
+          "name": "information",
+          "item": [
+            {
+              "name": "Information",
+              "id": "471499c6-8983-45da-b054-0dd150d74761",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/liquidity/information/?exchange=<string>&includeMetadata=true&includeDates=<boolean>&timeFormat=<string>&size=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "liquidity",
+                    "information",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "description": "Only return data for the specified exchange(s) (comma separated). Example: uniswapv2",
+                      "key": "exchange",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "**[Optional]** Include data for asset pair and pool information.<BR/>**[Defaults]** `false* | true`<BR/>**NOTE** If using this without specifying an exchange the endpoint will not return data.",
+                      "key": "includeMetadata",
+                      "value": "true"
+                    },
+                    {
+                      "description": "**[Optional]** Include date ranges for each record.<BR/>**[Defaults]** `false* | true`<BR/>**NOTE** includeMetadata is required for includeDates to return a valid response.<BR/>",
+                      "key": "includeDates",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                      "key": "timeFormat",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The number of records per page.",
+                      "key": "size",
+                      "value": "100"
+                    }
+                  ]
+                },
+                "description": "Retrieves information about supported exchange-pairs for liquidity."
+              },
+              "response": [
+                {
+                  "id": "de148ed1-8283-4962-9e9f-8891e50137bc",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/liquidity/information/?exchange=<string>&includeMetadata=true&includeDates=<boolean>&timeFormat=<string>&size=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "liquidity",
+                        "information",
+                        ""
+                      ],
+                      "query": [
+                        {
+                          "description": "Only return data for the specified exchange(s) (comma separated). Example: uniswapv2",
+                          "key": "exchange",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** Include data for asset pair and pool information.<BR/>**[Defaults]** `false* | true`<BR/>**NOTE** If using this without specifying an exchange the endpoint will not return data.",
+                          "key": "includeMetadata",
+                          "value": "true"
+                        },
+                        {
+                          "description": "**[Optional]** Include date ranges for each record.<BR/>**[Defaults]** `false* | true`<BR/>**NOTE** includeMetadata is required for includeDates to return a valid response.<BR/>",
+                          "key": "includeDates",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The number of records per page.",
+                          "key": "size",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"curvev1\": {\n      \"RC_bBADGER_5_DAI_2021_6_30_3Crv\": {},\n      \"RC_WETH_1400_DAI_2021_7_31_3Crv\": {},\n      \"RC_BDI_150_DAI_2021_6_30_3Crv\": {},\n      \"ycDAI_ycUSDC_ycUSDT_PAX\": {},\n      \"MBTC_crvRenWSBTC\": {},\n      \"BBTC_crvRenWSBTC\": {},\n      \"RC_DEFI5_60_DAI_2021_5_31_3Crv\": {},\n      \"xCOVER_3Crv\": {},\n      \"EURS_sEUR\": {},\n      \"USDN_3Crv\": {}\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:34.000Z",
+                  "updatedAt": "2026-07-28T00:59:34.000Z",
+                  "uid": "35240-de148ed1-8283-4962-9e9f-8891e50137bc"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:34.000Z",
+              "updatedAt": "2026-07-28T00:59:34.000Z",
+              "uid": "35240-471499c6-8983-45da-b054-0dd150d74761"
+            }
+          ],
+          "id": "561d96ef-0efb-49d3-a299-b5e3297d8b5c",
+          "createdAt": "2026-07-28T00:59:34.000Z",
+          "updatedAt": "2026-07-28T00:59:34.000Z",
+          "uid": "35240-561d96ef-0efb-49d3-a299-b5e3297d8b5c"
+        }
+      ],
+      "id": "a8ef7549-268b-4503-b46a-ff3995c2da55",
+      "createdAt": "2026-07-28T00:59:34.000Z",
+      "updatedAt": "2026-07-28T00:59:34.000Z",
+      "uid": "35240-a8ef7549-268b-4503-b46a-ff3995c2da55"
+    },
+    {
+      "name": "dex",
+      "item": [
+        {
+          "name": "exchanges",
+          "item": [
+            {
+              "name": "Information - DEX Protocols",
+              "id": "29687ccc-1a42-4fad-9c41-17013285756c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dex/exchanges?exchange=<string>&sortBy=numPairs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dex",
+                    "exchanges"
+                  ],
+                  "query": [
+                    {
+                      "description": "**[Optional]** The exchange for which to retrieve the requested data (address or name).<BR/>**[Examples]** `0x1f98431c8ad98523631ae4a59f267346ea31f984 | uniswapv3`",
+                      "key": "exchange",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "**[Optional]** Sorting criteria for exchanges.<BR/>**[Defaults]** `name* | numPairs`",
+                      "key": "sortBy",
+                      "value": "numPairs"
+                    }
+                  ]
+                },
+                "description": "Retrieves list of supported Ethereum decentralized exchanges (DEX)."
+              },
+              "response": [
+                {
+                  "id": "522ead0a-e43c-4342-9a28-0aa2269f7fad",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/dex/exchanges?exchange=<string>&sortBy=numPairs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dex",
+                        "exchanges"
+                      ],
+                      "query": [
+                        {
+                          "description": "**[Optional]** The exchange for which to retrieve the requested data (address or name).<BR/>**[Examples]** `0x1f98431c8ad98523631ae4a59f267346ea31f984 | uniswapv3`",
+                          "key": "exchange",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** Sorting criteria for exchanges.<BR/>**[Defaults]** `name* | numPairs`",
+                          "key": "sortBy",
+                          "value": "numPairs"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": [\n    {\n      \"exchangeName\": \"<string>\",\n      \"exchangeId\": \"<string>\",\n      \"numPairs\": \"<string>\"\n    },\n    {\n      \"exchangeName\": \"<string>\",\n      \"exchangeId\": \"<string>\",\n      \"numPairs\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T00:59:34.000Z",
+                  "updatedAt": "2026-07-28T00:59:34.000Z",
+                  "uid": "35240-522ead0a-e43c-4342-9a28-0aa2269f7fad"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:34.000Z",
+              "updatedAt": "2026-07-28T00:59:34.000Z",
+              "uid": "35240-29687ccc-1a42-4fad-9c41-17013285756c"
+            }
+          ],
+          "id": "29173eb2-ad57-45e1-8170-1400eae152ae",
+          "createdAt": "2026-07-28T00:59:34.000Z",
+          "updatedAt": "2026-07-28T00:59:34.000Z",
+          "uid": "35240-29173eb2-ad57-45e1-8170-1400eae152ae"
+        },
+        {
+          "name": "pairs",
+          "item": [
+            {
+              "name": "Information - Pairs in DEX Protocols",
+              "id": "ef9bb16a-1fa3-415e-844f-f9288a12eebb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dex/pairs?exchange=uniswapv3&pair=<string>&asset=<string>&size=1000",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dex",
+                    "pairs"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The exchange for which to retrieve the requested data (address or name).<BR/>**[Examples]** `0x1f98431c8ad98523631ae4a59f267346ea31f984 | uniswapv3`",
+                      "key": "exchange",
+                      "value": "uniswapv3"
+                    },
+                    {
+                      "description": "The pair for which to retrieve the request data (address).<BR/>**[Example]** `0x5777d92f208679db4b9778590fa3cab3ac9e2168`",
+                      "key": "pair",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The asset for which to retrieve the requested data (address or symbol).<BR/>**[Examples]** `0x6b175474e89094c44da98b954eedeac495271d0f | DAI`",
+                      "key": "asset",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "**[Optional]** Maximum number of items in *payload.data*.<BR/>",
+                      "key": "size",
+                      "value": "1000"
+                    }
+                  ]
+                },
+                "description": "Retrieves supported DEX Pairs."
+              },
+              "response": [
+                {
+                  "id": "811bb60a-f33a-427b-ac15-23905fff5fb8",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/dex/pairs?exchange=uniswapv3&pair=<string>&asset=<string>&size=1000",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "dex",
+                        "pairs"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The exchange for which to retrieve the requested data (address or name).<BR/>**[Examples]** `0x1f98431c8ad98523631ae4a59f267346ea31f984 | uniswapv3`",
+                          "key": "exchange",
+                          "value": "uniswapv3"
+                        },
+                        {
+                          "description": "The pair for which to retrieve the request data (address).<BR/>**[Example]** `0x5777d92f208679db4b9778590fa3cab3ac9e2168`",
+                          "key": "pair",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The asset for which to retrieve the requested data (address or symbol).<BR/>**[Examples]** `0x6b175474e89094c44da98b954eedeac495271d0f | DAI`",
+                          "key": "asset",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "**[Optional]** Maximum number of items in *payload.data*.<BR/>",
+                          "key": "size",
+                          "value": "1000"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"next\": \"<string>\"\n    },\n    \"data\": [\n      {\n        \"exchangeName\": \"<string>\",\n        \"exchangeId\": \"<string>\",\n        \"pairName\": \"<string>\",\n        \"pairAddress\": \"<string>\",\n        \"baseAddress\": \"<string>\",\n        \"baseName\": \"<string>\",\n        \"baseSymbol\": \"<string>\",\n        \"baseDecimals\": \"<string>\",\n        \"quoteAddress\": \"<string>\",\n        \"quoteName\": \"<string>\",\n        \"quoteSymbol\": \"<string>\",\n        \"quoteDecimals\": \"<string>\",\n        \"poolFees\": \"<string>\",\n        \"poolAddresses\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"poolNames\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"poolSymbols\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"poolDecimals\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"exchangeName\": \"<string>\",\n        \"exchangeId\": \"<string>\",\n        \"pairName\": \"<string>\",\n        \"pairAddress\": \"<string>\",\n        \"baseAddress\": \"<string>\",\n        \"baseName\": \"<string>\",\n        \"baseSymbol\": \"<string>\",\n        \"baseDecimals\": \"<string>\",\n        \"quoteAddress\": \"<string>\",\n        \"quoteName\": \"<string>\",\n        \"quoteSymbol\": \"<string>\",\n        \"quoteDecimals\": \"<string>\",\n        \"poolFees\": \"<string>\",\n        \"poolAddresses\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"poolNames\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"poolSymbols\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"poolDecimals\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T00:59:34.000Z",
+                  "updatedAt": "2026-07-28T00:59:34.000Z",
+                  "uid": "35240-811bb60a-f33a-427b-ac15-23905fff5fb8"
+                }
+              ],
+              "createdAt": "2026-07-28T00:59:34.000Z",
+              "updatedAt": "2026-07-28T00:59:34.000Z",
+              "uid": "35240-ef9bb16a-1fa3-415e-844f-f9288a12eebb"
+            }
+          ],
+          "id": "cb11cb72-d1a6-4f71-bda7-795b0073dfa0",
+          "createdAt": "2026-07-28T00:59:34.000Z",
+          "updatedAt": "2026-07-28T00:59:34.000Z",
+          "uid": "35240-cb11cb72-d1a6-4f71-bda7-795b0073dfa0"
+        }
+      ],
+      "id": "1db2edad-e760-4fea-9cd2-97d18a35f0b0",
+      "createdAt": "2026-07-28T00:59:34.000Z",
+      "updatedAt": "2026-07-28T00:59:34.000Z",
+      "uid": "35240-1db2edad-e760-4fea-9cd2-97d18a35f0b0"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.amberdata.com/market/defi"
+    }
+  ]
+}

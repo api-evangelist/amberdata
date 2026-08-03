@@ -1,0 +1,1066 @@
+{
+  "info": {
+    "_postman_id": "e6a1f78b-8805-4590-957d-d0edbc9dcdf6",
+    "name": "Market Metrics",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:00:31.000Z",
+    "updatedAt": "2026-07-28T01:00:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e6a1f78b-8805-4590-957d-d0edbc9dcdf6"
+  },
+  "item": [
+    {
+      "name": "{asset}",
+      "item": [
+        {
+          "name": "supply",
+          "item": [
+            {
+              "name": "latest",
+              "item": [
+                {
+                  "name": "Latest",
+                  "id": "eacbc528-a51b-46e1-bef2-b72f47f67d27",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:asset/supply/latest",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":asset",
+                        "supply",
+                        "latest"
+                      ],
+                      "variable": [
+                        {
+                          "id": "75817a51-fd91-462c-a776-395027571add",
+                          "key": "asset",
+                          "value": "btc",
+                          "description": "(Required) The symbol of the asset or token. <BR>**[Example]** BTC, ETH, MATIC, etc."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves latest supply data for blockchains and tokens.***Note**: We get supply values directly from our data/nodes. Blockchains included in our supply data are: Ethereum, Bitcoin and Litecoin."
+                  },
+                  "response": [
+                    {
+                      "id": "f4c055d1-5110-4c03-8d60-8d6de06c7136",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/:asset/supply/latest",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":asset",
+                            "supply",
+                            "latest"
+                          ],
+                          "variable": [
+                            {
+                              "key": "asset"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"timestamp\": \"<string>\",\n    \"issuance\": \"<string>\",\n    \"totalSupply\": \"<string>\",\n    \"circulatingSupply\": \"<string>\",\n    \"maxSupply\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:00:32.000Z",
+                      "updatedAt": "2026-07-28T01:00:32.000Z",
+                      "uid": "35240-f4c055d1-5110-4c03-8d60-8d6de06c7136"
+                    },
+                    {
+                      "id": "1826a397-e6c4-4dc2-bb86-b9fc40307a57",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/:asset/supply/latest",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":asset",
+                            "supply",
+                            "latest"
+                          ],
+                          "variable": [
+                            {
+                              "key": "asset"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:00:32.000Z",
+                      "updatedAt": "2026-07-28T01:00:32.000Z",
+                      "uid": "35240-1826a397-e6c4-4dc2-bb86-b9fc40307a57"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:00:32.000Z",
+                  "updatedAt": "2026-07-28T01:00:32.000Z",
+                  "uid": "35240-eacbc528-a51b-46e1-bef2-b72f47f67d27"
+                }
+              ],
+              "id": "bc484c6d-0b36-45af-8bc4-53266fdd4b64",
+              "createdAt": "2026-07-28T01:00:32.000Z",
+              "updatedAt": "2026-07-28T01:00:32.000Z",
+              "uid": "35240-bc484c6d-0b36-45af-8bc4-53266fdd4b64"
+            },
+            {
+              "name": "historical",
+              "item": [
+                {
+                  "name": "Historical",
+                  "id": "746123d5-9058-4c4a-9b51-101ea4457201",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:asset/supply/historical?startDate=<dateTime>&endDate=<dateTime>&timeFormat=iso",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":asset",
+                        "supply",
+                        "historical"
+                      ],
+                      "query": [
+                        {
+                          "description": "Returns data after this date. Accepts ISO8601 and Epoch/Unix timestamps",
+                          "key": "startDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Returns data before this date. Accepts ISO8601 and Epoch/Unix timestamps",
+                          "key": "endDate",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                          "key": "timeFormat",
+                          "value": "iso"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "5c718268-fe53-4ba1-adff-cecdc6e29321",
+                          "key": "asset",
+                          "value": "btc",
+                          "description": "(Required) The symbol of the asset or token. <BR>**[Example]** BTC, ETH, MATIC, etc."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves historical supply data for blockchains and tokens from October 2019 forward. ***Note**: We get supply values directly from our data/nodes. Blockchains included in our supply data are: Ethereum, Bitcoin and Litecoin."
+                  },
+                  "response": [
+                    {
+                      "id": "dca3de9c-1d49-479d-9b65-69df9f4ff49d",
+                      "name": "200",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/:asset/supply/historical?startDate=<dateTime>&endDate=<dateTime>&timeFormat=iso",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":asset",
+                            "supply",
+                            "historical"
+                          ],
+                          "query": [
+                            {
+                              "description": "Returns data after this date. Accepts ISO8601 and Epoch/Unix timestamps",
+                              "key": "startDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Returns data before this date. Accepts ISO8601 and Epoch/Unix timestamps",
+                              "key": "endDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                              "key": "timeFormat",
+                              "value": "iso"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "asset"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"startDate\": \"<string>\",\n      \"endDate\": \"<string>\"\n    },\n    \"data\": [\n      {\n        \"timestamp\": \"<string>\",\n        \"issuance\": \"<string>\",\n        \"totalSupply\": \"<string>\",\n        \"circulatingSupply\": \"<string>\",\n        \"maxSupply\": \"<string>\"\n      },\n      {\n        \"timestamp\": \"<string>\",\n        \"issuance\": \"<string>\",\n        \"totalSupply\": \"<string>\",\n        \"circulatingSupply\": \"<string>\",\n        \"maxSupply\": \"<string>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T01:00:32.000Z",
+                      "updatedAt": "2026-07-28T01:00:32.000Z",
+                      "uid": "35240-dca3de9c-1d49-479d-9b65-69df9f4ff49d"
+                    },
+                    {
+                      "id": "1b34e38e-4bbb-4abe-83fe-18103d36e5be",
+                      "name": "400",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/:asset/supply/historical?startDate=<dateTime>&endDate=<dateTime>&timeFormat=iso",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":asset",
+                            "supply",
+                            "historical"
+                          ],
+                          "query": [
+                            {
+                              "description": "Returns data after this date. Accepts ISO8601 and Epoch/Unix timestamps",
+                              "key": "startDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "Returns data before this date. Accepts ISO8601 and Epoch/Unix timestamps",
+                              "key": "endDate",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                              "key": "timeFormat",
+                              "value": "iso"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "asset"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T01:00:32.000Z",
+                      "updatedAt": "2026-07-28T01:00:32.000Z",
+                      "uid": "35240-1b34e38e-4bbb-4abe-83fe-18103d36e5be"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:00:32.000Z",
+                  "updatedAt": "2026-07-28T01:00:32.000Z",
+                  "uid": "35240-746123d5-9058-4c4a-9b51-101ea4457201"
+                }
+              ],
+              "id": "ca9e366e-b9ad-4500-9d34-4e7d62eabd07",
+              "createdAt": "2026-07-28T01:00:32.000Z",
+              "updatedAt": "2026-07-28T01:00:32.000Z",
+              "uid": "35240-ca9e366e-b9ad-4500-9d34-4e7d62eabd07"
+            }
+          ],
+          "id": "f0738698-feef-452d-883e-0ec3b4b26e3f",
+          "createdAt": "2026-07-28T01:00:32.000Z",
+          "updatedAt": "2026-07-28T01:00:32.000Z",
+          "uid": "35240-f0738698-feef-452d-883e-0ec3b4b26e3f"
+        }
+      ],
+      "id": "16d3a27c-6c73-4818-a0f2-53aa696edb96",
+      "createdAt": "2026-07-28T01:00:32.000Z",
+      "updatedAt": "2026-07-28T01:00:32.000Z",
+      "uid": "35240-16d3a27c-6c73-4818-a0f2-53aa696edb96"
+    },
+    {
+      "name": "exchanges",
+      "item": [
+        {
+          "name": "{exchange}",
+          "item": [
+            {
+              "name": "assets",
+              "item": [
+                {
+                  "name": "volumes",
+                  "item": [
+                    {
+                      "name": "historical",
+                      "item": [
+                        {
+                          "name": "Asset Volume Historical",
+                          "id": "d0a05682-7a99-46a2-a1d4-79e5aa2522fa",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/exchanges/:exchange/assets/volumes/historical?asset=btc&quoteVolume=false&direction=desc&startDate=<string>&endDate=<string>&timeFormat=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "exchanges",
+                                ":exchange",
+                                "assets",
+                                "volumes",
+                                "historical"
+                              ],
+                              "query": [
+                                {
+                                  "description": "**[Optional]** The asset for which to retrieve the most current data.<BR/>**[Default]** All available assets.",
+                                  "key": "asset",
+                                  "value": "btc"
+                                },
+                                {
+                                  "description": "**[Optional]** Aggregate on quote volume instead of base volume.",
+                                  "key": "quoteVolume",
+                                  "value": "false"
+                                },
+                                {
+                                  "description": "**[Optional]** The order in which to return the results, ordered by volumeUSD (ascending or descending). By default, records are returned in descending order, so the records with the largest volume are returned first.",
+                                  "key": "direction",
+                                  "value": "desc"
+                                },
+                                {
+                                  "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "startDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "endDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                  "key": "timeFormat",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ef48742b-bce4-4e93-8a52-6e923f1f5eb6",
+                                  "key": "exchange",
+                                  "value": "gdax",
+                                  "description": "(Required) The exchange for which to retrieve the requested data."
+                                }
+                              ]
+                            },
+                            "description": "Retrieves the daily volume of assets on each exchange.\n\n***Note**: This endpoint excludes data from LMAX."
+                          },
+                          "response": [
+                            {
+                              "id": "040ac80c-de27-4c21-87b4-43bcb7d7bd9c",
+                              "name": "200",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/exchanges/:exchange/assets/volumes/historical?asset=btc&quoteVolume=false&direction=desc&startDate=<string>&endDate=<string>&timeFormat=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "exchanges",
+                                    ":exchange",
+                                    "assets",
+                                    "volumes",
+                                    "historical"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "**[Optional]** The asset for which to retrieve the most current data.<BR/>**[Default]** All available assets.",
+                                      "key": "asset",
+                                      "value": "btc"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Aggregate on quote volume instead of base volume.",
+                                      "key": "quoteVolume",
+                                      "value": "false"
+                                    },
+                                    {
+                                      "description": "**[Optional]** The order in which to return the results, ordered by volumeUSD (ascending or descending). By default, records are returned in descending order, so the records with the largest volume are returned first.",
+                                      "key": "direction",
+                                      "value": "desc"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                      "key": "startDate",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                      "key": "endDate",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                      "key": "timeFormat",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "exchange"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"startDate\": \"<string>\",\n      \"endDate\": \"<string>\"\n    },\n    \"data\": [\n      {\n        \"exchange\": \"<string>\",\n        \"asset\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"volumeUSD\": \"<string>\"\n      },\n      {\n        \"exchange\": \"<string>\",\n        \"asset\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"volumeUSD\": \"<string>\"\n      }\n    ]\n  }\n}",
+                              "createdAt": "2026-07-28T01:00:32.000Z",
+                              "updatedAt": "2026-07-28T01:00:32.000Z",
+                              "uid": "35240-040ac80c-de27-4c21-87b4-43bcb7d7bd9c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:00:32.000Z",
+                          "updatedAt": "2026-07-28T01:00:32.000Z",
+                          "uid": "35240-d0a05682-7a99-46a2-a1d4-79e5aa2522fa"
+                        }
+                      ],
+                      "id": "1cd262c9-c08f-4166-bebd-7df77604e0b8",
+                      "createdAt": "2026-07-28T01:00:32.000Z",
+                      "updatedAt": "2026-07-28T01:00:32.000Z",
+                      "uid": "35240-1cd262c9-c08f-4166-bebd-7df77604e0b8"
+                    },
+                    {
+                      "name": "latest",
+                      "item": [
+                        {
+                          "name": "Asset Volume Latest",
+                          "id": "c23f9e09-a40e-45f3-b702-4dd8a74f4ec9",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/exchanges/:exchange/assets/volumes/latest?asset=<string>&quoteVolume=false&direction=desc&timeFormat=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "exchanges",
+                                ":exchange",
+                                "assets",
+                                "volumes",
+                                "latest"
+                              ],
+                              "query": [
+                                {
+                                  "description": "**[Optional]** The asset for which to retrieve the most current data (ie. btc, eth, etc.)<BR/>**[Default]** All available assets.",
+                                  "key": "asset",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "**[Optional]** Aggregate on quote volume instead of base volume.",
+                                  "key": "quoteVolume",
+                                  "value": "false"
+                                },
+                                {
+                                  "description": "**[Optional]** The order in which to return the results, ordered by volumeUSD (ascending or descending). By default, records are returned in descending order, so the records with the largest volume are returned first.",
+                                  "key": "direction",
+                                  "value": "desc"
+                                },
+                                {
+                                  "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                  "key": "timeFormat",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a073651d-5712-4bb2-b6ff-68f89ee14e08",
+                                  "key": "exchange",
+                                  "value": "gdax",
+                                  "description": "(Required) The exchange for which to retrieve the requested data."
+                                }
+                              ]
+                            },
+                            "description": "Retrieves the daily volume of assets on each exchange over a rolling 24h period, updated hourly. The timestamp returned represents the beginning of the daily bar, following the same approach as OHLCV. **Note**: This endpoint excludes data from LMAX."
+                          },
+                          "response": [
+                            {
+                              "id": "effad1f0-9b19-4c1f-82b4-79b05e79e006",
+                              "name": "200",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/exchanges/:exchange/assets/volumes/latest?asset=<string>&quoteVolume=false&direction=desc&timeFormat=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "exchanges",
+                                    ":exchange",
+                                    "assets",
+                                    "volumes",
+                                    "latest"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "**[Optional]** The asset for which to retrieve the most current data (ie. btc, eth, etc.)<BR/>**[Default]** All available assets.",
+                                      "key": "asset",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Aggregate on quote volume instead of base volume.",
+                                      "key": "quoteVolume",
+                                      "value": "false"
+                                    },
+                                    {
+                                      "description": "**[Optional]** The order in which to return the results, ordered by volumeUSD (ascending or descending). By default, records are returned in descending order, so the records with the largest volume are returned first.",
+                                      "key": "direction",
+                                      "value": "desc"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                      "key": "timeFormat",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "exchange"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"exchange\": \"<string>\",\n        \"asset\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"volumeUSD\": \"<string>\"\n      },\n      {\n        \"exchange\": \"<string>\",\n        \"asset\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"volumeUSD\": \"<string>\"\n      }\n    ]\n  }\n}",
+                              "createdAt": "2026-07-28T01:00:32.000Z",
+                              "updatedAt": "2026-07-28T01:00:32.000Z",
+                              "uid": "35240-effad1f0-9b19-4c1f-82b4-79b05e79e006"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:00:32.000Z",
+                          "updatedAt": "2026-07-28T01:00:32.000Z",
+                          "uid": "35240-c23f9e09-a40e-45f3-b702-4dd8a74f4ec9"
+                        }
+                      ],
+                      "id": "8b5ae84b-7e99-4514-aad4-af6812c6a35d",
+                      "createdAt": "2026-07-28T01:00:32.000Z",
+                      "updatedAt": "2026-07-28T01:00:32.000Z",
+                      "uid": "35240-8b5ae84b-7e99-4514-aad4-af6812c6a35d"
+                    }
+                  ],
+                  "id": "470567ec-2661-41a4-b448-227f701b63c3",
+                  "createdAt": "2026-07-28T01:00:32.000Z",
+                  "updatedAt": "2026-07-28T01:00:32.000Z",
+                  "uid": "35240-470567ec-2661-41a4-b448-227f701b63c3"
+                }
+              ],
+              "id": "c073ed03-00b1-4912-b143-a5eeb7680db6",
+              "createdAt": "2026-07-28T01:00:32.000Z",
+              "updatedAt": "2026-07-28T01:00:32.000Z",
+              "uid": "35240-c073ed03-00b1-4912-b143-a5eeb7680db6"
+            },
+            {
+              "name": "pairs",
+              "item": [
+                {
+                  "name": "volumes",
+                  "item": [
+                    {
+                      "name": "historical",
+                      "item": [
+                        {
+                          "name": "Pair Volume Historical",
+                          "id": "0f47c2c5-104b-42da-b60e-468e3d0168df",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/exchanges/:exchange/pairs/volumes/historical?pair=btc_usd&direction=desc&startDate=<string>&endDate=<string>&timeFormat=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "exchanges",
+                                ":exchange",
+                                "pairs",
+                                "volumes",
+                                "historical"
+                              ],
+                              "query": [
+                                {
+                                  "description": "**[Optional]** The pair for which to retrieve the most current data.<BR/>**[Default]** All available pairs.",
+                                  "key": "pair",
+                                  "value": "btc_usd"
+                                },
+                                {
+                                  "description": "**[Optional]** The order in which to return the results, ordered by volumeUSD (ascending or descending). By default, records are returned in descending order, so the records with the largest volume are returned first.",
+                                  "key": "direction",
+                                  "value": "desc"
+                                },
+                                {
+                                  "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "startDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                  "key": "endDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                  "key": "timeFormat",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "967b5c13-ca1a-41fe-b4fc-661d2a83c8f6",
+                                  "key": "exchange",
+                                  "value": "gdax",
+                                  "description": "(Required) The exchange for which to retrieve the requested data."
+                                }
+                              ]
+                            },
+                            "description": "Retrieves the daily volume of pairs on each exchange."
+                          },
+                          "response": [
+                            {
+                              "id": "bc6c04ba-f3b9-4057-b5ab-aaf7dcaa4895",
+                              "name": "200",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/exchanges/:exchange/pairs/volumes/historical?pair=btc_usd&direction=desc&startDate=<string>&endDate=<string>&timeFormat=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "exchanges",
+                                    ":exchange",
+                                    "pairs",
+                                    "volumes",
+                                    "historical"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "**[Optional]** The pair for which to retrieve the most current data.<BR/>**[Default]** All available pairs.",
+                                      "key": "pair",
+                                      "value": "btc_usd"
+                                    },
+                                    {
+                                      "description": "**[Optional]** The order in which to return the results, ordered by volumeUSD (ascending or descending). By default, records are returned in descending order, so the records with the largest volume are returned first.",
+                                      "key": "direction",
+                                      "value": "desc"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                      "key": "startDate",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Payload only includes data before this date (exclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`",
+                                      "key": "endDate",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                      "key": "timeFormat",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "exchange"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"startDate\": \"<string>\",\n      \"endDate\": \"<string>\"\n    },\n    \"data\": [\n      {\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"volumeUSD\": \"<string>\"\n      },\n      {\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"volumeUSD\": \"<string>\"\n      }\n    ]\n  }\n}",
+                              "createdAt": "2026-07-28T01:00:32.000Z",
+                              "updatedAt": "2026-07-28T01:00:32.000Z",
+                              "uid": "35240-bc6c04ba-f3b9-4057-b5ab-aaf7dcaa4895"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:00:32.000Z",
+                          "updatedAt": "2026-07-28T01:00:32.000Z",
+                          "uid": "35240-0f47c2c5-104b-42da-b60e-468e3d0168df"
+                        }
+                      ],
+                      "id": "b6810078-a1da-4b9b-97b9-ca9b12a49394",
+                      "createdAt": "2026-07-28T01:00:32.000Z",
+                      "updatedAt": "2026-07-28T01:00:32.000Z",
+                      "uid": "35240-b6810078-a1da-4b9b-97b9-ca9b12a49394"
+                    },
+                    {
+                      "name": "latest",
+                      "item": [
+                        {
+                          "name": "Pair Volume Latest",
+                          "id": "364aef74-26fd-4a1f-9cdd-d5db35fc492e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/exchanges/:exchange/pairs/volumes/latest?pair=<string>&direction=desc&timeFormat=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "exchanges",
+                                ":exchange",
+                                "pairs",
+                                "volumes",
+                                "latest"
+                              ],
+                              "query": [
+                                {
+                                  "description": "**[Optional]** The pair for which to retrieve the most current data (ie. btc_usd, eth_usd, etc.).<BR/>**[Default]** All available pairs.",
+                                  "key": "pair",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "**[Optional]** The order in which to return the results, ordered by volumeUSD (ascending or descending). By default, records are returned in descending order, so the records with the largest volume are returned first.",
+                                  "key": "direction",
+                                  "value": "desc"
+                                },
+                                {
+                                  "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                  "key": "timeFormat",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "2898d456-171d-49ca-a757-2cd58739d136",
+                                  "key": "exchange",
+                                  "value": "gdax",
+                                  "description": "(Required) The exchange for which to retrieve the requested data."
+                                }
+                              ]
+                            },
+                            "description": "Retrieves the daily volume of pairs on each exchange over a rolling 24h period, updated hourly. The timestamp returned represents the beginning of the daily bar, following the same approach as OHLCV."
+                          },
+                          "response": [
+                            {
+                              "id": "6a482d66-29d5-4036-b6b4-4a4f9a165136",
+                              "name": "200",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/exchanges/:exchange/pairs/volumes/latest?pair=<string>&direction=desc&timeFormat=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "exchanges",
+                                    ":exchange",
+                                    "pairs",
+                                    "volumes",
+                                    "latest"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "**[Optional]** The pair for which to retrieve the most current data (ie. btc_usd, eth_usd, etc.).<BR/>**[Default]** All available pairs.",
+                                      "key": "pair",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "**[Optional]** The order in which to return the results, ordered by volumeUSD (ascending or descending). By default, records are returned in descending order, so the records with the largest volume are returned first.",
+                                      "key": "direction",
+                                      "value": "desc"
+                                    },
+                                    {
+                                      "description": "**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`",
+                                      "key": "timeFormat",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "exchange"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"data\": [\n      {\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"volumeUSD\": \"<string>\"\n      },\n      {\n        \"exchange\": \"<string>\",\n        \"pair\": \"<string>\",\n        \"timestamp\": \"<string>\",\n        \"volumeUSD\": \"<string>\"\n      }\n    ]\n  }\n}",
+                              "createdAt": "2026-07-28T01:00:32.000Z",
+                              "updatedAt": "2026-07-28T01:00:32.000Z",
+                              "uid": "35240-6a482d66-29d5-4036-b6b4-4a4f9a165136"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:00:32.000Z",
+                          "updatedAt": "2026-07-28T01:00:32.000Z",
+                          "uid": "35240-364aef74-26fd-4a1f-9cdd-d5db35fc492e"
+                        }
+                      ],
+                      "id": "a9595ac7-a53b-4a0d-be0f-540efde5c84d",
+                      "createdAt": "2026-07-28T01:00:32.000Z",
+                      "updatedAt": "2026-07-28T01:00:32.000Z",
+                      "uid": "35240-a9595ac7-a53b-4a0d-be0f-540efde5c84d"
+                    }
+                  ],
+                  "id": "461affb5-91b7-40f1-ab9e-bbc8b7e12bbb",
+                  "createdAt": "2026-07-28T01:00:32.000Z",
+                  "updatedAt": "2026-07-28T01:00:32.000Z",
+                  "uid": "35240-461affb5-91b7-40f1-ab9e-bbc8b7e12bbb"
+                }
+              ],
+              "id": "8233d9c8-dd7f-469f-95b5-1091d6e567de",
+              "createdAt": "2026-07-28T01:00:32.000Z",
+              "updatedAt": "2026-07-28T01:00:32.000Z",
+              "uid": "35240-8233d9c8-dd7f-469f-95b5-1091d6e567de"
+            }
+          ],
+          "id": "927e24e8-727f-4ff0-b97d-e3257034b48c",
+          "createdAt": "2026-07-28T01:00:32.000Z",
+          "updatedAt": "2026-07-28T01:00:32.000Z",
+          "uid": "35240-927e24e8-727f-4ff0-b97d-e3257034b48c"
+        }
+      ],
+      "id": "0b3b5095-e844-46e1-83cf-15d1150e884f",
+      "createdAt": "2026-07-28T01:00:32.000Z",
+      "updatedAt": "2026-07-28T01:00:32.000Z",
+      "uid": "35240-0b3b5095-e844-46e1-83cf-15d1150e884f"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.amberdata.com/market/metrics"
+    }
+  ]
+}

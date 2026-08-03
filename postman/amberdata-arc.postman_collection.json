@@ -1,0 +1,432 @@
+{
+  "info": {
+    "_postman_id": "66d3b3f2-fc0f-42b8-b8e3-a9b2c69cee2d",
+    "name": "Asset Reference & Classification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:00:32.000Z",
+    "updatedAt": "2026-07-28T01:00:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-66d3b3f2-fc0f-42b8-b8e3-a9b2c69cee2d"
+  },
+  "item": [
+    {
+      "name": "updates",
+      "item": [
+        {
+          "name": "Updates",
+          "id": "ea9e7c31-30ec-481b-99d6-97e33a6bad70",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/updates?groupBy=assets&timeFormat=iso8601&updatesSince=P1D",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "updates"
+              ],
+              "query": [
+                {
+                  "key": "groupBy",
+                  "value": "assets"
+                },
+                {
+                  "description": "Represent timestamps in epoch milliseconds or human readable ISO format.",
+                  "key": "timeFormat",
+                  "value": "iso8601"
+                },
+                {
+                  "description": "Look back cutoff for updates made to the ARC dataset, represented in ISO format.<br><br>`P1D` represents 24 hrs (1 day) and `P7D` represents 7 days.",
+                  "key": "updatesSince",
+                  "value": "P1D"
+                }
+              ]
+            },
+            "description": "Retrieve the **latest** updates of assets and instruments added to ARC."
+          },
+          "response": [
+            {
+              "id": "e9eaf84f-e8c0-43a5-a56f-2bce3714d443",
+              "name": "200",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/updates?groupBy=assets&timeFormat=iso8601&updatesSince=P1D",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "updates"
+                  ],
+                  "query": [
+                    {
+                      "key": "groupBy",
+                      "value": "assets"
+                    },
+                    {
+                      "description": "Represent timestamps in epoch milliseconds or human readable ISO format.",
+                      "key": "timeFormat",
+                      "value": "iso8601"
+                    },
+                    {
+                      "description": "Look back cutoff for updates made to the ARC dataset, represented in ISO format.<br><br>`P1D` represents 24 hrs (1 day) and `P7D` represents 7 days.",
+                      "key": "updatesSince",
+                      "value": "P1D"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"next\": {}\n    },\n    \"data\": {\n      \"updateType\": \"<string>\",\n      \"updates\": [\n        {\n          \"arcInstrumentId\": \"<string>\",\n          \"arcInstrument\": \"<string>\",\n          \"baseAssetSymbol\": \"<string>\",\n          \"nativeInstrument\": \"<string>\",\n          \"exchange\": \"<string>\",\n          \"assetName\": \"<string>\",\n          \"assetArcId\": \"<string>\",\n          \"quoteArcId\": \"<string>\",\n          \"instrumentType\": \"<string>\"\n        },\n        {\n          \"arcInstrumentId\": \"<string>\",\n          \"arcInstrument\": \"<string>\",\n          \"baseAssetSymbol\": \"<string>\",\n          \"nativeInstrument\": \"<string>\",\n          \"exchange\": \"<string>\",\n          \"assetName\": \"<string>\",\n          \"assetArcId\": \"<string>\",\n          \"quoteArcId\": \"<string>\",\n          \"instrumentType\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:00:33.000Z",
+              "updatedAt": "2026-07-28T01:00:33.000Z",
+              "uid": "35240-e9eaf84f-e8c0-43a5-a56f-2bce3714d443"
+            }
+          ],
+          "createdAt": "2026-07-28T01:00:33.000Z",
+          "updatedAt": "2026-07-28T01:00:33.000Z",
+          "uid": "35240-ea9e7c31-30ec-481b-99d6-97e33a6bad70"
+        }
+      ],
+      "id": "8ac2dc27-51dd-4f46-ab01-1b838f082a72",
+      "createdAt": "2026-07-28T01:00:33.000Z",
+      "updatedAt": "2026-07-28T01:00:33.000Z",
+      "uid": "35240-8ac2dc27-51dd-4f46-ab01-1b838f082a72"
+    },
+    {
+      "name": "classifications",
+      "item": [
+        {
+          "name": "List Classifications",
+          "id": "2f66f71e-f8e2-4fe4-829a-5e884bab18eb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/classifications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "classifications"
+              ]
+            },
+            "description": "Retrieve the **latest** known classifications for assets in ARC."
+          },
+          "response": [
+            {
+              "id": "8f6c09eb-7aad-4843-bd56-d672a10e400a",
+              "name": "200",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/classifications",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "classifications"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"next\": {}\n    },\n    \"data\": [\n      {\n        \"tagName\": \"<string>\",\n        \"tagDescription\": \"<string>\"\n      },\n      {\n        \"tagName\": \"<string>\",\n        \"tagDescription\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:00:33.000Z",
+              "updatedAt": "2026-07-28T01:00:33.000Z",
+              "uid": "35240-8f6c09eb-7aad-4843-bd56-d672a10e400a"
+            }
+          ],
+          "createdAt": "2026-07-28T01:00:33.000Z",
+          "updatedAt": "2026-07-28T01:00:33.000Z",
+          "uid": "35240-2f66f71e-f8e2-4fe4-829a-5e884bab18eb"
+        }
+      ],
+      "id": "66c70a32-8696-4446-916e-7e8bd72bc02f",
+      "createdAt": "2026-07-28T01:00:33.000Z",
+      "updatedAt": "2026-07-28T01:00:33.000Z",
+      "uid": "35240-66c70a32-8696-4446-916e-7e8bd72bc02f"
+    },
+    {
+      "name": "exchanges",
+      "item": [
+        {
+          "name": "statistics",
+          "item": [
+            {
+              "name": "Exchange Statistics",
+              "id": "79c78084-883c-4884-b7f7-b439a9b476f9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exchanges/statistics",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exchanges",
+                    "statistics"
+                  ]
+                },
+                "description": "Retrieve the **latest** known instruments statistics from exchanges that Amberdata supports."
+              },
+              "response": [
+                {
+                  "id": "4caebeb6-4eb2-45e2-b9cf-9a7c4bb53d2f",
+                  "name": "200",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/exchanges/statistics",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "exchanges",
+                        "statistics"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"status\": 0,\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {\n      \"next\": {}\n    },\n    \"data\": {\n      \"lastUpdatedAt\": 0,\n      \"totalExchanges\": 0,\n      \"totalInstrumentsSpot\": 0,\n      \"byExchange\": [\n        {\n          \"exchange\": \"<string>\",\n          \"instrumentsSpot\": 0\n        },\n        {\n          \"exchange\": \"<string>\",\n          \"instrumentsSpot\": 0\n        }\n      ]\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T01:00:33.000Z",
+                  "updatedAt": "2026-07-28T01:00:33.000Z",
+                  "uid": "35240-4caebeb6-4eb2-45e2-b9cf-9a7c4bb53d2f"
+                }
+              ],
+              "createdAt": "2026-07-28T01:00:33.000Z",
+              "updatedAt": "2026-07-28T01:00:33.000Z",
+              "uid": "35240-79c78084-883c-4884-b7f7-b439a9b476f9"
+            }
+          ],
+          "id": "cf7c787d-9fda-4dca-81e6-06366db49795",
+          "createdAt": "2026-07-28T01:00:33.000Z",
+          "updatedAt": "2026-07-28T01:00:33.000Z",
+          "uid": "35240-cf7c787d-9fda-4dca-81e6-06366db49795"
+        }
+      ],
+      "id": "1463cb79-c4e9-4daa-8f6a-e116ab824cde",
+      "createdAt": "2026-07-28T01:00:33.000Z",
+      "updatedAt": "2026-07-28T01:00:33.000Z",
+      "uid": "35240-1463cb79-c4e9-4daa-8f6a-e116ab824cde"
+    },
+    {
+      "name": "search",
+      "item": [
+        {
+          "name": "Search Assets",
+          "id": "c45ab5c0-0c1d-47ea-b4c3-09f14c4418a5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/search?filterBy=assetName&filterValue=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "filterBy",
+                  "value": "assetName"
+                },
+                {
+                  "description": "An appropriate value that is within the context described by `filterBy`. <br><br> **Examples**: <br><br>`filterBy=classificationTag&filterValue=Meme` <br><br>`filterBy=exchange&filterValue=poloniex`",
+                  "key": "filterValue",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Filter and identify various assets indexed by ARC."
+          },
+          "response": [
+            {
+              "id": "7d03b5c8-b2b4-4a29-b6b3-3844ed89b6f5",
+              "name": "200",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/search?filterBy=assetName&filterValue=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "search"
+                  ],
+                  "query": [
+                    {
+                      "key": "filterBy",
+                      "value": "assetName"
+                    },
+                    {
+                      "description": "An appropriate value that is within the context described by `filterBy`. <br><br> **Examples**: <br><br>`filterBy=classificationTag&filterValue=Meme` <br><br>`filterBy=exchange&filterValue=poloniex`",
+                      "key": "filterValue",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"Result\": {\n      \"value\": {\n        \"status\": 200,\n        \"title\": \"OK\",\n        \"description\": \"Successful request\",\n        \"payload\": {\n          \"metadata\": {},\n          \"data\": [\n            {\n              \"assetSymbol\": \"2024token\",\n              \"assetName\": \"2024TOKEN\",\n              \"assetArcId\": \"AMB:202000003171\",\n              \"classificationTags\": [\n                \"Meme\"\n              ]\n            },\n            {\n              \"assetSymbol\": \"3d3d\",\n              \"assetName\": \"3D3D\",\n              \"assetArcId\": \"AMB:3D3000001344\",\n              \"classificationTags\": [\n                \"Meme\"\n              ]\n            },\n            {\n              \"assetSymbol\": \"3w3w\",\n              \"assetName\": \"3w3w\",\n              \"assetArcId\": \"AMB:3W3000000000\",\n              \"classificationTags\": [\n                \"Meme\"\n              ]\n            }\n          ]\n        }\n      }\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:00:33.000Z",
+              "updatedAt": "2026-07-28T01:00:33.000Z",
+              "uid": "35240-7d03b5c8-b2b4-4a29-b6b3-3844ed89b6f5"
+            }
+          ],
+          "createdAt": "2026-07-28T01:00:33.000Z",
+          "updatedAt": "2026-07-28T01:00:33.000Z",
+          "uid": "35240-c45ab5c0-0c1d-47ea-b4c3-09f14c4418a5"
+        }
+      ],
+      "id": "59a678dc-98db-4c9c-b83c-06b569bbd4b9",
+      "createdAt": "2026-07-28T01:00:33.000Z",
+      "updatedAt": "2026-07-28T01:00:33.000Z",
+      "uid": "35240-59a678dc-98db-4c9c-b83c-06b569bbd4b9"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.amberdata.com/arc"
+    }
+  ]
+}

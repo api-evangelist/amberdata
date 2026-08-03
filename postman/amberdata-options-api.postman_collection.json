@@ -1,0 +1,447 @@
+{
+  "info": {
+    "_postman_id": "b1856880-9273-40f5-b918-cdffe758bae8",
+    "name": "Amberdata DeFi Options API",
+    "description": "Amberdata's institutional-grade digital asset and blockchain data API. Provides spot market data (prices, OHLCV, tickers, trades, order books), derivatives across futures and options (funding rates, open interest, liquidations, implied volatility, Greeks), DeFi (DEX and lending), and on-chain blockchain data (blocks, transactions, addresses, tokens). Every request requires the x-api-key header. An optional api-version header selects a dated API version.\n\nContact Support:\n Name: Amberdata Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T00:59:42.000Z",
+    "updatedAt": "2026-07-28T00:59:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b1856880-9273-40f5-b918-cdffe758bae8"
+  },
+  "item": [
+    {
+      "name": "markets",
+      "item": [
+        {
+          "name": "options",
+          "item": [
+            {
+              "name": "exchanges",
+              "item": [
+                {
+                  "name": "reference",
+                  "item": [
+                    {
+                      "name": "Options instruments and reference",
+                      "id": "dead395c-ccd6-4ad7-84db-a39d28eda852",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/markets/options/exchanges/reference?exchange=<string>&currency=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "markets",
+                            "options",
+                            "exchanges",
+                            "reference"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                              "key": "exchange",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by underlying currency (e.g. BTC, ETH).",
+                              "key": "currency",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "description": "Returns all available exchanges, currencies, and option instruments, filterable by a timestamp for historical reference."
+                      },
+                      "response": [
+                        {
+                          "id": "13b39537-7ec0-40dd-aa13-33935c2dd192",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/markets/options/exchanges/reference?exchange=<string>&currency=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "markets",
+                                "options",
+                                "exchanges",
+                                "reference"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                                  "key": "exchange",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by underlying currency (e.g. BTC, ETH).",
+                                  "key": "currency",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:43.000Z",
+                          "updatedAt": "2026-07-28T00:59:43.000Z",
+                          "uid": "35240-13b39537-7ec0-40dd-aa13-33935c2dd192"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:43.000Z",
+                      "updatedAt": "2026-07-28T00:59:43.000Z",
+                      "uid": "35240-dead395c-ccd6-4ad7-84db-a39d28eda852"
+                    }
+                  ],
+                  "id": "10d25929-d1fa-4134-b836-6fe32bd6caa8",
+                  "createdAt": "2026-07-28T00:59:43.000Z",
+                  "updatedAt": "2026-07-28T00:59:43.000Z",
+                  "uid": "35240-10d25929-d1fa-4134-b836-6fe32bd6caa8"
+                }
+              ],
+              "id": "a4553ea4-c59d-437f-a536-d0df614e6fe6",
+              "createdAt": "2026-07-28T00:59:43.000Z",
+              "updatedAt": "2026-07-28T00:59:43.000Z",
+              "uid": "35240-a4553ea4-c59d-437f-a536-d0df614e6fe6"
+            },
+            {
+              "name": "trades",
+              "item": [
+                {
+                  "name": "{instrument}",
+                  "item": [
+                    {
+                      "name": "Options trades",
+                      "id": "d55ef149-4a44-49a8-8ee5-aec21333e0b4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/markets/options/trades/:instrument?exchange=<string>&startDate=<string>&endDate=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "markets",
+                            "options",
+                            "trades",
+                            ":instrument"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                              "key": "exchange",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "startDate",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                              "key": "endDate",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "621d3b17-3d30-4be4-bda7-7b3936c45500",
+                              "key": "instrument",
+                              "value": "<string>",
+                              "description": "(Required) The instrument identifier for the futures or options contract."
+                            }
+                          ]
+                        },
+                        "description": "Returns trade data for the specified options instrument."
+                      },
+                      "response": [
+                        {
+                          "id": "11c23347-040f-47ac-ada0-7b5330faee2e",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/markets/options/trades/:instrument?exchange=<string>&startDate=<string>&endDate=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "markets",
+                                "options",
+                                "trades",
+                                ":instrument"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                                  "key": "exchange",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "startDate",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch).",
+                                  "key": "endDate",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "instrument"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:43.000Z",
+                          "updatedAt": "2026-07-28T00:59:43.000Z",
+                          "uid": "35240-11c23347-040f-47ac-ada0-7b5330faee2e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:43.000Z",
+                      "updatedAt": "2026-07-28T00:59:43.000Z",
+                      "uid": "35240-d55ef149-4a44-49a8-8ee5-aec21333e0b4"
+                    }
+                  ],
+                  "id": "a3aad15e-834e-4add-a8c2-3e89f6a0b7e7",
+                  "createdAt": "2026-07-28T00:59:43.000Z",
+                  "updatedAt": "2026-07-28T00:59:43.000Z",
+                  "uid": "35240-a3aad15e-834e-4add-a8c2-3e89f6a0b7e7"
+                }
+              ],
+              "id": "aefc7bd4-39e2-40f6-9eff-3fc027eccde7",
+              "createdAt": "2026-07-28T00:59:43.000Z",
+              "updatedAt": "2026-07-28T00:59:43.000Z",
+              "uid": "35240-aefc7bd4-39e2-40f6-9eff-3fc027eccde7"
+            },
+            {
+              "name": "order-book-snapshots",
+              "item": [
+                {
+                  "name": "{instrument}",
+                  "item": [
+                    {
+                      "name": "Options order book snapshots",
+                      "id": "b6ca9c56-9238-421e-8bf0-196d52866131",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/markets/options/order-book-snapshots/:instrument?exchange=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "markets",
+                            "options",
+                            "order-book-snapshots",
+                            ":instrument"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                              "key": "exchange",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "78339f53-faf4-4b44-8e1f-c72ac34c2ba0",
+                              "key": "instrument",
+                              "value": "<string>",
+                              "description": "(Required) The instrument identifier for the futures or options contract."
+                            }
+                          ]
+                        },
+                        "description": "Returns order book snapshots for the specified options instrument."
+                      },
+                      "response": [
+                        {
+                          "id": "5aafcb38-9dcd-4ce1-896c-5c8aec28cbed",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/markets/options/order-book-snapshots/:instrument?exchange=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "markets",
+                                "options",
+                                "order-book-snapshots",
+                                ":instrument"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by exchange (e.g. binance, coinbase, deribit).",
+                                  "key": "exchange",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "instrument"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+                          "createdAt": "2026-07-28T00:59:43.000Z",
+                          "updatedAt": "2026-07-28T00:59:43.000Z",
+                          "uid": "35240-5aafcb38-9dcd-4ce1-896c-5c8aec28cbed"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T00:59:43.000Z",
+                      "updatedAt": "2026-07-28T00:59:43.000Z",
+                      "uid": "35240-b6ca9c56-9238-421e-8bf0-196d52866131"
+                    }
+                  ],
+                  "id": "39f2f09c-a1f4-4a0f-b203-d7832f2655a4",
+                  "createdAt": "2026-07-28T00:59:43.000Z",
+                  "updatedAt": "2026-07-28T00:59:43.000Z",
+                  "uid": "35240-39f2f09c-a1f4-4a0f-b203-d7832f2655a4"
+                }
+              ],
+              "id": "430fe355-6829-4341-8a91-19741c578252",
+              "createdAt": "2026-07-28T00:59:43.000Z",
+              "updatedAt": "2026-07-28T00:59:43.000Z",
+              "uid": "35240-430fe355-6829-4341-8a91-19741c578252"
+            }
+          ],
+          "id": "f514ecf3-4f84-4f4d-8d2a-1d5807965a4b",
+          "createdAt": "2026-07-28T00:59:43.000Z",
+          "updatedAt": "2026-07-28T00:59:43.000Z",
+          "uid": "35240-f514ecf3-4f84-4f4d-8d2a-1d5807965a4b"
+        }
+      ],
+      "id": "52ee977e-5e9b-4c7d-aeaf-5f782c51b562",
+      "createdAt": "2026-07-28T00:59:43.000Z",
+      "updatedAt": "2026-07-28T00:59:43.000Z",
+      "uid": "35240-52ee977e-5e9b-4c7d-aeaf-5f782c51b562"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.amberdata.com"
+    }
+  ]
+}

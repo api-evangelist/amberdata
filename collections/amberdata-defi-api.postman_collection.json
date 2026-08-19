@@ -1,0 +1,253 @@
+{
+  "item": [
+    {
+      "id": "c0122a4c-ea24-4eb8-9f56-eca98888b8b4",
+      "name": "DeFi",
+      "description": {
+        "content": "Decentralized finance (DEX and lending) data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b7a11263-a5c4-4c9b-8fd6-0293f24ff11f",
+          "name": "DEX trades",
+          "request": {
+            "name": "DEX trades",
+            "description": {
+              "content": "Returns decentralized exchange (DEX) trade history for the specified pair (e.g. Uniswap V3 pools).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "defi",
+                "dex",
+                "trades",
+                ":pair"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch)."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pair",
+                  "description": "(Required) The trading pair (e.g. eth_usd, btc_usd)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d06fe2cc-0739-405a-bf2a-49400ea656d2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "defi",
+                    "dex",
+                    "trades",
+                    ":pair"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pair",
+                      "description": "(Required) The trading pair (e.g. eth_usd, btc_usd)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"title\": \"OK\",\n  \"description\": \"string\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4aaca3d2-b59c-4ef3-afff-23217e0c3eb0",
+          "name": "DeFi lending protocols",
+          "request": {
+            "name": "DeFi lending protocols",
+            "description": {
+              "content": "Returns lending protocol metrics across supported DeFi lending markets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "defi",
+                "lending",
+                "protocols"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6028a1f7-3550-4586-8d00-8202fd4e1ca2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "defi",
+                    "lending",
+                    "protocols"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": 200,\n  \"title\": \"OK\",\n  \"description\": \"string\",\n  \"payload\": {\n    \"metadata\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.amberdata.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d3b57ad2-1ecb-4dc5-9354-cdc69eaf2c0e",
+    "name": "Amberdata DeFi API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amberdata's institutional-grade digital asset and blockchain data API. Provides spot market data (prices, OHLCV, tickers, trades, order books), derivatives across futures and options (funding rates, open interest, liquidations, implied volatility, Greeks), DeFi (DEX and lending), and on-chain blockchain data (blocks, transactions, addresses, tokens). Every request requires the x-api-key header. An optional api-version header selects a dated API version.\n\nContact Support:\n Name: Amberdata Support",
+      "type": "text/plain"
+    }
+  }
+}

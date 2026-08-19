@@ -1,0 +1,250 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amberdata DeFi On-Chain API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "On-Chain",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/blockchains/:blockchainId/blocks",
+            "params": [
+              {
+                "name": "blockchainId",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              }
+            ]
+          },
+          "docs": "Returns block information for the specified blockchain, including block number, hash, timestamp, and aggregate metrics."
+        },
+        {
+          "info": {
+            "name": "Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/blockchains/:blockchainId/transactions",
+            "params": [
+              {
+                "name": "blockchainId",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              }
+            ]
+          },
+          "docs": "Returns transaction data including sending and receiving addresses (with token transfers), fees (gas), amounts, op codes, block number and hash, and timestamps."
+        },
+        {
+          "info": {
+            "name": "Transaction by hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/blockchains/:blockchainId/transactions/:hash",
+            "params": [
+              {
+                "name": "blockchainId",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path",
+                "description": "The transaction hash."
+              }
+            ]
+          },
+          "docs": "Returns a single transaction by its hash on the specified blockchain."
+        },
+        {
+          "info": {
+            "name": "Address balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/blockchains/:blockchainId/addresses/:address/balances",
+            "params": [
+              {
+                "name": "blockchainId",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The on-chain address or token contract address."
+              }
+            ]
+          },
+          "docs": "Returns account balance and token balances for the specified address on the given blockchain."
+        },
+        {
+          "info": {
+            "name": "Address transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/blockchains/:blockchainId/addresses/:address/transactions",
+            "params": [
+              {
+                "name": "blockchainId",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The on-chain address or token contract address."
+              }
+            ]
+          },
+          "docs": "Returns transactions for the specified address on the given blockchain."
+        },
+        {
+          "info": {
+            "name": "Token information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/blockchains/:blockchainId/tokens/:address/information",
+            "params": [
+              {
+                "name": "blockchainId",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The on-chain address or token contract address."
+              }
+            ]
+          },
+          "docs": "Returns token information including name, symbol, contract address, decimals, total supply, and circulating supply."
+        },
+        {
+          "info": {
+            "name": "Token transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/blockchains/:blockchainId/tokens/:address/transfers",
+            "params": [
+              {
+                "name": "blockchainId",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The on-chain address or token contract address."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              }
+            ]
+          },
+          "docs": "Returns token transfers including sender, receiver, amount, transaction hash, and timestamp."
+        },
+        {
+          "info": {
+            "name": "Token holders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/blockchains/:blockchainId/tokens/:address/holders",
+            "params": [
+              {
+                "name": "blockchainId",
+                "value": "",
+                "type": "path",
+                "description": "The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces."
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The on-chain address or token contract address."
+              }
+            ]
+          },
+          "docs": "Returns token holder information including the number of holders, their addresses, and tokens held by each."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

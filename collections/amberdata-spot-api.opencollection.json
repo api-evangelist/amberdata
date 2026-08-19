@@ -1,0 +1,224 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amberdata DeFi Spot API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Spot",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Spot exchanges reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/markets/spot/exchanges/reference",
+            "params": [
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exchange (e.g. binance, coinbase, deribit)."
+              },
+              {
+                "name": "pair",
+                "value": "",
+                "type": "query",
+                "description": "Filter by trading pair (e.g. eth_usd, btc_usd)."
+              }
+            ]
+          },
+          "docs": "Returns reference information for all supported spot exchanges and the instruments (pairs) available on each."
+        },
+        {
+          "info": {
+            "name": "Latest spot price for a pair",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/markets/spot/prices/:pair/latest",
+            "params": [
+              {
+                "name": "pair",
+                "value": "",
+                "type": "path",
+                "description": "The trading pair (e.g. eth_usd, btc_usd)."
+              }
+            ]
+          },
+          "docs": "Returns the latest price for the specified spot pair (e.g. eth_usd)."
+        },
+        {
+          "info": {
+            "name": "Historical spot OHLCV",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/markets/spot/ohlcv/:pair/historical",
+            "params": [
+              {
+                "name": "pair",
+                "value": "",
+                "type": "path",
+                "description": "The trading pair (e.g. eth_usd, btc_usd)."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exchange (e.g. binance, coinbase, deribit)."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              },
+              {
+                "name": "timeInterval",
+                "value": "",
+                "type": "query",
+                "description": "Time resolution of the returned series (e.g. minutes, hours, days)."
+              }
+            ]
+          },
+          "docs": "Returns historical OHLCV (open/high/low/close/volume) time series for the specified spot pair."
+        },
+        {
+          "info": {
+            "name": "Spot tickers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/markets/spot/tickers/:pair",
+            "params": [
+              {
+                "name": "pair",
+                "value": "",
+                "type": "path",
+                "description": "The trading pair (e.g. eth_usd, btc_usd)."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exchange (e.g. binance, coinbase, deribit)."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              }
+            ]
+          },
+          "docs": "Returns historical and live best bid and best ask (top of book) for the specified spot instrument."
+        },
+        {
+          "info": {
+            "name": "Historical spot trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/markets/spot/trades/:pair",
+            "params": [
+              {
+                "name": "pair",
+                "value": "",
+                "type": "path",
+                "description": "The trading pair (e.g. eth_usd, btc_usd)."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exchange (e.g. binance, coinbase, deribit)."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              }
+            ]
+          },
+          "docs": "Returns historical (time series) trade data for the specified spot pair or instrument."
+        },
+        {
+          "info": {
+            "name": "Spot order book snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/markets/spot/order-book-snapshots/:pair",
+            "params": [
+              {
+                "name": "pair",
+                "value": "",
+                "type": "path",
+                "description": "The trading pair (e.g. eth_usd, btc_usd)."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exchange (e.g. binance, coinbase, deribit)."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              }
+            ]
+          },
+          "docs": "Returns order book snapshots for the specified spot pair with granularity from 1 minute to 1 day."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

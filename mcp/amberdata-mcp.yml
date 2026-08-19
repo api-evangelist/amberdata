@@ -9,56 +9,61 @@ server:
   authentication: none
   hosting: Mintlify (docs-assistant MCP server published by Amberdata's documentation site)
   discovery: /.well-known/mcp.json on docs.amberdata.io (saved at well-known/amberdata-mcp.json)
-notes: >-
-  Live, unauthenticated MCP server verified 2026-07-22 via a tools/list JSON-RPC
-  call (200, SSE response). It is a documentation-assistant server: tools search
-  and read the Amberdata docs knowledge base (including the published OpenAPI
-  specs) rather than calling the data APIs themselves. No API-data MCP server
-  (market data / on-chain queries) was found.
+notes: 'Live, unauthenticated MCP server verified 2026-07-22 via a tools/list JSON-RPC call (200, SSE
+  response). It is a documentation-assistant server: tools search and read the Amberdata docs knowledge
+  base (including the published OpenAPI specs) rather than calling the data APIs themselves. No API-data
+  MCP server (market data / on-chain queries) was found.'
 tools:
-  - name: search_amberdata_docs
-    title: Search documentation
-    description: >-
-      Search across the Amberdata Docs knowledge base to find relevant
-      information, code examples, API references, and guides. Returns
-      contextual content with titles and direct links to documentation pages.
-    input_schema:
-      type: object
-      required: [query]
-      properties:
-        query:
-          type: string
-          description: Search query
-    annotations:
-      readOnlyHint: true
-      destructiveHint: false
-      idempotentHint: true
-  - name: query_docs_filesystem_amberdata_docs
-    title: Query docs filesystem
-    description: >-
-      Run a read-only shell-like query (rg, grep, find, tree, ls, cat, head,
-      tail, jq, and basic text utilities) against a virtualized in-memory
-      filesystem containing only the Amberdata Docs documentation pages and
-      OpenAPI specs. Stateless per call; no writes, no network.
-    input_schema:
-      type: object
-      required: [command]
-      properties:
-        command:
-          type: string
-          description: Read-only shell-like command to run against the docs filesystem
-    annotations:
-      readOnlyHint: true
-  - name: submit_feedback
-    title: Submit feedback
-    description: Submit feedback about an Amberdata documentation page.
-    input_schema:
-      type: object
-      required: [path, feedback]
-      properties:
-        path:
-          type: string
-          description: The documentation page path the feedback is about (e.g. /quickstart)
-        feedback:
-          type: string
-          description: Description of the documentation issue or suggestion
+- name: search_amberdata_docs
+  title: Search documentation
+  description: Search across the Amberdata Docs knowledge base to find relevant information, code examples,
+    API references, and guides. Returns contextual content with titles and direct links to documentation
+    pages.
+  input_schema:
+    type: object
+    required:
+    - query
+    properties:
+      query:
+        type: string
+        description: Search query
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+- name: query_docs_filesystem_amberdata_docs
+  title: Query docs filesystem
+  description: Run a read-only shell-like query (rg, grep, find, tree, ls, cat, head, tail, jq, and basic
+    text utilities) against a virtualized in-memory filesystem containing only the Amberdata Docs documentation
+    pages and OpenAPI specs. Stateless per call; no writes, no network.
+  input_schema:
+    type: object
+    required:
+    - command
+    properties:
+      command:
+        type: string
+        description: Read-only shell-like command to run against the docs filesystem
+  annotations:
+    readOnlyHint: true
+- name: submit_feedback
+  title: Submit feedback
+  description: Submit feedback about an Amberdata documentation page.
+  input_schema:
+    type: object
+    required:
+    - path
+    - feedback
+    properties:
+      path:
+        type: string
+        description: The documentation page path the feedback is about (e.g. /quickstart)
+      feedback:
+        type: string
+        description: Description of the documentation issue or suggestion
+deployment:
+  mode: remote
+  verified: searched
+  tools: 3
+  checked: '2026-08-12'
+  source: catalog MCP census

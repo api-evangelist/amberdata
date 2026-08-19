@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amberdata DeFi Options API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Options",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Options instruments and reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/markets/options/exchanges/reference",
+            "params": [
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exchange (e.g. binance, coinbase, deribit)."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Filter by underlying currency (e.g. BTC, ETH)."
+              }
+            ]
+          },
+          "docs": "Returns all available exchanges, currencies, and option instruments, filterable by a timestamp for historical reference."
+        },
+        {
+          "info": {
+            "name": "Options trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/markets/options/trades/:instrument",
+            "params": [
+              {
+                "name": "instrument",
+                "value": "",
+                "type": "path",
+                "description": "The instrument identifier for the futures or options contract."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exchange (e.g. binance, coinbase, deribit)."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              }
+            ]
+          },
+          "docs": "Returns trade data for the specified options instrument."
+        },
+        {
+          "info": {
+            "name": "Options order book snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/markets/options/order-book-snapshots/:instrument",
+            "params": [
+              {
+                "name": "instrument",
+                "value": "",
+                "type": "path",
+                "description": "The instrument identifier for the futures or options contract."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exchange (e.g. binance, coinbase, deribit)."
+              }
+            ]
+          },
+          "docs": "Returns order book snapshots for the specified options instrument."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amberdata DeFi API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DeFi",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "DEX trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/defi/dex/trades/:pair",
+            "params": [
+              {
+                "name": "pair",
+                "value": "",
+                "type": "path",
+                "description": "The trading pair (e.g. eth_usd, btc_usd)."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              }
+            ]
+          },
+          "docs": "Returns decentralized exchange (DEX) trade history for the specified pair (e.g. Uniswap V3 pools)."
+        },
+        {
+          "info": {
+            "name": "DeFi lending protocols",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/defi/lending/protocols"
+          },
+          "docs": "Returns lending protocol metrics across supported DeFi lending markets."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amberdata DeFi Futures API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Futures",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Futures exchanges reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/markets/futures/exchanges/reference",
+            "params": [
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exchange (e.g. binance, coinbase, deribit)."
+              }
+            ]
+          },
+          "docs": "Returns reference data for futures instruments across exchanges, including base and quote symbols, price and volume limits, precision, contract terms, and trading availability."
+        },
+        {
+          "info": {
+            "name": "Futures tickers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/markets/futures/tickers/:instrument",
+            "params": [
+              {
+                "name": "instrument",
+                "value": "",
+                "type": "path",
+                "description": "The instrument identifier for the futures or options contract."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exchange (e.g. binance, coinbase, deribit)."
+              }
+            ]
+          },
+          "docs": "Returns ticker data for the specified futures instrument."
+        },
+        {
+          "info": {
+            "name": "Futures funding rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/markets/futures/funding-rates/:instrument",
+            "params": [
+              {
+                "name": "instrument",
+                "value": "",
+                "type": "path",
+                "description": "The instrument identifier for the futures or options contract."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exchange (e.g. binance, coinbase, deribit)."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              }
+            ]
+          },
+          "docs": "Returns funding rate data for the specified futures instrument."
+        },
+        {
+          "info": {
+            "name": "Futures open interest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/markets/futures/open-interest/:instrument",
+            "params": [
+              {
+                "name": "instrument",
+                "value": "",
+                "type": "path",
+                "description": "The instrument identifier for the futures or options contract."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exchange (e.g. binance, coinbase, deribit)."
+              }
+            ]
+          },
+          "docs": "Returns open interest data for the specified futures instrument."
+        },
+        {
+          "info": {
+            "name": "Futures liquidations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.amberdata.com/markets/futures/liquidations/:instrument",
+            "params": [
+              {
+                "name": "instrument",
+                "value": "",
+                "type": "path",
+                "description": "The instrument identifier for the futures or options contract."
+              },
+              {
+                "name": "exchange",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exchange (e.g. binance, coinbase, deribit)."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End of the time range (ISO 8601 timestamp or milliseconds epoch)."
+              }
+            ]
+          },
+          "docs": "Returns liquidation events for the specified futures instrument."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

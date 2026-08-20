@@ -29,6 +29,14 @@ tags:
 - Digital Assets
 - Derivatives
 - DeFi
+- Onchain
+tags_raw:
+- Crypto
+- Blockchain
+- Market Data
+- Digital Assets
+- Derivatives
+- DeFi
 - On-Chain
 created: '2026-06-21'
 modified: '2026-07-22'
@@ -37,6 +45,11 @@ apis:
 - aid: amberdata:websocket-streaming
   name: Amberdata WebSocket Streaming API
   tags:
+  - WebSocket
+  - Streaming
+  - Real-Time
+  - Low Latency
+  tags_raw:
   - WebSocket
   - Streaming
   - Real Time
@@ -122,6 +135,8 @@ apis:
   humanURL: https://docs.amberdata.io/docs/transactions
   baseURL: https://api.amberdata.com/blockchains
   tags:
+  - Onchain
+  tags_raw:
   - On-Chain
   properties:
   - type: OpenAPI

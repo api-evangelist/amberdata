@@ -75,10 +75,6 @@ apis:
   tags:
   - DeFi
   properties:
-  - type: OpenAPI
-    url: openapi/amberdata-defi-openapi.yaml
-  - type: OpenAPI
-    url: openapi/amberdata-defi-market-openapi.yaml
   - type: Overlay
     url: overlays/amberdata-defi-overlay.yaml
   - type: Overlay
@@ -109,8 +105,6 @@ apis:
   tags:
   - Futures
   properties:
-  - type: OpenAPI
-    url: openapi/amberdata-derivatives-openapi.yaml
   - type: Overlay
     url: overlays/amberdata-derivatives-overlay.yaml
   - type: OpenAPI
@@ -139,8 +133,6 @@ apis:
   tags_raw:
   - On-Chain
   properties:
-  - type: OpenAPI
-    url: openapi/amberdata-blockchain-openapi.yaml
   - type: Overlay
     url: overlays/amberdata-blockchain-overlay.yaml
   - type: OpenAPI
@@ -168,8 +160,6 @@ apis:
   tags:
   - Options
   properties:
-  - type: OpenAPI
-    url: openapi/amberdata-derivatives-openapi.yaml
   - type: Overlay
     url: overlays/amberdata-derivatives-overlay.yaml
   - type: OpenAPI
@@ -196,8 +186,6 @@ apis:
   tags:
   - Spot
   properties:
-  - type: OpenAPI
-    url: openapi/amberdata-spot-openapi.yaml
   - type: Overlay
     url: overlays/amberdata-spot-overlay.yaml
   - type: OpenAPI
@@ -216,39 +204,226 @@ apis:
     url: https://docs.amberdata.io/reference/defi-reference
   - type: Documentation
     url: https://docs.amberdata.io/docs/transactions
-- aid: amberdata:amberdata-arc-openapi
-  name: Amberdata Asset Reference & Classification API
-  description: >-
-    Amberdata Asset Reference & Classification API from Amberdata — 4 path(s) described in OpenAPI.
+- aid: amberdata:amberdata-addresses-api
+  name: Amberdata Addresses API
+  description: The Addresses API from Amberdata — 10 operation(s) for addresses.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
   baseURL: wss://ws.web3api.io
+  tags:
+  - Addresses
   properties:
   - type: OpenAPI
-    url: openapi/amberdata-arc-openapi.yaml
-- aid: amberdata:amberdata-market-openapi
-  name: Amberdata Market-api
-  description: Amberdata Market-api from Amberdata — 55 path(s) described in OpenAPI.
+    url: openapi/amberdata-addresses-api-openapi.yml
+- aid: amberdata:amberdata-analytics-api
+  name: Amberdata Analytics API
+  description: The Analytics API from Amberdata — 73 operation(s) for analytics.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
   baseURL: wss://ws.web3api.io
+  tags:
+  - Analytics
   properties:
   - type: OpenAPI
-    url: openapi/amberdata-market-openapi.yaml
-- aid: amberdata:amberdata-metrics-openapi
-  name: Amberdata Market Metrics
-  description: Amberdata Market Metrics from Amberdata — 6 path(s) described in OpenAPI.
+    url: openapi/amberdata-analytics-api-openapi.yml
+- aid: amberdata:amberdata-blocks-api
+  name: Amberdata Blocks API
+  description: The Blocks API from Amberdata — 1 operation(s) for blocks.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
   baseURL: wss://ws.web3api.io
+  tags:
+  - Blocks
   properties:
   - type: OpenAPI
-    url: openapi/amberdata-metrics-openapi.yaml
-- aid: amberdata:amberdata-price-openapi
-  name: Amberdata Pricing
-  description: Amberdata Pricing from Amberdata — 16 path(s) described in OpenAPI.
+    url: openapi/amberdata-blocks-api-openapi.yml
+- aid: amberdata:amberdata-classifications-api
+  name: Amberdata Classifications API
+  description: The Classifications API from Amberdata — 1 operation(s) for classifications.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
   baseURL: wss://ws.web3api.io
+  tags:
+  - Classifications
   properties:
   - type: OpenAPI
-    url: openapi/amberdata-price-openapi.yaml
+    url: openapi/amberdata-classifications-api-openapi.yml
+- aid: amberdata:amberdata-contracts-api
+  name: Amberdata Contracts API
+  description: The Contracts API from Amberdata — 1 operation(s) for contracts.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-contracts-api-openapi.yml
+- aid: amberdata:amberdata-depth-api
+  name: Amberdata Depth API
+  description: The Depth API from Amberdata — 7 operation(s) for depth.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Depth
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-depth-api-openapi.yml
+- aid: amberdata:amberdata-dex-api
+  name: Amberdata Dex API
+  description: The Dex API from Amberdata — 6 operation(s) for dex.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Dex
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-dex-api-openapi.yml
+- aid: amberdata:amberdata-exchanges-api
+  name: Amberdata Exchanges API
+  description: The Exchanges API from Amberdata — 5 operation(s) for exchanges.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Exchanges
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-exchanges-api-openapi.yml
+- aid: amberdata:amberdata-lending-api
+  name: Amberdata Lending API
+  description: The Lending API from Amberdata — 10 operation(s) for lending.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Lending
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-lending-api-openapi.yml
+- aid: amberdata:amberdata-liquidity-api
+  name: Amberdata Liquidity API
+  description: The Liquidity API from Amberdata — 1 operation(s) for liquidity.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Liquidity
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-liquidity-api-openapi.yml
+- aid: amberdata:amberdata-marketcap-api
+  name: Amberdata Marketcap API
+  description: The Marketcap API from Amberdata — 1 operation(s) for marketcap.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Marketcap
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-marketcap-api-openapi.yml
+- aid: amberdata:amberdata-metrics-api
+  name: Amberdata Metrics API
+  description: The Metrics API from Amberdata — 7 operation(s) for metrics.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-metrics-api-openapi.yml
+- aid: amberdata:amberdata-ohlcv-api
+  name: Amberdata Ohlcv API
+  description: The Ohlcv API from Amberdata — 2 operation(s) for ohlcv.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Ohlcv
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-ohlcv-api-openapi.yml
+- aid: amberdata:amberdata-prices-api
+  name: Amberdata Prices API
+  description: The Prices API from Amberdata — 4 operation(s) for prices.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Prices
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-prices-api-openapi.yml
+- aid: amberdata:amberdata-search-api
+  name: Amberdata Search API
+  description: The Search API from Amberdata — 1 operation(s) for search.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-search-api-openapi.yml
+- aid: amberdata:amberdata-stablecoins-api
+  name: Amberdata Stablecoins API
+  description: The Stablecoins API from Amberdata — 1 operation(s) for stablecoins.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Stablecoins
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-stablecoins-api-openapi.yml
+- aid: amberdata:amberdata-supply-api
+  name: Amberdata Supply API
+  description: The Supply API from Amberdata — 2 operation(s) for supply.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Supply
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-supply-api-openapi.yml
+- aid: amberdata:amberdata-tokens-api
+  name: Amberdata Tokens API
+  description: The Tokens API from Amberdata — 6 operation(s) for tokens.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-tokens-api-openapi.yml
+- aid: amberdata:amberdata-trade-api
+  name: Amberdata Trade API
+  description: The Trade API from Amberdata — 6 operation(s) for trade.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Trade
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-trade-api-openapi.yml
+- aid: amberdata:amberdata-transactions-api
+  name: Amberdata Transactions API
+  description: The Transactions API from Amberdata — 1 operation(s) for transactions.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-transactions-api-openapi.yml
+- aid: amberdata:amberdata-updates-api
+  name: Amberdata Updates API
+  description: The Updates API from Amberdata — 1 operation(s) for updates.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Updates
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-updates-api-openapi.yml
+- aid: amberdata:amberdata-volumes-api
+  name: Amberdata Volumes API
+  description: The Volumes API from Amberdata — 2 operation(s) for volumes.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Volumes
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-volumes-api-openapi.yml
 common:
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/amberdata/overview

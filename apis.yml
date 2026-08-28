@@ -8,6 +8,18 @@ description: Amberdata delivers institutional-grade digital asset and blockchain
   options (funding rates, open interest, liquidations, implied volatility, Greeks),
   DeFi (DEX trades and lending), and on-chain blockchain data (blocks, transactions,
   addresses, tokens, transfers), plus low-latency WebSocket streaming.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve

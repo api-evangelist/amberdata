@@ -41,7 +41,7 @@ tags:
 - Digital Assets
 - Derivatives
 - DeFi
-- Onchain
+- On-Chain
 tags_raw:
 - Crypto
 - Blockchain
@@ -141,7 +141,7 @@ apis:
   humanURL: https://docs.amberdata.io/docs/transactions
   baseURL: https://api.amberdata.com/blockchains
   tags:
-  - Onchain
+  - On-Chain
   tags_raw:
   - On-Chain
   properties:
@@ -282,6 +282,8 @@ apis:
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
   baseURL: wss://ws.web3api.io
   tags:
+  - DEX
+  tags_raw:
   - Dex
   properties:
   - type: OpenAPI
@@ -322,6 +324,8 @@ apis:
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
   baseURL: wss://ws.web3api.io
   tags:
+  - Market Cap
+  tags_raw:
   - Marketcap
   properties:
   - type: OpenAPI
@@ -342,6 +346,8 @@ apis:
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
   baseURL: wss://ws.web3api.io
   tags:
+  - OHLCV
+  tags_raw:
   - Ohlcv
   properties:
   - type: OpenAPI
@@ -412,6 +418,8 @@ apis:
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
   baseURL: wss://ws.web3api.io
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI

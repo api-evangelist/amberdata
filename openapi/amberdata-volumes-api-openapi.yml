@@ -1,0 +1,301 @@
+openapi: 3.2.0
+info:
+  title: spot-analytics Volumes API
+  version: '2'
+servers:
+- url: https://api.amberdata.com/markets/spot/analytics
+security:
+- sec0: []
+tags:
+- name: Volumes
+paths:
+  /volumes/asset:
+    get:
+      summary: Asset Volume USD
+      description: This endpoint displays the total volume per base asset or specifc pair, normalized to USD. This means that crypto-to-crypto pairs (such as ETH_BTC) are converted to USD before aggregation. Users can pass an optional boolean parameter to include pairs where the asset is on the quote side, example xyz_btc where btc is target asset.
+      operationId: spot-analytics-volumes-exchange
+      parameters:
+      - name: exchange
+        in: query
+        required: true
+        description: '**[Required]** The exchange for which to retrieve asset USD volume.
+
+          **[Examples]** ` gdax | okex | binance | binanceus`'
+        schema:
+          type: string
+          default: gdax
+      - name: asset
+        in: query
+        required: true
+        description: '**[Required]** The exchange for which to retrieve asset USD volume.
+
+          **[Examples]** ` btc | eth | sol | xrp`'
+        schema:
+          type: string
+          default: btc
+      - name: quoteAssetIncluded
+        in: query
+        required: true
+        description: '**[Required]** Whether the USD asset volumes from the quote side are included.
+
+          **[Examples]** ` gdax | okex | binance | binanceus`'
+        schema:
+          type: boolean
+          default: false
+      - name: pair
+        in: query
+        required: false
+        description: '**[Optional]** The parameter to isolate USD volume to only a specific pair.
+
+          **[Examples]** ` btc_usd | eth_usdt | sol_usd | xrp_usdc`'
+        schema:
+          type: string
+          default: null
+      - name: startDate
+        in: query
+        required: false
+        description: "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`"
+        schema:
+          type: string
+          default: '2025-06-01'
+      - name: endDate
+        in: query
+        required: false
+        description: "**[Optional]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`"
+        schema:
+          type: string
+          default: '2025-06-05'
+      - name: timeInterval
+        in: query
+        required: false
+        description: "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`"
+        schema:
+          type: string
+          default: day
+      - name: timeFormat
+        in: query
+        required: false
+        description: "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`"
+        schema:
+          type: string
+          default: hr
+      - name: orderSizeCategoryUsd
+        in: query
+        required: true
+        description: '**[Required]** Users can specify to return all aggregated trades, or trades of a specific size threshold. (0-1k, 1k-10k, 10k-100k, 100k+, ALL) by passing in the lower value of the range ` 0 | 1k | 10k | 100k | All `'
+        schema:
+          type: string
+          default: ALL
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                New Example:
+                  summary: New Example
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                      - exchange: binance
+                        timestamp: 2025-06-04 00:00:00 000
+                        totalVolumeUSD: 67022419665.659546
+                        totalVolumeUSDBillions: 67.02241966565954
+                      - exchange: binanceus
+                        timestamp: 2025-06-04 00:00:00 000
+                        totalVolumeUSD: 10036190.677076299
+                        totalVolumeUSDBillions: 0.010036190677076298
+                      - exchange: gdax
+                        timestamp: 2025-06-04 00:00:00 000
+                        totalVolumeUSD: 5434906189.482691
+                        totalVolumeUSDBillions: 5.434906189482691
+                      metadata:
+                        api-version: '2023-09-30'
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                              example: binance
+                              description: Exchange reflecting the volume USD
+                            timestamp:
+                              type: string
+                              example: 2025-06-04 00:00:00 000
+                              description: Date reflecting the total volume USD
+                            totalVolumeUSD:
+                              type: number
+                              example: 67022419665.659546
+                              description: Raw total volume in USD terms
+                            totalVolumeUSDBillions:
+                              type: number
+                              example: 67.02241966565954
+                              description: Conversion of raw total volume in USD terms into billions to be easily human readable
+                      metadata:
+                        type: object
+                        properties:
+                          api-version:
+                            type: string
+                            example: '2023-09-30'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Volumes
+  /volumes/exchange:
+    get:
+      summary: Exchange Volume USD
+      description: This endpoint displays the total volume per exchange for all available pairs, normalized to USD. This means that crypto-to-crypto pairs (such as ETH_BTC) are converted to USD before aggregation. Users can pass an exchange parameter to isolate volume data for a specific exchange or leave it blank to retrieve data for all supported exchanges. Users can also isolate volume that meet a size threshold using the “orderSizeCategoryUsd” parameter. A useful example might be to pass 100k+ threshold to measure which exchanges have the most “large ticket” volume (aka “whale” volume).
+      operationId: spot-analytics-volumes-exchange
+      parameters:
+      - name: exchange
+        in: query
+        required: false
+        description: '**[Optional]** The exchange for which to retrieve USD volume.
+
+          **[Examples]** ` gdax | okex | binance | binanceus`'
+        schema:
+          type: string
+          default: ''
+      - name: startDate
+        in: query
+        required: false
+        description: "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`"
+        schema:
+          type: string
+          default: '2025-06-01'
+      - name: endDate
+        in: query
+        required: false
+        description: "**[Optional]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`"
+        schema:
+          type: string
+          default: '2025-06-05'
+      - name: timeInterval
+        in: query
+        required: false
+        description: "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`"
+        schema:
+          type: string
+          default: day
+      - name: timeFormat
+        in: query
+        required: false
+        description: "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`"
+        schema:
+          type: string
+          default: hr
+      - name: orderSizeCategoryUsd
+        in: query
+        required: true
+        description: '**[Required]** Users can specify to return all aggregated trades, or trades of a specific size threshold. (0-1k, 1k-10k, 10k-100k, 100k+, ALL) by passing in the lower value of the range ` 0 | 1k | 10k | 100k | All `'
+        schema:
+          type: string
+          default: ALL
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                New Example:
+                  summary: New Example
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                      - exchange: binance
+                        timestamp: 2025-06-04 00:00:00 000
+                        totalVolumeUSD: 67022419665.659546
+                        totalVolumeUSDBillions: 67.02241966565954
+                      - exchange: binanceus
+                        timestamp: 2025-06-04 00:00:00 000
+                        totalVolumeUSD: 10036190.677076299
+                        totalVolumeUSDBillions: 0.010036190677076298
+                      - exchange: bitfinex
+                        timestamp: 2025-06-04 00:00:00 000
+                        totalVolumeUSD: 398537591611.8082
+                        totalVolumeUSDBillions: 398.53759161180824
+                      - exchange: gdax
+                        timestamp: 2025-06-04 00:00:00 000
+                        totalVolumeUSD: 5434906189.482691
+                        totalVolumeUSDBillions: 5.434906189482691
+                      metadata:
+                        api-version: '2023-09-30'
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                              example: binance
+                              description: Exchange reflecting the volume USD
+                            timestamp:
+                              type: string
+                              example: 2025-06-04 00:00:00 000
+                              description: Date reflecting the total volume USD
+                            totalVolumeUSD:
+                              type: number
+                              example: 67022419665.659546
+                              description: Raw total volume in USD terms
+                            totalVolumeUSDBillions:
+                              type: number
+                              example: 67.02241966565954
+                              description: Conversion of raw total volume in USD terms into billions to be easily human readable
+                      metadata:
+                        type: object
+                        properties:
+                          api-version:
+                            type: string
+                            example: '2023-09-30'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Volumes
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

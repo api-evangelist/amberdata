@@ -1,0 +1,133 @@
+openapi: 3.2.0
+info:
+  title: blockchain-api Marketcap API
+  version: '2'
+servers:
+- url: https://api.amberdata.com/blockchains
+security:
+- sec0: []
+tags:
+- name: Marketcap
+paths:
+  /marketcap:
+    get:
+      summary: Marketcap
+      description: Retrieves Market Capitalization of supported assets/tokens
+      operationId: marketcap
+      parameters:
+      - name: date
+        in: query
+        description: '**[Optional]** Filter by Market Capitalization on this date. Leave blank if desired date is latest.'
+        schema:
+          type: string
+          format: date
+          default: '2024-01-10'
+      - name: api-version
+        in: header
+        schema:
+          type: string
+          enum:
+          - '2023-09-30'
+          default: '2023-09-30'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        description: Array of token/coin market data
+                        items:
+                          type: object
+                          properties:
+                            blockchainSlug:
+                              type: string
+                              example: bitcoin-mainnet
+                            circulatingSupply:
+                              type: string
+                              example: '19594996.160661350000'
+                            marketCapUSD:
+                              type: string
+                              example: '905077909973.43'
+                            maxSupply:
+                              type: string
+                              example: '21000000'
+                            name:
+                              type: string
+                              example: bitcoin
+                            priceUSD:
+                              type: string
+                              example: '46189.236402630916818023'
+                            symbol:
+                              type: string
+                              example: btc
+                            timestamp:
+                              type: string
+                              format: date
+                              example: '2024-01-10'
+                            totalSupply:
+                              type: string
+                              example: '19594996.160661350000'
+                      metadata:
+                        type: object
+                        description: Optional metadata object
+                        example: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"status\": 400,\n  \"title\": \"BAD REQUEST\",\n  \"description\": \"Request was invalid or cannot be served. See message for details\",\n  \"error\": true,\n  \"message\": \"\"\n}"
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 400
+                    default: 0
+                  title:
+                    type: string
+                    example: BAD REQUEST
+                  description:
+                    type: string
+                    example: Request was invalid or cannot be served. See message for details
+                  error:
+                    type: boolean
+                    example: true
+                    default: true
+                  message:
+                    type: string
+                    example: ''
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Marketcap
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

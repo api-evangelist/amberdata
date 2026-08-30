@@ -1,0 +1,222 @@
+openapi: 3.2.0
+info:
+  title: Defi Stablecoins API
+  version: '2'
+servers:
+- url: https://api.amberdata.com/defi
+security:
+- sec0: []
+tags:
+- name: Stablecoins
+paths:
+  /stablecoins/{assetSymbol}/lending/metrics/summary:
+    get:
+      summary: Stablecoins in DeFi Lending - Aggregate Insights
+      description: Easily analyze a stablecoin's metrics across multiple DeFi lending protocols.
+      operationId: stablecoins-in-defi-lending-aggregate-insights
+      parameters:
+      - name: assetSymbol
+        in: path
+        schema:
+          type: string
+          enum:
+          - USDC
+          - USDT
+          - DAI
+          - BUSD
+          - TUSD
+          default: USDC
+        required: true
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive).<BR>**[Formats]** `seconds | milliseconds | iso8601`<BR>**[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeInterval
+        in: query
+        description: Determines whether the metrics are aggregated by hour or by day.
+        schema:
+          type: string
+          enum:
+          - days
+          - hours
+          default: days
+      - name: protocol
+        in: query
+        description: Drill down into the stablecoin's metrics by specifying a protocol.
+        schema:
+          type: string
+          enum:
+          - aavev2
+          - aavev3
+          - makerdao
+          - compoundv2
+          - compoundv3
+      - name: x-amberdata-blockchain-id
+        in: header
+        description: '**[Optional]** The id of the blockchain for which you want data from. Defaults to `ethereum-mainnet` if not specified.'
+        schema:
+          type: string
+          enum:
+          - ethereum-mainnet
+          - avalanche-mainnet
+          - arbitrum-mainnet
+          - optimism-mainnet
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          blockchainId:
+                            type: string
+                            example: avalanche-mainnet
+                          protocols:
+                            type: array
+                            items:
+                              type: string
+                              example: aavev2
+                      data:
+                        type: object
+                        properties:
+                          metrics:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                timestamp:
+                                  type: integer
+                                  example: 1685145599999
+                                depositedUSD:
+                                  type: number
+                                  example: 12245600.841895984
+                                borrowedUSD:
+                                  type: number
+                                  example: 111607.91129839412
+                                withdrawnUSD:
+                                  type: number
+                                  example: 8063459.152456514
+                                repaidUSD:
+                                  type: number
+                                  example: 214781.74953266996
+                                liquidatedUSD:
+                                  type: number
+                                  example: 0
+                                liquidatedProfitUSD:
+                                  type: number
+                                  example: 0
+                                flashLoanedUSD:
+                                  type: number
+                                  example: 55544.3264730185
+                                interestEarnedUSD:
+                                  type: number
+                                  example: 2590.714350187115
+                                interestPaidUSD:
+                                  type: number
+                                  example: 287.8571500207906
+                                numberOfDeposits:
+                                  type: integer
+                                  example: 186
+                                numberOfBorrows:
+                                  type: integer
+                                  example: 37
+                                numberOfWithdraws:
+                                  type: integer
+                                  example: 191
+                                numberOfRepays:
+                                  type: integer
+                                  example: 26
+                                numberOfLiquidations:
+                                  type: integer
+                                  example: 0
+                                depositRatio:
+                                  type: number
+                                  example: 0.8472260491461453
+                                borrowRatio:
+                                  type: number
+                                  example: 0.01629069721658102
+                                withdrawRatio:
+                                  type: number
+                                  example: 1.176971865549357
+                                liquidationRatio:
+                                  type: number
+                                  example: 0
+                                totalDepositedUSD:
+                                  type: number
+                                  example: 63039186.64521183
+                                totalCollateralUSD:
+                                  type: number
+                                  example: 159364840.70693165
+                                totalBorrowedUSD:
+                                  type: number
+                                  example: 39488498.24221587
+                                cumulativeLiquidatedUSD:
+                                  type: number
+                                  example: 25058036.913995497
+                                cumulativeLiquidatedProfitUSD:
+                                  type: number
+                                  example: 1130173.4298008725
+                                cumulativeInterestEarnedUSD:
+                                  type: number
+                                  example: 28758573.133691713
+                                totalUtilizationRatio:
+                                  type: number
+                                  example: 0.6264119247676753
+                                totalDepositConcentration:
+                                  type: number
+                                  example: 0.18215099394158993
+                                totalBorrowConcentration:
+                                  type: number
+                                  example: 0.37577326222343804
+      deprecated: false
+      tags:
+      - Stablecoins
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      x-default: API_KEY
+      name: x-api-key
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

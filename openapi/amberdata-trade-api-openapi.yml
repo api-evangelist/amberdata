@@ -1,0 +1,987 @@
+openapi: 3.2.0
+info:
+  title: spot-analytics Trade API
+  version: '2'
+servers:
+- url: https://api.amberdata.com/markets/spot/analytics
+security:
+- sec0: []
+tags:
+- name: Trade
+paths:
+  /trade/information/pairs:
+    get:
+      summary: Information Trade Analytics Pairs
+      description: This endpoint returns all the available pairs for a given exchange in the spot "Trade Analytics" section. The associated startDate and endDate represent the available history of trade data.
+      operationId: spot-analytics-information-trade-analytics-pairs
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Required]** The exchange for which to retrieve listed spot instruments.
+
+          **[Examples]** ` gdax | okex | binance | binanceus`'
+        required: true
+        schema:
+          type: string
+          default: gdax
+      - name: timeFormat
+        in: query
+        description: "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`"
+        schema:
+          type: string
+          default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                      - endDate: 2025-04-02 11:39:00 000
+                        exchange: gdax
+                        pair: 00_usd
+                        startDate: 2025-01-01 00:00:00 000
+                      - endDate: 2025-04-02 11:20:00 000
+                        exchange: gdax
+                        pair: 1inch_eur
+                        startDate: 2025-03-12 13:18:00 000
+                      - endDate: 2025-04-02 10:42:00 000
+                        exchange: gdax
+                        pair: 1inch_gbp
+                        startDate: 2025-03-12 13:14:00 000
+                      - endDate: 2025-04-02 11:28:00 000
+                        exchange: gdax
+                        pair: 1inch_usd
+                        startDate: 2025-01-01 00:00:00 000
+                      - endDate: 2025-04-02 11:39:00 000
+                        exchange: gdax
+                        pair: a8_usd
+                        startDate: 2025-01-01 00:02:00 000
+                      - endDate: 2025-04-02 11:43:00 000
+                        exchange: gdax
+                        pair: aave_btc
+                        startDate: 2025-03-12 13:11:00 000
+                      - endDate: 2025-04-02 11:44:00 000
+                        exchange: gdax
+                        pair: aave_eur
+                        startDate: 2025-03-12 13:11:00 000
+                      - endDate: 2025-04-02 11:32:00 000
+                        exchange: gdax
+                        pair: aave_gbp
+                        startDate: 2025-03-12 13:11:00 000
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            endDate:
+                              type: string
+                              example: 2025-04-02 11:39:00 000
+                              description: The last data observation for this pair's Trade analytics
+                            exchange:
+                              type: string
+                              example: gdax
+                              description: Exchange reflecting the pair
+                            pair:
+                              type: string
+                              example: 00_usd
+                              description: The subject pair
+                            startDate:
+                              type: string
+                              example: 2025-01-01 00:00:00 000
+                              description: The first data observation for this pair's Trade analytics
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: {}
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Trade
+  /trade/information/exchanges:
+    get:
+      summary: Information Trade Exchange Support per Pair
+      description: This endpoint returns all the exchanges that provide support for a given pair in the spot "Trade Analytics" section. The associated startDate and endDate represent the available history of trade data.
+      operationId: spot-analytics-information-trade-exchange-support-per-pair
+      parameters:
+      - name: pair
+        in: query
+        description: '**[Required]** The currency pair for the spot instrument.
+
+          **[Examples]** ` btc_usd | btc_usdc | eth_usd `'
+        required: true
+        schema:
+          type: string
+          default: btc_usd
+      - name: timeFormat
+        in: query
+        description: "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`"
+        schema:
+          type: string
+          default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                      - endDate: 2025-04-02 10:52:00 000
+                        exchange: binanceus
+                        pair: btc_usd
+                        startDate: 2025-02-19 13:43:00 000
+                      - endDate: 2025-03-17 23:58:00 000
+                        exchange: bitstamp
+                        pair: btc_usd
+                        startDate: 2025-01-01 00:00:00 000
+                      - endDate: 2025-04-02 11:54:00 000
+                        exchange: bullish
+                        pair: btc_usd
+                        startDate: 2025-03-20 15:09:00 000
+                      - endDate: 2025-04-02 11:54:00 000
+                        exchange: cryptocom
+                        pair: btc_usd
+                        startDate: 2025-02-18 23:44:00 000
+                      - endDate: 2025-04-02 11:54:00 000
+                        exchange: gdax
+                        pair: btc_usd
+                        startDate: 2025-01-01 00:00:00 000
+                      - endDate: 2025-03-17 23:59:00 000
+                        exchange: gemini
+                        pair: btc_usd
+                        startDate: 2025-01-01 00:00:00 000
+                      - endDate: 2025-04-02 11:53:00 000
+                        exchange: hashkey
+                        pair: btc_usd
+                        startDate: 2025-02-28 19:14:00 000
+                      - endDate: 2025-03-17 23:59:00 000
+                        exchange: itbit
+                        pair: btc_usd
+                        startDate: 2025-01-01 00:00:00 000
+                      - endDate: 2025-03-17 23:59:00 000
+                        exchange: kraken
+                        pair: btc_usd
+                        startDate: 2025-01-01 00:00:00 000
+                      metadata:
+                        api-version: '2023-09-30'
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            endDate:
+                              type: string
+                              example: 2025-04-02 10:52:00 000
+                              description: The last data observation for this exchange's pair in Trade analytics
+                            exchange:
+                              type: string
+                              example: binanceus
+                              description: The supported exchange for Trade analytics
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: The supported pair for this exchange's Trade analytics
+                            startDate:
+                              type: string
+                              example: 2025-02-19 13:43:00 000
+                              description: The first data observation for this exchange's pair in Trade analytics
+                      metadata:
+                        type: object
+                        properties:
+                          api-version:
+                            type: string
+                            example: '2023-09-30'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: {}
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Trade
+  /trade/frequency:
+    get:
+      summary: Trade Frequency
+      description: This endpoint condenses raw trade data into 1-minute increments, making it easier to analyze aggregated statistics without parsing millions of individual trades. It includes a breakdown of trades by quote size, allowing users to filter by specific trade sizes or view all trades. Key metrics provided are total volume traded, VWAP (volume-weighted average price), trade count, and net buy/sell aggressor volumes.
+      operationId: spot-analytics-trade-frequency
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange for which to retrieve listed spot instruments.
+
+          **[Examples]** ` gdax | okex | binance | binanceus`'
+        schema:
+          type: string
+          default: gdax
+      - name: pair
+        in: query
+        description: '**[Required]** The currency pair for the spot instrument.
+
+          **[Examples]** ` btc_usd | btc_usdc | eth_usd `'
+        required: true
+        schema:
+          type: string
+          default: btc_usd
+      - name: fuzzyMatch
+        in: query
+        description: '**[Required]** This parameter allows users to return either a specific pair, such as btc_usd, when set to FALSE, or return every pair related to an underlying asset, such as BTC, when set to TRUE (ex: btc_eur, btc_usd, btc_usdt, etc)'
+        required: true
+        schema:
+          type: boolean
+          default: false
+      - name: orderSizeCategoryUsd
+        in: query
+        description: "**[Optional]** Users can specify to return all aggregated trades or only trades that fit a specific size threshold (0-1k, 1k-10k, 10k-100k, 100k+, ALL).\n Users can specify by passing the lower threshold flag ` 0 | 1k | 10k | 100k | All `"
+        schema:
+          type: string
+          default: All
+      - name: startDate
+        in: query
+        description: "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`"
+        schema:
+          type: string
+          default: '2025-05-01'
+      - name: endDate
+        in: query
+        description: "**[Optional]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`"
+        schema:
+          type: string
+          default: '2025-05-01'
+      - name: timeFormat
+        in: query
+        description: "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`"
+        schema:
+          type: string
+          default: hr
+      - name: timeInterval
+        in: query
+        required: false
+        description: "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`"
+        schema:
+          type: string
+          default: day
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                      - avgTradeSizeUsd: 2430.788381711542
+                        buyTradeCount: 248726
+                        buyVolumeCoin: 4368.776665650001
+                        close: 96495.11
+                        exchange: gdax
+                        high: 97546.99
+                        low: 94136.79
+                        netBuyVolumeCoin: 403.52652067
+                        open: 96165.11
+                        orderSizeCategoryUsd: All
+                        pair: btc_usd
+                        sellTradeCount: 207596
+                        sellVolumeCoin: 3965.2501449799993
+                        timestamp: 2025-05-01 00:00:00 000
+                        totalTradeCount: 456322
+                        totalVolumeUsd: 801971245.3019549
+                        vwap: 96235.22440469854
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            avgTradeSizeUsd:
+                              type: number
+                              example: 182850.664267192
+                              description: The average trade size for the time interval
+                            buyTradeCount:
+                              type: integer
+                              example: 30
+                              description: The buy order count. Buy and sell counts are measured by aggressor behaviour
+                            buyVolumeCoin:
+                              type:
+                              - number
+                              - 'null'
+                              example: 5430
+                              description: The buy coin (base) volume. Buy and sell are measured by aggressor behaviour
+                            close:
+                              type: number
+                              example: 94229.78
+                              description: The time interval close price
+                            exchange:
+                              type: string
+                              example: gdax
+                              description: The subject exchange used for calculating trade frequency
+                            high:
+                              type: number
+                              example: 95229.78
+                              description: The time interval high price
+                            low:
+                              type: number
+                              example: 94229.78
+                              description: The time interval low price
+                            netBuyVolumeCoin:
+                              type: number
+                              example: 403.52652067
+                              description: The buy order volume minus sell order volume in coin (base) terms. Buy and sell counts are measured by aggressor behaviour
+                            open:
+                              type: number
+                              example: 93229.78
+                              description: The time interval open price
+                            orderSizeCategoryUsd:
+                              type: string
+                              example: 100K+
+                              description: The trade size threshold in quote terms (often USD) used for the calculation
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: The subject pair
+                            sellTradeCount:
+                              type: number
+                              example: 207596
+                              description: The total amount of sell trades
+                            sellVolumeCoin:
+                              type: number
+                              example: 3965.2501449799993
+                              description: The total amount of sell volume in coin (base) terms
+                            timestamp:
+                              type: string
+                              example: 2025-04-15 00:00:00 000
+                              description: The timestamp used for the calculation
+                            totalTradeCount:
+                              type: number
+                              example: 456322
+                              description: The total number of trades
+                            totalVolumeUsd:
+                              type: number
+                              example: 549390273.3037565
+                              description: The total quote (often USD) volume used for the calculation
+                            vwap:
+                              type: number
+                              example: 105724.81842395054
+                              description: Trade-weighted average price
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Trade
+  /trade/pressure:
+    get:
+      summary: Trade Pressure
+      description: This endpoint provides net trade data (buy aggressors minus sell aggressors) to help users identify which side of the market is more aggressive. Users can also filter by "orderSizeCategoryUsd" to analyze behavior across different market segments. Other details revolve around trade count.
+      operationId: spot-analytics-trade-pressure
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange for which to retrieve listed spot instruments.
+
+          **[Examples]** ` gdax | okex | binance | binanceus`'
+        schema:
+          type: string
+          default: gdax
+      - name: pair
+        in: query
+        description: '**[Required]** The currency pair for the spot instrument.
+
+          **[Examples]** ` btc_usd | btc_usdc | eth_usd `'
+        required: true
+        schema:
+          type: string
+          default: btc_usd
+      - name: fuzzyMatch
+        in: query
+        description: '**[Required]** This parameter allows users to return either a specific pair, such as btc_usd, when set to FALSE, or return every pair related to an underlying asset, such as BTC, when set to TRUE (ex: btc_eur, btc_usd, btc_usdt, etc)'
+        required: true
+        schema:
+          type: boolean
+          default: false
+      - name: orderSizeCategoryUsd
+        in: query
+        description: "**[Optional]** Users can specify to return all aggregated trades or only trades that fit a specific size threshold (0-1k, 1k-10k, 10k-100k, 100k+, ALL).\n Users can specify by passing the lower threshold flag ` 0 | 1k | 10k | 100k | All `"
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`"
+        schema:
+          type: string
+          default: '2025-04-15'
+      - name: endDate
+        in: query
+        description: "**[Optional]** Payload only includes data up to this date (exclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`"
+        schema:
+          type: string
+          default: '2025-04-16'
+      - name: timeInterval
+        in: query
+        description: "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`"
+        schema:
+          type: string
+      - name: timeFormat
+        in: query
+        description: "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`"
+        schema:
+          type: string
+          default: hr
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                      - close: 83622.17
+                        exchange: gdax
+                        high: 86491.4
+                        low: 83592.77
+                        netBuyTradeCount: 64529
+                        netBuyVolumeCoin: 2.5356237300000544
+                        netBuyVolumeUsd: 516634.4543056437
+                        open: 84590.37
+                        orderSizeCategoryUsd: All
+                        pair: btc_usd
+                        timestamp: 2025-04-15 00:00:00 000
+                        totalVolumeCoin: 6461.770244209999
+                        totalVolumeUsd: 549390273.3037565
+                      - close: 83603.53
+                        exchange: gdax
+                        high: 83622.52
+                        low: 83593.72
+                        netBuyTradeCount: -20
+                        netBuyVolumeCoin: -2.2689633999999996
+                        netBuyVolumeUsd: -189697.15606547246
+                        open: 83610.81
+                        orderSizeCategoryUsd: All
+                        pair: btc_usd
+                        timestamp: 2025-04-16 00:00:00 000
+                        totalVolumeCoin: 5.332700320000002
+                        totalVolumeUsd: 445841.5172556046
+                      metadata:
+                        api-version: '2023-09-30'
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            close:
+                              type: number
+                              example: 83622.17
+                              description: The time interval closing price
+                            exchange:
+                              type: string
+                              example: gdax
+                              description: The subject exchange used for calculating trade pressure
+                            high:
+                              type: number
+                              example: 86491.4
+                              description: The time interval high price
+                            low:
+                              type: number
+                              example: 83592.77
+                              description: The time interval low price
+                            netBuyTradeCount:
+                              type: integer
+                              example: 64529
+                              description: The buy order count minus sell order count. Buy and sell counts are measured by aggressor behaviour
+                            netBuyVolumeCoin:
+                              type: number
+                              example: 2.5356237300000544
+                              description: The buy order volume minus sell order volume in coin (base) terms. Buy and sell counts are measured by aggressor behaviour
+                            netBuyVolumeUsd:
+                              type: number
+                              example: 516634.4543056437
+                              escription: The buy order volume minus sell order volume in USD (quote) terms. Buy and sell counts are measured by aggressor behaviour. Note some pairs may note be quoted in USD, in that case, quote currency
+                            open:
+                              type: number
+                              example: 84590.37
+                              description: The time interval open price
+                            orderSizeCategoryUsd:
+                              type: string
+                              example: All
+                              description: The trade size threshold in quote terms (often USD) used for the calculation
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: The pair used for the calculation
+                            timestamp:
+                              type: string
+                              example: 2025-04-15 00:00:00 000
+                              description: The timestamp used for the calculation
+                            totalVolumeCoin:
+                              type: number
+                              example: 6461.770244209999
+                              description: The total base (often crypto) volume used for the calculation
+                            totalVolumeUsd:
+                              type: number
+                              example: 549390273.3037565
+                              description: The total quote (often USD) volume used for the calculation
+                      metadata:
+                        type: object
+                        properties:
+                          api-version:
+                            type: string
+                            example: '2023-09-30'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: {}
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Trade
+  /trade/vwap/global:
+    get:
+      description: ''
+      operationId: get_tradevwapglobal
+      responses:
+        '200':
+          description: ''
+      parameters:
+      - name: pair
+        in: query
+        required: true
+        description: '**[Required]** The currency pair for the spot instrument.
+
+          **[Examples]** ` btc_usd | btc_usdc | eth_usd `'
+        schema:
+          type: string
+          default: btc_usdt
+      - name: exchange
+        in: query
+        required: true
+        description: '**[Required]** The exchange for which to retrieve listed spot instruments.
+
+          **[Examples]** ` gdax | okex | binance | binanceus`'
+        schema:
+          type: string
+          default: gdax
+      - name: startDate
+        in: query
+        required: true
+        description: "**[Required]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`"
+        schema:
+          type: string
+          default: '2025-02-05T00:00:00'
+      - name: endDate
+        in: query
+        required: true
+        description: "**[Required]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`"
+        schema:
+          type: string
+          default: '2025-02-05T00:00:15'
+      - name: timeInterval
+        in: query
+        required: false
+        description: "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`"
+        schema:
+          type: string
+          default: minute
+      - name: timeFormat
+        in: query
+        required: false
+        description: "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`"
+        schema:
+          type: string
+          default: hr
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Trade
+  /trade/vwap:
+    get:
+      summary: VWAP - TWAP
+      description: The VWAP (Volume Weighted Average Price) for BTC/USDT and other pairs on a crypto exchanges like Binance, is calculated every minute using trade data. VWAP is computed by taking the sum of the product of each trade’s price and size (i.e., trade price × trade volume) within the 1-minute interval, and dividing that by the total traded volume in that same interval. This provides a time-specific average price that accounts for trade size, offering a more accurate reflection of market activity than a simple average. The TWAP users the time-weighted average of the “close” price for each 1-minute candle. We use the close price because it’s the last traded price for that minute, which provides as consistent price that matches the minute’s end as closely as possible.
+      operationId: spot-analytics-vwap-twap
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                New Example:
+                  summary: New Example
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      data:
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 23:00:00 000
+                        totalVolumeUSD: 17077624.10253145
+                        twap: 105726.12016666665
+                        vwap: 105724.81842395054
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 22:00:00 000
+                        totalVolumeUSD: 29901190.234523397
+                        twap: 106000.51333333335
+                        vwap: 106044.21872588272
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 21:00:00 000
+                        totalVolumeUSD: 11549771.859701945
+                        twap: 106338.51900000003
+                        vwap: 106347.79507951892
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 20:00:00 000
+                        totalVolumeUSD: 9735085.984966466
+                        twap: 106333.61000000002
+                        vwap: 106322.86687463883
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 19:00:00 000
+                        totalVolumeUSD: 6827882.382201663
+                        twap: 106358.19366666669
+                        vwap: 106355.23768030593
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 18:00:00 000
+                        totalVolumeUSD: 9869478.716884736
+                        twap: 106311.98866666664
+                        vwap: 106300.60451925016
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 17:00:00 000
+                        totalVolumeUSD: 13292180.074134275
+                        twap: 106302.93316666667
+                        vwap: 106311.10648933919
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 16:00:00 000
+                        totalVolumeUSD: 18507205.192912556
+                        twap: 106202.98033333335
+                        vwap: 106199.19117720834
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 15:00:00 000
+                        totalVolumeUSD: 13773886.83343635
+                        twap: 106027.39916666666
+                        vwap: 106063.01158809518
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 14:00:00 000
+                        totalVolumeUSD: 8186574.408960278
+                        twap: 105791.74616666674
+                        vwap: 105765.1241644865
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 13:00:00 000
+                        totalVolumeUSD: 9083039.802297479
+                        twap: 105797.45016666663
+                        vwap: 105896.6942760686
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 12:00:00 000
+                        totalVolumeUSD: 5633478.100658474
+                        twap: 105699.21833333331
+                        vwap: 105690.20520154337
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 11:00:00 000
+                        totalVolumeUSD: 5376178.2150859935
+                        twap: 105624.55266666666
+                        vwap: 105653.57221582466
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 10:00:00 000
+                        totalVolumeUSD: 4597719.486216294
+                        twap: 105252.75383333329
+                        vwap: 105229.85623988796
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 09:00:00 000
+                        totalVolumeUSD: 7621615.302100955
+                        twap: 105310.27333333336
+                        vwap: 105300.53282667995
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 08:00:00 000
+                        totalVolumeUSD: 2806791.298968891
+                        twap: 105506.08466666666
+                        vwap: 105498.35833966617
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 07:00:00 000
+                        totalVolumeUSD: 3736490.295869334
+                        twap: 105520.44233333334
+                        vwap: 105527.339573059
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 06:00:00 000
+                        totalVolumeUSD: 3972474.0227431855
+                        twap: 105580.118
+                        vwap: 105562.43588218733
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 05:00:00 000
+                        totalVolumeUSD: 5204434.701969851
+                        twap: 105599.48866666667
+                        vwap: 105601.56391191226
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 04:00:00 000
+                        totalVolumeUSD: 4616634.252113115
+                        twap: 105597.29466666664
+                        vwap: 105588.77625246809
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 03:00:00 000
+                        totalVolumeUSD: 3315188.01312173
+                        twap: 105504.52783333334
+                        vwap: 105508.71296682941
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 02:00:00 000
+                        totalVolumeUSD: 4278195.527676096
+                        twap: 105584.38616666665
+                        vwap: 105596.48203364453
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 01:00:00 000
+                        totalVolumeUSD: 5272046.963051804
+                        twap: 105640.23016666668
+                        vwap: 105617.56397541084
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-08 00:00:00 000
+                        totalVolumeUSD: 7474428.606706913
+                        twap: 105572.94466666666
+                        vwap: 105572.19499775872
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-07 23:00:00 000
+                        totalVolumeUSD: 11810499.390065463
+                        twap: 105726.95783333332
+                        vwap: 105726.27792341512
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-07 22:00:00 000
+                        totalVolumeUSD: 11505596.556401853
+                        twap: 105875.62700000002
+                        vwap: 105884.83995103992
+                      - exchange: gdax
+                        pair: btc_usd
+                        timestamp: 2025-06-07 21:00:00 000
+                        totalVolumeUSD: 7034260.681824598
+                        twap: 105883.99866666668
+                        vwap: 105883.8105750041
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                              example: gdax
+                              description: Exchange hosting the pair for VWAP/TWAP calculations
+                            pair:
+                              type: string
+                              example: btc_usd
+                              description: Underlying pair for VWAP/TWAP calculations
+                            timestamp:
+                              type: string
+                              example: 2025-06-08 23:00:00 000
+                              description: Timestamp reflecting the VWAP/TWAP calculations
+                            totalVolumeUSD:
+                              type: number
+                              example: 17077624.10253145
+                              description: Raw total volume in quote terms (often USD)
+                            twap:
+                              type: number
+                              example: 105726.12016666665
+                              description: Time-weighted average price. Underlying time increments are in minutes
+                            vwap:
+                              type: number
+                              example: 105724.81842395054
+                              description: Trade-weighted average price
+      parameters:
+      - name: pair
+        in: query
+        required: true
+        description: '**[Required]** The currency pair for the spot instrument.
+
+          **[Examples]** ` btc_usd | btc_usdc | eth_usd `'
+        schema:
+          type: string
+          default: btc_usd
+      - name: exchange
+        in: query
+        required: true
+        description: '**[Required]** The exchange for which to retrieve listed spot instruments.
+
+          **[Examples]** ` gdax | okex | binance | binanceus`'
+        schema:
+          type: string
+          default: gdax
+      - name: startDate
+        in: query
+        required: false
+        description: "**[Optional]** Payload only includes data after this date (inclusive).\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-27`"
+        schema:
+          type: string
+          default: '2025-06-01'
+      - name: endDate
+        in: query
+        required: false
+        description: "**[Optional]** Payload only includes data up to this date.\n**[Formats]** `seconds | milliseconds | iso8601` \n**[Examples]** `1578531600 | 1578531600000 | 2025-02-28`"
+        schema:
+          type: string
+          default: '2025-06-02'
+      - name: timeInterval
+        in: query
+        required: false
+        description: "**[Optional]** Time interval of data frequency for the selected date range. \n**[Examples]** ` minute | hour | day`"
+        schema:
+          type: string
+          default: day
+      - name: timeFormat
+        in: query
+        required: false
+        description: "**[Optional]** Time format of the timestamps in the return payload. \n**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`"
+        schema:
+          type: string
+          default: hr
+      - name: orderSizeCategoryUsd
+        in: query
+        required: true
+        description: '**[Required]** Users can specify to return all aggregated trades, or trades of a specific size threshold. (0-1k, 1k-10k, 10k-100k, 100k+, ALL) by passing in the lower value of the range ` 0 | 1k | 10k | 100k | All `'
+        schema:
+          type: string
+          default: All
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Trade
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

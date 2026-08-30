@@ -1,0 +1,77 @@
+openapi: 3.2.0
+info:
+  title: Asset Reference & Classification Search API
+  version: '2'
+servers:
+- url: https://api.amberdata.com/arc
+security:
+- sec0: []
+tags:
+- name: Search
+paths:
+  /search:
+    get:
+      summary: Search Assets
+      description: Filter and identify various assets indexed by ARC.
+      operationId: asset-reference-classification-search-assets
+      parameters:
+      - name: filterBy
+        in: query
+        schema:
+          type: string
+          enum:
+          - exchange
+          - classificationTag
+          - assetName
+          - assetSymbol
+          - assetArcId
+      - name: filterValue
+        in: query
+        description: 'An appropriate value that is within the context described by `filterBy`. <br><br> **Examples**: <br><br>`filterBy=classificationTag&filterValue=Meme` <br><br>`filterBy=exchange&filterValue=poloniex`'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                      data:
+                      - assetSymbol: 2024token
+                        assetName: 2024TOKEN
+                        assetArcId: AMB:202000003171
+                        classificationTags:
+                        - Meme
+                      - assetSymbol: 3d3d
+                        assetName: 3D3D
+                        assetArcId: AMB:3D3000001344
+                        classificationTags:
+                        - Meme
+                      - assetSymbol: 3w3w
+                        assetName: 3w3w
+                        assetArcId: AMB:3W3000000000
+                        classificationTags:
+                        - Meme
+      deprecated: false
+      tags:
+      - Search
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: x-api-key
+      x-default: API_KEY
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

@@ -1,0 +1,325 @@
+openapi: 3.2.0
+info:
+  title: Pricing Prices API
+  version: '2'
+servers:
+- url: https://api.amberdata.com/markets
+security:
+- sec0: []
+tags:
+- name: Prices
+paths:
+  /prices/spot/instruments/information:
+    get:
+      summary: Pair Information
+      description: This endpoint returns all available exchange and instrument pair combinations for price data. Users can also isolate a specific instrument pair to see all exchanges that support it.
+      operationId: instrument-pair-information
+      parameters:
+      - name: instrument
+        in: query
+        description: The specific instrument pair to isolate. **[Examples]** `btc_usdc | eth_usdt`
+        required: false
+        schema:
+          type: string
+          default: btc_usdc
+      - name: timeFormat
+        in: query
+        description: Time format of timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`
+        schema:
+          type: string
+          default: hr
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        arcInstrumentId:
+                          type: string
+                          example: AMB:CAT000000002_AMB:USD000000335
+                        assetName:
+                          type: string
+                          example: Catino
+                        assetSymbol:
+                          type: string
+                          example: catino
+                        exchange:
+                          type: string
+                          example: binance
+                        instrument:
+                          type: string
+                          example: cat_usd
+                        startDate:
+                          type: string
+                          format: date-time
+                          example: 2020-09-11 20:41:00+00:00
+                        endDate:
+                          type: string
+                          format: date-time
+                          example: 2024-09-11 20:41:00+00:00
+      deprecated: false
+      tags:
+      - Prices
+  /prices/spot/assets/information:
+    get:
+      summary: Asset Information
+      description: This endpoint returns all available exchange and asset combinations for price data. Users can also isolate a specific asset to see all exchanges that support it.
+      operationId: asset-information
+      parameters:
+      - name: asset
+        in: query
+        description: The specific instrument asset to isolate. **[Examples]** `btc | eth`
+        required: false
+        schema:
+          type: string
+          default: btc
+      - name: timeFormat
+        in: query
+        description: Time format of timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`
+        schema:
+          type: string
+          default: hr
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        asset:
+                          type: string
+                          example: btc
+                        assetArcId:
+                          type: string
+                          example: AMB:BTC000000000
+                        assetName:
+                          type: string
+                          example: Bitcoin
+                        assetSymbol:
+                          type: string
+                          example: btc
+                        exchange:
+                          type: string
+                          example: gdax
+                        startDate:
+                          type: string
+                          format: date-time
+                          example: 2020-09-11 20:41:00+00:00
+                        endDate:
+                          type: string
+                          format: date-time
+                          example: 2024-09-11 20:41:00+00:00
+      deprecated: false
+      tags:
+      - Prices
+  /prices/spot/assets:
+    get:
+      summary: Asset Price
+      description: This endpoint returns the asset price. This asset price is derived from trading data across various exchanges and cross-asset pairs, weighted by trade volume.
+      operationId: asset-price-new
+      parameters:
+      - name: asset
+        in: query
+        description: The specific asset to return prices for. **[Examples]** `btc | eth`
+        required: true
+        schema:
+          type: string
+          default: btc
+      - name: timeFormat
+        in: query
+        description: Time format of timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`
+        required: false
+        schema:
+          type: string
+          default: hr
+      - name: timeInterval
+        in: query
+        description: The time interval of the timeseries in the return payload.
+        required: false
+        schema:
+          type: string
+          default: day
+      - name: startDate
+        in: query
+        description: Payload only includes data after this date (inclusive).
+        required: false
+        schema:
+          type: string
+          format: date-time
+          default: '2026-01-01'
+      - name: endDate
+        in: query
+        description: Payload only includes data up-to this date (exclusive).
+        required: false
+        schema:
+          type: string
+          format: date-time
+          default: '2026-01-11'
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        asset:
+                          type: string
+                          example: btc
+                        assetArcId:
+                          type: string
+                          example: AMB:BTC000000000
+                        priceUSD:
+                          type: decimal
+                          example: 90532.21881230843
+                        timestamp:
+                          type: string
+                          format: date-time
+                          example: 2020-09-11 20:41:00+00:00
+                        volumeAsset:
+                          type: decimal
+                          example: 1874.335247657359
+      deprecated: false
+      tags:
+      - Prices
+  /prices/spot/instruments:
+    get:
+      summary: Pair Price
+      description: This endpoint returns the pair price. This pair price is derived from trading data across various exchanges weighted by trade volume.
+      operationId: pair-price-new
+      parameters:
+      - name: instrument
+        in: query
+        description: The specific pair instrument to return prices for. **[Examples]** `btc_usdt | eth_usdc`
+        required: true
+        schema:
+          type: string
+          default: btc_usdc
+      - name: timeFormat
+        in: query
+        description: Time format of timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`
+        required: false
+        schema:
+          type: string
+          default: hr
+      - name: timeInterval
+        in: query
+        description: The time interval of the timeseries in the return payload.
+        required: false
+        schema:
+          type: string
+          default: day
+      - name: startDate
+        in: query
+        description: Payload only includes data after this date (inclusive).
+        required: false
+        schema:
+          type: string
+          format: date-time
+          default: '2026-01-01'
+      - name: endDate
+        in: query
+        description: Payload only includes data up-to this date (exclusive).
+        required: false
+        schema:
+          type: string
+          format: date-time
+          default: '2026-01-11'
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        instrument:
+                          type: string
+                          example: btc_usdc
+                        arcInstrumentId:
+                          type: string
+                          example: AMB:BTC000000000_AMB:USD000000333
+                        priceUSD:
+                          type: decimal
+                          example: 90532.21881230843
+                        timestamp:
+                          type: string
+                          format: date-time
+                          example: 2020-09-11 20:41:00+00:00
+                        volumeAsset:
+                          type: decimal
+                          example: 1874.335247657359
+      deprecated: false
+      tags:
+      - Prices
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: x-api-key
+      x-default: API_KEY
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

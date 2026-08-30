@@ -1,0 +1,136 @@
+openapi: 3.2.0
+info:
+  title: blockchain-api Contracts API
+  version: '2'
+servers:
+- url: https://api.amberdata.com/blockchains
+security:
+- sec0: []
+tags:
+- name: Contracts
+paths:
+  /contracts/{hash}:
+    get:
+      summary: Contract Details
+      description: Retrieves all the detailed information for the specified contract (ABI, bytecode, sourcecode...).
+      operationId: get-contract-details
+      parameters:
+      - name: hash
+        in: path
+        description: The address of the contract
+        schema:
+          type: string
+          default: '0x06012c8cf97bead5deae237070f9587f8e7a266d'
+        required: true
+      - name: x-amberdata-blockchain-id
+        in: header
+        description: The id of the blockchain
+        schema:
+          type: string
+          enum:
+          - ethereum-mainnet
+          default: ethereum-mainnet
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      abi:
+                        type: array
+                        description: Ethereum smart contract ABI
+                        items:
+                          type: object
+                          properties:
+                            constant:
+                              type: boolean
+                              example: true
+                            inputs:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                    example: _interfaceID
+                                  type:
+                                    type: string
+                                    example: bytes4
+                            name:
+                              type: string
+                              example: supportsInterface
+                            outputs:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                    example: ''
+                                  type:
+                                    type: string
+                                    example: bool
+                            payable:
+                              type: boolean
+                              example: false
+                            stateMutability:
+                              type: string
+                              example: view
+                            type:
+                              type: string
+                              example: function
+                      bytecode:
+                        type: string
+                        description: Hex string containing the compiled contract bytecode
+                        example: 0x60806040...
+                      contractName:
+                        type: string
+                        example: CryptoKitties
+                      source:
+                        type: string
+                        description: Solidity source code
+                        example: "pragma solidity ^0.4.11;\n\ncontract Example {\n    // Contract body...\n}\n"
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+        '401':
+          description: '401'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: Unauthorized
+        '404':
+          description: '404'
+          content:
+            text/plain:
+              examples:
+                Address Not Found:
+                  value: Unknown address or address is not a contract
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Contracts
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

@@ -1,0 +1,223 @@
+openapi: 3.2.0
+info:
+  title: Asset Reference & Classification Updates API
+  version: '2'
+servers:
+- url: https://api.amberdata.com/arc
+security:
+- sec0: []
+tags:
+- name: Updates
+paths:
+  /updates:
+    get:
+      summary: Updates
+      description: Retrieve the **latest** updates of assets and instruments added to ARC.
+      operationId: asset-reference-classifications-list-updates
+      parameters:
+      - name: groupBy
+        in: query
+        schema:
+          type: string
+          enum:
+          - assets
+          - instruments
+          default: assets
+      - name: timeFormat
+        in: query
+        description: Represent timestamps in epoch milliseconds or human readable ISO format.
+        schema:
+          type: string
+          enum:
+          - iso8601
+      - name: updatesSince
+        in: query
+        description: Look back cutoff for updates made to the ARC dataset, represented in ISO format.<br><br>`P1D` represents 24 hrs (1 day) and `P7D` represents 7 days.
+        schema:
+          type: string
+          enum:
+          - P1D
+          - P7D
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                groupBy=instruments:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                      data:
+                        updateType: instruments
+                        updates:
+                        - arcInstrumentId: AMB:GRA000000002_AMB:USD000000335
+                          arcInstrument: grass_usdt
+                          baseAssetSymbol: grass
+                          nativeInstrument: GRASSUSDT
+                          exchange: bitget
+                          assetName: Grass
+                          assetArcId: AMB:GRA000000002
+                          quoteArcId: AMB:USD000000335
+                          instrumentType: spot
+                        - arcInstrumentId: AMB:GRA000000002_AMB:USD000000335
+                          arcInstrument: grass_usdt
+                          baseAssetSymbol: grass
+                          nativeInstrument: GRASSUSDT
+                          exchange: bybit
+                          assetName: Grass
+                          assetArcId: AMB:GRA000000002
+                          quoteArcId: AMB:USD000000335
+                          instrumentType: spot
+                        - arcInstrumentId: AMB:GRA000000002_AMB:USD000000335
+                          arcInstrument: grass_usdt
+                          baseAssetSymbol: grass
+                          nativeInstrument: GRASS/USDT
+                          exchange: huobi
+                          assetName: Grass
+                          assetArcId: AMB:GRA000000002
+                          quoteArcId: AMB:USD000000335
+                          instrumentType: spot
+                        - arcInstrumentId: AMB:GRA000000002_AMB:USD000000335
+                          arcInstrument: grass_usdt
+                          baseAssetSymbol: grass
+                          nativeInstrument: GRASSUSDT
+                          exchange: mexc
+                          assetName: Grass
+                          assetArcId: AMB:GRA000000002
+                          quoteArcId: AMB:USD000000335
+                          instrumentType: spot
+                        - arcInstrumentId: AMB:GRA000000002_AMB:USD000000335
+                          arcInstrument: grass_usdt
+                          baseAssetSymbol: grass
+                          nativeInstrument: GRASS_USDT
+                          exchange: poloniex
+                          assetName: Grass
+                          assetArcId: AMB:GRA000000002
+                          quoteArcId: AMB:USD000000335
+                          instrumentType: spot
+                groupBy=assets:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                      data:
+                        updateType: assets
+                        updates:
+                        - assetSymbol: grass
+              schema:
+                oneOf:
+                - title: groupBy=instruments
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next: {}
+                        data:
+                          type: object
+                          properties:
+                            updateType:
+                              type: string
+                              example: instruments
+                            updates:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  arcInstrumentId:
+                                    type: string
+                                    example: AMB:GRA000000002_AMB:USD000000335
+                                  arcInstrument:
+                                    type: string
+                                    example: grass_usdt
+                                  baseAssetSymbol:
+                                    type: string
+                                    example: grass
+                                  nativeInstrument:
+                                    type: string
+                                    example: GRASSUSDT
+                                  exchange:
+                                    type: string
+                                    example: bitget
+                                  assetName:
+                                    type: string
+                                    example: Grass
+                                  assetArcId:
+                                    type: string
+                                    example: AMB:GRA000000002
+                                  quoteArcId:
+                                    type: string
+                                    example: AMB:USD000000335
+                                  instrumentType:
+                                    type: string
+                                    example: spot
+                - title: groupBy=assets
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next: {}
+                        data:
+                          type: object
+                          properties:
+                            updateType:
+                              type: string
+                              example: assets
+                            updates:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  assetSymbol:
+                                    type: string
+                                    example: grass
+      deprecated: false
+      tags:
+      - Updates
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: x-api-key
+      x-default: API_KEY
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

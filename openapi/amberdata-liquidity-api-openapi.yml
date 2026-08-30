@@ -1,0 +1,113 @@
+openapi: 3.2.0
+info:
+  title: Defi Market Liquidity API
+  version: '2'
+servers:
+- url: https://api.amberdata.com/market/defi
+security:
+- sec0: []
+tags:
+- name: Liquidity
+paths:
+  /liquidity/information/:
+    get:
+      summary: Information
+      description: Retrieves information about supported exchange-pairs for liquidity.
+      operationId: defi-liquidity-information
+      parameters:
+      - name: exchange
+        in: query
+        description: 'Only return data for the specified exchange(s) (comma separated). Example: uniswapv2'
+        schema:
+          type: string
+      - name: includeMetadata
+        in: query
+        description: '**[Optional]** Include data for asset pair and pool information.<BR/>**[Defaults]** `false* | true`<BR/>**NOTE** If using this without specifying an exchange the endpoint will not return data.'
+        schema:
+          type: boolean
+          default: true
+      - name: includeDates
+        in: query
+        description: '**[Optional]** Include date ranges for each record.<BR/>**[Defaults]** `false* | true`<BR/>**NOTE** includeMetadata is required for includeDates to return a valid response.<BR/>'
+        schema:
+          type: boolean
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: The number of records per page.
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      curvev1:
+                        type: object
+                        properties:
+                          RC_bBADGER_5_DAI_2021_6_30_3Crv:
+                            type: object
+                            example: {}
+                          RC_WETH_1400_DAI_2021_7_31_3Crv:
+                            type: object
+                            example: {}
+                          RC_BDI_150_DAI_2021_6_30_3Crv:
+                            type: object
+                            example: {}
+                          ycDAI_ycUSDC_ycUSDT_PAX:
+                            type: object
+                            example: {}
+                          MBTC_crvRenWSBTC:
+                            type: object
+                            example: {}
+                          BBTC_crvRenWSBTC:
+                            type: object
+                            example: {}
+                          RC_DEFI5_60_DAI_2021_5_31_3Crv:
+                            type: object
+                            example: {}
+                          xCOVER_3Crv:
+                            type: object
+                            example: {}
+                          EURS_sEUR:
+                            type: object
+                            example: {}
+                          USDN_3Crv:
+                            type: object
+                            example: {}
+      deprecated: false
+      tags:
+      - Liquidity
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      x-default: API_KEY
+      name: x-api-key
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

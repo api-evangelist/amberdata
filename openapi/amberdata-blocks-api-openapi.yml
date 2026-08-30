@@ -1,0 +1,198 @@
+openapi: 3.2.0
+info:
+  title: blockchain-api Blocks API
+  version: '2'
+servers:
+- url: https://api.amberdata.com/blockchains
+security:
+- sec0: []
+tags:
+- name: Blocks
+paths:
+  /blocks/metrics/historical:
+    get:
+      summary: Blocks Metrics Historical
+      description: Get metrics for historical confirmed blocks for a given blockchain.
+      operationId: blocks-metrics-historical
+      parameters:
+      - name: startDate
+        in: query
+        description: '**[Optional]** Filter by data after this date.'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Filter by data before this date.'
+        schema:
+          type: string
+          format: date-time
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+          default: iso
+      - name: x-amberdata-blockchain-id
+        in: header
+        description: The id of the blockchain
+        schema:
+          type: string
+          enum:
+          - bitcoin-mainnet
+          - bitcoin-abc-mainnet
+          - ethereum-mainnet
+          - litecoin-mainnet
+          default: ethereum-mainnet
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      records:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            timestamp:
+                              type: string
+                              format: date-time
+                              example: '2021-08-10T00:00:00.000Z'
+                            difficultyAverage:
+                              type: string
+                              example: '7699414348610995.0000'
+                            difficultyMaximum:
+                              type: string
+                              example: '7699414348610995'
+                            difficultyMinimum:
+                              type: string
+                              example: '7699414348610995'
+                            durationAverage:
+                              type: string
+                              example: '41000.000000000000'
+                            durationMaximum:
+                              type: string
+                              example: '41000'
+                            durationMinimum:
+                              type: string
+                              example: '41000'
+                            hashrateAverage:
+                              type: integer
+                              example: 187790593868561
+                            baseFeeAverage:
+                              type: string
+                              example: '30258142234.00000000'
+                            baseFeeMaximum:
+                              type: string
+                              example: '30258142234'
+                            baseFeeMinimum:
+                              type: string
+                              example: '30258142234'
+                            baseFeeTotal:
+                              type: string
+                              example: '30258142234'
+                            burntFeeAverage:
+                              type: string
+                              example: '351805579933266838'
+                            burntFeeMaximum:
+                              type: string
+                              example: '351805579933266838'
+                            burntFeeMinimum:
+                              type: string
+                              example: '351805579933266838'
+                            burntFeeTotal:
+                              type: string
+                              example: '351805579933266838'
+                            issuanceAverage:
+                              type: string
+                              example: '2000000000000000000'
+                            issuanceMaximum:
+                              type: string
+                              example: '2000000000000000000'
+                            issuanceMinimum:
+                              type: string
+                              example: '2000000000000000000'
+                            issuanceTotal:
+                              type: string
+                              example: '2000000000000000000'
+                            issuanceUnit:
+                              type: string
+                              example: wei
+                            sizeAverage:
+                              type: string
+                              example: '42380.000000000000'
+                            sizeMaximum:
+                              type: integer
+                              example: 42380
+                            sizeMinimum:
+                              type: integer
+                              example: 42380
+                            sizeTotal:
+                              type: string
+                              example: '42380'
+                            transactionFeeAverage:
+                              type: string
+                              example: '8191431157883818.0000'
+                            transactionFeeMaximum:
+                              type: string
+                              example: '8191431157883818'
+                            transactionFeeMinimum:
+                              type: string
+                              example: '8191431157883818'
+                            transactionFeeTotal:
+                              type: string
+                              example: '8191431157883818'
+                            transactionsAverage:
+                              type: string
+                              example: '93.0000000000000000'
+                            transactionsMaximum:
+                              type: integer
+                              example: 93
+                            transactionsMinimum:
+                              type: integer
+                              example: 93
+                            transactionsTotal:
+                              type: string
+                              example: '93'
+                      totalRecords:
+                        type: integer
+                        example: 365
+        '401':
+          description: '401'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: Unauthorized
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Blocks
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

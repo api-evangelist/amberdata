@@ -1,0 +1,829 @@
+openapi: 3.2.0
+info:
+  title: blockchain-api Tokens API
+  version: '2'
+servers:
+- url: https://api.amberdata.com/blockchains
+security:
+- sec0: []
+tags:
+- name: Tokens
+paths:
+  /tokens/{hash}/supplies/historical:
+    get:
+      summary: Token Supplies by Address Historical
+      description: 'Retrieves the historical token supplies (and derivatives) for the specified address.
+
+
+        Note: This endpoint returns a max of 6 months of historical data. In order to get more than 6 months you must use the `startDate`  & `endDate` parameters to move the time frame window to get the next ***n*** days/months of data.'
+      operationId: get-historical-token-supply
+      parameters:
+      - name: hash
+        in: path
+        description: The address for which to retrieve token supply. (example is MKR)
+        schema:
+          type: string
+          default: '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2'
+        required: true
+      - name: startDate
+        in: query
+        description: Filter by token prices after this date - note that the interval can not exceed 6 months (d), or 30 days (h).
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Filter by token prices before this date - note that the interval can not exceed 6 months (d), or 30 days (h).
+        schema:
+          type: string
+          format: date-time
+      - name: timeInterval
+        in: query
+        description: 'The time interval to return the historical data in: by day (days) or by hour (hours).'
+        schema:
+          type: string
+          default: days
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+          default: ms
+      - name: x-amberdata-blockchain-id
+        in: header
+        description: The id of the blockchain
+        schema:
+          type: string
+          enum:
+          - ethereum-mainnet
+          - polygon-mainnet
+          default: ethereum-mainnet
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          columns:
+                            type: array
+                            items:
+                              type: string
+                            example:
+                            - timestamp
+                            - numHolders
+                            - circulatingSupply
+                            - totalSupply
+                          startDate:
+                            type: integer
+                            format: int64
+                            example: 1573257600000
+                          endDate:
+                            type: integer
+                            format: int64
+                            example: 1575849600000
+                          decimals:
+                            type: string
+                            example: '18'
+                      data:
+                        type: array
+                        description: Array of rows, each row matches metadata.columns
+                        items:
+                          type: array
+                          minItems: 4
+                          maxItems: 4
+                          items:
+                            oneOf:
+                            - type: integer
+                            - type: string
+                          example:
+                          - 1573257600000
+                          - 15460
+                          - '1000000000000000000000000'
+                          - '1000000000000000000000000'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Tokens
+  /tokens/metrics/{symbol}/historical:
+    get:
+      summary: Token Metrics Historical
+      description: Retrieves the historical metrics for the specified ERC token symbol.
+      operationId: token-metrics-historical
+      parameters:
+      - name: symbol
+        in: path
+        description: The symbol of the token contract.
+        schema:
+          type: string
+          default: link
+        required: true
+      - name: startDate
+        in: query
+        description: Filter by data after this date.
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Filter by data before this date.
+        schema:
+          type: string
+          format: date-time
+      - name: timeInterval
+        in: query
+        description: 'The time interval to return the historical data in: by day (d), by hour (h) or by minute (m)'
+        schema:
+          type: string
+          default: h
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+          default: iso
+      - name: x-amberdata-blockchain-id
+        in: header
+        description: The id of the blockchain
+        schema:
+          type: string
+          enum:
+          - ethereum-mainnet
+          default: ethereum-mainnet
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      records:
+                        type: array
+                        description: Array of daily transfer metrics
+                        items:
+                          type: object
+                          properties:
+                            timestamp:
+                              type: string
+                              format: date-time
+                              example: '2020-05-31T00:00:00.000Z'
+                            priceUSD:
+                              type: string
+                              example: '1.5779'
+                            transfersTotal:
+                              type: string
+                              example: '1708'
+                            transferedValueTotal:
+                              type: string
+                              example: '3776546.97171975838093617'
+                            transferedValueAverage:
+                              type: string
+                              example: '2211.093074777376101251'
+                            transferedValueTotalUSD:
+                              type: string
+                              example: '5959161.3814'
+                            transferedValueAverageUSD:
+                              type: string
+                              example: '3488.9704'
+                      totalRecords:
+                        type: integer
+                        example: 365
+        '401':
+          description: '401'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: Unauthorized
+        '404':
+          description: '404'
+          content:
+            text/plain:
+              examples:
+                Address Not Found:
+                  value: Unknown address or address is not a contract
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Tokens
+  /tokens/{hash}/transfers:
+    get:
+      summary: Token Transfers - By Token Address
+      description: Retrieves all token transfers involving the specified token address.
+      operationId: get-token-transfers
+      parameters:
+      - name: hash
+        in: path
+        description: The address to retrieve the token transfers for. (example is USDC)
+        schema:
+          type: string
+          default: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'
+        required: true
+      - name: amount
+        in: query
+        description: Filter by token transfers which value is equal to this amount.
+        schema:
+          type: integer
+          format: int32
+      - name: amountGt
+        in: query
+        description: Filter by token transfers which value is greater than this amount.
+        schema:
+          type: integer
+          format: int32
+      - name: amountGte
+        in: query
+        description: Filter by token transfers which value is greater than or equal to this amount.
+        schema:
+          type: integer
+          format: int32
+      - name: amountLt
+        in: query
+        description: Filter by token transfers which value is less than this amount.
+        schema:
+          type: integer
+          format: int32
+      - name: amountLte
+        in: query
+        description: Filter by token transfers which value is less than or equal to this amount
+        schema:
+          type: integer
+          format: int32
+      - name: blockNumber
+        in: query
+        description: Filter by token transfers with this block number.
+        schema:
+          type: integer
+          format: int32
+      - name: decodeTransactions
+        in: query
+        description: Decodes transactions input via known ABIs.
+        schema:
+          type: boolean
+          default: false
+      - name: startDate
+        in: query
+        description: Filter by token transfers which happened after this date.
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: Filter by token transfers which happened before this date.
+        schema:
+          type: string
+          format: date-time
+      - name: tokenAddress
+        in: query
+        description: Filter by token transfers for this token.
+        schema:
+          type: string
+      - name: transactionHash
+        in: query
+        description: Filter by token transfers for this transaction hash.
+        schema:
+          type: string
+      - name: validationMethod
+        in: query
+        description: 'The validation method to be added to the response: `none`, `basic`, `full`. Default: `none`. <a href="https://docs.amberdata.io/reference#section-validation-method">More Details.</a>'
+        schema:
+          type: string
+      - name: includePrice
+        in: query
+        description: 'Indicates whether or not to include price data with the results. Options: true, false. <a href="https://docs.amberdata.io/reference#section-include-price">More Details.</a>'
+        schema:
+          type: boolean
+      - name: currency
+        in: query
+        description: 'The currency of the price information. Options: usd, btc. Only used in conjunction with includePrice. <a href="https://docs.amberdata.io/reference#section-currency">More Details.</a>'
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: The page number to return.
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        description: Number of records per page.
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      - name: x-amberdata-blockchain-id
+        in: header
+        description: The id of the blockchain
+        schema:
+          type: string
+          enum:
+          - ethereum-mainnet
+          - polygon-mainnet
+          default: ethereum-mainnet
+      - name: direction
+        in: query
+        description: The order in which to return the results (ascending or descending).  By default, records are returned in descending order, so the most recent records are returned first.
+        schema:
+          type: string
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+          default: iso
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      totalRecords:
+                        type: integer
+                        example: 69918
+                        default: 0
+                      records:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            transactionHash:
+                              type: string
+                              example: '0x281d6478dee6d20da7e9293991cc68085532a915760f23d77ffa9923edb523de'
+                            blockHash:
+                              type: string
+                              example: '0x5b24ad74b3b6b7adb83e0ba4996726db5b91392a925bb54462c1d9833e921a4f'
+                            blockNumber:
+                              type: string
+                              example: '7252428'
+                            tokenAddress:
+                              type: string
+                              example: '0x26fb86579e371c7aedc461b2ddef0a8628c93d3b'
+                            amount:
+                              type: string
+                              example: '20000000000000000000'
+                            timestamp:
+                              type: integer
+                              example: 1550825454000
+                              default: 0
+                            timestampNanoseconds:
+                              type: integer
+                              example: 0
+                              default: 0
+                            logIndex:
+                              type: integer
+                              example: 163
+                              default: 0
+                            blockchainId:
+                              type: string
+                              example: 1c9c969065fcd1cf
+                            to:
+                              type: array
+                              items:
+                                type: string
+                                example: '0x06012c8cf97bead5deae237070f9587f8e7a266d'
+                            from:
+                              type: string
+                              example: '0x41efb7f2fa8e27a5c089082e8a61f15f748f7e0b'
+                            decimals:
+                              type: string
+                              example: '18'
+                            name:
+                              type: string
+                              example: BORA
+                            symbol:
+                              type: string
+                              example: BORA
+                            isERC20:
+                              type: boolean
+                              example: true
+                              default: true
+                            isERC721:
+                              type: boolean
+                              example: false
+                              default: true
+                            isERC777:
+                              type: boolean
+                              example: false
+                              default: true
+                            isERC884:
+                              type: boolean
+                              example: false
+                              default: true
+                            isERC998:
+                              type: boolean
+                              example: false
+                              default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Tokens
+  /tokens/{hash}/holders/latest:
+    get:
+      summary: Current Holders - By Token Address
+      description: Retrieves the token holders for the specified address.
+      operationId: get-token-holders
+      parameters:
+      - name: hash
+        in: path
+        description: The address to retrieve token holders for
+        schema:
+          type: string
+          default: '0x6982508145454Ce325dDbE47a25d4ec3d2311933'
+        required: true
+      - name: numTokens
+        in: query
+        description: Filter by token holders who own the specified amount of tokens.
+        schema:
+          type: integer
+          format: int32
+      - name: numTokensGt
+        in: query
+        description: Filter by token holders who own more than the specified amount of tokens
+        schema:
+          type: integer
+          format: int32
+      - name: numTokensGte
+        in: query
+        description: Filter by token holders who own more than or equal to the specified amount of tokens
+        schema:
+          type: integer
+          format: int32
+      - name: numTokensLt
+        in: query
+        description: Fitler by token holders who own less than the specified amount of tokens
+        schema:
+          type: integer
+          format: int32
+      - name: numTokensLte
+        in: query
+        description: Filter by token holders who own less than or equal to the specified amount of tokens
+        schema:
+          type: integer
+          format: int32
+      - name: timestampGt
+        in: query
+        description: Filter by token holders who started holding the token after the specified date
+        schema:
+          type: string
+          format: date-time
+      - name: timestampGte
+        in: query
+        description: Filter by token holders who started holding the token after or equal to the specified date
+        schema:
+          type: string
+          format: date-time
+      - name: timestampLt
+        in: query
+        description: Filter by token holders who started holding the token before the specified date
+        schema:
+          type: string
+          format: date-time
+      - name: timestampLte
+        in: query
+        description: Filter by token holders who started holding the token before or equal to the specified date
+        schema:
+          type: string
+          format: date-time
+      - name: tokenAddress
+        in: query
+        description: Filter by token holders for this token (mandatory)
+        schema:
+          type: string
+      - name: includePrice
+        in: query
+        description: 'Indicates whether or not to include price data with the results. Options: true, false. <a href="https://docs.amberdata.io/reference#section-include-price">More Details.</a>'
+        schema:
+          type: boolean
+      - name: currency
+        in: query
+        description: The currency of the price information (usd or btc.) - only used in conjunction with includePrice. <a href="https://docs.amberdata.io/reference#section-currency">More Details.</a>
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: The page number to return.
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        description: Number of records per page
+        schema:
+          type: integer
+          format: int32
+          default: 50
+      - name: x-amberdata-blockchain-id
+        in: header
+        description: The id of the blockchain
+        schema:
+          type: string
+          enum:
+          - ethereum-mainnet
+          - polygon-mainnet
+          default: ethereum-mainnet
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.<BR/>**[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      records:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            tokenAddress:
+                              type: string
+                              example: '0x06012c8cf97bead5deae237070f9587f8e7a266d'
+                            holderAddress:
+                              type: string
+                              example: '0xb1690c08e213a35ed9bab7b318de14420fb57d8c'
+                            timestamp:
+                              type: integer
+                              example: 1575920861000
+                              default: 0
+                            holderFirstTimestamp:
+                              type: string
+                              example: '2017-11-23T18:44:21.000Z'
+                            numTokens:
+                              type: string
+                              example: '209736'
+                            decimals:
+                              type: string
+                              example: '0'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Tokens
+  /tokens/metrics/{symbol}/latest:
+    get:
+      summary: Metrics Latest
+      description: Retrieves the latest metrics for the specified ERC token symbol.
+      operationId: token-metrics-latest
+      parameters:
+      - name: symbol
+        in: path
+        description: The symbol of the token contract.
+        schema:
+          type: string
+          default: link
+        required: true
+      - name: x-amberdata-blockchain-id
+        in: header
+        description: The id of the blockchain
+        schema:
+          type: string
+          enum:
+          - ethereum-mainnet
+          default: ethereum-mainnet
+      - name: timeFrame
+        in: query
+        description: 'The time frame to return the historical data in: by day (1d, 2d, ..., all), by hour (1h, 2h, ..., 72h) or by minute (1m, 2m, ..., 360m)'
+        schema:
+          type: string
+          default: 30d
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      priceUSD:
+                        type: string
+                        example: '418.9650'
+                      transfersTotal:
+                        type: string
+                        example: '126'
+                      transferedValueTotal:
+                        type: string
+                        example: '1107.33716042075807677'
+                      transferedValueAverage:
+                        type: string
+                        example: '8.788390162069508546'
+                      transferedValueTotalUSD:
+                        type: string
+                        example: '463935.5134'
+                      transferedValueAverageUSD:
+                        type: string
+                        example: '3682.0279'
+        '401':
+          description: '401'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: Unauthorized
+        '404':
+          description: '404'
+          content:
+            text/plain:
+              examples:
+                Address Not Found:
+                  value: Unknown address or address is not a contract
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Tokens
+  /tokens/{hash}/supplies/latest:
+    get:
+      summary: Latest
+      description: Retrieves the latest token supplies (and derivatives) for the specified address.
+      operationId: get-token-supply-latest
+      parameters:
+      - name: hash
+        in: path
+        description: The address for which to retrieve token holders. (example is MKR)
+        schema:
+          type: string
+          default: '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2'
+        required: true
+      - name: x-amberdata-blockchain-id
+        in: header
+        description: The id of the blockchain
+        schema:
+          type: string
+          enum:
+          - ethereum-mainnet
+          - polygon-mainnet
+          default: ethereum-mainnet
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      decimals:
+                        type: string
+                        example: '18'
+                      circulatingSupply:
+                        type: string
+                        example: '1000001.0000081356704131'
+                      totalBurned:
+                        type: string
+                        example: '1000000'
+                      totalMinted:
+                        type: string
+                        example: '2000000'
+                      totalSupply:
+                        type: string
+                        example: '1000000'
+                      totalTransfers:
+                        type: string
+                        example: '577586'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Tokens
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

@@ -319,18 +319,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/amberdata-liquidity-api-openapi.yml
-- aid: amberdata:amberdata-marketcap-api
-  name: Amberdata Marketcap API
-  description: The Marketcap API from Amberdata — 1 operation(s) for marketcap.
-  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
-  tags:
-  - Market Cap
-  tags_raw:
-  - Marketcap
-  properties:
-  - type: OpenAPI
-    url: openapi/amberdata-marketcap-api-openapi.yml
 - aid: amberdata:amberdata-metrics-api
   name: Amberdata Metrics API
   description: The Metrics API from Amberdata — 7 operation(s) for metrics.
@@ -445,6 +433,16 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/amberdata-volumes-api-openapi.yml
+- aid: amberdata:amberdata-market-cap-api
+  name: Amberdata Market Cap API
+  description: The Market Cap API from Amberdata — 1 operation(s) for market cap.
+  humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
+  baseURL: wss://ws.web3api.io
+  tags:
+  - Market Cap
+  properties:
+  - type: OpenAPI
+    url: openapi/amberdata-market-cap-api-openapi.yml
 common:
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/amberdata/overview

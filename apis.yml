@@ -295,6 +295,8 @@ apis:
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
   baseURL: wss://ws.web3api.io
   tags:
+  - Exchange
+  tags_raw:
   - Exchanges
   properties:
   - type: OpenAPI

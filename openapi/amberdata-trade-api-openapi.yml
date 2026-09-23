@@ -691,6 +691,8 @@ paths:
       - ApiKeyAuth: []
       tags:
       - Trade
+      summary: Get tradevwapglobal
+      x-summary-source: derived
   /trade/vwap:
     get:
       summary: VWAP - TWAP

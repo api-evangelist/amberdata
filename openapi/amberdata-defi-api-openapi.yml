@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Amberdata DeFi API
+  title: Amberdata De Fi API
   description: Amberdata's institutional-grade digital asset and blockchain data API. Provides spot market data (prices, OHLCV, tickers, trades, order books), derivatives across futures and options (funding rates, open interest, liquidations, implied volatility, Greeks), DeFi (DEX and lending), and on-chain blockchain data (blocks, transactions, addresses, tokens). Every request requires the x-api-key header. An optional api-version header selects a dated API version.
   termsOfService: https://www.amberdata.io/terms-of-service
   contact:

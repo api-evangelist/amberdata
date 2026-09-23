@@ -1,21 +1,3702 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Amberdata DeFi Futures API
-  description: Amberdata's institutional-grade digital asset and blockchain data API. Provides spot market data (prices, OHLCV, tickers, trades, order books), derivatives across futures and options (funding rates, open interest, liquidations, implied volatility, Greeks), DeFi (DEX and lending), and on-chain blockchain data (blocks, transactions, addresses, tokens). Every request requires the x-api-key header. An optional api-version header selects a dated API version.
-  termsOfService: https://www.amberdata.io/terms-of-service
-  contact:
-    name: Amberdata Support
-    url: https://www.amberdata.io/contact
+  title: Amberdata Futures API
   version: '1.0'
+  description: 'Operations tagged Futures across 2 of this provider''s published API definitions: amberdata-market-openapi.yaml, amberdata-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://api.amberdata.com/markets
 - url: https://api.amberdata.com
   description: Amberdata REST API
-security:
-- apiKeyAuth: []
 tags:
 - name: Futures
-  description: Futures market data and analytics.
 paths:
+  /futures/exchanges/information:
+    get:
+      summary: Instruments
+      description: Provides detailed metadata and trading activity timelines for futures instruments across exchanges, including funding rates, liquidations, long/short ratios, OHLCV, open interest, order book snapshots and events, ticker updates, and trade history.
+      operationId: futures-exchanges-pairs
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** Only return data for the given exchange(s) (comma separated)'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones. **[Defaults]** `True | False*`.'
+        schema:
+          type: boolean
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: '**[Optional]** The number of records per page (only available when `includeInactive=true`).'
+        schema:
+          type: integer
+          format: int32
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/futures/exchanges/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: binance
+                        instrument: 1000BONKUSDC
+                        fundingRate:
+                          startDate: 1714521600000
+                          endDate: 1722369601000
+                        liquidation:
+                          startDate: 1714639265467
+                          endDate: 1722370187666
+                        longShortRatio:
+                          startDate: 1714636800000
+                          endDate: 1722369600000
+                        ohlcv:
+                          startDate: 1714608000000
+                          endDate: 1722211200000
+                        openInterest:
+                          startDate: 1714635667663
+                          endDate: 1722373127413
+                        orderBookSnapshot:
+                          startDate: 1714635300000
+                          endDate: 1722373440667
+                        orderBookEvent:
+                          startDate: 1714635333956
+                          endDate: 1722373199545
+                        ticker:
+                          startDate: 1714635454117
+                          endDate: 1722373199496
+                        trade:
+                          startDate: 1714635667663
+                          endDate: 1722373188111
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              example: https://api.amberdata.com/markets/futures/exchanges/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              exchange:
+                                type: string
+                                example: binance
+                              instrument:
+                                type: string
+                                example: 1000BONKUSDC
+                              fundingRate:
+                                type: object
+                                properties:
+                                  startDate:
+                                    type: integer
+                                    example: 1714521600000
+                                    default: 0
+                                  endDate:
+                                    type: integer
+                                    example: 1722369601000
+                                    default: 0
+                              liquidation:
+                                type: object
+                                properties:
+                                  startDate:
+                                    type: integer
+                                    example: 1714639265467
+                                    default: 0
+                                  endDate:
+                                    type: integer
+                                    example: 1722370187666
+                                    default: 0
+                              longShortRatio:
+                                type: object
+                                properties:
+                                  startDate:
+                                    type: integer
+                                    example: 1714636800000
+                                    default: 0
+                                  endDate:
+                                    type: integer
+                                    example: 1722369600000
+                                    default: 0
+                              ohlcv:
+                                type: object
+                                properties:
+                                  startDate:
+                                    type: integer
+                                    example: 1714608000000
+                                    default: 0
+                                  endDate:
+                                    type: integer
+                                    example: 1722211200000
+                                    default: 0
+                              openInterest:
+                                type: object
+                                properties:
+                                  startDate:
+                                    type: integer
+                                    example: 1714635667663
+                                    default: 0
+                                  endDate:
+                                    type: integer
+                                    example: 1722373127413
+                                    default: 0
+                              orderBookSnapshot:
+                                type: object
+                                properties:
+                                  startDate:
+                                    type: integer
+                                    example: 1714635300000
+                                    default: 0
+                                  endDate:
+                                    type: integer
+                                    example: 1722373440667
+                                    default: 0
+                              orderBookEvent:
+                                type: object
+                                properties:
+                                  startDate:
+                                    type: integer
+                                    example: 1714635333956
+                                    default: 0
+                                  endDate:
+                                    type: integer
+                                    example: 1722373199545
+                                    default: 0
+                              ticker:
+                                type: object
+                                properties:
+                                  startDate:
+                                    type: integer
+                                    example: 1714635454117
+                                    default: 0
+                                  endDate:
+                                    type: integer
+                                    example: 1722373199496
+                                    default: 0
+                              trade:
+                                type: object
+                                properties:
+                                  startDate:
+                                    type: integer
+                                    example: 1714635667663
+                                    default: 0
+                                  endDate:
+                                    type: integer
+                                    example: 1722373188111
+                                    default: 0
+      deprecated: false
+      tags:
+      - Futures
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/exchanges/reference:
+    get:
+      summary: Reference
+      description: Provides comprehensive reference data for futures instruments across exchanges, including details on base and quote symbols, price and volume limits, precision, contract terms, and trading availability.
+      operationId: futures-exchanges-reference
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** Only return data for the given exchange(s) (comma separated)'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones. **[Defaults]** `True | False*`.'
+        schema:
+          type: boolean
+      - name: size
+        in: query
+        description: '**[Optional]** The number of records per page (only available when `includeInactive=true`).'
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes instruments which have expiration after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes instruments which have expiration before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: includeOriginalReference
+        in: query
+        description: '**[Optional]** If true, endpoint returns originalReference. **[Defaults]** `True | False*`.'
+        schema:
+          type: boolean
+      - name: underlying
+        in: query
+        description: '**[Optional]** Filter for instruments whose underlying matches the value given.   **[Examples]** btc | ETH'
+        schema:
+          type: string
+      - name: expiration
+        in: query
+        description: '**[Optional]** Filter for instruments that expire on the specified date.   **[Example]** 2024-08-01'
+        schema:
+          type: string
+          format: date-time
+      - name: contractType
+        in: query
+        description: '**[Optional]** Filter for instruments that match the contract type specified.   **[Examples]** yearly | quarterly | monthly | weekly | daily | perpetual | prediction'
+        schema:
+          type: string
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/futures/exchanges/reference?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yA8gE5gDmkZASksUk0tAIkylGpFiIkAVQjk4AB3kB7JliQIAogA8oAC3QRWSckVIVqIHAFskAMRVX0WIiCtgYMMJShKICEzTEDk4uAFbkviA08uhGRACMNORgAF5CAKwADJkAvkA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: binance
+                        instrument: 1000BONKUSDC
+                        baseSymbol: 1000BONK
+                        quoteSymbol: USDC
+                        market: futures
+                        exchangeEnabled: true
+                        limitsPriceMin: 1.0e-06
+                        limitsPriceMax: 200
+                        limitsVolumeMin: 1
+                        limitsVolumeMax: 10000000
+                        limitsMarketMin: 1
+                        limitsMarketMax: 2000000
+                        limitsLeverageMin: null
+                        limitsLeverageMax: null
+                        limitsLeverageSuperMax: null
+                        limitsCostMin: null
+                        limitsCostMax: null
+                        precisionPrice: 1.0e-06
+                        precisionVolume: 1
+                        precisionBase: 1.0e-08
+                        precisionQuote: 1.0e-08
+                        listingTimestamp: null
+                        contractUnderlying: 1000BONK
+                        contractExpirationTimestamp: null
+                        contractPeriod: perpetual
+                        contractSize: null
+                        contractSettleType: linear
+                        contractSettleSymbol: null
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              example: https://api.amberdata.com/markets/futures/exchanges/reference?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yA8gE5gDmkZASksUk0tAIkylGpFiIkAVQjk4AB3kB7JliQIAogA8oAC3QRWSckVIVqIHAFskAMRVX0WIiCtgYMMJShKICEzTEDk4uAFbkviA08uhGRACMNORgAF5CAKwADJkAvkA
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              exchange:
+                                type: string
+                                example: binance
+                              instrument:
+                                type: string
+                                example: 1000BONKUSDC
+                              baseSymbol:
+                                type: string
+                                example: 1000BONK
+                              quoteSymbol:
+                                type: string
+                                example: USDC
+                              market:
+                                type: string
+                                example: futures
+                              exchangeEnabled:
+                                type: boolean
+                                example: true
+                                default: true
+                              limitsPriceMin:
+                                type: number
+                                example: 1.0e-06
+                                default: 0
+                              limitsPriceMax:
+                                type: integer
+                                example: 200
+                                default: 0
+                              limitsVolumeMin:
+                                type: integer
+                                example: 1
+                                default: 0
+                              limitsVolumeMax:
+                                type: integer
+                                example: 10000000
+                                default: 0
+                              limitsMarketMin:
+                                type: integer
+                                example: 1
+                                default: 0
+                              limitsMarketMax:
+                                type: integer
+                                example: 2000000
+                                default: 0
+                              limitsLeverageMin: {}
+                              limitsLeverageMax: {}
+                              limitsLeverageSuperMax: {}
+                              limitsCostMin: {}
+                              limitsCostMax: {}
+                              precisionPrice:
+                                type: number
+                                example: 1.0e-06
+                                default: 0
+                              precisionVolume:
+                                type: integer
+                                example: 1
+                                default: 0
+                              precisionBase:
+                                type: number
+                                example: 1.0e-08
+                                default: 0
+                              precisionQuote:
+                                type: number
+                                example: 1.0e-08
+                                default: 0
+                              listingTimestamp: {}
+                              contractUnderlying:
+                                type: string
+                                example: 1000BONK
+                              contractExpirationTimestamp: {}
+                              contractPeriod:
+                                type: string
+                                example: perpetual
+                              contractSize: {}
+                              contractSettleType:
+                                type: string
+                                example: linear
+                              contractSettleSymbol: {}
+      deprecated: false
+      tags:
+      - Futures
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/funding-rates/information:
+    get:
+      summary: Information
+      description: Delivers information on funding rate periods for futures instruments across exchanges, including start and end dates for available funding data.
+      operationId: futures-funding-rates-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones.'
+        schema:
+          type: boolean
+          default: false
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/futures/funding-rates/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: binance
+                        instrument: 1000BONKUSDC
+                        startDate: 1714521600000
+                        endDate: 1717603201000
+                      - exchange: binance
+                        instrument: 1000BONKUSDT
+                        startDate: 1700662262000
+                        endDate: 1717603441001
+                      - exchange: binance
+                        instrument: 1000FLOKIUSDT
+                        startDate: 1683388800000
+                        endDate: 1717603441001
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                            instrument:
+                              type: string
+                            startDate:
+                              type: integer
+                            endDate:
+                              type: integer
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/funding-rates/{instrument}:
+    get:
+      summary: Historical
+      description: Provides historical funding rate data for futures instruments, including timestamps, actual and projected rates, and details on upcoming funding times across exchanges.
+      operationId: futures-funding-rates-historical
+      parameters:
+      - name: exchange
+        in: query
+        description: The exchange for which data should be retrieved. Only **1** exchange is allowed.
+        required: true
+        schema:
+          type: string
+          default: binance
+      - name: instrument
+        in: path
+        description: The futures instrument for which data will be retrieved.
+        schema:
+          type: string
+          default: BTCUSD_PERP
+        required: true
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: rateType
+        in: query
+        description: '**`applied`**: Returns only applied funding rates (historical, confirmed rates) **`predicted`**: Returns only predicted funding rates (future, expected rates) **`both`** (default): Returns both predicted and applied funding rates'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTCUSD_PERP
+                        exchange: binance
+                        exchangeTimestamp: 1717545600000
+                        exchangeTimestampNanoseconds: 0
+                        fundingInterval: null
+                        fundingRate: 0.0001
+                        nextFundingRate: null
+                        nextFundingTime: null
+                        isActualFundingRate: true
+                      - instrument: BTCUSD_PERP
+                        exchange: binance
+                        exchangeTimestamp: 1717545601000
+                        exchangeTimestampNanoseconds: 0
+                        fundingInterval: null
+                        fundingRate: 0.0001
+                        nextFundingRate: null
+                        nextFundingTime: 1717574400000
+                        isActualFundingRate: false
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            instrument:
+                              type: string
+                            exchange:
+                              type: string
+                            exchangeTimestamp:
+                              type: integer
+                            exchangeTimestampNanoseconds:
+                              type: integer
+                            fundingInterval:
+                              type: number
+                            fundingRate:
+                              type: number
+                            nextFundingRate:
+                              type: number
+                            nextFundingTime:
+                              type: number
+                            isActualFundingRate:
+                              type: boolean
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/batch-funding-rates/{exchange}:
+    get:
+      summary: Batch Historical
+      description: Returns batched historical funding rate data for futures instruments within a specified date range, including timestamps, actual funding rates, and projected rates across exchanges.
+      operationId: batch-historical-ent
+      parameters:
+      - name: exchange
+        in: path
+        description: The exchange for which to retrieve the most current data.
+        schema:
+          type: string
+          default: binance
+        required: true
+      - name: instruments
+        in: query
+        description: '**[Required]** The instrument(s) for which to retrieve the most current data (comma separated).  **[Maximum]** 50 instruments'
+        required: true
+        schema:
+          type: string
+          default: BTCUSDT,ETHUSDT
+      - name: rateType
+        in: query
+        description: '**`applied`** (default): Returns only applied funding rates (historical, confirmed rates) **`predicted`**: Returns only predicted funding rates (future, expected rates)'
+        required: true
+        schema:
+          type: string
+          default: applied
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeInterval
+        in: query
+        description: '**[Optional]** Time interval. **[Defaults]** `minutes | hours | days*`'
+        schema:
+          type: string
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTCUSDT
+                        exchangeTimestamp: 1735948800000
+                        fundingInterval: null
+                        fundingRate: 7.98e-06
+                        nextFundingRate: null
+                        nextFundingTime: null
+                        isActualFundingRate: true
+                      - instrument: ETHUSDT
+                        exchangeTimestamp: 1735948800000
+                        fundingInterval: null
+                        fundingRate: 0.0001
+                        nextFundingRate: null
+                        nextFundingTime: null
+                        isActualFundingRate: true
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            instrument:
+                              type: string
+                            exchangeTimestamp:
+                              type: integer
+                            fundingInterval:
+                              type: number
+                            fundingRate:
+                              type: number
+                            nextFundingRate:
+                              type: number
+                            nextFundingTime:
+                              type: number
+                            isActualFundingRate:
+                              type: boolean
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/insurance-fund/information:
+    get:
+      summary: Information
+      description: Provides details on insurance fund data availability for futures instruments, including exchanges, underlying assets, and date ranges for historical coverage.
+      operationId: futures-insurance-funds-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones.'
+        schema:
+          type: boolean
+          default: false
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the response.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: bitmex
+                        instrument: USDt
+                        underlying: USDt
+                        startDate: 1636113600000
+                        endDate: 1717588800000
+                      - exchange: bitmex
+                        instrument: XBt
+                        underlying: XBt
+                        startDate: 1456660800000
+                        endDate: 1717588800000
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                            instrument:
+                              type: string
+                            underlying:
+                              type: string
+                            startDate:
+                              type: integer
+                            endDate:
+                              type: integer
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/insurance-fund/{instrument}:
+    get:
+      summary: Historical
+      description: Delivers historical data on insurance fund balances for futures instruments, including timestamps, fund amounts, and underlying assets across exchanges.
+      operationId: futures-insurance-funds-historical
+      parameters:
+      - name: instrument
+        in: path
+        description: The futures instrument for which data will be retrieved.
+        schema:
+          type: string
+          default: BTC-USDT
+        required: true
+      - name: exchange
+        in: query
+        description: The exchange for which data should be retrieved. Only **1** exchange is allowed.
+        required: true
+        schema:
+          type: string
+          default: huobi
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTC-USDT
+                        exchange: huobi
+                        exchangeTimestamp: 1717574400000
+                        exchangeTimestampNanoseconds: 0
+                        fund: 242292335.5251998
+                        underlying: BTC-USDT
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                    default: 0
+                  title:
+                    type: string
+                    example: OK
+                  description:
+                    type: string
+                    example: Successful request
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next: {}
+                          api-version:
+                            type: string
+                            example: '2023-09-30'
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            instrument:
+                              type: string
+                              example: BTC-USDT
+                            exchange:
+                              type: string
+                              example: huobi
+                            exchangeTimestamp:
+                              type: integer
+                              example: 1717574400000
+                              default: 0
+                            exchangeTimestampNanoseconds:
+                              type: integer
+                              example: 0
+                              default: 0
+                            fund:
+                              type: number
+                              example: 242292335.5251998
+                              default: 0
+                            underlying:
+                              type: string
+                              example: BTC-USDT
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/liquidations/information:
+    get:
+      summary: Information
+      description: Provides available date ranges for liquidation data on futures instruments across exchanges, including start and end timestamps for each instrument.
+      operationId: futures-liquidations-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones.'
+        schema:
+          type: boolean
+          default: false
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the response.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/futures/liquidations/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: binance
+                        instrument: 1000BONKUSDC
+                        startDate: 1714639265467
+                        endDate: 1717596728610
+                      - exchange: binance
+                        instrument: 1000BONKUSDT
+                        startDate: 1700661767295
+                        endDate: 1717603600409
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                            instrument:
+                              type: string
+                            startDate:
+                              type: integer
+                            endDate:
+                              type: integer
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/liquidations/{instrument}:
+    get:
+      summary: Historical
+      description: Provides historical liquidation data for futures instruments, including timestamps, order details, price, volume, and position type for each liquidation event across exchanges.
+      operationId: futures-liquidations-historical
+      parameters:
+      - name: instrument
+        in: path
+        description: The futures instrument for which data will be retrieved.
+        schema:
+          type: string
+          default: BTCUSDT
+        required: true
+      - name: exchange
+        in: query
+        description: The exchange for which data should be retrieved. Only **1** exchange is allowed.
+        required: true
+        schema:
+          type: string
+          default: binance
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/futures/liquidations/BTCUSDT?cursor=N4IgpgHgxgFghgOwOZhALhAIwJYMVVAGhCgFcAnAZwHtz0FSAbR4ygFznLYBE43U0ARgDsIgKxiADAE5hADkEAmOcTAIAJr37oRIgGySALIKWHF04riiNS6sAFUElUgAcXtfuoCi0eMjCU6ABmcIyUYMRs2AC2YABitNF86CDR2MzY4VDUGoHEQYnJGABWNAggrB4A0mAAnim6whIy8kpyAPqS7Th4CATtAEIAKgDC9gDK3EPtogDMgmIAdAudi5JGIAC%2BQA
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTCUSDT
+                        exchange: binance
+                        exchangeTimestamp: 1717517743430
+                        exchangeTimestampNanoseconds: 0
+                        action: null
+                        orderId: null
+                        side: BUY
+                        status: FILLED
+                        timeInForce: IOC
+                        type: LIMIT
+                        price: 70913.39
+                        volume: 0.002
+                        unit: base_asset
+                        positionType: SHORT
+                      - instrument: BTCUSDT
+                        exchange: binance
+                        exchangeTimestamp: 1717517764608
+                        exchangeTimestampNanoseconds: 0
+                        action: null
+                        orderId: null
+                        side: BUY
+                        status: FILLED
+                        timeInForce: IOC
+                        type: LIMIT
+                        price: 70929.32
+                        volume: 0.002
+                        unit: base_asset
+                        positionType: SHORT
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            instrument:
+                              type: string
+                            exchange:
+                              type: string
+                            exchangeTimestamp:
+                              type: integer
+                            exchangeTimestampNanoseconds:
+                              type: integer
+                            action:
+                              type: string
+                            orderId:
+                              type: string
+                            side:
+                              type: string
+                            status:
+                              type: string
+                            timeInForce:
+                              type: string
+                            type:
+                              type: string
+                            price:
+                              type: number
+                            volume:
+                              type: number
+                            unit:
+                              type: string
+                            positionType:
+                              type: string
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/long-short-ratio/information:
+    get:
+      summary: Information
+      description: Provides available date ranges for long/short ratio data on futures instruments across exchanges, detailing the start and end dates for each instrument.
+      operationId: futures-long-short-ratio-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones.'
+        schema:
+          type: boolean
+          default: false
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/futures/long-short-ratio/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAW1QReXXGSKgMKoiBEc4XGTXIBHGADl0ewgaNcQZyzZUAFeFy33DxmACeziDIpHAwWEQATABsAOwAHAAsAAxpaTRK6ILR8cnpGSAwHBwA1gBGmKXuSFxgHAjRSQC%2BNMpIAGLcWZH2SmAwMGCUUBwQCKYgxN3ovSAAVuRjwazoUkQAjGZgAF4EhACsac1AA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: binance
+                        instrument: 1000BONKUSDC
+                        startDate: 1714636800000
+                        endDate: 1717603200000
+                      - exchange: binance
+                        instrument: 1000BONKUSDT
+                        startDate: 1700665200000
+                        endDate: 1717603200000
+                      - exchange: binance
+                        instrument: 1000FLOKIUSDT
+                        startDate: 1683392400000
+                        endDate: 1717603200000
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                            instrument:
+                              type: string
+                            startDate:
+                              type: integer
+                            endDate:
+                              type: integer
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/long-short-ratio/{instrument}:
+    get:
+      summary: Historical
+      description: Provides historical long/short ratio data for futures instruments, including timestamps, long and short account distributions, and ratio values across exchanges.
+      operationId: futures-long-short-ratio-historical
+      parameters:
+      - name: instrument
+        in: path
+        description: The futures instrument for which data will be retrieved.
+        schema:
+          type: string
+          default: BTCUSDT
+        required: true
+      - name: exchange
+        in: query
+        description: The exchange for which data should be retrieved. Only **1** exchange is allowed.
+        required: true
+        schema:
+          type: string
+          default: binance
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: timeInterval
+        in: query
+        description: '**[Optional]** Time interval to aggregate the historical data to.'
+        schema:
+          type: string
+          enum:
+          - minutes
+          - hours
+          - days
+          default: hours
+      - name: metricType
+        in: query
+        description: '**[Optional]** Specifies the long/short ratio metric to retrieve.
+
+
+          | Value | Description |
+
+          |---|---|
+
+          | `default` | Long/short ratio across **all** accounts on the exchange. Available for all supported exchanges. |
+
+          | `topTraderPositions` | Long/short ratio by **position size** (dollar-weighted) among the top 20% of traders by margin balance. Reflects where the largest capital is allocated. |
+
+          | `topTraderAccounts` | Long/short ratio by **account count** among top traders — each account counted once regardless of position size. Reflects how many large traders are bullish vs bearish. |
+
+
+          **[Supported exchanges]** `topTraderPositions` and `topTraderAccounts` are only supported for `binance`. Requests using these values with other exchanges will return an empty response.
+
+          '
+        schema:
+          type: string
+          enum:
+          - default
+          - topTraderPositions
+          - topTraderAccounts
+          default: default
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTCUSDT
+                        exchange: binance
+                        exchangeTimestamp: 1714928400000
+                        exchangeTimestampNanoseconds: 0
+                        period: 1
+                        longAccount: 0.519
+                        shortAccount: 0.481
+                        ratio: 1.079
+                      - instrument: BTCUSDT
+                        exchange: binance
+                        exchangeTimestamp: 1714932000000
+                        exchangeTimestampNanoseconds: 0
+                        period: 1
+                        longAccount: 0.5179
+                        shortAccount: 0.4821
+                        ratio: 1.0743
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            instrument:
+                              type: string
+                            exchange:
+                              type: string
+                            exchangeTimestamp:
+                              type: integer
+                            exchangeTimestampNanoseconds:
+                              type: integer
+                            period:
+                              type: integer
+                              description: 'The number of `timeInterval` units per data point.
+
+
+                                **Example:**
+
+                                - `timeInterval=minutes`, `period=5` → 5-minute buckets
+
+                                - `timeInterval=hours`, `period=1` → 1-hour buckets
+
+                                - `timeInterval=days`, `period=1` → 1-day buckets
+
+                                '
+                            longAccount:
+                              type: number
+                            shortAccount:
+                              type: number
+                            ratio:
+                              type: number
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/ohlcv/information:
+    get:
+      summary: Information
+      description: Provides available date ranges for OHLCV (Open, High, Low, Close, Volume) data on futures instruments across exchanges, including start and end dates for each instrument.
+      operationId: futures-ohlcv-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones. **[Defaults]** `True | False*`.'
+        schema:
+          type: boolean
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: timeInterval
+        in: query
+        description: '**[Optional]** Time interval. **[Defaults]** `minutes* | hours | days`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/futures/ohlcv/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAW1QReXXGSKgMKoiAToAnjJrkAjjABy6PYQPGQZyzZUAFeFy33DYGEacDJFI4GCwiAGYARgA2ACY4gBYABlTUmiV0QSIYiKTEgA409JAYDg4AawAjTAq3JC4wDgQiOOSAXxplJAAxbkzw%2ByU-GDBKKA4IBFMQYn70QZAAK3JJwNZ0KSIoszAALwJCAFZU9qA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: binance
+                        instrument: 1000BONKUSDC
+                        startDate: 1714608000000
+                        endDate: 1722297600000
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              example: https://api.amberdata.com/markets/futures/ohlcv/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAW1QReXXGSKgMKoiAToAnjJrkAjjABy6PYQPGQZyzZUAFeFy33DYGEacDJFI4GCwiAGYARgA2ACY4gBYABlTUmiV0QSIYiKTEgA409JAYDg4AawAjTAq3JC4wDgQiOOSAXxplJAAxbkzw%2ByU-GDBKKA4IBFMQYn70QZAAK3JJwNZ0KSIoszAALwJCAFZU9qA
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              exchange:
+                                type: string
+                                example: binance
+                              instrument:
+                                type: string
+                                example: 1000BONKUSDC
+                              startDate:
+                                type: integer
+                                example: 1714608000000
+                                default: 0
+                              endDate:
+                                type: integer
+                                example: 1722297600000
+                                default: 0
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/ohlcv/{instrument}:
+    get:
+      summary: Historical
+      description: Delivers historical OHLCV (Open, High, Low, Close, Volume) data for futures instruments, including timestamps, price levels, and trading volume across exchanges.
+      operationId: futures-ohlcv-historical
+      parameters:
+      - name: instrument
+        in: path
+        description: The instrument for which to retrieve the requested data.
+        schema:
+          type: string
+          default: BTCUSD_PERP
+        required: true
+      - name: exchange
+        in: query
+        description: '**[Default]** All available exchanges.'
+        required: true
+        schema:
+          type: string
+          default: binance
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeInterval
+        in: query
+        description: '**[Optional]** Time interval. **[Defaults]** `minutes | hours | days*`'
+        schema:
+          type: string
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: 1000BONKUSDC
+                        exchange: binance
+                        exchangeTimestamp: 1714608000000
+                        open: 0.023
+                        high: 0.026
+                        low: 0.022392
+                        close: 0.02531
+                        volume: 210710456
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next: {}
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              instrument:
+                                type: string
+                                example: 1000BONKUSDC
+                              exchange:
+                                type: string
+                                example: binance
+                              exchangeTimestamp:
+                                type: integer
+                                example: 1714608000000
+                                default: 0
+                              open:
+                                type: number
+                                example: 0.023
+                                default: 0
+                              high:
+                                type: number
+                                example: 0.026
+                                default: 0
+                              low:
+                                type: number
+                                example: 0.022392
+                                default: 0
+                              close:
+                                type: number
+                                example: 0.02531
+                                default: 0
+                              volume:
+                                type: integer
+                                example: 210710456
+                                default: 0
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/batch-ohlcv/{exchange}:
+    get:
+      summary: Batch Historical
+      description: Provides batched historical OHLCV (Open, High, Low, Close, Volume) data for multiple futures instruments within a specified date range, including timestamps, price levels, and trading volumes across exchanges.
+      operationId: ohlcv-ond
+      parameters:
+      - name: exchange
+        in: path
+        description: The exchange for which to retrieve the most current data.
+        schema:
+          type: string
+          default: binance
+        required: true
+      - name: instruments
+        in: query
+        description: '**[Required]** The instrument(s) for which to retrieve the most current data (comma separated).  **[Maximum]** 50 instruments'
+        required: true
+        schema:
+          type: string
+          default: BTCUSDT,ETHUSDT
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeInterval
+        in: query
+        description: '**[Optional]** Time interval. **[Defaults]** `minutes | hours | days*`'
+        schema:
+          type: string
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTCUSDT
+                        exchangeTimestamp: 1735948800000
+                        open: 98145.7
+                        high: 98760.9
+                        low: 97438.2
+                        close: 98173.2
+                        volume: 71914.634
+                      - instrument: ETHUSDT
+                        exchangeTimestamp: 1735948800000
+                        open: 3607.9
+                        high: 3670
+                        low: 3570.66
+                        close: 3655.99
+                        volume: 1729182.603
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            instrument:
+                              type: string
+                            exchangeTimestamp:
+                              type: integer
+                            open:
+                              type: number
+                            high:
+                              type: number
+                            low:
+                              type: number
+                            close:
+                              type: number
+                            volume:
+                              type: number
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/open-interest/information:
+    get:
+      summary: Information
+      description: Provides available date ranges for open interest data on futures instruments across exchanges, including start and end dates for each instrument.
+      operationId: futures-open-interest-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones.'
+        schema:
+          type: boolean
+          default: false
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/futures/open-interest/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: binance
+                        instrument: 1000BONKUSDC
+                        startDate: 1714635667663
+                        endDate: 1717604023595
+                      - exchange: binance
+                        instrument: 1000BONKUSDT
+                        startDate: 1700661777079
+                        endDate: 1717604038239
+                      - exchange: binance
+                        instrument: 1000FLOKIUSDT
+                        startDate: 1683391318193
+                        endDate: 1717604038880
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                            instrument:
+                              type: string
+                            startDate:
+                              type: integer
+                            endDate:
+                              type: integer
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/open-interest/{instrument}:
+    get:
+      summary: Historical
+      description: Provides historical open interest data for futures instruments, including timestamps, open interest values, and contract types across exchanges.
+      operationId: futures-open-interest-historical
+      parameters:
+      - name: instrument
+        in: path
+        description: The futures instrument for which data will be retrieved.
+        schema:
+          type: string
+          default: BTCUSD_PERP
+        required: true
+      - name: exchange
+        in: query
+        description: The exchange for which data should be retrieved. Only **1** exchange is allowed.
+        required: true
+        schema:
+          type: string
+          default: binance
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/futures/open-interest/BTCUSD_PERP?cursor=N4IgpgHgxgFghgOwOZhALhAIwJYMVVAGhCgFcAnAZwHtz0FSAbR4ygFznLYBE43U0ARgDsIgKwAWABwAGCQCYAzMLHEwCACa9%2B6ESIBscidJmDFxXFEakNYAKoJKpAA7Pa-DQFFo8ZGEroAGZwjJRgxGzYALZgAGK0UXzoIFHYzNhhUNSaAcSBCUkYAFY0CCCs7gDSYACeyXoqJgrKYgD6Mq04eAgErQBCACoAwnYAytytAAqeAEqTIAC%2BQA
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTCUSD_PERP
+                        exchange: binance
+                        exchangeTimestamp: 1717518065771
+                        exchangeTimestampNanoseconds: 0
+                        value: 16862174
+                        type: PERPETUAL
+                      - instrument: BTCUSD_PERP
+                        exchange: binance
+                        exchangeTimestamp: 1717518157220
+                        exchangeTimestampNanoseconds: 0
+                        value: 16865368
+                        type: PERPETUAL
+                      - instrument: BTCUSD_PERP
+                        exchange: binance
+                        exchangeTimestamp: 1717518218262
+                        exchangeTimestampNanoseconds: 0
+                        value: 16866686
+                        type: PERPETUAL
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            instrument:
+                              type: string
+                            exchange:
+                              type: string
+                            exchangeTimestamp:
+                              type: integer
+                            exchangeTimestampNanoseconds:
+                              type: integer
+                            value:
+                              type: integer
+                            type:
+                              type: string
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/batch-open-interest/{exchange}:
+    get:
+      summary: Batch Historical
+      description: Provides batched historical open interest data for multiple futures instruments within a specified date range, including timestamps, open interest values, and contract types across exchanges.
+      operationId: batch-historical-ent-1
+      parameters:
+      - name: exchange
+        in: path
+        description: The exchange for which to retrieve the most current data.
+        schema:
+          type: string
+          default: binance
+        required: true
+      - name: instruments
+        in: query
+        description: '**[Required]** The instrument(s) for which to retrieve the most current data (comma separated).  **[Maximum]** 50 instruments'
+        required: true
+        schema:
+          type: string
+          default: BTCUSDT,ETHUSDT
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeInterval
+        in: query
+        description: '**[Optional]** Time interval. **[Defaults]** `minutes | hours | days*`'
+        schema:
+          type: string
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTCUSDT
+                        exchangeTimestamp: 1735948800000
+                        value: 87453.638
+                        type: null
+                      - instrument: ETHUSDT
+                        exchangeTimestamp: 1735948800000
+                        value: 1631146.816
+                        type: null
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            instrument:
+                              type: string
+                            exchangeTimestamp:
+                              type: integer
+                            value:
+                              type: number
+                            type:
+                              type: string
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/order-book-snapshots/information:
+    get:
+      summary: Information
+      description: Provides available date ranges for order book snapshot data on futures instruments across exchanges, including start and end timestamps for each instrument.
+      operationId: futures-order-books-information
+      parameters:
+      - name: exchange
+        in: query
+        description: 'The exchange(s) for which to retrieve futures order book data. Example: exchange=bitfinex,bitstamp'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If `true`, endpoint returns all instruments, including delisted ones.'
+        schema:
+          type: boolean
+          default: false
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/futures/order-book-snapshots/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: binance
+                        instrument: 1000BONKUSDC
+                        startDate: 1714635300000
+                        endDate: 1717604340194
+                      - exchange: binance
+                        instrument: 1000BONKUSDT
+                        startDate: 1700662020000
+                        endDate: 1717604340185
+                      - exchange: binance
+                        instrument: 1000FLOKIUSDT
+                        startDate: 1683390900000
+                        endDate: 1717604340574
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                            instrument:
+                              type: string
+                            startDate:
+                              type: integer
+                            endDate:
+                              type: integer
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/order-book-events/{instrument}:
+    get:
+      summary: Events/Updates Historical
+      description: Provides historical event updates for futures order books, including bid and ask price levels, volumes, and sequence information for each update across exchanges.
+      operationId: futures-order-books-events-historical
+      parameters:
+      - name: instrument
+        in: path
+        description: The futures instrument for which data will be retrieved.
+        schema:
+          type: string
+          default: BTCUSD_PERP
+        required: true
+      - name: exchange
+        in: query
+        description: The exchange for which data should be retrieved. Only **1** exchange is allowed.
+        required: true
+        schema:
+          type: string
+          default: binance
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive).  **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive).  **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the response.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        requestedStartDate: 2024-06-04 16:22:24 224
+                        requestedEndDate: 2024-06-05 16:22:24 224
+                        returnedStartDate: 2024-06-04 16:22:24 231
+                        returnedEndDate: 2024-06-04 16:23:12 414
+                        next: https://api.amberdata.com/markets/futures/order-book-events/BTCUSD_PERP?cursor=N4IgxgrgTgzg9lEAuAdhANugNCGAXAQyjwBEC8BTZARgHY6BWagDmoE4AmAFmq5wpQATMpRr1aANgAMXBly4duOPAEsAthQBiCNeWQgAFhF0oAShQKCCAI3RVl6igEkUlKADcC6ZKBQEN%2BgCeFrAgODAAjugAcv5USCDBRGG4UbEaAAro0F5BIeiBKYIUAGYEGHjIzBJcUnV1OLoAHsgSAMzcXMz1DSDocHAA1tYEYIMZFFAqcILIaJgAvjglOnoJAFbwKCkUTWAGBCgA5vEg1ip%2BKGD2IBdg2cUAqigwEAAObwiUggCiewfHCgwZBldAwCjhL4AaQohQSdEYLHY3F4AH0pKjzpdrqi2NIOExmN02gw2Ki8FAIBRUQAhAAqAGFHgBlEiojI-UwZEALIA
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTCUSD_PERP
+                        exchange: binance
+                        exchangeTimestamp: 2024-06-04 16:23:12 414
+                        exchangeTimestampNanoseconds: 0
+                        sequence: '960251880359'
+                        ask:
+                        - price: 70960.6
+                          volume: 75
+                          numOrders: null
+                        - price: 70973.5
+                          volume: 137
+                          numOrders: null
+                        - price: 70975.4
+                          volume: 7914
+                          numOrders: null
+                        - price: 70976
+                          volume: 0
+                          numOrders: null
+                        - price: 70976.6
+                          volume: 20
+                          numOrders: null
+                        bid:
+                        - price: 70907
+                          volume: 51
+                          numOrders: null
+                        - price: 70914
+                          volume: 50
+                          numOrders: null
+                        - price: 70928.5
+                          volume: 25
+                          numOrders: null
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          requestedStartDate:
+                            type: string
+                          requestedEndDate:
+                            type: string
+                          returnedStartDate:
+                            type: string
+                          returnedEndDate:
+                            type: string
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            instrument:
+                              type: string
+                            exchange:
+                              type: string
+                            exchangeTimestamp:
+                              type: string
+                            exchangeTimestampNanoseconds:
+                              type: integer
+                            sequence:
+                              type: string
+                            ask:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  price:
+                                    type: number
+                                  volume:
+                                    type: integer
+                                  numOrders:
+                                    type: string
+                            bid:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  price:
+                                    type: integer
+                                  volume:
+                                    type: integer
+                                  numOrders:
+                                    type: string
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/order-book-snapshots/{instrument}:
+    get:
+      summary: Snapshots Historical
+      description: Provides historical snapshots of futures order books, capturing bid and ask price levels, volumes, and sequence details at specific timestamps across exchanges.
+      operationId: futures-order-book-snapshots-historical
+      parameters:
+      - name: instrument
+        in: path
+        description: The instrument for which to retrieve the requested data.
+        schema:
+          type: string
+          default: BTCUSD_PERP
+        required: true
+      - name: exchange
+        in: query
+        description: The exchange for which data should be retrieved. Only **1** exchange is allowed.
+        required: true
+        schema:
+          type: string
+          default: binance
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Defaults]** Beginning of the current minute (max time range is 10 minutes).'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Defaults]** Ten minutes after the beginning of the current hour (max time range is 10 minutes).'
+        schema:
+          type: string
+          format: date-time
+      - name: timestamp
+        in: query
+        description: '**[Optional]** The timestamp at which to return the order book information (closest match, lower or equal to the timestamp specified).'
+        schema:
+          type: string
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: maxLevel
+        in: query
+        description: The number of order book levels that should be returned.
+        schema:
+          type: integer
+          format: int32
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        requestedStartDate: 1717518243690
+                        requestedEndDate: 1717604643690
+                        returnedStartDate: 1717518300000
+                        returnedEndDate: 1717521900000
+                        next: https://api.amberdata.com/markets/futures/order-book-snapshots/BTCUSD_PERP?cursor=N4IgpgHgxgFghgOwOZhALhAIwJYMVVAGhCgFcAnAZwHtz0FSAbR4ygFznLYBE43U0ARgDsIgKwAmQQE4ADPPnEwCACa9%2B6ESIBssgCza9AZm1zibbAFswAMVqW%2B6EJezNslMFGqrKIc1bAASQR%2BcgA3OEZ0UDxrJwBPME5fVgBHRgA5ODiMRM4-EEp0rOsABUYKSISk8kZ4gpUwADM4JjZ0AA5DBUVnOAh0bSMJPT0OntliRmpqAGtMOChZ0rBybGoVeiZGAF9iJvtHDAArGgQCi2t2bIAHLeZiBwgAGTAwsCi0BgeQXCgKxoAVQQlFINxutH4KgAotB4MgwL40C1GB5WJCANJgeoYLTCSQyCYAfVkRJweAQBCJ0l0RlkUiM0mE2jERLY5FIYCJACEACoAYUBAGVuETStCAEqlEA7IA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: binance
+                        instrument: BTCUSD_PERP
+                        timestamp: 1717518300000
+                        exchangeTimestamp: 1717518300711
+                        exchangeTimestampNanoseconds: 0
+                        sequence: '960253327911'
+                        currentFunding: null
+                        ask:
+                        - price: 70895.9
+                          volume: 7086
+                          numOrders: null
+                        - price: 70896
+                          volume: 48
+                          numOrders: null
+                        bid:
+                        - price: 70895.8
+                          volume: 2097
+                          numOrders: null
+                        - price: 70895
+                          volume: 1
+                          numOrders: null
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          requestedStartDate:
+                            type: integer
+                          requestedEndDate:
+                            type: integer
+                          returnedStartDate:
+                            type: integer
+                          returnedEndDate:
+                            type: integer
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                            instrument:
+                              type: string
+                            timestamp:
+                              type: integer
+                            exchangeTimestamp:
+                              type: integer
+                            exchangeTimestampNanoseconds:
+                              type: integer
+                            sequence:
+                              type: string
+                            currentFunding:
+                              type: string
+                            ask:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  price:
+                                    type: number
+                                  volume:
+                                    type: integer
+                                  numOrders:
+                                    type: string
+                            bid:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  price:
+                                    type: number
+                                  volume:
+                                    type: integer
+                                  numOrders:
+                                    type: string
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/tickers/information:
+    get:
+      summary: Information
+      description: Provides available date ranges for ticker data on futures instruments across exchanges, including start and end timestamps for each instrument.
+      operationId: futures-tickers-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones.'
+        schema:
+          type: boolean
+          default: false
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the response.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/futures/tickers/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: binance
+                        instrument: 1000BONKUSDC
+                        startDate: 1714635454117
+                        endDate: 1717604699662
+                      - exchange: binance
+                        instrument: 1000BONKUSDT
+                        startDate: 1700662147849
+                        endDate: 1717604699631
+                      - exchange: binance
+                        instrument: 1000FLOKIUSDT
+                        startDate: 1683391092423
+                        endDate: 1717604699817
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                            instrument:
+                              type: string
+                            startDate:
+                              type: integer
+                            endDate:
+                              type: integer
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/tickers/{instrument}:
+    get:
+      summary: Historical
+      description: Provides historical ticker data for futures instruments, including bid, ask, mid prices, volumes, mark and index prices, and sequence information across exchanges.
+      operationId: futures-tickers-historical
+      parameters:
+      - name: exchange
+        in: query
+        description: The exchange for which data should be retrieved. Only **1** exchange is allowed.
+        required: true
+        schema:
+          type: string
+          default: binance
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Defaults]** Beginning of the current hour (max time range is 1 hour). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Defaults]** One hour after the beginning of the current hour (max time range is 1 hour). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: instrument
+        in: path
+        description: The futures instrument for which data will be retrieved.
+        schema:
+          type: string
+          default: BTCUSDT
+        required: true
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/futures/tickers/BTCUSDT?cursor=N4IgpgHgxgFghgOwOZhALhAIwJYMVVAGhCgFcAnAZwHtz0FSAbR4ygFznLYBE43U0ARgDsIgKyCAHABZhY6ZMnEwCACa9%2B6ESIBsABgXCAzGJnFcURqVVgAqgkqkADk9r9VAUWjxkYSugAzOEZKMGI2bABbMAAxWki%2BdBBI7GZsUKhqNX9iAPjEjAArGgQQVjcAaTAATyTtOSlZeUUAfT0WnDwEAhbZIyM5MQAmAz0BloAhABUAYVsAZW4pkABfIA
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTCUSDT
+                        exchange: binance
+                        exchangeTimestamp: 1717518473606
+                        exchangeTimestampNanoseconds: 0
+                        bid: 70836.3
+                        ask: 70836.4
+                        mid: 70836.35
+                        last: null
+                        bidVolume: 2.016
+                        askVolume: 6.463
+                        lastVolume: null
+                        baseVolume: null
+                        quoteVolume: null
+                        sequence: '4733755080561'
+                        markPrice: 70829.9
+                        indexPrice: 70781.87276596
+                        askTimestamp: null
+                        bidTimestamp: null
+                        askTimestampNanoseconds: null
+                        bidTimestampNanoseconds: null
+                      - instrument: BTCUSDT
+                        exchange: binance
+                        exchangeTimestamp: 1717518473608
+                        exchangeTimestampNanoseconds: 0
+                        bid: 70836.3
+                        ask: 70836.4
+                        mid: 70836.35
+                        last: null
+                        bidVolume: 1.766
+                        askVolume: 6.463
+                        lastVolume: null
+                        baseVolume: null
+                        quoteVolume: null
+                        sequence: '4733755080681'
+                        markPrice: 70829.9
+                        indexPrice: 70781.87276596
+                        askTimestamp: null
+                        bidTimestamp: null
+                        askTimestampNanoseconds: null
+                        bidTimestampNanoseconds: null
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            instrument:
+                              type: string
+                            exchange:
+                              type: string
+                            exchangeTimestamp:
+                              type: integer
+                            exchangeTimestampNanoseconds:
+                              type: integer
+                            bid:
+                              type: number
+                            ask:
+                              type: number
+                            mid:
+                              type: number
+                            last:
+                              type: string
+                            bidVolume:
+                              type: number
+                            askVolume:
+                              type: number
+                            lastVolume:
+                              type: string
+                            baseVolume:
+                              type: string
+                            quoteVolume:
+                              type: string
+                            sequence:
+                              type: string
+                            markPrice:
+                              type: number
+                            indexPrice:
+                              type: number
+                            askTimestamp:
+                              type: number
+                            bidTimestamp:
+                              type: number
+                            askTimestampNanoseconds:
+                              type: number
+                            bidTimestampNanoseconds:
+                              type: number
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/trades/information:
+    get:
+      summary: Information
+      description: Provides available date ranges for trade data on futures instruments across exchanges, including start and end timestamps for each instrument.
+      operationId: futures-trades-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: boolean
+          default: false
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the response.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/futures/trades/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: binance
+                        instrument: 1000BONKUSDC
+                        startDate: 1714635667663
+                        endDate: 1717604699630
+                      - exchange: binance
+                        instrument: 1000BONKUSDT
+                        startDate: 1700662212045
+                        endDate: 1717604697934
+                      - exchange: binance
+                        instrument: 1000FLOKIUSDT
+                        startDate: 1683391154190
+                        endDate: 1717604699756
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                            instrument:
+                              type: string
+                            startDate:
+                              type: integer
+                            endDate:
+                              type: integer
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
+  /futures/trades/{instrument}:
+    get:
+      summary: Historical
+      description: Provides historical trade data for futures instruments, including timestamps, trade prices, volumes, buy/sell side information, and trade identifiers across exchanges.
+      operationId: futures-trades-historical
+      parameters:
+      - name: instrument
+        in: path
+        schema:
+          type: string
+          default: BTCUSD_PERP
+        required: true
+      - name: exchange
+        in: query
+        description: The exchange for which data should be retrieved. Only **1** exchange is allowed.
+        required: true
+        schema:
+          type: string
+          default: binance
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Defaults]** Beginning of the current hour (max time range is 1 hour). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Defaults]** One hour after the beginning of the current hour (max time range is 1 hour). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the response.'
+        schema:
+          type: string
+          enum:
+          - milliseconds
+          - ms*
+          - iso
+          - iso8601
+          - hr
+          - human_readable
+          default: hr
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/futures/trades/BTCUSD_PERP?cursor=N4IgpgHgxgFghgOwOZhALhAIwJYMVVAGhCgFcAnAZwHtz0FSAbR4ygFznLYBE43U0ARgDsIgKyCAHAE5hAZgBMwycTAIAJr37oRIgGwAGMUcEK5KkLiiNS6sAFUElUgAcXtfuoCi0eMjCU6ABmcIyUYMRs2AC2YABitNF86CDR2MzY4VDUGoHEQYnJGABWNAggrB4A0mAAnim6whIy8kqSAPoG7Th4CATtkoLSkpJGI%2B0AQgAqAML2AMrc7QAKXgBKyyAAvkA
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTCUSD_PERP
+                        exchange: binance
+                        exchangeTimestamp: 1717518651671
+                        exchangeTimestampNanoseconds: 0
+                        isBuySide: false
+                        price: 70845.5
+                        volume: 21
+                        tradeId: '819875589'
+                        quoteVolume: null
+                        sequence: null
+                      - instrument: BTCUSD_PERP
+                        exchange: binance
+                        exchangeTimestamp: 1717518651671
+                        exchangeTimestampNanoseconds: 0
+                        isBuySide: false
+                        price: 70845.5
+                        volume: 64
+                        tradeId: '819875590'
+                        quoteVolume: null
+                        sequence: null
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            instrument:
+                              type: string
+                            exchange:
+                              type: string
+                            exchangeTimestamp:
+                              type: integer
+                            exchangeTimestampNanoseconds:
+                              type: integer
+                            isBuySide:
+                              type: boolean
+                            price:
+                              type: number
+                            volume:
+                              type: integer
+                            tradeId:
+                              type: string
+                            quoteVolume:
+                              type: number
+                            sequence:
+                              type: number
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Futures
+    servers:
+    - url: https://api.amberdata.com/markets
   /markets/futures/exchanges/reference:
     get:
       operationId: getFuturesExchangesReference
@@ -32,6 +3713,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      security:
+      - apiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com
+      description: Amberdata REST API
   /markets/futures/tickers/{instrument}:
     get:
       operationId: getFuturesTickers
@@ -49,6 +3735,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      security:
+      - apiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com
+      description: Amberdata REST API
   /markets/futures/funding-rates/{instrument}:
     get:
       operationId: getFuturesFundingRates
@@ -68,6 +3759,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      security:
+      - apiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com
+      description: Amberdata REST API
   /markets/futures/open-interest/{instrument}:
     get:
       operationId: getFuturesOpenInterest
@@ -85,6 +3781,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      security:
+      - apiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com
+      description: Amberdata REST API
   /markets/futures/liquidations/{instrument}:
     get:
       operationId: getFuturesLiquidations
@@ -104,7 +3805,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      security:
+      - apiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com
+      description: Amberdata REST API
 components:
+  parameters:
+    StartDate:
+      name: startDate
+      in: query
+      required: false
+      description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    Exchange:
+      name: exchange
+      in: query
+      required: false
+      description: Filter by exchange (e.g. binance, coinbase, deribit).
+      schema:
+        type: string
+    EndDate:
+      name: endDate
+      in: query
+      required: false
+      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    InstrumentPath:
+      name: instrument
+      in: path
+      required: true
+      description: The instrument identifier for the futures or options contract.
+      schema:
+        type: string
   schemas:
     ApiResponse:
       type: object
@@ -133,38 +3868,21 @@ components:
               description: The array of records for the requested resource.
               items:
                 type: object
-  parameters:
-    StartDate:
-      name: startDate
-      in: query
-      required: false
-      description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
-      schema:
-        type: string
-    InstrumentPath:
-      name: instrument
-      in: path
-      required: true
-      description: The instrument identifier for the futures or options contract.
-      schema:
-        type: string
-    Exchange:
-      name: exchange
-      in: query
-      required: false
-      description: Filter by exchange (e.g. binance, coinbase, deribit).
-      schema:
-        type: string
-    EndDate:
-      name: endDate
-      in: query
-      required: false
-      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
-      schema:
-        type: string
   securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
     apiKeyAuth:
       type: apiKey
       in: header
       name: x-api-key
       description: Unique, user-specific API key. Required on every REST request via the x-api-key header.
+x-refined-from:
+- amberdata-market-openapi.yaml
+- amberdata-openapi.yml
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

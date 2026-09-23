@@ -9,7 +9,7 @@ servers:
 security:
 - sec0: []
 tags:
-- name: Dex
+- name: DEX
 paths:
   /dex/exchanges:
     get:
@@ -62,7 +62,7 @@ paths:
                           example: '329843'
       deprecated: false
       tags:
-      - Dex
+      - DEX
     servers:
     - url: https://api.amberdata.com/market/defi
   /dex/pairs:
@@ -188,7 +188,7 @@ paths:
                                 example: '18'
       deprecated: false
       tags:
-      - Dex
+      - DEX
     servers:
     - url: https://api.amberdata.com/market/defi
   /dex/uniswapv3/pools/{poolAddress}/liquidity-distribution:
@@ -291,7 +291,7 @@ paths:
                               example: 257220
       deprecated: false
       tags:
-      - Dex
+      - DEX
     servers:
     - url: https://api.amberdata.com/defi
   /dex/ohlcv/information/:
@@ -405,7 +405,7 @@ paths:
                     example: OK
       deprecated: false
       tags:
-      - Dex
+      - DEX
     servers:
     - url: https://api.amberdata.com/defi
   /dex/trades:
@@ -589,7 +589,7 @@ paths:
                               example: '0x7a250d5630b4cf539739df2c5dacb4c659f2488d'
       deprecated: false
       tags:
-      - Dex
+      - DEX
     servers:
     - url: https://api.amberdata.com/defi
   /dex/information:
@@ -698,7 +698,7 @@ paths:
                               example: uniswap_v3
       deprecated: false
       tags:
-      - Dex
+      - DEX
     servers:
     - url: https://api.amberdata.com/defi
 components:

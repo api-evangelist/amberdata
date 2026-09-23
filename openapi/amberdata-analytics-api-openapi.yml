@@ -1944,7 +1944,7 @@ paths:
   /analytics/futures-perpetuals/funding-rates:
     get:
       summary: Funding Rates
-      description: This endpoint returns funding realized/accumulated data, which refers to the payments made between traders holding long and short positions in perpetual futures contracts.  Accumulated funding is the total series of payments made between selected dates.
+      description: This endpoint returns funding realized/accumulated data, which refers to the payments made between traders holding long and short positions in perpetual futures contracts. Accumulated funding is the total series of payments made between selected dates.
       operationId: derivatives-futures-perpetuals-funding-rates
       parameters:
       - name: underlying
@@ -3929,7 +3929,12 @@ paths:
   /analytics/volatility/level-1-quotes:
     get:
       summary: Level 1 Quotes
-      description: "This endpoint returns the Level 1 option chain with associated volatilities, greeks and underlying prices. This is the core underlying options data for many analytics.\n\nAlthough this data streams to Amberdata every 100ms this endpoint returns the first observation for each instrument in 1-minute, 1-hour or 1-day intervals.  \nNote: Due to the density of data historical date ranges are limited to 60x 1-minute or 24x 1 hour intervals, per call.  If no date range is passed, the most recent option chain will be returned."
+      description: 'This endpoint returns the Level 1 option chain with associated volatilities, greeks and underlying prices. This is the core underlying options data for many analytics.
+
+
+        Although this data streams to Amberdata every 100ms this endpoint returns the first observation for each instrument in 1-minute, 1-hour or 1-day intervals.
+
+        Note: Due to the density of data historical date ranges are limited to 60x 1-minute or 24x 1 hour intervals, per call. If no date range is passed, the most recent option chain will be returned.'
       operationId: derivatives-volatility-level-1-quotes
       parameters:
       - name: exchange
@@ -8393,9 +8398,7 @@ paths:
       description: 'This endpoint provides calibrated SVI (Stochastic Volatility Inspired) parameters for BTC and ETH options traded on Deribit, with hourly granularity. The data covers each hour from April 1, 2019, to the present, offering a historical view of volatility surface calibrations for these assets.
 
 
-        Download the SVI White Paper here: https://go.amberdata.io/hubfs/SVITrueLineWhitepaper.pdf
-
-        '
+        Download the SVI White Paper here: https://go.amberdata.io/hubfs/SVITrueLineWhitepaper.pdf'
       operationId: derivatives-svi-historical
       parameters:
       - name: exchange
@@ -8642,9 +8645,7 @@ paths:
       description: 'This endpoint provides calibrated SVI (Stochastic Volatility Inspired) parameters for BTC and ETH options traded on Deribit, with 5-minute granularity. Offering a timely calibration view of the volatility surface.
 
 
-        Download the SVI White Paper here: https://go.amberdata.io/hubfs/SVITrueLineWhitepaper.pdf
-
-        '
+        Download the SVI White Paper here: https://go.amberdata.io/hubfs/SVITrueLineWhitepaper.pdf'
       operationId: derivatives-svi-minutely
       parameters:
       - name: currency
@@ -8900,9 +8901,7 @@ paths:
   /analytics/trades-flow/block-volumes:
     get:
       summary: Block Volumes
-      description: 'This endpoint returns the total block traded options volume for a selected exchange and a selected underlying currency. The volume is broken out by instruments for 3rd party "blockTrades" (venues such as Paradigm, GreeksLive, etc).
-
-        '
+      description: This endpoint returns the total block traded options volume for a selected exchange and a selected underlying currency. The volume is broken out by instruments for 3rd party "blockTrades" (venues such as Paradigm, GreeksLive, etc).
       operationId: derivatives-trades-flow-block-volumes
       parameters:
       - name: exchange
@@ -9059,9 +9058,7 @@ paths:
   /analytics/trades-flow/decorated-trades:
     get:
       summary: Decorated Trades
-      description: 'This endpoint returns option "times and sales" data that''s decorated with pre-trade level-1 orderbook data and post-trade level-1 data. This is the core dataset of the Amberdata direction and GEX "Gamma Exposure" analysis. We use this orderbook impact to analyze the true aggressor of every trade, while assuming that market-makers (aka "dealers") are typically the passive trade participants. Some exchanges, such as "okex" and "bybit" will have volatility values in decimal format (ex: 97% iv will be noted as 0.97)
-
-        '
+      description: 'This endpoint returns option "times and sales" data that''s decorated with pre-trade level-1 orderbook data and post-trade level-1 data. This is the core dataset of the Amberdata direction and GEX "Gamma Exposure" analysis. We use this orderbook impact to analyze the true aggressor of every trade, while assuming that market-makers (aka "dealers") are typically the passive trade participants. Some exchanges, such as "okex" and "bybit" will have volatility values in decimal format (ex: 97% iv will be noted as 0.97)'
       operationId: derivatives-trades-flow-decorated-trades
       parameters:
       - name: exchange
@@ -9415,9 +9412,7 @@ paths:
   /analytics/instruments/most-traded:
     get:
       summary: Instruments Most Traded
-      description: 'This endpoint returns the most traded instruments on a selected exchange for a selected underlying currency, for a given date range. Users can filter out select trade types: "ALL" trades, "Block" trades and "Non-Block" trades.
-
-        '
+      description: 'This endpoint returns the most traded instruments on a selected exchange for a selected underlying currency, for a given date range. Users can filter out select trade types: "ALL" trades, "Block" trades and "Non-Block" trades.'
       operationId: derivatives-trades-flow-instruments-most-traded
       parameters:
       - name: exchange
@@ -9573,9 +9568,7 @@ paths:
   /analytics/trades-flow/gamma-exposures/normalized-usd:
     get:
       summary: Gamma Normalized in USD
-      description: 'This chart depicts the overall impact of "gamma exposure" (GEX) in terms of notional in the underlying for a 1% move in spot prices.
-
-        '
+      description: This chart depicts the overall impact of "gamma exposure" (GEX) in terms of notional in the underlying for a 1% move in spot prices.
       operationId: derivatives-trades-flow-gamma-normalized-usd
       parameters:
       - name: exchange
@@ -9707,9 +9700,7 @@ paths:
   /analytics/trades-flow/gamma-exposures-snapshots:
     get:
       summary: Gamma Snapshots (GEX)
-      description: 'GEX aims to calculate the gamma exposure of Market Makers (MMs) and the resulting number of underlying contracts they must trade to keep their book delta-hedged. "Positive/long gamma" => more underlying stability because of "Buy low, sell high" "Negative/short gamma" => more underlying volatility because of "Sell low, buy high" Starting point is the direction of trades with our proprietary algorithm "AMBERDATA DIRECTION" composed of over 30 heuristics that estimate the "correct direction" = side of the initiator/aggressor of the trade at which other side there is "likely" a MMs. With this algorithm we are able to flag every trades by tracking the orderbook at millisecond level, to calculate and maintain a database of MMs gamma exposure
-
-        '
+      description: GEX aims to calculate the gamma exposure of Market Makers (MMs) and the resulting number of underlying contracts they must trade to keep their book delta-hedged. "Positive/long gamma" => more underlying stability because of "Buy low, sell high" "Negative/short gamma" => more underlying volatility because of "Sell low, buy high" Starting point is the direction of trades with our proprietary algorithm "AMBERDATA DIRECTION" composed of over 30 heuristics that estimate the "correct direction" = side of the initiator/aggressor of the trade at which other side there is "likely" a MMs. With this algorithm we are able to flag every trades by tracking the orderbook at millisecond level, to calculate and maintain a database of MMs gamma exposure
       operationId: derivatives-trades-flow-gamma-gex-snapshots
       parameters:
       - name: exchange
@@ -9938,9 +9929,7 @@ paths:
 
         RETURN CALCULATIONS
 
-        Absolute Yield: \$25/\$275 Annualized Yield: \$25/\$275 * (525,600 / minutes left until expiration)
-
-        '
+        Absolute Yield: \$25/\$275 Annualized Yield: \$25/\$275 * (525,600 / minutes left until expiration)'
       operationId: derivatives-trades-flow-options-yields
       parameters:
       - name: exchange
@@ -10160,9 +10149,7 @@ paths:
   /analytics/trades-flow/put-call-distribution:
     get:
       summary: Put Call Trades Distribution
-      description: 'Using proprietary algorithm (Amberdata direction) that assess real initiator of a trade, we sum by the amounts of contracts and premium of the last 24 hours (default) according to put/call/bought/sold metrics.
-
-        '
+      description: Using proprietary algorithm (Amberdata direction) that assess real initiator of a trade, we sum by the amounts of contracts and premium of the last 24 hours (default) according to put/call/bought/sold metrics.
       operationId: derivatives-trades-flow-put-call-trades-distribution
       parameters:
       - name: exchange
@@ -10357,9 +10344,7 @@ paths:
   /analytics/trades-flow/put-call-ratio:
     get:
       summary: Put Call Ratio
-      description: 'This endpoint returns the Put Call Ratio for open interest and volume. The users can request the data in daily or hourly granularity.
-
-        '
+      description: This endpoint returns the Put Call Ratio for open interest and volume. The users can request the data in daily or hourly granularity.
       operationId: derivatives-trades-flow-put-call-ratio
       parameters:
       - name: exchange
@@ -10590,9 +10575,7 @@ paths:
   /analytics/options-scanner/top-trades:
     get:
       summary: Top Trades
-      description: 'This endpoint contains all the relevant information about the most important trades both on screen and blocked. Besides the usual information this endpoint have some proprietary nuances that helps market watchers to read the flow deeply. Among the others: - "Amberdata Direction" is the metrics we developed for gauging the real initiator of a trade - "Delta Hedge" highlight is a block trade contained a futures leg - The information of the orderbook prior to the trade ("pre" columns) and post ("post" columns)
-
-        '
+      description: 'This endpoint contains all the relevant information about the most important trades both on screen and blocked. Besides the usual information this endpoint have some proprietary nuances that helps market watchers to read the flow deeply. Among the others: - "Amberdata Direction" is the metrics we developed for gauging the real initiator of a trade - "Delta Hedge" highlight is a block trade contained a futures leg - The information of the orderbook prior to the trade ("pre" columns) and post ("post" columns)'
       operationId: derivatives-trades-flow-top-trades
       parameters:
       - name: exchange
@@ -10853,9 +10836,7 @@ paths:
   /analytics/trades-flow/volume-aggregates:
     get:
       summary: Volume Aggregates
-      description: 'This endpoint returns the total traded options volume for a selected exchange and a selected underlying currency. The volume is broken out between onScreen exchange volume and 3rd party "blockTrades" (venues such as Paradigm, GreeksLive, etc).
-
-        '
+      description: This endpoint returns the total traded options volume for a selected exchange and a selected underlying currency. The volume is broken out between onScreen exchange volume and 3rd party "blockTrades" (venues such as Paradigm, GreeksLive, etc).
       operationId: derivatives-trades-flow-volume-aggregates
       parameters:
       - name: exchange
@@ -11049,9 +11030,7 @@ paths:
       summary: Options Instruments
       description: 'This endpoint returns all available exchanges, currencies and option instruments. If a timestamp is used we can then filter the information for historical data.
 
-        USA Trading hours are 14:30:00 - 21:00:00 UTC (9:30a-4pm ET)
-
-        '
+        USA Trading hours are 14:30:00 - 21:00:00 UTC (9:30a-4pm ET)'
       operationId: tradfi-information-instruments
       parameters:
       - name: currency
@@ -11230,9 +11209,7 @@ paths:
   /analytics/realized-volatility/tradfi:
     get:
       summary: Realized Volatility (Close-to-Close)
-      description: 'This endpoint returns the entire series of close-to-close realized volatility and OHLCV prices for a selected currency (ticker). Note the realized volatility calculation window must have enough data points to return a value.
-
-        '
+      description: This endpoint returns the entire series of close-to-close realized volatility and OHLCV prices for a selected currency (ticker). Note the realized volatility calculation window must have enough data points to return a value.
       operationId: tradfi-realized-volatility-close-to-close
       parameters:
       - name: currency
@@ -11401,9 +11378,7 @@ paths:
   /analytics/realized-volatility/cones/tradfi:
     get:
       summary: Volatility Cones
-      description: 'The endpoint returns the percentile distribution of realized volatility for a specific spot trading pair. We can see the RV distribution for multiple measurement windows compared to the end date.
-
-        '
+      description: The endpoint returns the percentile distribution of realized volatility for a specific spot trading pair. We can see the RV distribution for multiple measurement windows compared to the end date.
       operationId: tradfi-realized-volatility-cones
       parameters:
       - name: currency
@@ -11632,7 +11607,7 @@ paths:
   /analytics/volatility/level-1-quotes/tradfi:
     get:
       summary: Level 1 Quotes
-      description: 'This endpoint returns the "Level 1" option chain with associated volatilities, greeks and underlying prices. This is the core underlying options data for many analytics.\n\nNote: Due to the density of data historical date ranges are limited to 60x 1-minute or 24x 1 hour intervals, per call.  If no date range is passed, the most recent option chain will be returned.
+      description: 'This endpoint returns the "Level 1" option chain with associated volatilities, greeks and underlying prices. This is the core underlying options data for many analytics.\n\nNote: Due to the density of data historical date ranges are limited to 60x 1-minute or 24x 1 hour intervals, per call. If no date range is passed, the most recent option chain will be returned.
 
 
         USA Trading hours are 14:30:00 - 21:00:00 UTC (9:30a-4pm ET)'
@@ -11934,9 +11909,7 @@ paths:
       summary: Delta Surfaces Constant
       description: 'This endpoint returns the option delta surface with constant maturities.
 
-        USA Trading hours are 14:30:00 - 21:00:00 UTC (9:30a-4pm ET)
-
-        '
+        USA Trading hours are 14:30:00 - 21:00:00 UTC (9:30a-4pm ET)'
       operationId: tradfi-volatility-delta-surfaces-constant
       parameters:
       - name: currency
@@ -12310,9 +12283,7 @@ paths:
       description: 'This endpoint returns the close-to-close daily realized volatility for 5-days and 21-days. Using the daysToExpiration parameter, users can choose which "at-the-money" implied volatility to compare. Implied Volatility is returned on an hourly interval.
 
 
-        USA Trading hours are 14:30:00 - 21:00:00 UTC (9:30a-4pm ET)
-
-        '
+        USA Trading hours are 14:30:00 - 21:00:00 UTC (9:30a-4pm ET)'
       operationId: tradfi-volatility-implied-vs-realized
       parameters:
       - name: currency
@@ -12415,9 +12386,7 @@ paths:
       description: 'This endpoint returns the term structure (for exchange listed expirations) with forward volatility calculations, for constant "daysToExpiration" maturities.
 
 
-        USA Trading hours are 14:30:00 - 21:00:00 UTC (9:30a-4pm ET)
-
-        '
+        USA Trading hours are 14:30:00 - 21:00:00 UTC (9:30a-4pm ET)'
       operationId: tradfi-volatility-term-structures-constant
       parameters:
       - name: currency
@@ -12711,9 +12680,7 @@ paths:
       description: 'This endpoint contains all the metrics useful for having an immediate overview of the options market, for each active expiry. The current Mark IV is updated every minute. These metrics are then compared according to the selected "daysBack" parameter. All the differences are found in the columns with the indication "change" (current metrics vs 24hr ago)
 
 
-        USA Trading hours are 14:30:00 - 21:00:00 UTC (9:30a-4pm ET)
-
-        '
+        USA Trading hours are 14:30:00 - 21:00:00 UTC (9:30a-4pm ET)'
       operationId: tradfi-volatility-metrics
       parameters:
       - name: currency
@@ -13052,9 +13019,7 @@ paths:
 
         RETURN CALCULATIONS
 
-        Absolute Yield: \$25/\$275 Annualized Yield: \$25/\$275 * (525,600 / minutes left until expiration)
-
-        '
+        Absolute Yield: \$25/\$275 Annualized Yield: \$25/\$275 * (525,600 / minutes left until expiration)'
       operationId: tradfi-trades-flow-options-yields
       parameters:
       - name: currency
@@ -13641,7 +13606,7 @@ paths:
   /analytics/futures-perpetuals/depth/pressure:
     get:
       summary: Pressure
-      description: 'Order book pressure is a market indicator that measures the relative balance between buy and sell orders. It is calculated as:  Order_Book_Pressure = (bid depth − ask depth) This metric provides insight into market sentiment by quantifying the dominance of buyers or sellers. A positive value indicates stronger bid depth, while a negative value signals sell-side dominance.'
+      description: 'Order book pressure is a market indicator that measures the relative balance between buy and sell orders. It is calculated as: Order_Book_Pressure = (bid depth − ask depth) This metric provides insight into market sentiment by quantifying the dominance of buyers or sellers. A positive value indicates stronger bid depth, while a negative value signals sell-side dominance.'
       operationId: spot-analytics-order-book-depth-pressure
       parameters:
       - name: exchange

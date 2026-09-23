@@ -15,7 +15,7 @@ paths:
       description: 'Retrieves the historical token supplies (and derivatives) for the specified address.
 
 
-        Note: This endpoint returns a max of 6 months of historical data. In order to get more than 6 months you must use the `startDate`  & `endDate` parameters to move the time frame window to get the next ***n*** days/months of data.'
+        Note: This endpoint returns a max of 6 months of historical data. In order to get more than 6 months you must use the `startDate` & `endDate` parameters to move the time frame window to get the next ***n*** days/months of data.'
       operationId: get-historical-token-supply
       parameters:
       - name: hash

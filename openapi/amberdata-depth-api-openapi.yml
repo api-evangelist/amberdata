@@ -1109,7 +1109,7 @@ paths:
   /depth/pressure:
     get:
       summary: Pressure
-      description: 'Order book pressure is a market indicator that measures the relative balance between buy and sell orders. It is calculated as:  Order_Book_Pressure = (bid depth − ask depth) This metric provides insight into market sentiment by quantifying the dominance of buyers or sellers. A positive value indicates stronger bid depth, while a negative value signals sell-side dominance.'
+      description: 'Order book pressure is a market indicator that measures the relative balance between buy and sell orders. It is calculated as: Order_Book_Pressure = (bid depth − ask depth) This metric provides insight into market sentiment by quantifying the dominance of buyers or sellers. A positive value indicates stronger bid depth, while a negative value signals sell-side dominance.'
       operationId: spot-analytics-order-book-depth-pressure
       parameters:
       - name: exchange

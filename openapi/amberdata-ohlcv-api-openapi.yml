@@ -7,7 +7,7 @@ servers:
 security:
 - sec0: []
 tags:
-- name: Ohlcv
+- name: OHLCV
 paths:
   /ohlcv/{pool}/latest/:
     get:
@@ -173,11 +173,11 @@ paths:
                             example: 1
       deprecated: false
       tags:
-      - Ohlcv
+      - OHLCV
   /ohlcv/{pool}/historical/:
     get:
       summary: Historical
-      description: 'Retrieves the historical (time series) open-high-low-close for the specified pair. Includes data for  exchanges depending on where the pair is traded.
+      description: 'Retrieves the historical (time series) open-high-low-close for the specified pair. Includes data for exchanges depending on where the pair is traded.
 
         Base & Quote information is using the first and second asset in a pool/pair, which is the represented price.'
       operationId: defi-ohlcv-historical
@@ -300,7 +300,7 @@ paths:
                             - '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
       deprecated: false
       tags:
-      - Ohlcv
+      - OHLCV
 components:
   securitySchemes:
     sec0:

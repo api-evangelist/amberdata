@@ -1,21 +1,2709 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Amberdata DeFi Options API
-  description: Amberdata's institutional-grade digital asset and blockchain data API. Provides spot market data (prices, OHLCV, tickers, trades, order books), derivatives across futures and options (funding rates, open interest, liquidations, implied volatility, Greeks), DeFi (DEX and lending), and on-chain blockchain data (blocks, transactions, addresses, tokens). Every request requires the x-api-key header. An optional api-version header selects a dated API version.
-  termsOfService: https://www.amberdata.io/terms-of-service
-  contact:
-    name: Amberdata Support
-    url: https://www.amberdata.io/contact
+  title: Amberdata Options API
   version: '1.0'
+  description: 'Operations tagged Options across 2 of this provider''s published API definitions: amberdata-market-openapi.yaml, amberdata-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://api.amberdata.com/markets
 - url: https://api.amberdata.com
   description: Amberdata REST API
-security:
-- apiKeyAuth: []
 tags:
 - name: Options
-  description: Options market data and analytics.
 paths:
+  /options/exchanges/information:
+    get:
+      summary: Instruments
+      description: Provides metadata for available options contracts on supported exchanges, including exchange names, contract symbols, and data types (Order Book Events, Ticker, Trades, etc.) with associated data coverage periods.
+      operationId: options-exchanges-pairs
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** Only return data for the given exchange(s) (comma separated)'
+        schema:
+          type: string
+          default: deribit
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones. **[Defaults]** `True | False*`.'
+        schema:
+          type: boolean
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: '**[Optional]** The number of records per page (only available when `includeInactive=true`).'
+        schema:
+          type: integer
+          format: int32
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/options/exchanges/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: bybit
+                        instrument: BTC-16AUG24-50000-C
+                        openInterest:
+                          startDate: 1721895646123
+                          endDate: 1722297559023
+                        orderBookSnapshot:
+                          startDate: 1721895180679
+                          endDate: 1722370735780
+                        orderBookEvent:
+                          startDate: 1721899231080
+                          endDate: 1721946070781
+                        ticker:
+                          startDate: 1721895381123
+                          endDate: 1722370799223
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              example: https://api.amberdata.com/markets/options/exchanges/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              exchange:
+                                type: string
+                                example: bybit
+                              instrument:
+                                type: string
+                                example: BTC-16AUG24-50000-C
+                              openInterest:
+                                type: object
+                                properties:
+                                  startDate:
+                                    type: integer
+                                    example: 1721895646123
+                                    default: 0
+                                  endDate:
+                                    type: integer
+                                    example: 1722297559023
+                                    default: 0
+                              orderBookSnapshot:
+                                type: object
+                                properties:
+                                  startDate:
+                                    type: integer
+                                    example: 1721895180679
+                                    default: 0
+                                  endDate:
+                                    type: integer
+                                    example: 1722370735780
+                                    default: 0
+                              orderBookEvent:
+                                type: object
+                                properties:
+                                  startDate:
+                                    type: integer
+                                    example: 1721899231080
+                                    default: 0
+                                  endDate:
+                                    type: integer
+                                    example: 1721946070781
+                                    default: 0
+                              ticker:
+                                type: object
+                                properties:
+                                  startDate:
+                                    type: integer
+                                    example: 1721895381123
+                                    default: 0
+                                  endDate:
+                                    type: integer
+                                    example: 1722370799223
+                                    default: 0
+      deprecated: false
+      tags:
+      - Options
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/exchanges/reference:
+    get:
+      summary: Reference
+      description: Provides essential reference details for options contracts on supported exchanges, including contract symbols, underlying assets, strike prices, expiration dates, settlement types, price and volume limits, and precision requirements.
+      operationId: options-exchanges-reference
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** Only return data for the given exchange(s) (comma separated)'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones. **[Defaults]** `True | False*`.'
+        schema:
+          type: boolean
+      - name: size
+        in: query
+        description: '**[Optional]** The number of records per page (only available when `includeInactive=true`).'
+        schema:
+          type: integer
+          format: int32
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes instruments which have expiration after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes instruments which have expiration before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: includeOriginalReference
+        in: query
+        description: '**[Optional]** If true, endpoint returns originalReference. **[Defaults]** `True | False*`.'
+        schema:
+          type: boolean
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/options/exchanges/reference?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yA8gE5gDmkZASksUk0tAIkylGpFiIkAVQjk4AB3kB7JliQIAogA8oAC3QRWSckVIVqIHAFskAMRVX0WIiCtgYMMJShKICEzTEDk4uAFbkviA08uhGRACMNORgAF5CAKwADJkAvkA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: bybit
+                        instrument: BTC-16AUG24-50000-C
+                        baseSymbol: BTC
+                        quoteSymbol: USDC
+                        market: options
+                        exchangeEnabled: true
+                        limitsPriceMin: 5
+                        limitsPriceMax: 10000000
+                        limitsVolumeMin: null
+                        limitsVolumeMax: null
+                        limitsMarketMin: 0.01
+                        limitsMarketMax: 500
+                        limitsLeverageMin: null
+                        limitsLeverageMax: null
+                        limitsLeverageSuperMax: null
+                        limitsCostMin: null
+                        limitsCostMax: null
+                        precisionPrice: 5
+                        precisionVolume: 0.01
+                        precisionBase: null
+                        precisionQuote: null
+                        listingTimestamp: 1721894400000
+                        contractUnderlying: BTC
+                        contractExpirationTimestamp: 1723795200000
+                        contractPeriod: weekly
+                        contractSize: null
+                        contractSettleType: option
+                        contractSettleSymbol: USDC
+                        optionType: call
+                        optionStrikePrice: 50000
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              example: https://api.amberdata.com/markets/options/exchanges/reference?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yA8gE5gDmkZASksUk0tAIkylGpFiIkAVQjk4AB3kB7JliQIAogA8oAC3QRWSckVIVqIHAFskAMRVX0WIiCtgYMMJShKICEzTEDk4uAFbkviA08uhGRACMNORgAF5CAKwADJkAvkA
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              exchange:
+                                type: string
+                                example: bybit
+                              instrument:
+                                type: string
+                                example: BTC-16AUG24-50000-C
+                              baseSymbol:
+                                type: string
+                                example: BTC
+                              quoteSymbol:
+                                type: string
+                                example: USDC
+                              market:
+                                type: string
+                                example: options
+                              exchangeEnabled:
+                                type: boolean
+                                example: true
+                                default: true
+                              limitsPriceMin:
+                                type: integer
+                                example: 5
+                                default: 0
+                              limitsPriceMax:
+                                type: integer
+                                example: 10000000
+                                default: 0
+                              limitsVolumeMin: {}
+                              limitsVolumeMax: {}
+                              limitsMarketMin:
+                                type: number
+                                example: 0.01
+                                default: 0
+                              limitsMarketMax:
+                                type: integer
+                                example: 500
+                                default: 0
+                              limitsLeverageMin: {}
+                              limitsLeverageMax: {}
+                              limitsLeverageSuperMax: {}
+                              limitsCostMin: {}
+                              limitsCostMax: {}
+                              precisionPrice:
+                                type: integer
+                                example: 5
+                                default: 0
+                              precisionVolume:
+                                type: number
+                                example: 0.01
+                                default: 0
+                              precisionBase: {}
+                              precisionQuote: {}
+                              listingTimestamp:
+                                type: integer
+                                example: 1721894400000
+                                default: 0
+                              contractUnderlying:
+                                type: string
+                                example: BTC
+                              contractExpirationTimestamp:
+                                type: integer
+                                example: 1723795200000
+                                default: 0
+                              contractPeriod:
+                                type: string
+                                example: weekly
+                              contractSize: {}
+                              contractSettleType:
+                                type: string
+                                example: option
+                              contractSettleSymbol:
+                                type: string
+                                example: USDC
+                              optionType:
+                                type: string
+                                example: call
+                              optionStrikePrice:
+                                type: integer
+                                example: 50000
+                                default: 0
+      deprecated: false
+      tags:
+      - Options
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/liquidations/information:
+    get:
+      summary: Information
+      description: Provides availability details for options contract liquidation data across supported exchanges, including contract symbols, underlying assets, and data coverage periods for tracking liquidation events.
+      operationId: options-liquidations-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones. **[Defaults]** `false* | true`'
+        schema:
+          type: boolean
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/options/liquidations/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: deribit
+                        instrument: BTC-10JUL24-55500-P
+                        underlying: BTC
+                        startDate: 1720581871000
+                        endDate: 1720581871000
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              example: https://api.amberdata.com/markets/options/liquidations/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              exchange:
+                                type: string
+                                example: deribit
+                              instrument:
+                                type: string
+                                example: BTC-10JUL24-55500-P
+                              underlying:
+                                type: string
+                                example: BTC
+                              startDate:
+                                type: integer
+                                example: 1720581871000
+                                default: 0
+                              endDate:
+                                type: integer
+                                example: 1720581871000
+                                default: 0
+      deprecated: false
+      tags:
+      - Options
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/liquidations/{instrument}:
+    get:
+      summary: Historical
+      description: Provides historical liquidation data for options contracts, detailing liquidation actions, prices, volumes, mark and index prices, and buy/sell sides to track liquidation events over time across supported exchanges.
+      operationId: options-liquidations-historical
+      parameters:
+      - name: instrument
+        in: path
+        description: The instrument for which to retrieve the requested data.
+        schema:
+          type: string
+          default: BTC-27DEC24-100000-C
+        required: true
+      - name: exchange
+        in: query
+        description: The exchange(s) for which to retrieve the requested data (comma separated). **[Defaults]** All available exchanges.
+        required: true
+        schema:
+          type: string
+          default: deribit
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+          default: '1691321498000'
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTC-29DEC23-30000-C
+                        exchange: deribit
+                        exchangeTimestamp: 1691321498000
+                        exchangeTimestampNanoseconds: 0
+                        action: null
+                        orderId: '262149185'
+                        side: BUY
+                        status: null
+                        timeInForce: null
+                        type: null
+                        price: 0.0935
+                        volume: 2
+                        unit: base_asset
+                        tickDirection: 2
+                        markPrice: 0.09432956
+                        indexPrice: 29033.78
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next: {}
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              instrument:
+                                type: string
+                                example: BTC-29DEC23-30000-C
+                              exchange:
+                                type: string
+                                example: deribit
+                              exchangeTimestamp:
+                                type: integer
+                                example: 1691321498000
+                                default: 0
+                              exchangeTimestampNanoseconds:
+                                type: integer
+                                example: 0
+                                default: 0
+                              action: {}
+                              orderId:
+                                type: string
+                                example: '262149185'
+                              side:
+                                type: string
+                                example: BUY
+                              status: {}
+                              timeInForce: {}
+                              type: {}
+                              price:
+                                type: number
+                                example: 0.0935
+                                default: 0
+                              volume:
+                                type: integer
+                                example: 2
+                                default: 0
+                              unit:
+                                type: string
+                                example: base_asset
+                              tickDirection:
+                                type: integer
+                                example: 2
+                                default: 0
+                              markPrice:
+                                type: number
+                                example: 0.09432956
+                                default: 0
+                              indexPrice:
+                                type: number
+                                example: 29033.78
+                                default: 0
+      deprecated: false
+      tags:
+      - Options
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/ohlcv/information:
+    get:
+      summary: Information
+      description: Provides availability details for OHLCV (Open, High, Low, Close, Volume) data on options contracts across supported exchanges, including contract symbols, underlying assets, and data coverage periods.
+      operationId: options-ohlcv-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones. **[Defaults]** `True | False*`.'
+        schema:
+          type: boolean
+      - name: timeInterval
+        in: query
+        description: '**[Optional]** Time interval. **[Defaults]** `minutes* | hours | days`'
+        schema:
+          type: string
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/options/ohlcv/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAW1QReXXGSKgMKoiAToAnjJrkAjjABy6PYQPGQZyzZUAFeFy33DYGEacDJFI4GCwiAGYARgA2ACY4gBYABlTUmiV0QSIYiKTEgA409JAYDg4AawAjTAq3JC4wDgQiOOSAXxokYXokKw4IABUvZBaSMkoaZSQAMW5M8PslPxgwSigBhFMQYnn0RZAAK3IBwNZ0KSIoszAALwJCAFZU9qA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: deribit
+                        instrument: BTC-24JUL24-59000-C
+                        underlying: BTC
+                        startDate: null
+                        endDate: null
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              example: https://api.amberdata.com/markets/options/ohlcv/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAW1QReXXGSKgMKoiAToAnjJrkAjjABy6PYQPGQZyzZUAFeFy33DYGEacDJFI4GCwiAGYARgA2ACY4gBYABlTUmiV0QSIYiKTEgA409JAYDg4AawAjTAq3JC4wDgQiOOSAXxokYXokKw4IABUvZBaSMkoaZSQAMW5M8PslPxgwSigBhFMQYnn0RZAAK3IBwNZ0KSIoszAALwJCAFZU9qA
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              exchange:
+                                type: string
+                                example: deribit
+                              instrument:
+                                type: string
+                                example: BTC-24JUL24-59000-C
+                              underlying:
+                                type: string
+                                example: BTC
+                              startDate: {}
+                              endDate: {}
+      deprecated: false
+      tags:
+      - Options
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/ohlcv/{instrument}:
+    get:
+      summary: Historical
+      description: Provides historical OHLCV (Open, High, Low, Close, Volume) data for options contracts, enabling analysis of price movements and trading volumes over time for specific contracts across supported exchanges.
+      operationId: options-ohlcv-historical
+      parameters:
+      - name: instrument
+        in: path
+        description: The instrument for which to retrieve the requested data.
+        schema:
+          type: string
+          default: BTC-27DEC24-100000-C
+        required: true
+      - name: exchange
+        in: query
+        description: '**[Default]** All available exchanges.'
+        required: true
+        schema:
+          type: string
+          default: deribit
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeInterval
+        in: query
+        description: Time interval to return the historical data in ("days" | "hours" | "minutes")
+        schema:
+          type: string
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/options/ohlcv/BTC-29DEC23-30000-C?cursor=N4IgpgHgxgFghgOwOZhALhAEzAJwJYBGeALiADQhQCuOAzgPY7oJUA2rFtxcOxAInGKo0ARgBsATgDsADikBWAEwAGVaopgEmAUPQipi-fIAsYmTMNiKxPAFswASQRCcANzit0oBHHvoscACetOQgtACOrAByvsIBgaER0bEACqw0Hv6YcHisCRTYAGZwbKRoAMziiorGauogtnAQ6GLlNcYydcoUrPT0ANYEcFD9Kbh49JjoKgC%2BFHgIUOnYAKoItFQADpuMQpgAotDwyGAhaMWstGDWdmAAYoyNZQ25rHhXUPRaIRSFj4L%2BABWDAQoVYcC4AHEcPQtl4sOMiGVQDZ7FxfJs9JJZAoVHUbmjuLZNjEEPQPl9MGduiAFthmmhlDNmUA
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTC-29DEC23-30000-C
+                        exchange: deribit
+                        exchangeTimestamp: 1690185600000
+                        open: 0.128
+                        high: 0.128
+                        low: 0.1145
+                        close: 0.1155
+                        volume: 28.5
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              example: https://api.amberdata.com/markets/options/ohlcv/BTC-29DEC23-30000-C?cursor=N4IgpgHgxgFghgOwOZhALhAEzAJwJYBGeALiADQhQCuOAzgPY7oJUA2rFtxcOxAInGKo0ARgBsATgDsADikBWAEwAGVaopgEmAUPQipi-fIAsYmTMNiKxPAFswASQRCcANzit0oBHHvoscACetOQgtACOrAByvsIBgaER0bEACqw0Hv6YcHisCRTYAGZwbKRoAMziiorGauogtnAQ6GLlNcYydcoUrPT0ANYEcFD9Kbh49JjoKgC%2BFHgIUOnYAKoItFQADpuMQpgAotDwyGAhaMWstGDWdmAAYoyNZQ25rHhXUPRaIRSFj4L%2BABWDAQoVYcC4AHEcPQtl4sOMiGVQDZ7FxfJs9JJZAoVHUbmjuLZNjEEPQPl9MGduiAFthmmhlDNmUA
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              instrument:
+                                type: string
+                                example: BTC-29DEC23-30000-C
+                              exchange:
+                                type: string
+                                example: deribit
+                              exchangeTimestamp:
+                                type: integer
+                                example: 1690185600000
+                                default: 0
+                              open:
+                                type: number
+                                example: 0.128
+                                default: 0
+                              high:
+                                type: number
+                                example: 0.128
+                                default: 0
+                              low:
+                                type: number
+                                example: 0.1145
+                                default: 0
+                              close:
+                                type: number
+                                example: 0.1155
+                                default: 0
+                              volume:
+                                type: number
+                                example: 28.5
+                                default: 0
+      deprecated: false
+      tags:
+      - Options
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/batch-ohlcv/{exchange}:
+    get:
+      summary: Batch Historical
+      description: Delivers historical OHLCV (Open, High, Low, Close, Volume) data in batch format for multiple Options market contracts, providing comprehensive price and volume history over specified time ranges for efficient analysis across multiple instruments.
+      operationId: batch-historical-ond-1
+      parameters:
+      - name: exchange
+        in: path
+        description: The exchange for which to retrieve the most current data.
+        schema:
+          type: string
+          default: deribit
+        required: true
+      - name: instruments
+        in: query
+        description: '**[Required]** The instrument(s) for which to retrieve the most current data (comma separated).  **[Maximum]** 50 instruments'
+        required: true
+        schema:
+          type: string
+          default: BTC-29DEC23-30000-C
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeInterval
+        in: query
+        description: '**[Optional]** Time interval. **[Defaults]** `minutes | hours | days*`'
+        schema:
+          type: string
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTC-14MAR25-105000-C
+                        exchangeTimestamp: 1740009600000
+                        open: 0.019
+                        high: 0.022
+                        low: 0.0185
+                        close: 0.02
+                        volume: 40.3
+                      - instrument: BTC-14MAR25-105000-C
+                        exchangeTimestamp: 1740096000000
+                        open: 0.019
+                        high: 0.022
+                        low: 0.0115
+                        close: 0.014
+                        volume: 25.5
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            instrument:
+                              type: string
+                            exchangeTimestamp:
+                              type: integer
+                            open:
+                              type: number
+                            high:
+                              type: number
+                            low:
+                              type: number
+                            close:
+                              type: number
+                            volume:
+                              type: number
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Options
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/open-interest/information:
+    get:
+      summary: Information
+      description: Provides availability details for open interest data on options contracts, including contract symbols, underlying assets, and data coverage periods across supported exchanges.
+      operationId: options-open-interest-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones. **[Defaults]** `True | False*`.'
+        schema:
+          type: boolean
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/options/open-interest/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: bybit
+                        instrument: BTC-24JUL24-62000-C
+                        underlying: BTC
+                        startDate: 1721550049114
+                        endDate: 1721722822415
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              example: https://api.amberdata.com/markets/options/open-interest/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              exchange:
+                                type: string
+                                example: bybit
+                              instrument:
+                                type: string
+                                example: BTC-24JUL24-62000-C
+                              underlying:
+                                type: string
+                                example: BTC
+                              startDate:
+                                type: integer
+                                example: 1721550049114
+                                default: 0
+                              endDate:
+                                type: integer
+                                example: 1721722822415
+                                default: 0
+      deprecated: false
+      tags:
+      - Options
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/open-interest/{instrument}:
+    get:
+      summary: Historical
+      description: Provides historical open interest data for options contracts, detailing the total number of outstanding contracts at specific timestamps to help assess market interest over time across supported exchanges.
+      operationId: options-open-interest-historical
+      parameters:
+      - name: instrument
+        in: path
+        description: The instrument for which to retrieve the requested data.
+        schema:
+          type: string
+          default: BTC-27DEC24-100000-C
+        required: true
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the requested data (comma separated). **[Defaults]** All available exchanges.'
+        required: true
+        schema:
+          type: string
+          default: deribit
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+          default: '1690156800000'
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+          default: '1690160400000'
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTC-29DEC23-30000-C
+                        exchange: deribit
+                        exchangeTimestamp: 1690156800895
+                        exchangeTimestampNanoseconds: 0
+                        value: 2603.5
+                        type: null
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next: {}
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              instrument:
+                                type: string
+                                example: BTC-29DEC23-30000-C
+                              exchange:
+                                type: string
+                                example: deribit
+                              exchangeTimestamp:
+                                type: integer
+                                example: 1690156800895
+                                default: 0
+                              exchangeTimestampNanoseconds:
+                                type: integer
+                                example: 0
+                                default: 0
+                              value:
+                                type: number
+                                example: 2603.5
+                                default: 0
+                              type: {}
+      deprecated: false
+      tags:
+      - Options
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/batch-open-interest/{exchange}:
+    get:
+      summary: Batch Historical
+      description: Delivers batch historical open interest data for multiple options contracts, providing timestamped values that reflect the total number of outstanding contracts over specified time ranges across supported exchanges.
+      operationId: batch-historical-ent-2
+      parameters:
+      - name: exchange
+        in: path
+        description: The exchange for which to retrieve the most current data.
+        schema:
+          type: string
+          default: deribit
+        required: true
+      - name: instruments
+        in: query
+        description: '**[Required]** The instrument(s) for which to retrieve the most current data (comma separated).  **[Maximum]** 50 instruments'
+        required: true
+        schema:
+          type: string
+          default: BTC-29DEC23-30000-C
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeInterval
+        in: query
+        description: '**[Optional]** Time interval. **[Defaults]** `ticks | minutes | hours | days*`'
+        schema:
+          type: string
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTC-14MAR25-100000-C
+                        exchangeTimestamp: 1740009600000
+                        value: 4.7
+                        type: null
+                      - instrument: BTC-14MAR25-100000-C
+                        exchangeTimestamp: 1740096000000
+                        value: 7.9
+                        type: null
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            instrument:
+                              type: string
+                            exchangeTimestamp:
+                              type: integer
+                            value:
+                              type: number
+                            type:
+                              type: string
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Options
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/order-book-events/information:
+    get:
+      summary: Events Information
+      description: Provides availability details for options order book events, including contract symbols, underlying assets, and data coverage periods across supported exchanges to track order book activity over time.
+      operationId: options-order-book-events-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones. **[Defaults]** `false* | true`'
+        schema:
+          type: boolean
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/options/order-book-events/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: bybit
+                        instrument: BTC-18SEP24-53000-C
+                        underlying: BTC
+                        startDate: 1726446949183
+                        endDate: 1726611867867
+                      - exchange: bybit
+                        instrument: BTC-18SEP24-53000-P
+                        underlying: BTC
+                        startDate: 1726446941517
+                        endDate: 1726611898406
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                          api-version:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                            instrument:
+                              type: string
+                            underlying:
+                              type: string
+                            startDate:
+                              type: integer
+                            endDate:
+                              type: integer
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Options
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/order-book-events/{instrument}:
+    get:
+      summary: Events Historical
+      description: Provides historical order book events for options contracts, detailing bid and ask levels, volumes, and order counts at specific timestamps to track market depth and activity over time across supported exchanges.
+      operationId: options-order-book-events-historical
+      parameters:
+      - name: instrument
+        in: path
+        description: The instrument for which to retrieve the requested data.
+        schema:
+          type: string
+          default: BTC-27DEC24-100000-C
+        required: true
+      - name: exchange
+        in: query
+        description: The exchange(s) for which to retrieve the requested data (comma separated). **[Default]** All available exchanges.
+        required: true
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Defaults]** Beginning of the current hour (max time range is 1 hour).'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Defaults]** One hour after the beginning of the current hour (max time range is 1 hour).'
+        schema:
+          type: string
+          format: date-time
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/options/order-book-events/BTC-18SEP24-60000-C?cursor=N4IgpgHgxgFghgOwOZhALhAIwJ6YJYAuIANCFAK4BOAzgPaXoLkA2zp1BclBAInAajQBGAOwAmAGwBWAMySAnEPnyppMAgAmfAelGSJQsVIAcU%2BTIAspPAijNyGsAFUE1cgAd39ARoCi0eGQwanQAMzhmajBSAjwAWzAAMXo4-nQQOLxWPCioWk0Q0lCUtIwAKzoEEhA6bgBpMGx0vWk5CUVlKQB9AAYunHwCLoV5CzF5CRl5MS6AIQAVAGEAWiFjAGVfAAUxC2WJHsOe5cWusDAJOGMZUNCQAF8gA
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTC-18SEP24-60000-C
+                        exchange: bybit
+                        exchangeTimestamp: 1726526186266
+                        exchangeTimestampNanoseconds: 0
+                        sequence: '26992247584'
+                        ask:
+                        - price: 95
+                          volume: 3.92
+                          numOrders: null
+                        - price: 100
+                          volume: 26.97
+                          numOrders: null
+                        bid: []
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Options
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/order-book-snapshots/information:
+    get:
+      summary: Snapshots Information
+      description: Provides availability details for options order book snapshots, including contract symbols, underlying assets, and data coverage periods across supported exchanges to support historical market depth analysis.
+      operationId: options-order-book-snapshots-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones. **[Defaults]** `True | False*`.'
+        schema:
+          type: boolean
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/market/options/order-book-snapshots/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0IOAtkgGID2ATnelkSHWDDGEpRmEBORA1ibDl0IgAVuRESQAB3QBzAoQCMNcmABe2nQAZzAXyA
+                      data:
+                      - exchange: deribit
+                        instrument: BTC-10MAR23-12000-C
+                        startDate: 1676593260000
+                        endDate: 1677742980000
+                        underlying: BTC-10MAR23
+                      - exchange: deribit
+                        instrument: BTC-10MAR23-12000-P
+                        startDate: 1676593260000
+                        endDate: 1677742980000
+                        underlying: BTC-10MAR23
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            exchange:
+                              type: string
+                            instrument:
+                              type: string
+                            startDate:
+                              type: integer
+                            endDate:
+                              type: integer
+                            underlying:
+                              type: string
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Options
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/order-book-snapshots/{instrument}:
+    get:
+      summary: Snapshots Historical
+      description: Provides detailed historical snapshots of options order books, including bid and ask levels, underlying prices, market statistics, open interest, and Greeks, enabling in-depth analysis of market depth and options pricing over time across supported exchanges.
+      operationId: options-order-book-snapshots-historical
+      parameters:
+      - name: instrument
+        in: path
+        description: The instrument for which to retrieve the requested data.
+        schema:
+          type: string
+          default: BTC-27DEC24-100000-C
+        required: true
+      - name: exchange
+        in: query
+        description: '**[Required]** The exchange(s) for which to retrieve the requested data (comma separated). **[Default]** All available exchanges.'
+        required: true
+        schema:
+          type: string
+          default: deribit
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Defaults]** Beginning of the current minute (max time range is 1 hour).'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Defaults]** Ten minutes after the beginning of the current hour (max time range is 1 hour).'
+        schema:
+          type: string
+          format: date-time
+      - name: timestamp
+        in: query
+        description: '**[Optional]** The timestamp at which to return the order book information (closest match, lower or equal to the timestamp specified).'
+        schema:
+          type: string
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: maxLevel
+        in: query
+        description: The number of order book levels that should be returned.
+        schema:
+          type: integer
+          format: int32
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/options/order-book-snapshots/BTC-13FEB26-100000-C?cursor=N4IgpgHgxgFghgOwOZhALhAEzAJwJYBGeALiADQhQCuOAzgPY7oJUA2rFxeAtmLcXG4AHZmw4h%2BcHMQAicYqjQBGAOwA2AJwqAHAFY1AJgAMugCwqKYBJjkL0qzTv1mDaoxTwIorKtgCqCLRUQkKMCpgAotDwyHzoAGZwrLRgFNxwEAAyYABuYKyi7Jw8YABijOmkGNx47HgpUPTWtOQg8RXy6CAAVgwIrQzSANJgAJ5dDlp6hkazRgD62PhExPNKAMwqukqa2toGugbzAEIAKgDCALQbpRHHrtdzs5fnIAC%2BQA
+                        api-version: 2023-09-30 00:00:00+00:00
+                      data:
+                      - timestamp: 1769699280000
+                        instrument: BTC-13FEB26-100000-C
+                        exchange: deribit
+                        exchangeTimestamp: 1769699279646
+                        exchangeTimestampNanoseconds: 0
+                        sequence: 137341145308
+                        underlyingPrice: 86308.1667
+                        underlyingIndex: SYN.BTC-13FEB26
+                        low: 0.0012
+                        high: 0.0031
+                        volume: 112.6
+                        volumeUSD: 16365.05
+                        priceChange: -58.6207
+                        openInterest: 1392.8
+                        minPrice: 0.0001
+                        maxPrice: 0.016
+                        markPrice: 0.0012
+                        markIv: 40.59
+                        lastPrice: 0.0012
+                        interestRate: 0
+                        indexPrice: 86149.28
+                        estimatedDeliveryPrice: 0
+                        rho: 1.30112
+                        vega: 14.51698
+                        delta: 0.03865
+                        gamma: 1.0e-05
+                        theta: -20.04074
+                        bidIv: 40.42
+                        askIv: 42.12
+                        bestBidPrice: 0.0012
+                        bestAskPrice: 0.0015
+                        bestBidVolume: 3.7
+                        bestAskVolume: 69.2
+                        state: open
+                        ask:
+                        - price: 0.0295
+                          volume: 69.2
+                          numOrders: null
+                        - price: 0.0295
+                          volume: 69.2
+                          numOrders: null
+                        - price: 0.0295
+                          volume: 69.2
+                          numOrders: null
+                        bid:
+                        - price: 0.0012
+                          volume: 3.7
+                          numOrders: null
+                        - price: 0.0011
+                          volume: 16.9
+                          numOrders: null
+                        - price: 0.001
+                          volume: 42
+                          numOrders: null
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  payload:
+                    type: object
+                    properties:
+                      metadata:
+                        type: object
+                        properties:
+                          next:
+                            type: string
+                            description: Cursor for pagination
+                          api-version:
+                            type: string
+                            description: API version used
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            timestamp:
+                              type: integer
+                              format: int64
+                            instrument:
+                              type: string
+                            exchange:
+                              type: string
+                            exchangeTimestamp:
+                              type: integer
+                              format: int64
+                            exchangeTimestampNanoseconds:
+                              type: integer
+                            sequence:
+                              type: string
+                            underlyingPrice:
+                              type: number
+                            underlyingIndex:
+                              type: string
+                            low:
+                              type: number
+                            high:
+                              type: number
+                            volume:
+                              type: number
+                            volumeUSD:
+                              type: number
+                            priceChange:
+                              type: number
+                            openInterest:
+                              type: number
+                            minPrice:
+                              type: number
+                            maxPrice:
+                              type: number
+                            markPrice:
+                              type: number
+                            markIv:
+                              type: number
+                            lastPrice:
+                              type: number
+                            interestRate:
+                              type: number
+                            indexPrice:
+                              type: number
+                            estimatedDeliveryPrice:
+                              type: number
+                            rho:
+                              type: number
+                            vega:
+                              type: number
+                            delta:
+                              type: number
+                            gamma:
+                              type: number
+                            theta:
+                              type: number
+                            bidIv:
+                              type: number
+                            askIv:
+                              type: number
+                            bestBidPrice:
+                              type: number
+                            bestAskPrice:
+                              type: number
+                            bestBidVolume:
+                              type: number
+                            bestAskVolume:
+                              type: number
+                            state:
+                              type: string
+                            ask:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  price:
+                                    type: number
+                                  volume:
+                                    type: number
+                                  numOrders:
+                                    type: integer
+                                    nullable: true
+                            bid:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  price:
+                                    type: number
+                                  volume:
+                                    type: number
+                                  numOrders:
+                                    type: integer
+                                    nullable: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Options
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/tickers/information:
+    get:
+      summary: Information
+      description: Provides details about available options tickers on various exchanges, including essential information about each options contract's underlying asset, trading period, and contract type.
+      operationId: options-tickers-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones. **[Defaults]** `false* | true`'
+        schema:
+          type: boolean
+      - name: includeDates
+        in: query
+        description: '**[Optional]** Include date ranges for each record. **[Defaults]** `false* | true`'
+        schema:
+          type: boolean
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/options/tickers/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: bybit
+                        instrument: BTC-16AUG24-50000-C
+                        underlying: BTC
+                        startDate: 1721895381123
+                        endDate: 1722346199223
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              example: https://api.amberdata.com/markets/options/tickers/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              exchange:
+                                type: string
+                                example: bybit
+                              instrument:
+                                type: string
+                                example: BTC-16AUG24-50000-C
+                              underlying:
+                                type: string
+                                example: BTC
+                              startDate:
+                                type: integer
+                                example: 1721895381123
+                                default: 0
+                              endDate:
+                                type: integer
+                                example: 1722346199223
+                                default: 0
+      deprecated: false
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Options
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/tickers/{instrument}:
+    get:
+      summary: Historical
+      description: Provides detailed historical data for options tickers, including price metrics, trading volumes, Greeks, and implied volatility. This endpoint is particularly useful for analyzing past market conditions for specific options on various exchanges.
+      operationId: options-tickers-historical
+      parameters:
+      - name: instrument
+        in: path
+        description: The instrument for which to retrieve the requested data.
+        schema:
+          type: string
+          default: BTC-27DEC24-100000-C
+        required: true
+      - name: exchange
+        in: query
+        description: The exchange(s) for which to retrieve the requested data (comma separated). **[Default]** All available exchanges.
+        required: true
+        schema:
+          type: string
+          default: bybit
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Defaults]** Beginning of the current hour (max time range is 1 hour). **[Formats]** `ms* | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Defaults]** One hour after the beginning of the current hour (max time range is 1 hour). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/options/tickers/BTC-16AUG24-50000-C?cursor=N4IgpgHgxgFghgOwOZhALhAIwJ6YJYAuIANCFAK4BOAzgPaXoLkA2zp1BclBAInAajQBGAOwAmCQDYAzNICscgAxjppMAgAmfAelETpAFnGSAnAA5ZpPAijNyGsAFUE1cgAc39ARoCi0eMhg1OgAZnDM1GCkBHgAtmAAYvSx-OggsXiseJFQtJrBpCHJqRgAVnQIJCB03ADSYNhpelKyCsrSAPqKHTj4BF0dAEIAKgDCALRCkgCCjgDiYgbjSoqr46MgAL5AA
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTC-16AUG24-50000-C
+                        exchange: bybit
+                        exchangeTimestamp: 1722260870023
+                        exchangeTimestampNanoseconds: 0
+                        bid: 0
+                        mid: 0
+                        ask: 0
+                        last: 0
+                        bidVolume: 0
+                        askVolume: 0
+                        lastVolume: null
+                        baseVolume: null
+                        quoteVolume: null
+                        sequence: null
+                        underlyingPrice: 69793.36
+                        underlyingIndex: null
+                        settlementPrice: null
+                        markPrice: 19806.40225084
+                        low: 0
+                        high: 0
+                        volume: 0
+                        volumeUSD: null
+                        priceChange: 0
+                        openInterest: 0
+                        minPrice: null
+                        maxPrice: null
+                        markIv: 0.5997
+                        interestRate: null
+                        indexPrice: 69398.4
+                        rho: null
+                        vega: 2.16053057
+                        delta: 0.99516469
+                        gamma: 1.52e-06
+                        theta: -3.64786985
+                        bidIv: 0
+                        askIv: 0
+                        estimatedDeliveryPrice: null
+                        state: null
+                        askTimestamp: null
+                        bidTimestamp: null
+                        askTimestampNanoseconds: null
+                        bidTimestampNanoseconds: null
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              example: https://api.amberdata.com/markets/options/tickers/BTC-16AUG24-50000-C?cursor=N4IgpgHgxgFghgOwOZhALhAIwJ6YJYAuIANCFAK4BOAzgPaXoLkA2zp1BclBAInAajQBGAOwAmCQDYAzNICscgAxjppMAgAmfAelETpAFnGSAnAA5ZpPAijNyGsAFUE1cgAc39ARoCi0eMhg1OgAZnDM1GCkBHgAtmAAYvSx-OggsXiseJFQtJrBpCHJqRgAVnQIJCB03ADSYNhpelKyCsrSAPqKHTj4BF0dAEIAKgDCALRCkgCCjgDiYgbjSoqr46MgAL5AA
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              instrument:
+                                type: string
+                                example: BTC-16AUG24-50000-C
+                              exchange:
+                                type: string
+                                example: bybit
+                              exchangeTimestamp:
+                                type: integer
+                                example: 1722260870023
+                                default: 0
+                              exchangeTimestampNanoseconds:
+                                type: integer
+                                example: 0
+                                default: 0
+                              bid:
+                                type: integer
+                                example: 0
+                                default: 0
+                              mid:
+                                type: integer
+                                example: 0
+                                default: 0
+                              ask:
+                                type: integer
+                                example: 0
+                                default: 0
+                              last:
+                                type: integer
+                                example: 0
+                                default: 0
+                              bidVolume:
+                                type: integer
+                                example: 0
+                                default: 0
+                              askVolume:
+                                type: integer
+                                example: 0
+                                default: 0
+                              lastVolume: {}
+                              baseVolume: {}
+                              quoteVolume: {}
+                              sequence: {}
+                              underlyingPrice:
+                                type: number
+                                example: 69793.36
+                                default: 0
+                              underlyingIndex: {}
+                              settlementPrice: {}
+                              markPrice:
+                                type: number
+                                example: 19806.40225084
+                                default: 0
+                              low:
+                                type: integer
+                                example: 0
+                                default: 0
+                              high:
+                                type: integer
+                                example: 0
+                                default: 0
+                              volume:
+                                type: integer
+                                example: 0
+                                default: 0
+                              volumeUSD: {}
+                              priceChange:
+                                type: integer
+                                example: 0
+                                default: 0
+                              openInterest:
+                                type: integer
+                                example: 0
+                                default: 0
+                              minPrice: {}
+                              maxPrice: {}
+                              markIv:
+                                type: number
+                                example: 0.5997
+                                default: 0
+                              interestRate: {}
+                              indexPrice:
+                                type: number
+                                example: 69398.4
+                                default: 0
+                              rho: {}
+                              vega:
+                                type: number
+                                example: 2.16053057
+                                default: 0
+                              delta:
+                                type: number
+                                example: 0.99516469
+                                default: 0
+                              gamma:
+                                type: number
+                                example: 1.52e-06
+                                default: 0
+                              theta:
+                                type: number
+                                example: -3.64786985
+                                default: 0
+                              bidIv:
+                                type: integer
+                                example: 0
+                                default: 0
+                              askIv:
+                                type: integer
+                                example: 0
+                                default: 0
+                              estimatedDeliveryPrice: {}
+                              state: {}
+                              askTimestamp: {}
+                              bidTimestamp: {}
+                              askTimestampNanoseconds: {}
+                              bidTimestampNanoseconds: {}
+      deprecated: false
+      tags:
+      - Options
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/trades/information:
+    get:
+      summary: Information
+      description: Povides metadata on available options trades across various exchanges. This includes information on instruments (specific options contracts) such as their exchange, underlying asset, and the time period during which the trade data is available.
+      operationId: options-trades-information
+      parameters:
+      - name: exchange
+        in: query
+        description: '**[Optional]** The exchange(s) for which to retrieve the most current data (comma separated). **[Default]** All available exchanges.'
+        schema:
+          type: string
+      - name: instrument
+        in: query
+        description: Only return data for the given pair.
+        schema:
+          type: string
+      - name: includeInactive
+        in: query
+        description: '**[Optional]** If true, endpoint returns all instruments, including delisted ones. **[Defaults]** `false* | true`'
+        schema:
+          type: boolean
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: https://api.amberdata.com/markets/options/trades/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                        api-version: '2023-09-30'
+                      data:
+                      - exchange: bybit
+                        instrument: BTC-16AUG24-50000-P
+                        underlying: BTC
+                        startDate: 1721916316594
+                        endDate: 1722412049804
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next:
+                              type: string
+                              example: https://api.amberdata.com/markets/options/trades/information?cursor=N4IglgdgxgNgrgEwKYEkIEMoBcwDckgBcAZujAM5IA0408yAqhOXAA6sD2ATlkggKIAPKAAt0EAOZJyRUhWogcAWyQAxbkvRYiIJWBgwwlKBwgIZNYhq06AVuVMgardFKIBGGuTAAvAoQBWAAYggF8gA
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              exchange:
+                                type: string
+                                example: bybit
+                              instrument:
+                                type: string
+                                example: BTC-16AUG24-50000-P
+                              underlying:
+                                type: string
+                                example: BTC
+                              startDate:
+                                type: integer
+                                example: 1721916316594
+                                default: 0
+                              endDate:
+                                type: integer
+                                example: 1722412049804
+                                default: 0
+      deprecated: false
+      tags:
+      - Options
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com/markets
+  /options/trades/{instrument}:
+    get:
+      summary: Historical
+      description: Provides detailed historical trade data for a specific options instrument, including the trade's timestamp, side (buy or sell), price, volume, and other relevant metrics like the index price, mark price, and implied volatility (IV) at the time of the trade.
+      operationId: options-trades-historical
+      parameters:
+      - name: instrument
+        in: path
+        description: The instrument for which to retrieve the requested data.
+        schema:
+          type: string
+          default: BTC-27DEC24-100000-C
+        required: true
+      - name: exchange
+        in: query
+        description: '**[Required]** The exchange(s) for which to retrieve the requested data (comma separated). **[Default]** All available exchanges.'
+        required: true
+        schema:
+          type: string
+          default: deribit
+      - name: startDate
+        in: query
+        description: '**[Optional]** Payload only includes data after this date (inclusive). **[Defaults]** Beginning of the current hour (max time range is 1 hour). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: endDate
+        in: query
+        description: '**[Optional]** Payload only includes data before this date (exclusive). **[Defaults]** One hour after the beginning of the current hour (max time range is 1 hour). **[Formats]** `seconds | milliseconds | iso8601` **[Examples]** `1578531600 | 1578531600000 | 2020-09-01T01:00:00`'
+        schema:
+          type: string
+          format: date-time
+      - name: timeFormat
+        in: query
+        description: '**[Optional]** Time format of the timestamps in the return payload. **[Defaults]** `milliseconds | ms* | iso | iso8601 | hr | human_readable`'
+        schema:
+          type: string
+      - name: sortDirection
+        in: query
+        description: '**[Optional]** Specifies the direction in which the data is sorted (by timestamp).   **[Defaults]** asc (ascending order).   **[Usage Conditions]** This parameter can only be used if the `startDate` and `endDate` timeframe is within the most recent 24 hours, or if the `startDate` and `endDate` parameters are not used at all.   **[Examples]** ascending | descending | asc | desc'
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        description: ''
+        schema:
+          type: string
+          default: gzip, deflate, br
+      - name: api-version
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Success:
+                  value:
+                    status: 200
+                    title: OK
+                    description: Successful request
+                    payload:
+                      metadata:
+                        next: null
+                        api-version: '2023-09-30'
+                      data:
+                      - instrument: BTC-16AUG24-50000-P
+                        exchange: bybit
+                        exchangeTimestamp: 1722412049804
+                        exchangeTimestampNanoseconds: 0
+                        isBuySide: true
+                        price: 25
+                        volume: 0.1
+                        tradeId: 8212ab1b-88f9-5c3b-a55d-2bf79a805e11
+                        quoteVolume: null
+                        sequence: null
+                        tickDirection: null
+                        indexPrice: 66292.12
+                        markPrice: 39.59685034
+                        underlyingIndex: null
+                        underlyingPrice: 66607.93
+                        iv: 0.6291
+              schema:
+                oneOf:
+                - title: Success
+                  type: object
+                  properties:
+                    status:
+                      type: integer
+                      example: 200
+                      default: 0
+                    title:
+                      type: string
+                      example: OK
+                    description:
+                      type: string
+                      example: Successful request
+                    payload:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            next: {}
+                            api-version:
+                              type: string
+                              example: '2023-09-30'
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              instrument:
+                                type: string
+                                example: BTC-16AUG24-50000-P
+                              exchange:
+                                type: string
+                                example: bybit
+                              exchangeTimestamp:
+                                type: integer
+                                example: 1722412049804
+                                default: 0
+                              exchangeTimestampNanoseconds:
+                                type: integer
+                                example: 0
+                                default: 0
+                              isBuySide:
+                                type: boolean
+                                example: true
+                                default: true
+                              price:
+                                type: integer
+                                example: 25
+                                default: 0
+                              volume:
+                                type: number
+                                example: 0.1
+                                default: 0
+                              tradeId:
+                                type: string
+                                example: 8212ab1b-88f9-5c3b-a55d-2bf79a805e11
+                              quoteVolume:
+                                type: number
+                              sequence: {}
+                              tickDirection: {}
+                              indexPrice:
+                                type: number
+                                example: 66292.12
+                                default: 0
+                              markPrice:
+                                type: number
+                                example: 39.59685034
+                                default: 0
+                              underlyingIndex: {}
+                              underlyingPrice:
+                                type: number
+                                example: 66607.93
+                                default: 0
+                              iv:
+                                type: number
+                                example: 0.6291
+                                default: 0
+      deprecated: false
+      tags:
+      - Options
+      security:
+      - ApiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com/markets
   /markets/options/exchanges/reference:
     get:
       operationId: getOptionsExchangesReference
@@ -33,6 +2721,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      security:
+      - apiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com
+      description: Amberdata REST API
   /markets/options/trades/{instrument}:
     get:
       operationId: getOptionsTrades
@@ -52,6 +2745,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      security:
+      - apiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com
+      description: Amberdata REST API
   /markets/options/order-book-snapshots/{instrument}:
     get:
       operationId: getOptionsOrderBookSnapshots
@@ -69,7 +2767,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
+      security:
+      - apiKeyAuth: []
+    servers:
+    - url: https://api.amberdata.com
+      description: Amberdata REST API
 components:
+  parameters:
+    StartDate:
+      name: startDate
+      in: query
+      required: false
+      description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    Exchange:
+      name: exchange
+      in: query
+      required: false
+      description: Filter by exchange (e.g. binance, coinbase, deribit).
+      schema:
+        type: string
+    EndDate:
+      name: endDate
+      in: query
+      required: false
+      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    Currency:
+      name: currency
+      in: query
+      required: false
+      description: Filter by underlying currency (e.g. BTC, ETH).
+      schema:
+        type: string
+    InstrumentPath:
+      name: instrument
+      in: path
+      required: true
+      description: The instrument identifier for the futures or options contract.
+      schema:
+        type: string
   schemas:
     ApiResponse:
       type: object
@@ -98,45 +2837,21 @@ components:
               description: The array of records for the requested resource.
               items:
                 type: object
-  parameters:
-    StartDate:
-      name: startDate
-      in: query
-      required: false
-      description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
-      schema:
-        type: string
-    InstrumentPath:
-      name: instrument
-      in: path
-      required: true
-      description: The instrument identifier for the futures or options contract.
-      schema:
-        type: string
-    Exchange:
-      name: exchange
-      in: query
-      required: false
-      description: Filter by exchange (e.g. binance, coinbase, deribit).
-      schema:
-        type: string
-    Currency:
-      name: currency
-      in: query
-      required: false
-      description: Filter by underlying currency (e.g. BTC, ETH).
-      schema:
-        type: string
-    EndDate:
-      name: endDate
-      in: query
-      required: false
-      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
-      schema:
-        type: string
   securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
     apiKeyAuth:
       type: apiKey
       in: header
       name: x-api-key
       description: Unique, user-specific API key. Required on every REST request via the x-api-key header.
+x-refined-from:
+- amberdata-market-openapi.yaml
+- amberdata-openapi.yml
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

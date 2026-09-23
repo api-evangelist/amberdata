@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Amberdata DeFi On-Chain API
+  title: Amberdata On Chain API
   description: Amberdata's institutional-grade digital asset and blockchain data API. Provides spot market data (prices, OHLCV, tickers, trades, order books), derivatives across futures and options (funding rates, open interest, liquidations, implied volatility, Greeks), DeFi (DEX and lending), and on-chain blockchain data (blocks, transactions, addresses, tokens). Every request requires the x-api-key header. An optional api-version header selects a dated API version.
   termsOfService: https://www.amberdata.io/terms-of-service
   contact:
@@ -13,14 +13,14 @@ servers:
 security:
 - apiKeyAuth: []
 tags:
-- name: On-Chain
+- name: On Chain
   description: On-chain blockchain data (blocks, transactions, addresses, tokens).
 paths:
   /blockchains/{blockchainId}/blocks:
     get:
       operationId: getBlocks
       tags:
-      - On-Chain
+      - On Chain
       summary: Blocks
       description: Returns block information for the specified blockchain, including block number, hash, timestamp, and aggregate metrics.
       parameters:
@@ -38,7 +38,7 @@ paths:
     get:
       operationId: getTransactions
       tags:
-      - On-Chain
+      - On Chain
       summary: Transactions
       description: Returns transaction data including sending and receiving addresses (with token transfers), fees (gas), amounts, op codes, block number and hash, and timestamps.
       parameters:
@@ -56,7 +56,7 @@ paths:
     get:
       operationId: getTransaction
       tags:
-      - On-Chain
+      - On Chain
       summary: Transaction by hash
       description: Returns a single transaction by its hash on the specified blockchain.
       parameters:
@@ -78,7 +78,7 @@ paths:
     get:
       operationId: getAddressBalances
       tags:
-      - On-Chain
+      - On Chain
       summary: Address balances
       description: Returns account balance and token balances for the specified address on the given blockchain.
       parameters:
@@ -95,7 +95,7 @@ paths:
     get:
       operationId: getAddressTransactions
       tags:
-      - On-Chain
+      - On Chain
       summary: Address transactions
       description: Returns transactions for the specified address on the given blockchain.
       parameters:
@@ -112,7 +112,7 @@ paths:
     get:
       operationId: getTokenInformation
       tags:
-      - On-Chain
+      - On Chain
       summary: Token information
       description: Returns token information including name, symbol, contract address, decimals, total supply, and circulating supply.
       parameters:
@@ -129,7 +129,7 @@ paths:
     get:
       operationId: getTokenTransfers
       tags:
-      - On-Chain
+      - On Chain
       summary: Token transfers
       description: Returns token transfers including sender, receiver, amount, transaction hash, and timestamp.
       parameters:
@@ -148,7 +148,7 @@ paths:
     get:
       operationId: getTokenHolders
       tags:
-      - On-Chain
+      - On Chain
       summary: Token holders
       description: Returns token holder information including the number of holders, their addresses, and tokens held by each.
       parameters:
@@ -162,6 +162,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
 components:
+  parameters:
+    StartDate:
+      name: startDate
+      in: query
+      required: false
+      description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    BlockchainId:
+      name: blockchainId
+      in: path
+      required: true
+      description: The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces.
+      schema:
+        type: string
+    EndDate:
+      name: endDate
+      in: query
+      required: false
+      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    AddressPath:
+      name: address
+      in: path
+      required: true
+      description: The on-chain address or token contract address.
+      schema:
+        type: string
   schemas:
     ApiResponse:
       type: object
@@ -190,35 +219,6 @@ components:
               description: The array of records for the requested resource.
               items:
                 type: object
-  parameters:
-    BlockchainId:
-      name: blockchainId
-      in: path
-      required: true
-      description: The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces.
-      schema:
-        type: string
-    StartDate:
-      name: startDate
-      in: query
-      required: false
-      description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
-      schema:
-        type: string
-    EndDate:
-      name: endDate
-      in: query
-      required: false
-      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
-      schema:
-        type: string
-    AddressPath:
-      name: address
-      in: path
-      required: true
-      description: The on-chain address or token contract address.
-      schema:
-        type: string
   securitySchemes:
     apiKeyAuth:
       type: apiKey

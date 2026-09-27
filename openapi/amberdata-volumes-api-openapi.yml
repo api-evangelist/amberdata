@@ -164,7 +164,7 @@ paths:
     get:
       summary: Exchange Volume USD
       description: This endpoint displays the total volume per exchange for all available pairs, normalized to USD. This means that crypto-to-crypto pairs (such as ETH_BTC) are converted to USD before aggregation. Users can pass an exchange parameter to isolate volume data for a specific exchange or leave it blank to retrieve data for all supported exchanges. Users can also isolate volume that meet a size threshold using the “orderSizeCategoryUsd” parameter. A useful example might be to pass 100k+ threshold to measure which exchanges have the most “large ticket” volume (aka “whale” volume).
-      operationId: spot-analytics-volumes-exchange
+      operationId: getVolumesExchange
       parameters:
       - name: exchange
         in: query
@@ -288,6 +288,8 @@ paths:
       - ApiKeyAuth: []
       tags:
       - Volumes
+      x-operation-id-source: normalized
+      x-operation-id-original: spot-analytics-volumes-exchange
 components:
   securitySchemes:
     ApiKeyAuth:

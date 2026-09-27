@@ -732,7 +732,7 @@ paths:
     get:
       summary: Futures Depth Instruments
       description: This endpoint returns all available exchanges and futures/perpetual instruments with order book depth data.
-      operationId: derivatives-information-instruments
+      operationId: getAnalyticsFuturesPerpetualsDepthInformation
       parameters:
       - name: exchange
         in: query
@@ -821,6 +821,8 @@ paths:
       - ApiKeyAuth: []
       tags:
       - Analytics
+      x-operation-id-source: normalized
+      x-operation-id-original: derivatives-information-instruments
     servers:
     - url: https://api.amberdata.com/markets/derivatives
   /analytics/futures-perpetuals/trade-aggregation:

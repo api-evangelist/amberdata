@@ -2773,42 +2773,6 @@ paths:
     - url: https://api.amberdata.com
       description: Amberdata REST API
 components:
-  parameters:
-    StartDate:
-      name: startDate
-      in: query
-      required: false
-      description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
-      schema:
-        type: string
-    Exchange:
-      name: exchange
-      in: query
-      required: false
-      description: Filter by exchange (e.g. binance, coinbase, deribit).
-      schema:
-        type: string
-    EndDate:
-      name: endDate
-      in: query
-      required: false
-      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
-      schema:
-        type: string
-    Currency:
-      name: currency
-      in: query
-      required: false
-      description: Filter by underlying currency (e.g. BTC, ETH).
-      schema:
-        type: string
-    InstrumentPath:
-      name: instrument
-      in: path
-      required: true
-      description: The instrument identifier for the futures or options contract.
-      schema:
-        type: string
   schemas:
     ApiResponse:
       type: object
@@ -2837,6 +2801,42 @@ components:
               description: The array of records for the requested resource.
               items:
                 type: object
+  parameters:
+    InstrumentPath:
+      name: instrument
+      in: path
+      required: true
+      description: The instrument identifier for the futures or options contract.
+      schema:
+        type: string
+    Exchange:
+      name: exchange
+      in: query
+      required: false
+      description: Filter by exchange (e.g. binance, coinbase, deribit).
+      schema:
+        type: string
+    StartDate:
+      name: startDate
+      in: query
+      required: false
+      description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    EndDate:
+      name: endDate
+      in: query
+      required: false
+      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    Currency:
+      name: currency
+      in: query
+      required: false
+      description: Filter by underlying currency (e.g. BTC, ETH).
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

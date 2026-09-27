@@ -57,18 +57,18 @@ components:
       description: The trading pair (e.g. eth_usd, btc_usd).
       schema:
         type: string
-    StartDate:
-      name: startDate
-      in: query
-      required: false
-      description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
-      schema:
-        type: string
     EndDate:
       name: endDate
       in: query
       required: false
       description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    StartDate:
+      name: startDate
+      in: query
+      required: false
+      description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
       schema:
         type: string
   schemas:

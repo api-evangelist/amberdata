@@ -3322,13 +3322,6 @@ paths:
     - url: https://api.amberdata.com/markets
 components:
   parameters:
-    Pair:
-      name: pair
-      in: query
-      required: false
-      description: Filter by trading pair (e.g. eth_usd, btc_usd).
-      schema:
-        type: string
     TimeInterval:
       name: timeInterval
       in: query
@@ -3343,6 +3336,20 @@ components:
       description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
       schema:
         type: string
+    Exchange:
+      name: exchange
+      in: query
+      required: false
+      description: Filter by exchange (e.g. binance, coinbase, deribit).
+      schema:
+        type: string
+    Pair:
+      name: pair
+      in: query
+      required: false
+      description: Filter by trading pair (e.g. eth_usd, btc_usd).
+      schema:
+        type: string
     EndDate:
       name: endDate
       in: query
@@ -3355,13 +3362,6 @@ components:
       in: path
       required: true
       description: The trading pair (e.g. eth_usd, btc_usd).
-      schema:
-        type: string
-    Exchange:
-      name: exchange
-      in: query
-      required: false
-      description: Filter by exchange (e.g. binance, coinbase, deribit).
       schema:
         type: string
   schemas:

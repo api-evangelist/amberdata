@@ -163,18 +163,11 @@ paths:
                 $ref: '#/components/schemas/ApiResponse'
 components:
   parameters:
-    AddressPath:
-      name: address
+    BlockchainId:
+      name: blockchainId
       in: path
       required: true
-      description: The on-chain address or token contract address.
-      schema:
-        type: string
-    EndDate:
-      name: endDate
-      in: query
-      required: false
-      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
+      description: The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces.
       schema:
         type: string
     StartDate:
@@ -184,11 +177,18 @@ components:
       description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
       schema:
         type: string
-    BlockchainId:
-      name: blockchainId
+    EndDate:
+      name: endDate
+      in: query
+      required: false
+      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    AddressPath:
+      name: address
       in: path
       required: true
-      description: The blockchain network identifier (e.g. ethereum-mainnet, bitcoin-mainnet). Also selectable via the x-amberdata-blockchain-id header on some namespaces.
+      description: The on-chain address or token contract address.
       schema:
         type: string
   schemas:

@@ -3812,13 +3812,6 @@ paths:
       description: Amberdata REST API
 components:
   parameters:
-    EndDate:
-      name: endDate
-      in: query
-      required: false
-      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
-      schema:
-        type: string
     StartDate:
       name: startDate
       in: query
@@ -3826,18 +3819,25 @@ components:
       description: Start of the time range (ISO 8601 timestamp or milliseconds epoch).
       schema:
         type: string
-    InstrumentPath:
-      name: instrument
-      in: path
-      required: true
-      description: The instrument identifier for the futures or options contract.
-      schema:
-        type: string
     Exchange:
       name: exchange
       in: query
       required: false
       description: Filter by exchange (e.g. binance, coinbase, deribit).
+      schema:
+        type: string
+    EndDate:
+      name: endDate
+      in: query
+      required: false
+      description: End of the time range (ISO 8601 timestamp or milliseconds epoch).
+      schema:
+        type: string
+    InstrumentPath:
+      name: instrument
+      in: path
+      required: true
+      description: The instrument identifier for the futures or options contract.
       schema:
         type: string
   schemas:

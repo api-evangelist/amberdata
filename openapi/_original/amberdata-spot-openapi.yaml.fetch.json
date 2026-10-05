@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.amberdata.io/http/analytics/spot/openapi.yaml",
+ "requested_url": "https://docs.amberdata.io/http/analytics/spot/openapi.yaml",
+ "status": 200,
+ "content_type": "text/yaml",
+ "bytes": 118203,
+ "sha256": "1cdca07aa8539bd8562beade752242392785d081ca6b9c42ed0a3ea493665b84",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}

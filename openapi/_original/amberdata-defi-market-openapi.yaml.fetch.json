@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.amberdata.io/http/defi-market/openapi.yaml",
+ "requested_url": "https://docs.amberdata.io/http/defi-market/openapi.yaml",
+ "status": 200,
+ "content_type": "text/yaml",
+ "bytes": 41711,
+ "sha256": "76ae7cb8797e0bd61c188b3892edd8c8f9c1eb676df11544b981bffaf25c028e",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}

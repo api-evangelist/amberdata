@@ -227,7 +227,7 @@ apis:
   name: Amberdata Addresses API
   description: The Addresses API from Amberdata — 10 operation(s) for addresses.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/blockchains
   tags:
   - Addresses
   properties:
@@ -237,7 +237,7 @@ apis:
   name: Amberdata Analytics API
   description: The Analytics API from Amberdata — 73 operation(s) for analytics.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/blockchains
   tags:
   - Analytics
   properties:
@@ -247,7 +247,7 @@ apis:
   name: Amberdata Blocks API
   description: The Blocks API from Amberdata — 1 operation(s) for blocks.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/blockchains
   tags:
   - Blocks
   properties:
@@ -257,7 +257,7 @@ apis:
   name: Amberdata Classifications API
   description: The Classifications API from Amberdata — 1 operation(s) for classifications.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/arc
   tags:
   - Classifications
   properties:
@@ -267,7 +267,7 @@ apis:
   name: Amberdata Contracts API
   description: The Contracts API from Amberdata — 1 operation(s) for contracts.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/blockchains
   tags:
   - Contracts
   properties:
@@ -277,7 +277,7 @@ apis:
   name: Amberdata Depth API
   description: The Depth API from Amberdata — 7 operation(s) for depth.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/markets/spot/analytics
   tags:
   - Depth
   properties:
@@ -287,7 +287,7 @@ apis:
   name: Amberdata Dex API
   description: The Dex API from Amberdata — 6 operation(s) for dex.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/market/defi
   tags:
   - DEX
   tags_raw:
@@ -299,7 +299,7 @@ apis:
   name: Amberdata Exchanges API
   description: The Exchanges API from Amberdata — 5 operation(s) for exchanges.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/arc
   tags:
   - Exchange
   tags_raw:
@@ -311,7 +311,7 @@ apis:
   name: Amberdata Lending API
   description: The Lending API from Amberdata — 10 operation(s) for lending.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/defi
   tags:
   - Lending
   properties:
@@ -321,7 +321,7 @@ apis:
   name: Amberdata Liquidity API
   description: The Liquidity API from Amberdata — 1 operation(s) for liquidity.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/market/defi
   tags:
   - Liquidity
   properties:
@@ -331,7 +331,7 @@ apis:
   name: Amberdata Metrics API
   description: The Metrics API from Amberdata — 7 operation(s) for metrics.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/blockchains
   tags:
   - Metrics
   properties:
@@ -341,7 +341,7 @@ apis:
   name: Amberdata Ohlcv API
   description: The Ohlcv API from Amberdata — 2 operation(s) for ohlcv.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/market/defi
   tags:
   - OHLCV
   tags_raw:
@@ -353,7 +353,7 @@ apis:
   name: Amberdata Prices API
   description: The Prices API from Amberdata — 4 operation(s) for prices.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/markets
   tags:
   - Prices
   properties:
@@ -363,7 +363,7 @@ apis:
   name: Amberdata Search API
   description: The Search API from Amberdata — 1 operation(s) for search.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/arc
   tags:
   - Search
   properties:
@@ -373,7 +373,7 @@ apis:
   name: Amberdata Stablecoins API
   description: The Stablecoins API from Amberdata — 1 operation(s) for stablecoins.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/defi
   tags:
   - Stablecoins
   properties:
@@ -383,7 +383,7 @@ apis:
   name: Amberdata Supply API
   description: The Supply API from Amberdata — 2 operation(s) for supply.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/market/metrics
   tags:
   - Supply
   properties:
@@ -393,7 +393,7 @@ apis:
   name: Amberdata Tokens API
   description: The Tokens API from Amberdata — 6 operation(s) for tokens.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/blockchains
   tags:
   - Tokens
   properties:
@@ -403,7 +403,7 @@ apis:
   name: Amberdata Trade API
   description: The Trade API from Amberdata — 6 operation(s) for trade.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/markets/spot/analytics
   tags:
   - Trade
   properties:
@@ -413,7 +413,7 @@ apis:
   name: Amberdata Transactions API
   description: The Transactions API from Amberdata — 1 operation(s) for transactions.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/blockchains
   tags:
   - Transaction
   tags_raw:
@@ -425,7 +425,7 @@ apis:
   name: Amberdata Updates API
   description: The Updates API from Amberdata — 1 operation(s) for updates.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/arc
   tags:
   - Updates
   properties:
@@ -435,7 +435,7 @@ apis:
   name: Amberdata Volumes API
   description: The Volumes API from Amberdata — 2 operation(s) for volumes.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/markets/spot/analytics
   tags:
   - Volumes
   properties:
@@ -445,7 +445,7 @@ apis:
   name: Amberdata Market Cap API
   description: The Market Cap API from Amberdata — 1 operation(s) for market cap.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: wss://ws.web3api.io
+  baseURL: https://api.amberdata.com/blockchains
   tags:
   - Market Cap
   properties:

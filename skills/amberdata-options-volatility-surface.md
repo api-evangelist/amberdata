@@ -2,7 +2,7 @@
 name: Analyze options volatility
 description: Pull implied-volatility surfaces, term structures, and the volatility index for a crypto asset from the Amberdata Derivatives Analytics API.
 api: openapi/amberdata-derivatives-openapi.yaml
-operations: [derivatives-information-instruments, derivatives-volatility-delta-surfaces-constant, derivatives-volatility-term-structures-constant, derivatives-volatility-index, derivatives-volatility-implied-vs-realized]
+operations: [getAnalyticsFuturesPerpetualsDepthInformation, derivatives-volatility-delta-surfaces-constant, derivatives-volatility-term-structures-constant, derivatives-volatility-index, derivatives-volatility-implied-vs-realized]
 generated: '2026-07-22'
 method: generated
 ---

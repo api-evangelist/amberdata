@@ -445,7 +445,7 @@ apis:
   name: Amberdata Market Cap API
   description: The Market Cap API from Amberdata — 1 operation(s) for market cap.
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
-  baseURL: https://api.amberdata.com/blockchains
+  baseURL: wss://ws.web3api.io
   tags:
   - Market Cap
   properties:

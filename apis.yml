@@ -40,7 +40,7 @@ x-docs-platform-confidence: medium
 x-docs-platform-checked: 2026-09-18
 x-docs-hosting: vercel
 tags:
-- Crypto
+- Cryptocurrency
 - Blockchain
 - Market Data
 - Digital Assets
@@ -289,9 +289,10 @@ apis:
   humanURL: https://docs.amberdata.io/real-time/websocket-getting-started
   baseURL: https://api.amberdata.com/market/defi
   tags:
-  - DEX
+  - Decentralized Exchange
   tags_raw:
   - Dex
+  - DEX
   properties:
   - type: OpenAPI
     url: openapi/amberdata-dex-api-openapi.yml

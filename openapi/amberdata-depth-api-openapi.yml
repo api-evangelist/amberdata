@@ -1291,3 +1291,9 @@ x-readme:
   explorer-enabled: true
   proxy-enabled: true
 x-readme-fauxas: true
+x-provenance:
+  method: harvested
+  publisher: Amberdata
+  source: https://docs.amberdata.io/http/analytics/spot/openapi.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

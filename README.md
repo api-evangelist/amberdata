@@ -1,4 +1,4 @@
-# Amberdata (amberdata)
+# Amberdata
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,152 +66,208 @@
 
 Amberdata delivers institutional-grade digital asset and blockchain data through its REST API at https://api.amberdata.com. Coverage spans spot market data (prices, OHLCV, tickers, trades, order books), derivatives across futures and options (funding rates, open interest, liquidations, implied volatility, Greeks), DeFi (DEX trades and lending), and on-chain blockchain data (blocks, transactions, addresses, tokens, transfers), plus low-latency WebSocket streaming.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/amberdata/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/amberdata/refs/heads/main/apis.yml)
+**Areas:** Cryptocurrency · Blockchain · Market Data · Digital Assets · Derivatives · DeFi · Onchain · Real-Time
 
-## Tags
+## Amberdata on APIs.io
 
-- Crypto
-- Blockchain
-- Market Data
-- Digital Assets
-- Derivatives
-- DeFi
-- On-Chain
+Everything profiled for Amberdata is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/amberdata/](https://apis.io/providers/amberdata/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (28)
 
-- **Created:** 2026-06-21
-- **Modified:** 2026-06-21
+- [Amberdata WebSocket Streaming API](https://apis.io/apis/amberdata/websocket-streaming/) — Low-latency real-time WebSocket streaming over a JSON-RPC 2.0 subscribe interface for spot trades and prices, DEX data, and on-chain events, authenticated…
+- [Amberdata DeFi API](https://apis.io/apis/amberdata/amberdata-defi-api/) — Decentralized finance (DEX and lending) data.
+- [Amberdata Futures API](https://apis.io/apis/amberdata/amberdata-futures-api/) — Futures and perpetuals market data and derivatives analytics (funding rates, open interest, liquidations, basis).
+- [Amberdata On-Chain API](https://apis.io/apis/amberdata/amberdata-on-chain-api/) — On-chain blockchain data (blocks, transactions, addresses, tokens).
+- [Amberdata Options API](https://apis.io/apis/amberdata/amberdata-options-api/) — Options market data and volatility analytics (implied volatility, Greeks, surfaces, term structures).
+- [Amberdata Spot API](https://apis.io/apis/amberdata/amberdata-spot-api/) — Spot market analytics across supported exchanges (order-book depth, trade analytics).
+- [Amberdata Addresses API](https://apis.io/apis/amberdata/amberdata-addresses-api/) — The Addresses API from Amberdata — 10 operation(s) for addresses.
+- [Amberdata Analytics API](https://apis.io/apis/amberdata/amberdata-analytics-api/) — The Analytics API from Amberdata — 73 operation(s) for analytics.
+- [Amberdata Blocks API](https://apis.io/apis/amberdata/amberdata-blocks-api/) — The Blocks API from Amberdata — 1 operation(s) for blocks.
+- [Amberdata Classifications API](https://apis.io/apis/amberdata/amberdata-classifications-api/) — The Classifications API from Amberdata — 1 operation(s) for classifications.
+- [Amberdata Contracts API](https://apis.io/apis/amberdata/amberdata-contracts-api/) — The Contracts API from Amberdata — 1 operation(s) for contracts.
+- [Amberdata Depth API](https://apis.io/apis/amberdata/amberdata-depth-api/) — The Depth API from Amberdata — 7 operation(s) for depth.
+- [Amberdata Dex API](https://apis.io/apis/amberdata/amberdata-dex-api/) — The Dex API from Amberdata — 6 operation(s) for dex.
+- [Amberdata Exchanges API](https://apis.io/apis/amberdata/amberdata-exchanges-api/) — The Exchanges API from Amberdata — 5 operation(s) for exchanges.
+- [Amberdata Lending API](https://apis.io/apis/amberdata/amberdata-lending-api/) — The Lending API from Amberdata — 10 operation(s) for lending.
+- [Amberdata Liquidity API](https://apis.io/apis/amberdata/amberdata-liquidity-api/) — The Liquidity API from Amberdata — 1 operation(s) for liquidity.
+- [Amberdata Metrics API](https://apis.io/apis/amberdata/amberdata-metrics-api/) — The Metrics API from Amberdata — 7 operation(s) for metrics.
+- [Amberdata Ohlcv API](https://apis.io/apis/amberdata/amberdata-ohlcv-api/) — The Ohlcv API from Amberdata — 2 operation(s) for ohlcv.
+- [Amberdata Prices API](https://apis.io/apis/amberdata/amberdata-prices-api/) — The Prices API from Amberdata — 4 operation(s) for prices.
+- [Amberdata Search API](https://apis.io/apis/amberdata/amberdata-search-api/) — The Search API from Amberdata — 1 operation(s) for search.
+- [Amberdata Stablecoins API](https://apis.io/apis/amberdata/amberdata-stablecoins-api/) — The Stablecoins API from Amberdata — 1 operation(s) for stablecoins.
+- [Amberdata Supply API](https://apis.io/apis/amberdata/amberdata-supply-api/) — The Supply API from Amberdata — 2 operation(s) for supply.
+- [Amberdata Tokens API](https://apis.io/apis/amberdata/amberdata-tokens-api/) — The Tokens API from Amberdata — 6 operation(s) for tokens.
+- [Amberdata Trade API](https://apis.io/apis/amberdata/amberdata-trade-api/) — The Trade API from Amberdata — 6 operation(s) for trade.
+- [Amberdata Transactions API](https://apis.io/apis/amberdata/amberdata-transactions-api/) — The Transactions API from Amberdata — 1 operation(s) for transactions.
+- [Amberdata Updates API](https://apis.io/apis/amberdata/amberdata-updates-api/) — The Updates API from Amberdata — 1 operation(s) for updates.
+- [Amberdata Volumes API](https://apis.io/apis/amberdata/amberdata-volumes-api/) — The Volumes API from Amberdata — 2 operation(s) for volumes.
+- [Amberdata Market Cap API](https://apis.io/apis/amberdata/amberdata-market-cap-api/) — The Market Cap API from Amberdata — 1 operation(s) for market cap.
 
-## APIs
+### Published properties
 
-### Amberdata Spot Market Data API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Spot market data across supported exchanges - reference rates, prices, OHLCV, tickers, historical trades, and order book snapshots and events for any traded pair (e.g. eth_usd, btc_usd).
+#### AsyncAPI (1)
 
-- **Human URL:** [https://docs.amberdata.io/reference/spot-reference](https://docs.amberdata.io/reference/spot-reference)
-- **Base URL:** `https://api.amberdata.com`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Amberdata WebSocket Streaming API](https://apis.io/asyncapis/amberdata/amberdata-asyncapi/)
 
-- Spot
-- Market Data
-- Prices
-- OHLCV
-- Trades
-- Order Books
+#### Event channels (2)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [Documentation](https://docs.amberdata.io/http/http-api-fundamentals)
-- [API Reference](https://docs.amberdata.io/reference/spot-reference)
-- [OpenAPI](openapi/amberdata-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [AsyncAPI](asyncapi/amberdata-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/amberdata.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amberdata.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [market:spot:prices](https://apis.io/channels/amberdata/market-spot-prices/)
+- [market:spot:trades](https://apis.io/channels/amberdata/market-spot-trades/)
 
-### Amberdata Derivatives API
+#### MCP servers (1)
 
-Futures and options market data and analytics - OHLCV, tickers, trades, open interest, funding rates, liquidations, long/short ratio, order books, plus options implied volatility, Greeks, term structure, and skew.
+Model Context Protocol servers that expose the API to agents.
 
-- **Human URL:** [https://docs.amberdata.io/reference/futures-exchanges-reference](https://docs.amberdata.io/reference/futures-exchanges-reference)
-- **Base URL:** `https://api.amberdata.com`
+- [amberdata-docs](https://apis.io/servers/amberdata/amberdata-docs/)
 
-#### Tags
+#### Agentic access (1)
 
-- Derivatives
-- Futures
-- Options
-- Funding Rates
-- Open Interest
-- Implied Volatility
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Properties
+- [Amberdata Agentic Access](https://apis.io/agentic-access/amberdata/amberdata-agentic-access/)
 
-- [Documentation](https://docs.amberdata.io/http/analytics/derivatives/instruments-information)
-- [API Reference](https://docs.amberdata.io/reference/futures-exchanges-reference)
-- [OpenAPI](openapi/amberdata-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amberdata.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amberdata.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Collections (20)
 
-### Amberdata DeFi API
+Postman and Open Collection request collections.
 
-Decentralized finance data covering DEX pair prices, trades and liquidity (e.g. Uniswap V3), and lending protocol, asset, and wallet position metrics.
+- [Amberdata API](https://apis.io/collections/amberdata/open-amberdata/)
+- [Amberdata DeFi API](https://apis.io/collections/amberdata/open-amberdata-defi-api/)
+- [Amberdata DeFi Futures API](https://apis.io/collections/amberdata/open-amberdata-futures-api/)
+- [Amberdata DeFi On-Chain API](https://apis.io/collections/amberdata/open-amberdata-on-chain-api/)
+- [Amberdata DeFi Options API](https://apis.io/collections/amberdata/open-amberdata-options-api/)
+- [Amberdata DeFi Spot API](https://apis.io/collections/amberdata/open-amberdata-spot-api/)
+- [Asset Reference & Classification API](https://apis.io/collections/amberdata/postman-amberdata-arc/)
+- [blockchain-api](https://apis.io/collections/amberdata/postman-amberdata-blockchain/)
+- [Defi API](https://apis.io/collections/amberdata/postman-amberdata-defi/)
+- [Amberdata DeFi API](https://apis.io/collections/amberdata/postman-amberdata-defi-api/)
+- [Defi Market API](https://apis.io/collections/amberdata/postman-amberdata-defi-market/)
+- [derivatives-api](https://apis.io/collections/amberdata/postman-amberdata-derivatives/)
+- [Amberdata DeFi Futures API](https://apis.io/collections/amberdata/postman-amberdata-futures-api/)
+- [market-api](https://apis.io/collections/amberdata/postman-amberdata-market/)
+- [Market Metrics](https://apis.io/collections/amberdata/postman-amberdata-metrics/)
+- [Amberdata DeFi On-Chain API](https://apis.io/collections/amberdata/postman-amberdata-on-chain-api/)
+- [Amberdata DeFi Options API](https://apis.io/collections/amberdata/postman-amberdata-options-api/)
+- [Pricing](https://apis.io/collections/amberdata/postman-amberdata-price/)
+- [spot-analytics](https://apis.io/collections/amberdata/postman-amberdata-spot/)
+- [Amberdata DeFi Spot API](https://apis.io/collections/amberdata/postman-amberdata-spot-api/)
 
-- **Human URL:** [https://docs.amberdata.io/reference/defi-reference](https://docs.amberdata.io/reference/defi-reference)
-- **Base URL:** `https://api.amberdata.com`
+#### Overlays (9)
 
-#### Tags
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- DeFi
-- DEX
-- Lending
-- Uniswap
-- Liquidity
+- [Amberdata Arc Overlay](https://apis.io/overlays/amberdata/amberdata-arc-overlay/)
+- [Amberdata Blockchain Overlay](https://apis.io/overlays/amberdata/amberdata-blockchain-overlay/)
+- [Amberdata Defi Market Overlay](https://apis.io/overlays/amberdata/amberdata-defi-market-overlay/)
+- [Amberdata Defi Overlay](https://apis.io/overlays/amberdata/amberdata-defi-overlay/)
+- [Amberdata Derivatives Overlay](https://apis.io/overlays/amberdata/amberdata-derivatives-overlay/)
+- [Amberdata Market Overlay](https://apis.io/overlays/amberdata/amberdata-market-overlay/)
+- [Amberdata Metrics Overlay](https://apis.io/overlays/amberdata/amberdata-metrics-overlay/)
+- [Amberdata Price Overlay](https://apis.io/overlays/amberdata/amberdata-price-overlay/)
+- [Amberdata Spot Overlay](https://apis.io/overlays/amberdata/amberdata-spot-overlay/)
 
-#### Properties
+#### Governance rules (1)
 
-- [Documentation](https://docs.amberdata.io/reference/defi-reference)
-- [OpenAPI](openapi/amberdata-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amberdata.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amberdata.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Spectral rulesets for the provider's contracts.
 
-### Amberdata On-Chain API
+- [Amberdata — asyncapi rules](https://apis.io/rules/amberdata/amberdata-asyncapi-spectral-rules/)
 
-On-chain blockchain data across supported networks - blocks, transactions, addresses (balances, token balances, transactions), tokens (information, transfers, holders), and account balances, sourced from Amberdata's own full nodes from the genesis block forward.
+#### Security (2)
 
-- **Human URL:** [https://docs.amberdata.io/docs/transactions](https://docs.amberdata.io/docs/transactions)
-- **Base URL:** `https://api.amberdata.com`
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Tags
+- [Amberdata Authentication](https://apis.io/security/amberdata/amberdata-authentication/)
+- [Amberdata Domain Security](https://apis.io/security/amberdata/amberdata-domain-security/)
 
-- On-Chain
-- Blockchain
-- Blocks
-- Transactions
-- Addresses
-- Tokens
+#### Plans and pricing (1)
 
-#### Properties
+Published plans, tiers and prices.
 
-- [Documentation](https://docs.amberdata.io/docs/transactions)
-- [OpenAPI](openapi/amberdata-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amberdata.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amberdata.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Amberdata Plans Pricing](https://apis.io/plans/amberdata/amberdata-plans-pricing/)
 
-### Amberdata WebSocket Streaming API
+#### Rate limits (1)
 
-Low-latency real-time WebSocket streaming over a JSON-RPC 2.0 subscribe interface for spot trades and prices, DEX data, and on-chain events, authenticated with the x-api-key header.
+Published request limits.
 
-- **Human URL:** [https://docs.amberdata.io/real-time/websocket-getting-started](https://docs.amberdata.io/real-time/websocket-getting-started)
-- **Base URL:** `wss://ws.web3api.io`
+- [Amberdata Rate Limits](https://apis.io/rate-limits/amberdata/amberdata-rate-limits/)
 
-#### Tags
+#### FinOps (1)
 
-- WebSocket
-- Streaming
-- Real Time
-- Low Latency
+What the API costs to run, by operation.
 
-#### Properties
+- [Amberdata Finops](https://apis.io/finops/amberdata/amberdata-finops/)
 
-- [Documentation](https://docs.amberdata.io/real-time/websocket-getting-started)
-- [API Reference](https://docs.amberdata.io/reference/ws-connection)
-- [AsyncAPI](asyncapi/amberdata-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/amberdata.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amberdata.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+## Where to find this API
 
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- [GitHub Organization](https://github.com/amberdata)
-- [LinkedIn](https://www.linkedin.com/company/amberdata)
 - [Website](https://www.amberdata.io)
 - [Documentation](https://docs.amberdata.io)
-- [Plans](plans/amberdata-plans-pricing.yml)
-- [Rate Limits](rate-limits/amberdata-rate-limits.yml)
-- [Fin Ops](finops/amberdata-finops.yml)
+- [Getting started](https://docs.amberdata.io/real-time/websocket-getting-started)
+- [API reference](https://docs.amberdata.io/data-dictionary/api-specs)
+- [Pricing](https://www.amberdata.io/pricing)
+- [Blog](https://blog.amberdata.io/rss.xml)
+- [Terms of service](https://www.amberdata.io/terms)
+- [Privacy policy](https://www.amberdata.io/privacy)
+- [GitHub](https://github.com/amberdata)
+- [Status](https://status.amberdata.io)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 43.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 76.7 |
+| Contract quality | 56.6 |
+| Contract governance | 15.9 |
+| Operational transparency | 42.1 |
+| Developer ergonomics | 29.2 |
+| Access clarity | 36.8 |
+
+**Agent readiness 35.3** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 28.7** — Securities & Market Data
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/amberdata/](https://apis.io/providers/amberdata/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Amberdata: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/amberdata/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
